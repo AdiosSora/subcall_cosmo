@@ -41,7 +41,7 @@ const Peer = window.Peer;
 
   // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
-      key: '766085bc-041a-4889-ba90-b8fda1a4615f',
+    key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
   }));
 
