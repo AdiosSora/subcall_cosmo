@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1>アカウント登録画面</h1>
-    <form method="post" action="regist_check.php">
+
+    <form method="post" action="register_check.php">
 
     アカウント名
     <input type="text" name="name" size="30" maxlength="20"> <br><br>
@@ -18,7 +19,7 @@
     <input type="password" name="pass2" size="6" maxlength="20"> <br/>
 
     <button type="button" onclick="history.back()">戻る</button>
-    <button type="submit" name="regist" value="登録"></button>
+    <button type="submit" name="register" value="登録">確認</button>
 
     </form>
 
