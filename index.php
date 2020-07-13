@@ -29,7 +29,7 @@
 
       </div>
     </div>
-    <div class="parallax" style="background:#444444;"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <div class="container">
@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <div class="container">
@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <?php include('./footer.php'); ?>
