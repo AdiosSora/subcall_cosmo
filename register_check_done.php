@@ -13,20 +13,20 @@ try
 	require_once('common.php');
 
 	$post = sanitize($_POST);
-//	$regist_name = $post['name'];
-//	$regist_pass = $post['pass'];
+	$regist_name = $post['name'];
+	$regist_pass = $post['pass'];
 
-//	$dsn = 'mysql:dbname=account;host=localhost;charset=utf8';
-//	$user = 'root';
-//	$password = '';
-//	$dbh = new PDO($dsn,$user,$password);
-//	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	$dsn = 'mysql:dbname=account;host=localhost;charset=utf8';
+	$user = 'root';
+	$password = 'kcsf';
+	$dbh = new PDO($dsn,$user,$password);
+	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-//	$sql = 'INSERT INTO mst_product(name,price,gazou) VALUES (?,?,?)';
-//	$stmt = $dbh->prepare($sql);
-//	$stmt->execute($data);
+	$sql = 'INSERT INTO account(mail_address,name,password) VALUES (?,?,?)';
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute($data);
 
-//	$dbh = null;
+	$dbh = null;
 
 	print 'アカウントの登録が完了しました。 <br />';
 
