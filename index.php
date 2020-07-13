@@ -20,33 +20,47 @@
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
           <div class="col s12 m6 center">
-          <div class="lighten-5">
-          <form action="location.href("join.php")">
-            <button type="button" onclick="golink()">ログイン</button></br>
+            <div class="card-panel grey lighten-5">
+            <form action="location.href("join.php")">
+              <div class="input-field col s12">
+                <input id="first_name" type="text" class="validate">
+                <label for="ID">ID</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+              <a class="waves-effect waves-light btn">ログイン</a>
+              <a class="waves-effect waves-light btn" onclick="room_make()">部屋を作る</a>
+              <a class="waves-effect waves-light btn" onclick="clickBtn_create()" >部屋に入る</a>
+              <a class="waves-effect waves-light btn">button</a>
+              <input class="waves-effect waves-light btn" onclick="golink()">ログイン</button></br>
+              <p id="p1">テスト１</p>
+              <script>
+                    //初期表示は非表示
+                  document.getElementById("p1").style.display ="none";
 
-            <button type="button" onclick="room_make()">部屋を作る</button></br>
-            <input type="text" id="roommake" style="display:none;">#id roommake</input>
-            <button type="button" onclick="room_in()">部屋に入る</button></br>
-          </form>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">textsms</i>
-              <input type="text" id="autocomplete-input" class="autocomplete">
-              <label for="autocomplete-input">Autocomplete</label>
-          </div>
-        </div>
-            <script>
-              function golink(){
-                 location.href="login.php";
-              }
+                  function clickBtn_create(){
+                  	const p1 = document.getElementById("p1");
 
-              function room_make(){
-                 location.href="room_make.php";
-              }
+                  	if(p1.style.display=="block"){
+                  		// noneで非表示
+                  		p1.style.display ="none";
+                  	}else{
+                  		// blockで表示
+                  		p1.style.display ="block";
+                  	}
+                  }
 
-              function room_in(){
-                 location.href="room_in.php";
-              }
-            </script>
+              </script>
+              <button type="button" onclick="room_in()">部屋に入る</button></br>
+            </form>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Autocomplete</label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row center">
