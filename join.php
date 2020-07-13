@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyWay - Room example</title>
-    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">
@@ -33,7 +32,5 @@
       <p class="meta" id="js-meta"></p>
     </div>
     <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-    <script src="../_shared/key.js"></script>
-    <script src="./script.js"></script>
   </body>
 </html>
