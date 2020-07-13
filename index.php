@@ -9,7 +9,7 @@
 <body>
   <div id="index-banner" class="parallax-container">
 
-  <?php include('./news.php'); ?>
+  <?php include('./header.php'); ?>
     <div class="section no-pad-bot">
       <div class="container">
         <h1 class="heading">Welcome to Subcall</h1>
