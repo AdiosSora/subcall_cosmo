@@ -19,26 +19,14 @@
 
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
-          <div class="col s12 m6 center"><form>
+          <div class="col s12 m6 center">
+            <form action="location.href("join.php")">
             <button type="button" onclick="golink()">ログイン</button></br>
 
             <button type="button" onclick="room_make()">部屋を作る</button></br>
-
+            <input type="text" id="roommake" style="display:none;">#id roommake</input>
             <button type="button" onclick="room_in()">部屋に入る</button></br>
           </form>
-            <script>
-              function golink(){
-                 location.href="login.php";
-              }
-
-              function room_make(){
-                 location.href="room_make.php";
-              }
-
-              function room_in(){
-                 location.href="room_in.php";
-              }
-            </script>
           </div>
         </div>
         <div class="row center">
