@@ -19,13 +19,21 @@
 
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
-          <div class="col s12 m6 center"><form>
-            <button type="button" onclick="golink()">ログイン</button></br>
+          <div class="col s12 m6 center">
+          <div class="lighten-5">
+            <form>
+              <button type="button" onclick="golink()">ログイン</button></br>
 
-            <button type="button" onclick="room_make()">部屋を作る</button></br>
+              <button type="button" onclick="room_make()">部屋を作る</button></br>
 
-            <button type="button" onclick="room_in()">部屋に入る</button></br>
-          </form>
+              <button type="button" onclick="room_in()">部屋に入る</button></br>
+            </form>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">textsms</i>
+              <input type="text" id="autocomplete-input" class="autocomplete">
+              <label for="autocomplete-input">Autocomplete</label>
+          </div>
+        </div>
             <script>
               function golink(){
                  location.href="login.php";
