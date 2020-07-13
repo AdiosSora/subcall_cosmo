@@ -17,11 +17,11 @@ $regist_pass2=htmlspecialchars($regist_pass2,ENT_QUOTES,'UTF-8'); //文字列に
 //$regist_nameがカラならエラーメッセージを表示する
 //$regist_nameが入力されていれば、$regist_nameを表示する
 if($regist_name==''){
-  print 'スタッフ名が入力されていません。<br />';
+  print 'アカウント名が入力されていません。<br />';
 }
 else
 {
-  print 'スタッフ名：';
+  print 'アカウント名：';
   print $regist_name;
   print '<br />';
 }

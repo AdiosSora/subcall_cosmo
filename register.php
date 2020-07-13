@@ -10,16 +10,33 @@
     <form method="post" action="register_check.php">
 
     アカウント名
-    <input type="text" name="name" size="30" maxlength="20"> <br><br>
+    <input type="text" name="name" size="30" maxlength="20" required> <br><br>
 
     パスワード
-    <input type="password" name="pass" size="6" maxlength="20"> <br><br>
+    <input type="password" name="pass" id="word" size="6" maxlength="30"><br><br>
 
     パスワードをもう一度入力してください
-    <input type="password" name="pass2" size="6" maxlength="20"> <br/>
+    <input type="password" name="pass2" id="word2" size="6" maxlength="30"><br><br>
 
     <button type="button" onclick="history.back()">戻る</button>
-    <button type="submit" name="register" value="登録">確認</button>
+    <button type="submit" onclick="return_test" id="b1" name="register" value="登録">確認</button>
+
+    <script>
+
+          function return_test()
+          {
+            if(document.getElementById("word").value != document.getElementById("word2").value)
+            {
+              alert("パスワードが一致していません");
+              return false;
+            }
+            else
+            {
+              return true;
+            }
+          }
+
+    </script>
 
     </form>
 
