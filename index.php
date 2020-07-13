@@ -28,7 +28,6 @@
     <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
-
   <div class="container">
     <div class="section">
 
@@ -66,7 +65,6 @@
     </div>
   </div>
 
-
   <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
       <div class="container">
@@ -102,14 +100,8 @@
     </div>
     <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
   </div>
+
   <?php include('./footer.php'); ?>
-
-
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
 
   </body>
 </html>
