@@ -1,4 +1,5 @@
-<!-- Compiled and minified CSS -->
+<!-- CSS  -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <!-- Compiled and minified JavaScript -->
@@ -12,3 +13,4 @@
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
 <script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
