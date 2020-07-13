@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="ja">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,13 +11,35 @@
   <?php include('./nav.php'); ?>
 
   <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
+    <div class="container">
+      <div class="section no-pad-bot">
         <br><br>
-        <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-          <img src="STABLE_logo.svg">
+        <div class="row">
+          <div class="col s12 m6 center">
+
+            いいいいいいいいいいいいいいいいいいいいいいいいいい
+          </div>
+          <div class="col s12 m6 center"><form>
+            <button type="button" onclick="golink()">ログイン</button></br>
+
+            <button type="button" onclick="room_make()">部屋を作る</button></br>
+
+            <button type="button" onclick="room_in()">部屋に入る</button></br>
+          </form>
+            <script>
+              function golink(){
+                 location.href="login.php";
+              }
+
+              function room_make(){
+                 location.href="room_make.php";
+              }
+
+              function room_in(){
+                 location.href="room_in.php";
+              }
+            </script>
+          </div>
         </div>
         <div class="row center">
           <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
@@ -25,7 +48,7 @@
 
       </div>
     </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <div class="container">
@@ -73,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <div class="container">
@@ -98,10 +121,11 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax" style="background:#999999;"></div>
   </div>
 
   <?php include('./footer.php'); ?>
 
   </body>
+>>>>>>> 881bfa53084d72f62bf878e8682019184be9c8eb
 </html>
