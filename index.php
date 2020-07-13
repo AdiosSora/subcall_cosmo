@@ -1,48 +1,33 @@
-﻿<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SubCall</title>
-    <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <div id="index-banner" class="parallax-container">
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
 
-  <?php include('./header.php'); ?>
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
-        <h1 class="heading">Welcome to Subcall</h1>
-        <img src="STABLE_logo.svg">
-        <script>
-        function golink(){
-           location.href="login.php";
-        }
-        </script>
-        <button type="button" onclick="golink()">ログイン</button></br>
-        <form action="login.php" method="post">
-        部屋番号を入力してください
-        <input type="text" name="roomId" size="30" maxlength="20"></br>
-        言語を選択してください(Select a language)
-        <select name="language">
-          <option value="ja">日本語</option>
-          <option value="english">英語</option>
-        </p>
-        <body>
-        <nav class="white" role="navigation">
-          <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-              <li><a href="#">Navbar Link</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-              <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          </div>
-        </nav>
-
         <br><br>
         <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
         <div class="row center">
@@ -63,6 +48,7 @@
     <div class="section">
 
       <!--   Icon Section   -->
+  
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
@@ -168,5 +154,12 @@
       </div>
     </div>
   </footer>
-</body>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
 </html>
