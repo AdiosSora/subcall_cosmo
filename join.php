@@ -16,7 +16,12 @@
         <div>
           <video id="js-local-stream"></video>
           <span id="js-room-mode"></span>:
-          <input type="text" placeholder="Room Name" id="js-room-id">
+
+          <?php
+          $room = $_POST['roomId'];
+          print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">'
+          ?>
+
           <button id="js-join-trigger">Join</button>
           <button id="js-leave-trigger">Leave</button>
         </div>

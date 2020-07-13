@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="ja">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -18,8 +19,26 @@
 
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
-          <div class="col s12 m6 center">
-            ああああああああああああああああああああああああああああ
+          <div class="col s12 m6 center"><form>
+            <button type="button" onclick="golink()">ログイン</button></br>
+
+            <button type="button" onclick="room_make()">部屋を作る</button></br>
+
+            <button type="button" onclick="room_in()">部屋に入る</button></br>
+          </form>
+            <script>
+              function golink(){
+                 location.href="login.php";
+              }
+
+              function room_make(){
+                 location.href="room_make.php";
+              }
+
+              function room_in(){
+                 location.href="room_in.php";
+              }
+            </script>
           </div>
         </div>
         <div class="row center">
@@ -108,4 +127,5 @@
   <?php include('./footer.php'); ?>
 
   </body>
+>>>>>>> 881bfa53084d72f62bf878e8682019184be9c8eb
 </html>
