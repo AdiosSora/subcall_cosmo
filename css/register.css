@@ -1,5 +1,5 @@
 body {
-  background: #2b2b2b;
+  background: #87CEEB;
   height: 100vh;
   margin: 0;
   display: flex;
@@ -77,7 +77,18 @@ body {
   cursor: pointer;
 }
 
+.pw-form input[type="button"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
 .pw-form input[type="submit"]:hover {
+  background: #17c;
+}
+
+.pw-form input[type="button"]:hover {
   background: #17c;
 }
 
@@ -85,6 +96,11 @@ body {
 .pw-form input[type="submit"]:focus {
   border-color: #05a;
 }
+
+.pw-form input[type="button"]:focus {
+  border-color: #05a;
+}
+
 
 .field-icon {
   color: #555;
