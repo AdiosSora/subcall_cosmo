@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
       <meta charset="utf-8"/>
+      <link rel="stylesheet" href="css/register.css">
       <title>Acount regist</title>
   </head>
   <body>
@@ -10,24 +11,27 @@
       <script src="js/jquery.validate.min.js"></script>
       <script src="js/register.js"></script>
 
-      <h1>会員登録画面</h1><br/>
-      <form method="post" action="register_check.php" id="check">
 
-          ユーザ名<br/>
-          <input type="text" name="name" id="name" size="30" maxlength="20"> <br/><br/>
+      <div class="pw-form">
+          <form method="post" action="register_check.php" id="check" class="pw-form-container">
+              <h1>会員登録画面</h1><br/>
 
-          パスワード<br/>
-          <input type="password" name="pass" id="pass" size="30" maxlength="20"> <br/><br/>
 
-          パスワード(確認用)<br/>
-          <input type="password" name="pass2" id="pass2" size="30" maxlength="20"> <br/><br/>
+              <p><input type="text" name="name" id="name" size="30" maxlength="20" placeholder="UserName"></p>
 
-          メールアドレス<br/>
-          <input type="email" name="address" id="address" size="30" maxlength="50"> <br><br>
+              <p><input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="Password"></p>
+                 <span class="field-icon">
+                   <i toggle="#password-field" class="mdi mdi-eye toggle-password"></i>
+                 </span>
+              <p><input type="password" name="pass2" id="pass2" size="30" maxlength="20" placeholder="Password  (check)"></p>
+                 <span class="field-icon">
+                   <i toggle="#password-field" class="mdi mdi-eye toggle-password"></i>
+                 </span>
+              <p><input type="email" name="address" id="address" size="30" maxlength="50" placeholder="E-mail"></p>
 
-          <button type="button" onclick="history.back()">戻る</button>
-          <button type="submit" name="regist" value="登録">確認</button>
+              <p><button type="button" onclick="history.back()">戻る</button></p>
+              <p><button type="submit" name="regist" value="登録">確認</button></p>
 
-      </form>
+          </form>
   </body>
 </html>
