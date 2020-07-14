@@ -189,11 +189,10 @@ label.form_name {
 }
 
 label.pass2-error {
-  height:auto;
   margin:10px 0px;
 }
 
 label.address-error{
-  height:auto;
+  height:20px;
   margin:10px 0px;
 }
