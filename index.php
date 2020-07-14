@@ -20,12 +20,27 @@
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
           <div class="col s12 m6 center">
-            <form action="location.href("join.php")">
+
             <button type="button" onclick="golink()">ログイン</button></br>
+            
+            <form method = "post" action="join.php">
+            <!--
+            <form action="location.href("join.php")">
+            -->
+
+            <!--
+            <button type="button" onclick="golink()">ログイン</button></br>
+            -->
 
             <button type="button" onclick="room_make()">部屋を作る</button></br>
-            <input type="text" id="roommake" style="display:none;">#id roommake</input>
+            <input type="text" id="roommake" style="display:none;">#id roommake</input></br>
+
             <button type="button" onclick="room_in()">部屋に入る</button></br>
+            <input type="text" id="roomin" style="display:none;">#id roomin</input></br>
+
+            <input type="text" name="test"></input></br>
+
+            <input type="submit" value="入室"><br />
           </form>
           </div>
         </div>

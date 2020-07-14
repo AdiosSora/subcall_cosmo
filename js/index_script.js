@@ -1,5 +1,6 @@
 window.onload = function() {
   function golink(){
+    window.alert("押された")
      location.href="login.php";
   }
   function room_in(){
