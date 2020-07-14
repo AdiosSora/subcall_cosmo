@@ -37,5 +37,6 @@
       <p class="meta" id="js-meta"></p>
     </div>
     <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
