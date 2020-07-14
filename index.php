@@ -38,6 +38,10 @@
               <a class="waves-effect waves-light btn">button</a>
               <input class="waves-effect waves-light btn" onclick="golink()">ログイン</button></br>
               <p id="p1">テスト１</p>
+
+              <!-- ゲスト用名前入力欄 -->
+              <input type="text" name="guestname" value="名前を入力してください"></br>
+
               <script>
                     //初期表示は非表示
                   document.getElementById("p1").style.display ="none";
