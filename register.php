@@ -23,54 +23,38 @@
           <div class="col offset-s2 s8 center">
             <div class="card">
               <div class="card-content">
-                <form method="post" action="register_check.php" id="check" class="pw-form-container">
-                    <h1>会員登録画面</h1><br/>
+                <form method="post" name="regiser_form" action="register_check.php" id="check" class="pw-form-container">
+                    <h2 style="color:black !important;">会員登録</h1><br/>
                     <div class="form_title">
                       <label for="name" class="form_name">お名前</label>
                       <a class="form_required_mark">必須</a>
                     </div>
-                    <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="UserName" autocomplete="off"></p>
-
-                    <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="Password" autocomplete="off">
-                    <span class="helper-text" data-error="wrong" data-success="right"><i toggle="#password-field" class="mdi mdi-eye toggle-password"></i></span></p>
-
-                    <p><input type="password" name="pass2" id="pass2" size="30" maxlength="20" placeholder="Password  (check)" autocomplete="off">
-                    <span class="helper-text" data-error="wrong" data-success="right"><i toggle="#password-field" class="mdi mdi-eye toggle-password"></i></span></p>
-                       <span class="field-icon">
-                         <i toggle="#password-field" class="mdi mdi-eye toggle-password"></i>
-                       </span>
-
-                    <script>
-                      $(".toggle-password").click(function() {
-                        $(this).toggleClass("mdi-eye mdi-eye-off");
-
-                        var input = $(this).parent().prev("input");
-                        if (input.attr("type") == "password") {
-                          input.attr("type", "text");
-                        } else {
-                          input.attr("type", "password");
-                        }
-                      });
-                    </script>
-
-                    <p><input type="email" name="address" id="address" size="30" maxlength="50" placeholder="E-mail" autocomplete="off"></p>
-
-                    <a class="waves-effect waves-light btn-large grey darken-1" href="javascript:form1.submit()">戻る</a>
-                    <a class="waves-effect waves-light btn-large" href="javascript:form1.submit()">確認</a>
+                    <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="例:たろう" autocomplete="off">
+                    <br>
+                    <div class="form_title">
+                      <label for="name" class="form_name">パスワード</label>
+                      <a class="form_required_mark">必須</a>
+                    </div>
+                    <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off">
+                    <input type="password" name="pass2" id="pass2" size="30" maxlength="20" placeholder="パスワード(確認)" autocomplete="off">
+                    <br>
+                    <div class="form_title">
+                      <label for="name" class="form_name">メールアドレス</label>
+                      <a class="form_required_mark">必須</a>
+                    </div>
+                    <input type="email" name="address" id="address" size="30" maxlength="50" placeholder="例:Stable@example.com" autocomplete="off">
+                    <a class="waves-effect waves-light btn-large grey darken-1" href="index.php">戻る</a>
+                    <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">確認</a>
                 </form>
               </div>
             </div>
           </div>
         </div>
         <br><br>
-
       </div>
     </div>
     <div class="parallax" style="background:#999999;"></div>
   </div>
-
-
   <?php include './footer.php'; ?>
-
   </body>
 </html>
