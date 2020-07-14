@@ -13,16 +13,20 @@ try
 	require_once('common.php');
 
 	$post = sanitize($_POST);
+	$regist_address = $post['address'];
 	$regist_name = $post['name'];
 	$regist_pass = $post['pass'];
 
-	$dsn = 'mysql:dbname=account;host=localhost;charset=utf8';
+	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
 	$password = 'kcsf';
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	$sql = 'INSERT INTO account(mail_address,name,password) VALUES (?,?,?)';
+	$data[] = $regist_address;
+	$data[] = $regist_name;
+	$data[] = $regist_pass;
+	$sql = 'INSERT INTO account(mail_address,name,pass) VALUES (?,?,?)';
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute($data);
 
@@ -33,9 +37,14 @@ try
 }
 catch (Exception $e)
 {
+	print$regist_address;
+	print$regist_name;
+	print$regist_pass;
+	print$e;
 	print'ただいま障害により大変ご迷惑をお掛けしております。';
 	exit();
 }
+
 
 ?>
 

@@ -20,6 +20,7 @@
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
           <div class="col s12 m6 center">
+<<<<<<< HEAD
 
             <button type="button" onclick="golink()">ログイン</button></br>
             
@@ -42,6 +43,49 @@
 
             <input type="submit" value="入室"><br />
           </form>
+=======
+            <div class="card-panel grey lighten-5">
+            <form action="location.href("join.php")">
+              <div class="input-field col s12">
+                <input id="first_name" type="text" class="validate">
+                <label for="ID">ID</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+              <a class="waves-effect waves-light btn">ログイン</a>
+              <a class="waves-effect waves-light btn" onclick="room_make()">部屋を作る</a>
+              <a class="waves-effect waves-light btn" onclick="clickBtn_create()" >部屋に入る</a>
+              <a class="waves-effect waves-light btn">button</a>
+              <input class="waves-effect waves-light btn" onclick="golink()">ログイン</button></br>
+              <p id="p1">テスト１</p>
+              <script>
+                    //初期表示は非表示
+                  document.getElementById("p1").style.display ="none";
+
+                  function clickBtn_create(){
+                  	const p1 = document.getElementById("p1");
+
+                  	if(p1.style.display=="block"){
+                  		// noneで非表示
+                  		p1.style.display ="none";
+                  	}else{
+                  		// blockで表示
+                  		p1.style.display ="block";
+                  	}
+                  }
+
+              </script>
+              <button type="button" onclick="room_in()">部屋に入る</button></br>
+            </form>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Autocomplete</label>
+              </div>
+            </div>
+>>>>>>> e1d223c880dc4b7157c7ecf0560651eeb5ffc062
           </div>
         </div>
         <div class="row center">
@@ -130,5 +174,4 @@
   <?php include('./footer.php'); ?>
 
   </body>
->>>>>>> 881bfa53084d72f62bf878e8682019184be9c8eb
 </html>

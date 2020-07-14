@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 window.onload = function() {
   function golink(){
     window.alert("押された")
@@ -8,13 +9,6 @@ window.onload = function() {
   }
   function room_make(){
   	const p2 = document.getElementById("roommake");
+=======
+>>>>>>> e1d223c880dc4b7157c7ecf0560651eeb5ffc062
 
-  	if(p2.style.display=="block"){
-  		// hiddenで非表示
-  		p2.style.display ="none";
-  	}else{
-  		// visibleで表示
-  		p2.style.display ="block";
-  	}
-  }
-}
