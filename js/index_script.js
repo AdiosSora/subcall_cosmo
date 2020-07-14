@@ -9,6 +9,4 @@ window.onload = function() {
   }
   function room_make(){
   	const p2 = document.getElementById("roommake");
-=======
->>>>>>> e1d223c880dc4b7157c7ecf0560651eeb5ffc062
-
+  }

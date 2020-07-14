@@ -20,30 +20,6 @@
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
           <div class="col s12 m6 center">
-<<<<<<< HEAD
-
-            <button type="button" onclick="golink()">ログイン</button></br>
-            
-            <form method = "post" action="join.php">
-            <!--
-            <form action="location.href("join.php")">
-            -->
-
-            <!--
-            <button type="button" onclick="golink()">ログイン</button></br>
-            -->
-
-            <button type="button" onclick="room_make()">部屋を作る</button></br>
-            <input type="text" id="roommake" style="display:none;">#id roommake</input></br>
-
-            <button type="button" onclick="room_in()">部屋に入る</button></br>
-            <input type="text" id="roomin" style="display:none;">#id roomin</input></br>
-
-            <input type="text" name="test"></input></br>
-
-            <input type="submit" value="入室"><br />
-          </form>
-=======
             <div class="card-panel grey lighten-5">
             <form action="location.href("join.php")">
               <div class="input-field col s12">
@@ -54,7 +30,9 @@
                 <input id="password" type="password" class="validate">
                 <label for="password">Password</label>
               </div>
-              <a class="waves-effect waves-light btn">ログイン</a>
+
+              <input type="button" value="golink" onClick="golink()">
+              <a class="" onclick="golink()">ログイン</a>
               <a class="waves-effect waves-light btn" onclick="room_make()">部屋を作る</a>
               <a class="waves-effect waves-light btn" onclick="clickBtn_create()" >部屋に入る</a>
               <a class="waves-effect waves-light btn">button</a>
@@ -63,6 +41,7 @@
               <script>
                     //初期表示は非表示
                   document.getElementById("p1").style.display ="none";
+
 
                   function clickBtn_create(){
                   	const p1 = document.getElementById("p1");
@@ -85,7 +64,6 @@
                 <label for="autocomplete-input">Autocomplete</label>
               </div>
             </div>
->>>>>>> e1d223c880dc4b7157c7ecf0560651eeb5ffc062
           </div>
         </div>
         <div class="row center">
