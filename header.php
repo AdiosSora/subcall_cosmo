@@ -13,9 +13,6 @@
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
 <script src="js/script.js"></script>
-<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-=======
 <script src="js/index_script.js"></script>
 <!---<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>--->
->>>>>>> d625418e2d30f79d4c4184d0bb02663462a140ca
