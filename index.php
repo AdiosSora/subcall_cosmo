@@ -20,6 +20,30 @@
             いいいいいいいいいいいいいいいいいいいいいいいいいい
           </div>
           <div class="col s12 m6 center">
+<<<<<<< HEAD
+
+            <button type="button" onclick="golink()">ログイン</button></br>
+            
+            <form method = "post" action="join.php">
+            <!--
+            <form action="location.href("join.php")">
+            -->
+
+            <!--
+            <button type="button" onclick="golink()">ログイン</button></br>
+            -->
+
+            <button type="button" onclick="room_make()">部屋を作る</button></br>
+            <input type="text" id="roommake" style="display:none;">#id roommake</input></br>
+
+            <button type="button" onclick="room_in()">部屋に入る</button></br>
+            <input type="text" id="roomin" style="display:none;">#id roomin</input></br>
+
+            <input type="text" name="test"></input></br>
+
+            <input type="submit" value="入室"><br />
+          </form>
+=======
             <div class="card-panel grey lighten-5">
             <form action="location.href("join.php")">
               <div class="input-field col s12">
@@ -61,6 +85,7 @@
                 <label for="autocomplete-input">Autocomplete</label>
               </div>
             </div>
+>>>>>>> e1d223c880dc4b7157c7ecf0560651eeb5ffc062
           </div>
         </div>
         <div class="row center">
@@ -149,5 +174,4 @@
   <?php include('./footer.php'); ?>
 
   </body>
->>>>>>> 881bfa53084d72f62bf878e8682019184be9c8eb
 </html>
