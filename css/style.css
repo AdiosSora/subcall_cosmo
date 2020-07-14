@@ -60,3 +60,11 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+/* 会員登録ページ */
+.required_mark {
+  background-color: red;
+  color: white;
+  font-size: 0.8em;
+  
+}

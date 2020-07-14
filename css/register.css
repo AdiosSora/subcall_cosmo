@@ -1,14 +1,3 @@
-body {
-  background: #87CEEB;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: Helvetica neue, roboto;
-}
-
 .pw-form {
     width : 80%;
     min-width : 300px;
