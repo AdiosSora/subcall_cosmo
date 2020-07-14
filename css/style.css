@@ -5,15 +5,15 @@
  *
  * Made By MaterializeCSS.com
  */
-
 nav ul a,
 nav .brand-logo {
   color: #444;
 }
+
 nav .logo-image {
-    margin : 0 auto;
-    padding : 0;
-    height : 100%;
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
 }
 
 p {
@@ -28,17 +28,19 @@ p {
   min-height: 380px;
   line-height: 0;
   height: auto;
-  color: rgba(255,255,255,.9);
+  color: rgba(255, 255, 255, .9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+.parallax-container .section {
+  width: 100%;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
     top: 40%;
   }
+
   #index-banner .section {
     top: 10%;
   }
@@ -53,6 +55,7 @@ p {
 .icon-block {
   padding: 0 15px;
 }
+
 .icon-block .material-icons {
   font-size: inherit;
 }
@@ -62,9 +65,20 @@ footer.page-footer {
 }
 
 /* 会員登録ページ */
-.required_mark {
-  background-color: red;
+.form_title {
+  text-align: left !important;
+  padding: 2px 0px;
+}
+
+.form_required_mark {
+  background: #20b2aa;
   color: white;
-  font-size: 0.8em;
-  
+  font-size: 1em;
+  border-radius: 20%;
+}
+
+label.form_name {
+  color: black !important;
+  font-size: 1em !important;
+  text-align: left;
 }
