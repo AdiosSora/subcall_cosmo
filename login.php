@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Acount regist</title>
+    <meta charset="utf-8"/>
+    <title>Login</title>
   </head>
   <body>
-    <h1>アカウント登録画面</h1>
-    <form action="regist_check.php">
+    <h1>ログイン画面</h1>
+    <form method="post" action="login_check.php">
 
-    アカウント名<input type="text" name="name" size="30" maxlength="20"> <br><br>
-    パスワード<input type="password" name="pass" size="6" maxlength="20"> <br><br>
-    パスワードをもう一度入力してください<input type="password" name="pass" size="6" maxlength="20"> <br/>
+    ユーザ名<br/>
+    <input type="text" name="name" size="30" maxlength="30" autocomplete="off"> <br/><br/>
+
+    パスワード<br/>
+    <input type="password" name="pass" size="30" maxlength="30" autocomplete="off"> <br/><br/>
 
 
     <button type="button" onclick="history.back()">戻る</button>
-    <button type="submit" value="登録"></button>
-    </form>
+    <button type="submit" value="ログイン">ログイン</button>
 
+    </form>
   </body>
 </html>
