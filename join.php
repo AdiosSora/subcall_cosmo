@@ -18,8 +18,9 @@
           <span id="js-room-mode"></span>:
 
           <?php
-          $room = $_POST['roomId'];
-          print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">'
+          //$room = $_POST['roomId'];
+          //print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">'
+          print '<input type="text" placeholder="Room Name" id="js-room-id" value="room">'
           ?>
 
           <button id="js-join-trigger">Join</button>
