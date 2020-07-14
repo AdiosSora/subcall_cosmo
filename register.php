@@ -10,10 +10,10 @@
   <script src="js/register.js"></script>
 
   <title>Stable - ビデオ会議</title>
-  <?php include('./header.php'); ?>
+  <?php include './header.php'; ?>
 </head>
 <body>
-  <?php include('./nav.php'); ?>
+  <?php include './nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -25,7 +25,10 @@
               <div class="card-content">
                 <form method="post" action="register_check.php" id="check" class="pw-form-container">
                     <h1>会員登録画面</h1><br/>
-                    <label for="name"><span class="required_mark">必須</span> お名前</label>
+                    <div class="form_title">
+                      <label for="name" class="form_name">お名前</label>
+                      <a class="form_required_mark">必須</a>
+                    </div>
                     <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="UserName" autocomplete="off"></p>
 
                     <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="Password" autocomplete="off">
@@ -67,7 +70,7 @@
   </div>
 
 
-  <?php include('./footer.php'); ?>
+  <?php include './footer.php'; ?>
 
   </body>
 </html>
