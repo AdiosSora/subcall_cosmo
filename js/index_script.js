@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 window.onload = function() {
   function golink(){
     window.alert("押された")
