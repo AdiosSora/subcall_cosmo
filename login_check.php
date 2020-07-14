@@ -17,7 +17,7 @@ try
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	$sql = 'SELECT name FROM account WHERE name=? AND password=?';
+	$sql = 'SELECT name FROM account WHERE name=? AND pass=?';
 	$stmt = $dbh->prepare($sql);
 	$data[] = $regist_name;
 	$data[] = $regist_pass;
@@ -29,24 +29,28 @@ try
 
 	if($rec == false)
 	{
-		print 'ユーザ名かパスワードが間違っています。<br />' ;
-		print '<a href="login.php">戻る</a>' ;
+		session_start();
+		$_SESSION['bool']=$rec;
+		header('Location: login.php');
+		exit();
 	}
 	else
 	{
 		session_start();
-		$_SESSION['login']=1;
-		$_SESSION['staff_name']=$regist_name;
-		$_SESSION['staff_name']=$rec['name'];
-		header('Location: staff_top.php');
+		//$_SESSION['login']=1;
+		//$_SESSION['regist_name']=$regist_name;
+		//$_SESSION['regist_name']=$rec['name'];
+		header('Location: index.php');
 		exit();
 	}
 
 }
 catch (Exception $e)
 {
-	print 'ただいま障害により大変ご迷惑をおかけしております。';
+	print$e;
+	print 'Sorry!!Connection lost!!';
 	exit();
 }
+
 
 ?>
