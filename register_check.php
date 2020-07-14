@@ -32,7 +32,7 @@ $regist_address=htmlspecialchars($regist_address,ENT_QUOTES,'UTF-8');
   print '<br />';
   print '上記の内容で登録します。よろしいですか？';
 
-  $regist_pass=hash('sha256' , $regist_pass); //パスワードをMD5規約に則って32桁のランダム値に変換
+  $regist_pass = hash('sha256' , $regist_pass); //パスワードをMD5規約に則って32桁のランダム値に変換
 
   print '<form method="post" action="register_check_done.php">';
   print '<input type="hidden" name="name" value="'.$regist_name.'">'; //'<input type="hidden" name="name" value="'と$regist_nameをドットで連結
