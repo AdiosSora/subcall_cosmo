@@ -1,3 +1,16 @@
+<!--ようこそゲスト様or○○（ログインユーザー）様-->
+<?php
+session_start();
+session_regenerate_id(true);
+// test用データ、削除予定
+//$_SESSION['bool']= null; // 「null」,「1」いずれか代入で分岐可能
+//$_SESSION['regist_name'] = '太郎';
+// test用、ここまで
+?>
+<!--ここまで、ようこそ○○様-->
+
+
+
 <nav class="white" role="navigation">
   <div class="nav-wrapper container">
     <a id="logo-container" href="./index.php" class="brand-logo">
@@ -8,6 +21,23 @@
       </div>
     </a>
     <ul class="right hide-on-med-and-down">
+      <?php
+        // セッション名は統一
+        if(isset($_SESSION['bool']) == false)
+        {
+          print 'ようこそゲスト様<br />';
+          print '<li><a href="login.php">Log in</a></li>';
+          print '<li><a href="register.php"Sign up</a></li>';
+          print '<br />';
+        }
+        else
+        {
+          print 'ようこそ';
+          print $_SESSION['regist_name'];
+          print '様　';
+          print '<br />';
+        }
+       ?>
       <li><a href="#">Stableとは？</a></li>
       <li><a href="#">使い方</a></li>
     </ul>
