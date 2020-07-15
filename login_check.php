@@ -1,3 +1,22 @@
+<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+<!DOCTYPE>
+<html>
+	<body>
+		<div class="container">
+			<div class="section no-pad-bot">
+				<br><br>
+				<div class="row">
+					<div class="col s12 m6 offset-m3 center">
+					<div class="alert  error">[error - 334] <br/>IDかパスワードが間違っています、もう一度入力してください。
+						<a class="button" href="login.php">戻る</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
 <?php
 
 try
@@ -29,9 +48,6 @@ try
 
 	if(!is_null($rec)){
 		?>
-		<script>
-			<div class="alert  error">Error! <a class="button">link</a></div>  
-		</script>
 		<?php
 	}
 	else{
