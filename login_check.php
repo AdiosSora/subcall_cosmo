@@ -37,9 +37,9 @@ try
 	else
 	{
 		session_start();
-		//$_SESSION['login']=1;
+		$_SESSION['bool']=1;
 		//$_SESSION['regist_name']=$regist_name;
-		//$_SESSION['regist_name']=$rec['name'];
+		$_SESSION['regist_name']=$rec['name'];
 		header('Location: index.php');
 		exit();
 	}

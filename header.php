@@ -14,8 +14,5 @@
 <script src="js/init.js"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-<<<<<<< HEAD
-=======
 <script src="js/index_script.js"></script>
 <!---<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>--->
->>>>>>> be0588b8836ea935851b219a78e37809ba399b3b
