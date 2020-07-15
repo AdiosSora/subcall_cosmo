@@ -21,11 +21,12 @@ session_regenerate_id(true);
       </div>
     </a>
     <ul class="right hide-on-med-and-down">
+     <li><a href="#">Stableとは？</a></li>
+     <li><a href="#">使い方</a></li>
       <?php
         // セッション名は統一
         if(isset($_SESSION['bool']) == false)
         {
-          print 'ようこそゲスト様<br />';
           print '<li><a href="login.php">Log in</a></li>';
           print '<li><a href="register.php"Sign up</a></li>';
           print '<br />';
@@ -35,11 +36,8 @@ session_regenerate_id(true);
           print 'ようこそ';
           print $_SESSION['regist_name'];
           print '様　';
-          print '<br />';
         }
        ?>
-      <li><a href="#">Stableとは？</a></li>
-      <li><a href="#">使い方</a></li>
     </ul>
     <ul id="nav-mobile" class="sidenav">
       <li><a href="#">Stableとは？</a></li>
