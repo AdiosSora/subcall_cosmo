@@ -15,69 +15,33 @@
       <div class="section no-pad-bot">
         <br><br>
         <div class="row">
-          <div class="col s12 m6 center">
-
-            いいいいいいいいいいいいいいいいいいいいいいいいいい
-          </div>
-          <div class="col s12 m6 center">
-            <div class="card-panel grey lighten-5">
+          <div class="col s12 m6 offset-m6 center">
+            <h2 style="color:black !important;">会議へ参加する</h2>
             <form action="location.href("join.php")">
               <div class="input-field col s12">
-                <input id="first_name" type="text" class="validate">
-                <label for="ID">ID</label>
+                <input id="room_id" type="text" class="validate">
+                <label for="room_id">Room ID</label>
               </div>
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
+              <div id="room_create_form" class="input-field col s12" style="display: none;">
+                <input id="room_password" type="password" class="validate">
+                <label for="room_password">password</label>
+              </div>
+              <div class="input-field col s12" style="display: block;">
+                <input id="guest_name" type="text" class="validate" name="guestname">
+                <label for="guest_name">ニックネーム</label>
               </div>
 
-              <input type="button" value="golink" onClick="golink()">
-              <a class="" onclick="golink()">ログイン</a>
-              <a class="waves-effect waves-light btn" onclick="room_make()">部屋を作る</a>
-              <a class="waves-effect waves-light btn" onclick="clickBtn_create()" >部屋に入る</a>
-              <a class="waves-effect waves-light btn">button</a>
-              <input class="waves-effect waves-light btn" onclick="golink()">ログイン</button></br>
-              <p id="p1">テスト１</p>
+              <a class="waves-effect waves-light btn-large" onclick="clickBtn_create()" >部屋作成</a>
+              <a class="waves-effect waves-light btn-large" onclick="room_make()">入室</a>
 
-              <!-- ゲスト用名前入力欄 -->
-              <input type="text" name="guestname" value="名前を入力してください"></br>
-
-              <script>
-                    //初期表示は非表示
-                  document.getElementById("p1").style.display ="none";
-
-
-                  function clickBtn_create(){
-                  	const p1 = document.getElementById("p1");
-
-                  	if(p1.style.display=="block"){
-                  		// noneで非表示
-                  		p1.style.display ="none";
-                  	}else{
-                  		// blockで表示
-                  		p1.style.display ="block";
-                  	}
-                  }
-
-              </script>
-              <button type="button" onclick="room_in()">部屋に入る</button></br>
             </form>
-              <div class="input-field col s12">
-                <i class="material-icons prefix">textsms</i>
-                <input type="text" id="autocomplete-input" class="autocomplete">
-                <label for="autocomplete-input">Autocomplete</label>
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
         </div>
         <br><br>
 
       </div>
     </div>
-    <div class="parallax" style="background:#999999;"></div>
+    <div class="parallax"><img src="images/background_top.png" alt="topimage"></div>
   </div>
 
   <div class="container">

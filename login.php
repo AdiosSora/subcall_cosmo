@@ -1,23 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Login</title>
-  </head>
-  <body>
-    <h1>ログイン画面</h1>
-    <form method="post" action="login_check.php">
 
-    ユーザ名<br/>
-    <input type="text" name="name" size="30" maxlength="30" autocomplete="off"> <br/><br/>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    パスワード<br/>
-    <input type="password" name="pass" size="30" maxlength="30" autocomplete="off"> <br/><br/>
+  <title>Stable - ビデオ会議</title>
+  <?php include './header.php'; ?>
+</head>
+<body>
+  <?php include './nav.php'; ?>
 
+  <div id="index-banner" class="parallax-container">
+    <div class="container">
+      <div class="section no-pad-bot">
+        <br><br>
+        <div class="row">
+          <div class="col offset-s2 s8 center">
+            <div class="card">
+              <div class="card-content">
+                <form method="post" name="regiser_form" action="login_check.php" id="check" class="pw-form-container">
+                    <h2 style="color:black !important;">ログイン</h1><br/>
+                      <?php
+                          session_start();
+                          session_regenerate_id(true);
+                          if($_SESSION['bool'] == true){
+                            print'<p>ユーザ名またはパスワードが間違っています</p>';
+                          }
+                       ?>
+                    <div class="form_title">
+                      <label for="name" class="form_name">お名前</label>
+                    </div>
+                    <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="例:たろう" autocomplete="off">
+                    <br>
+                    <div class="form_title">
+                      <label for="name" class="form_name">パスワード</label>
+                    </div>
+                    <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off">
+                    <br>
+                    <a class="waves-effect waves-light btn-large grey darken-1" href="index.php">戻る</a>
+                    <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">ログイン</a>
 
-    <button type="button" onclick="history.back()">戻る</button>
-    <button type="submit" value="ログイン">ログイン</button>
-
-    </form>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax" style="background:#999999;"></div>
+  </div>
+  <?php include './footer.php'; ?>
   </body>
 </html>
