@@ -35,7 +35,9 @@
                     <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off">
                     <br>
                     <a class="waves-effect waves-light btn-large grey darken-1" href="index.php">戻る</a>
+                    <a class="waves-effect waves-light btn-large grey darken-1" href="register.php">会員登録</a>
                     <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">ログイン</a>
+
 
                 </form>
               </div>
