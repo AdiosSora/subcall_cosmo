@@ -31,8 +31,6 @@
                 <input id="guest_name" type="text" class="validate" name="guestname">
                 <label for="guest_name">ニックネーム</label>
               </div>
-              <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" >部屋作成</a>
-              <a class="waves-effect waves-light btn-large" href="javascript:join_form.submit();">入室</a>
               <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" ><i class="material-icons left">add</i>部屋作成</a>
               <a class="waves-effect waves-light2 btn-large" href="javascript:join_form.submit();">入室</a>
             </form>
