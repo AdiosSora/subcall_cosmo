@@ -30,9 +30,7 @@ try
 	if(!is_null($rec)){
 		?>
 		<script>
- 		if (window.alert("ユーザ名またはパスワードが間違っています")) {
-  	window.open("login.php");
-		}
+			<div class="alert  error">Error! <a class="button">link</a></div>  
 		</script>
 		<?php
 	}
