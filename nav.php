@@ -1,9 +1,11 @@
 <nav class="white" role="navigation">
   <div class="nav-wrapper container">
-    <a id="logo-container" href="#" class="brand-logo">
-      <object id="front-page-logo" class="responsive-img" width="170px" type="image/svg+xml" data="STABLE_logo.svg">
-        Your browser does not support SVG.
-      </object>
+    <a id="logo-container" href="./index.php" class="brand-logo">
+      <div>
+        <object id="front-page-logo" class="responsive-img" width="170px" type="image/svg+xml" data="STABLE_logo.svg">
+          Your browser does not support SVG.
+        </object>
+      </div>
     </a>
     <ul class="right hide-on-med-and-down">
       <li><a href="#">Stableとは？</a></li>
