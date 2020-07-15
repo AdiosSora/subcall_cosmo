@@ -27,15 +27,16 @@ try
 
 	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	if($rec == false)
-	{
-		session_start();
-		$_SESSION['bool']=$rec;
-		header('Location: login.php');
-		exit();
+	if(!is_null($rec)){
+		?>
+		<script>
+ 		if (window.alert("ユーザ名またはパスワードが間違っています")) {
+  	window.open("login.php");
+		}
+		</script>
+		<?php
 	}
-	else
-	{
+	else{
 		session_start();
 		//$_SESSION['login']=1;
 		//$_SESSION['regist_name']=$regist_name;
