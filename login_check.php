@@ -46,11 +46,7 @@ try
 
 	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	if(!is_null($rec)){
-		?>
-		<?php
-	}
-	else{
+	if($rec == true){
 		session_start();
 		$_SESSION['bool']=1;
 		//$_SESSION['regist_name']=$regist_name;
