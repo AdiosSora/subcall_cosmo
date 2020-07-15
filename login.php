@@ -4,11 +4,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!--<script src="./js/login.js"></script>-->
 
   <title>Stable - ビデオ会議</title>
   <?php include './header.php'; ?>
 </head>
 <body>
+
   <?php include './nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
@@ -20,14 +22,8 @@
             <div class="card">
               <div class="card-content">
                 <form method="post" name="regiser_form" action="login_check.php" id="check" class="pw-form-container">
-                    <h2 style="color:black !important;">ログイン</h1><br/>
-                      <?php
-                          session_start();
-                          session_regenerate_id(true);
-                          if($_SESSION['bool'] == true){
-                            print'<p>ユーザ名またはパスワードが間違っています</p>';
-                          }
-                       ?>
+                    <h2 style="color:black !important;">ログイン</h2><br/>
+
                     <div class="form_title">
                       <label for="name" class="form_name">お名前</label>
                     </div>
