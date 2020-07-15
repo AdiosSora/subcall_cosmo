@@ -34,11 +34,9 @@
                     <div class="form_title">
                       <label for="name" class="form_name">パスワード</label>
                       <a class="form_required_mark">必須</a>
-                      <span id="result"></span>
                     </div>
                     <input type="password" name="pass" id="pass" size="30" maxlength="30" placeholder="パスワード" autocomplete="off">
                     <input type="password" name="pass2" id="pass2" size="30" maxlength="30" placeholder="パスワード(確認)" autocomplete="off">
-                    <span class="helper-text" data-error="wrong" data-success="right">パスワードが一致しません。</span>
                     <br>
                     <div class="form_title">
                       <label for="name" class="form_name">メールアドレス</label>

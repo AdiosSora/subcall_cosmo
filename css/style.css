@@ -179,7 +179,7 @@ footer.page-footer {
   color: white;
   font-size: 1em;
   border-radius: 20%;
-  padding:0px 5px;
+  padding: 0px 5px;
 }
 
 label.form_name {
@@ -189,10 +189,44 @@ label.form_name {
 }
 
 label.pass2-error {
-  margin:10px 0px;
+  margin: 10px 0px;
 }
 
-label.address-error{
-  height:20px;
-  margin:10px 0px;
+label.address-error {
+  height: 20px;
+  margin: 10px 0px;
+}
+
+/*パスワード強度*/
+#password_result label {
+  margin-right: 5px;
+}
+
+#password_result input {
+  padding: 5px 14px;
+  border: 1px solid #d5d9da;
+  box-shadow: 0 0 9px #0E34F5 inset;
+  width: 272px;
+  font-size: 1em;
+  height: 25px;
+}
+
+#password_result .short {
+  font-weight: bold;
+  color: #FF0000 !important;
+}
+
+#password_result .weak {
+  font-weight: bold;
+  color: orange !important;
+}
+
+#password_result .good {
+  font-weight: bold;
+  color: #2D98F3 !important;
+}
+
+#password_result .strong {
+  font-weight: bold;
+  color: limegreen !important;
 }

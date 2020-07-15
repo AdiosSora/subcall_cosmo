@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col s12 m6 offset-m6 center">
             <h2 style="color:black !important;">会議へ参加する</h2>
-            <form action="location.href("join.php")">
+            <form id="join_form" action="location.href("join.php")">
               <div class="input-field col s12">
                 <input id="room_id" type="text" class="validate">
                 <label for="room_id">Room ID</label>
