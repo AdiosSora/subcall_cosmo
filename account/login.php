@@ -7,11 +7,11 @@
   <!--<script src="./js/login.js"></script>-->
 
   <title>Stable - ビデオ会議</title>
-  <?php include '../header.php'; ?>
+  <?php include './header.php'; ?>
 </head>
 <body>
 
-  <?php include '../nav.php'; ?>
+  <?php include './nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -49,6 +49,6 @@
     </div>
     <div class="parallax" style="background:#999999;"></div>
   </div>
-  <?php include '../footer.php'; ?>
+  <?php include './footer.php'; ?>
   </body>
 </html>

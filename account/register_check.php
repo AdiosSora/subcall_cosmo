@@ -14,6 +14,26 @@ $regist_name=htmlspecialchars($regist_name,ENT_QUOTES,'UTF-8'); //文字列に�
 $regist_pass=htmlspecialchars($regist_pass,ENT_QUOTES,'UTF-8'); //文字列に変換（セキュリティ対策）
 $regist_address=htmlspecialchars($regist_address,ENT_QUOTES,'UTF-8');
 
+$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
+$user = 'root';
+$password = 'kcsf';
+$dbh = new PDO($dsn,$user,$password);
+$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+$sql = 'SELECT name FROM account WHERE mail_address=?';
+$stmt = $dbh->prepare($sql);
+$data[] = $regist_address;
+$stmt->execute($data);
+
+$dbh = null;
+
+$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if($rec == true){
+  print'error!!';
+  header('Location: index.php');
+  exit();
+}else{
 //$regist_nameがカラならエラーメッセージを表示する
 //$regist_nameが入力されていれば、$regist_nameを表示する
   print 'ユーザ名：';
@@ -42,6 +62,7 @@ $regist_address=htmlspecialchars($regist_address,ENT_QUOTES,'UTF-8');
   print '<button type="button" onclick="history.back()" value="戻る">戻る</button>';
   print '<button type="submit" value="登録">登録</button>';
   print '</form>';
+}
 
 ?>
 </body>

@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col col s10 offset-m1 m8 offset-m2 center">
             <form method="post" name="regiser_form" action="register_check.php" id="check" class="pw-form-container">
-                <h2 style="color:black !important;">会員登録</h1><br/>
+                <h2 style="color:black !important;">会員登録</h2><br/>
                 <div class="form_title">
                   <label for="name" class="form_name">お名前</label>
                   <a class="form_required_mark">必須</a>
