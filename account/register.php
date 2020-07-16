@@ -5,15 +5,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="js/jquery.validate.js"></script>
-  <script src="js/jquery.validate.min.js"></script>
-  <script src="js/register.js"></script>
+  <script src="/js/jquery.validate.js"></script>
+  <script src="/js/jquery.validate.min.js"></script>
+  <script src="/js/register.js"></script>
 
   <title>Stable - ビデオ会議</title>
-  <?php include './header.php'; ?>
+  <?php include '../header.php'; ?>
 </head>
 <body>
-  <?php include './nav.php'; ?>
+  <?php include '../nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col col s10 offset-m1 m8 offset-m2 center">
             <form method="post" name="regiser_form" action="register_check.php" id="check" class="pw-form-container">
-                <h2 style="color:black !important;">会員登録</h1><br/>
+                <h2 style="color:black !important;">会員登録</h2><br/>
                 <div class="form_title">
                   <label for="name" class="form_name">お名前</label>
                   <a class="form_required_mark">必須</a>
@@ -53,6 +53,6 @@
     </div>
     <div class="parallax" style="background:white;"></div>
   </div>
-  <?php include './footer.php'; ?>
+  <?php include '../footer.php'; ?>
   </body>
 </html>

@@ -22,7 +22,7 @@
 try
 {
 
-	require_once('common.php');
+	require_once('C:\xampp\htdocs/common.php');
 
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
@@ -51,7 +51,7 @@ try
 		$_SESSION['bool']=1;
 		//$_SESSION['regist_name']=$regist_name;
 		$_SESSION['regist_name']=$rec['name'];
-		header('Location: index.php');
+		header('Location: ../index.php');
 		exit();
 	}
 

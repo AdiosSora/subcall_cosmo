@@ -10,7 +10,7 @@
 
 try
 {
-	require_once('common.php');
+	require_once('../common.php');
 
 	$post = sanitize($_POST);
 	$regist_address = $post['address'];
@@ -48,7 +48,7 @@ catch (Exception $e)
 
 ?>
 
-<a href="index.php">戻る</a>
+<a href="../index.php">戻る</a>
 
 </body>
 </html>
