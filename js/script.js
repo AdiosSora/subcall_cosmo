@@ -13,19 +13,21 @@ const Peer = window.Peer;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
 
+  //ブラウザの情報
   meta.innerText = `
     UA: ${navigator.userAgent}
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
   `.trim();
 
+  //mode指定
   const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
-
   roomMode.textContent = getRoomModeByHash();
   window.addEventListener(
     'hashchange',
     () => (roomMode.textContent = getRoomModeByHash())
   );
 
+  //メディアの接続確認 & 待機
   const localStream = await navigator.mediaDevices
     .getUserMedia({
       audio: true,
@@ -33,7 +35,7 @@ const Peer = window.Peer;
     })
     .catch(console.error);
 
-  // Render local stream
+  //ローカルストリームを描画
   localVideo.muted = true;
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
@@ -46,7 +48,7 @@ const Peer = window.Peer;
   }));
 
   // Register join handler
-  joinTrigger.addEventListener('click', () => {
+  auto_join(){
     // Note that you need to ensure the peer has connected to signaling server
     // before using methods of peer instance.
     if (!peer.open) {
@@ -118,21 +120,3 @@ const Peer = window.Peer;
 
   peer.on('error', console.error);
 })();
-
-document.addEventListener('DOMContentLoaded', function() {
-   var elems = document.querySelectorAll('.autocomplete');
-   var instances = M.Autocomplete.init(elems, options);
- });
-
-
- // Or with jQuery
-
- $(document).ready(function(){
-   $('input.autocomplete').autocomplete({
-     data: {
-       "Apple": null,
-       "Microsoft": null,
-       "Google": 'https://placehold.it/250x250'
-     },
-   });
- });
