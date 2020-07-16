@@ -48,7 +48,7 @@ const Peer = window.Peer;
   }));
 
   // Register join handler
-  auto_join(){
+    window.setTimeout(() => {
     // Note that you need to ensure the peer has connected to signaling server
     // before using methods of peer instance.
     if (!peer.open) {
@@ -116,7 +116,7 @@ const Peer = window.Peer;
       messages.textContent += `${peer.id}: ${localText.value}\n`;
       localText.value = '';
     }
-  });
+  }, 1000);
 
   peer.on('error', console.error);
 })();

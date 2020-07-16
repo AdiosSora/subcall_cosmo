@@ -35,6 +35,5 @@
     <script src="/js/script.js"></script>
   </body>
   <script>
-    window.setTimeout("auto_join()", 1000);
   </script>
 </html>
