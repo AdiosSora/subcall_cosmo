@@ -1,3 +1,4 @@
+
 <!DOCTYPE htmel>
 <html>
 <head>
@@ -5,6 +6,7 @@
 </head>
 <title>Register check</title>
 <body>
+
 <?php
 $regist_name=$_POST['name']; //前の画面から入力値を受け取り、$regist_nameに格納
 $regist_pass=$_POST['pass']; //前の画面から入力値を受け取り、$regist_passに格納
@@ -29,11 +31,7 @@ $dbh = null;
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($rec == true){
-  print'error!!';
-  header('Location: index.php');
-  exit();
-}else{
+if($rec == false){
 //$regist_nameがカラならエラーメッセージを表示する
 //$regist_nameが入力されていれば、$regist_nameを表示する
   print 'ユーザ名：';
@@ -62,6 +60,8 @@ if($rec == true){
   print '<button type="button" onclick="history.back()" value="戻る">戻る</button>';
   print '<button type="submit" value="登録">登録</button>';
   print '</form>';
+}else{
+  print'error';
 }
 
 ?>

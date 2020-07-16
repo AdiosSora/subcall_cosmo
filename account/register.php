@@ -5,15 +5,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="js/jquery.validate.js"></script>
-  <script src="js/jquery.validate.min.js"></script>
-  <script src="js/register.js"></script>
+  <script src="/js/jquery.validate.js"></script>
+  <script src="/js/jquery.validate.min.js"></script>
+  <script src="/js/register.js"></script>
 
   <title>Stable - ビデオ会議</title>
-  <?php include './header.php'; ?>
+  <?php include '../header.php'; ?>
 </head>
 <body>
-  <?php include './nav.php'; ?>
+  <?php include '../nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -53,6 +53,6 @@
     </div>
     <div class="parallax" style="background:white;"></div>
   </div>
-  <?php include './footer.php'; ?>
+  <?php include '../footer.php'; ?>
   </body>
 </html>
