@@ -18,10 +18,7 @@
           <div class="col s12 m6 offset-m6 center">
             <h2 style="color:black !important;">会議へ参加する</h2>
 
-						<!--<form method="post" action="join.php">-->
-
-            <form id="join_form" action="location.href("join.php")">
-
+            <form method="post" id="join_form" action="./account/join.php">
               <div class="input-field col s12">
                 <input id="room_id" type="text" class="validate">
                 <label for="room_id">Room ID</label>
@@ -36,9 +33,8 @@
               </div>
               <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" ><i class="material-icons left">add</i>部屋作成</a>
               <a class="waves-effect waves-light2 btn-large" href="javascript:join_form.submit();">入室</a>
-
-
             </form>
+
           </div>
         </div>
         <br><br>
