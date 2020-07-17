@@ -20,7 +20,7 @@
           $room = $_POST['room_id'];
           $guestName=$_POST['guest_name'];
           print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">';
-          print '<input type="text" placeholder="User Name" id="guestName" value="'.$guestName.'">';
+          print '<div id="js-guest-name">'.$guestName.'</div>';
           ?>
           <button id="js-join-trigger">Join</button>
           <button id="js-leave-trigger">Leave</button>
