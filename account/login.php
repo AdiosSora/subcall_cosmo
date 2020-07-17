@@ -7,19 +7,11 @@
   <!--<script src="./js/login.js"></script>-->
 
   <title>Stable - ビデオ会議</title>
-<<<<<<< HEAD
   <?php include '../header.php'; ?>
 </head>
 <body>
 
   <?php include '../nav.php'; ?>
-=======
-  <?php include 'C:\xampp\htdocs/header.php'; ?>
-</head>
-<body>
-
-  <?php include 'C:\xampp\htdocs/nav.php'; ?>
->>>>>>> f2d1643f4596802eb5dc332a8ea6cfec2fbdd647
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -57,10 +49,6 @@
     </div>
     <div class="parallax" style="background:#999999;"></div>
   </div>
-<<<<<<< HEAD
   <?php include '../footer.php'; ?>
-=======
-  <?php include 'C:\xampp\htdocs/footer.php'; ?>
->>>>>>> f2d1643f4596802eb5dc332a8ea6cfec2fbdd647
   </body>
 </html>

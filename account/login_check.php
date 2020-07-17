@@ -22,11 +22,7 @@
 try
 {
 
-<<<<<<< HEAD
 	require_once('../common.php');
-=======
-	require_once('C:\xampp\htdocs/common.php');
->>>>>>> f2d1643f4596802eb5dc332a8ea6cfec2fbdd647
 
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
