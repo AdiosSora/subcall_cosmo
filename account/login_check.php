@@ -27,6 +27,7 @@ try
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
 	$regist_pass = $post['pass'];
+	$regist_address =$post['address'];
 
 	$regist_pass = hash('sha256' , $regist_pass);
 
@@ -49,8 +50,8 @@ try
 	if($rec == true){
 		session_start();
 		$_SESSION['bool']=1;
-		//$_SESSION['regist_name']=$regist_name;
 		$_SESSION['regist_name']=$rec['name'];
+		$_SESSION['regist_address']=$rec['address'];
 		header('Location: ../index.php');
 		exit();
 	}
