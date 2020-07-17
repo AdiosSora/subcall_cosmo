@@ -16,6 +16,7 @@ $regist_name=htmlspecialchars($regist_name,ENT_QUOTES,'UTF-8'); //文字列に�
 $regist_pass=htmlspecialchars($regist_pass,ENT_QUOTES,'UTF-8'); //文字列に変換（セキュリティ対策）
 $regist_address=htmlspecialchars($regist_address,ENT_QUOTES,'UTF-8');
 
+//
 if(empty($regist_name) || empty($regist_pass) || empty($regist_address)){
   print'error';
   exit();
@@ -66,6 +67,7 @@ if(empty($regist_name) || empty($regist_pass) || empty($regist_address)){
     print '<button type="submit" value="登録">登録</button>';
     print '</form>';
   }else{
+    //メールアドレスが重複しています。
     print'error';
   }
 

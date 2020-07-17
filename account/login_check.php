@@ -22,7 +22,7 @@
 try
 {
 
-	require_once('common.php');
+	require_once('../common.php');
 
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
