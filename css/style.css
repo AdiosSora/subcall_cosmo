@@ -268,3 +268,8 @@ label.address-error {
 .alert.success .button {
   background: #00A69F;
 }
+
+.error_text {
+  font-size: 40px !important;
+  color: black !important;
+}
