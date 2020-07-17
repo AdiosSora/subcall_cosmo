@@ -48,7 +48,7 @@ const Peer = window.Peer;
   }));
 
   // Register join handler
-    window.setTimeout(() => {
+  window.setTimeout(() => {
     // Note that you need to ensure the peer has connected to signaling server
     // before using methods of peer instance.
     if (!peer.open) {

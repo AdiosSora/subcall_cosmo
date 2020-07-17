@@ -20,7 +20,7 @@
 
             <form method="post" id="join_form" action="/join.php">
               <div class="input-field col s12">
-                <input id="room_id" type="text" class="validate">
+                <input name="room_id" id="room_id" type="text" class="validate">
                 <label for="room_id">Room ID</label>
               </div>
               <div id="room_create_form" class="input-field col s12" style="display: none;">
