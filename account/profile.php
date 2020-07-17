@@ -173,7 +173,10 @@
                               <option value="女">女</option>
                               <option value="">その他</option>
                               </select><br/><br/>
-              <input type="submit" name="upload" value="更新"><br/>
+
+              <input type="submit" name="upload" value="編集"><br/>
+                <a href="delete.php">退会</a>
+                <a class= href="...php"></a>
           </form>
 
         </body>
