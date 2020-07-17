@@ -36,6 +36,7 @@
       </div>
       <p class="meta" id="js-meta"></p>
     </div>
+    音声認識ログ<input type="text" name="speechText">
     <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
     <script src="/js/script.js"></script>
   </body>
