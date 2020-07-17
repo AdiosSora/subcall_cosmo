@@ -28,7 +28,7 @@
                 <label for="room_password">password</label>
               </div>
               <div class="input-field col s12" style="display: block;">
-                <input id="guest_name" type="text" class="validate" name="guestname">
+                <input id="guest_name" type="text" class="validate" name="guest_name">
                 <label for="guest_name">ニックネーム</label>
               </div>
               <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" ><i class="material-icons left">add</i>部屋作成</a>
