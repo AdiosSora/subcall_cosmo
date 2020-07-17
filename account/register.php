@@ -42,7 +42,7 @@
                 </div>
                 <input type="email" name="address" id="address" size="30" maxlength="50" placeholder="例:Stable@example.com" autocomplete="off">
                 <div id="button_box" style="margin: 20px;">
-                  <a class="waves-effect waves-light btn-large grey darken-1" href="index.php">戻る</a>
+                  <a class="waves-effect waves-light btn-large grey darken-1" href="../index.php">戻る</a>
                   <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">確認</a>
                 </div>
             </form>
