@@ -1,13 +1,14 @@
-//参考　URL　https://qiita.com/hmmrjn/items/4b77a86030ed0071f548
-
-const resultDiv = document.getelementbyId('speechText');
-
-window.alert("speechAPIが呼び出されました");
-
-recognition.start();//音声認識スタート!!
+<div id="result-div"></div>
+<button id="stop-btn">stop</button>
+<script>
+  const startBtn = document.querySelector('#start-btn');
+  const stopBtn = document.querySelector('#stop-btn');
+  const resultDiv = document.querySelector('#result-div');
+  const speech= document.getElementById('speechAPI');
 
   SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
-  let recognition = new SpeechRecognition();//SpeechRecognitionは音声認識メソッド。
+  let recognition = new SpeechRecognition();
+	recognition.start();
 
   recognition.lang = 'ja-JP';
   recognition.interimResults = true;
@@ -25,5 +26,10 @@ recognition.start();//音声認識スタート!!
         interimTranscript = transcript;
       }
     }
-    resultDiv.value+=finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</i>';
+    resultDiv.innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</i>';
   }
+
+  stopBtn.onclick = () => {
+    recognition.stop();
+  }
+</script>
