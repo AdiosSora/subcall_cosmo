@@ -67,7 +67,7 @@ if(empty($regist_name) || empty($regist_pass) || empty($regist_address)){
     print '<button type="submit" value="登録">登録</button>';
     print '</form>';
   }else{
-    //メールアドレスが重複しています。
+    //</body>メールアドレスが重複しています。
     print'error';
   }
 
