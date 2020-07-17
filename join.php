@@ -17,10 +17,14 @@
           <video id="js-local-stream"></video>
           <span id="js-room-mode"></span>:
           <?php
-          $room = $_POST['room_id'];
-          $guestName=$_POST['guest_name'];
-          print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">';
-          print '<div id="js-guest-name">'.$guestName.'</div>';
+            $room = $_POST['room_id'];
+            $guestName=$_POST['guest_name'];
+          if($room!=null && $guestName!=null){
+            print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">';
+            print '<div id="js-guest-name">'.$guestName.'</div>';
+          } else {
+            header('Location: index.php');
+          }
           ?>
           <button id="js-join-trigger">Join</button>
           <button id="js-leave-trigger">Leave</button>
