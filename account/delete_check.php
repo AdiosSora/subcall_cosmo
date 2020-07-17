@@ -15,6 +15,9 @@ try
 
 	$name = $post['name'];
   $pass = $post['pass'];
+  //$address = $post['address'];
+
+  $regist_pass = hash('sha256' , $pass);
 
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
@@ -25,7 +28,7 @@ try
 	$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
 	$stmt = $dbh->prepare($sql);
 	$data[] = $name;
-  $data[] = $pass;
+  $data[] = $regist_pass;
 	$stmt->execute($data);
 
 	$dbh = null;
@@ -45,7 +48,7 @@ try
   	print'</form>';
     print '<a href="../index.php">いいえ</a>';
   }else{
-    print '名前かパスワードが間違っています。'.'<br>';
+    print 'パスワードが間違っています。'.'<br>';
     print '<a href="./delete.php">戻る</a>';
   }
 

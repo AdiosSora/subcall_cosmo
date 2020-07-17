@@ -17,6 +17,8 @@ try
   $name = $post['name'];
   $pass = $post['pass'];
 
+  $regist_pass = hash('sha256' , $pass);
+
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
 	$password = 'kcsf';
@@ -26,7 +28,7 @@ try
 	$sql = 'DELETE FROM account WHERE name=? AND pass=?';
 	$stmt = $dbh->prepare($sql);
 	$data[] = $name;
-  $data[] = $pass;
+  $data[] = $regist_pass;
 	$stmt->execute($data);
 
 	$dbh = null;
