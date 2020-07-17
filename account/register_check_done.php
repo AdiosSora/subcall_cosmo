@@ -33,6 +33,9 @@ try
 	$dbh = null;
 
 	print 'アカウントの登録が完了しました。 <br />';
+	print '<form method="post" action="profile.php">';
+	print '<input type="hidden" name="name" value="'.$regist_name.'">';
+	print '<input type="hidden" name="address" value="'.$regist_address.'">';
 
 }
 catch (Exception $e)
