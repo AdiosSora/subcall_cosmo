@@ -13,6 +13,8 @@ const Peer = window.Peer;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
 
+  const guestname = document.getElementById('js-guest-name').innerHTML;
+
   //ブラウザの情報
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -48,7 +50,7 @@ const Peer = window.Peer;
   }));
 
   // Register join handler
-    window.setTimeout(() => {
+  window.setTimeout(() => {
     // Note that you need to ensure the peer has connected to signaling server
     // before using methods of peer instance.
     if (!peer.open) {
@@ -63,8 +65,8 @@ const Peer = window.Peer;
     room.once('open', () => {
       messages.textContent += '=== You joined ===\n';
     });
-    room.on('peerJoin', peerId => {
-      messages.textContent += `=== ${peerId} joined ===\n`;
+    room.on('peerJoin', peerId  => {
+      messages.textContent += `=== ${guestname}  joined ===\n`;
     });
 
     // Render remote stream for new peer join in the room
