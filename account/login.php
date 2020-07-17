@@ -7,11 +7,19 @@
   <!--<script src="./js/login.js"></script>-->
 
   <title>Stable - ビデオ会議</title>
+<<<<<<< HEAD
   <?php include '../header.php'; ?>
 </head>
 <body>
 
   <?php include '../nav.php'; ?>
+=======
+  <?php include 'C:\xampp\htdocs/header.php'; ?>
+</head>
+<body>
+
+  <?php include 'C:\xampp\htdocs/nav.php'; ?>
+>>>>>>> f2d1643f4596802eb5dc332a8ea6cfec2fbdd647
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -34,7 +42,7 @@
                     </div>
                     <input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off">
                     <br>
-                    <a class="waves-effect waves-light btn-large grey darken-1" href="index.php">戻る</a>
+                    <a class="waves-effect waves-light btn-large grey darken-1" href="../index.php">戻る</a>
                     <a class="waves-effect waves-light btn-large grey darken-1" href="register.php">会員登録</a>
                     <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">ログイン</a>
 
@@ -49,6 +57,10 @@
     </div>
     <div class="parallax" style="background:#999999;"></div>
   </div>
+<<<<<<< HEAD
   <?php include '../footer.php'; ?>
+=======
+  <?php include 'C:\xampp\htdocs/footer.php'; ?>
+>>>>>>> f2d1643f4596802eb5dc332a8ea6cfec2fbdd647
   </body>
 </html>
