@@ -13,7 +13,7 @@ if(isset($_SESSION['bool'])==false){
 }
 
 ?>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
         <head>
           <script src="/js/register_update.js"></script>
@@ -22,19 +22,14 @@ if(isset($_SESSION['bool'])==false){
         <body>
           <p>
           Preview:<br/><br/>
-          <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
+          <image id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
           </p>
-        <form method='POST' action="register_update_done.php">
-              <input type="file" accept='image/*' onchange="previewImage(this);"><br/><br/>
 
-              <!-- <?php
-              $url = '';
-              $data = file_get_contents($url);
-              file_put_contents('../download/dl.jpg',$data);
-              ?> -->
 
+        <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
+              <input type="file" name="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
               ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
-              E-mail : &nbsp;<input type="text" id="address" name="address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
+              E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
 
               生年月日 :&nbsp;
               <select name="year" id="year">
@@ -175,12 +170,19 @@ if(isset($_SESSION['bool'])==false){
               </select><br/><br/>
 
             性別 :&nbsp;
-              <input type="radio" name="gender[]" id="male" value="male">男性
-              <input type="radio" name="gender[]" id="female" value="female">女性
-              <input type="radio" name="gender[]" id="null" value="null">その他
-              <br/><br/>
+            <div>
+               <input type="radio" id="gender1" name="gender" value="male">
+               <label for="gender1">男性</label>
 
-              <button type="submit">完了</button>
+               <input type="radio" id="gender2" name="gender" value="female">
+               <label for="gender2">女性</label>
+
+               <input type="radio" id="gender3" name="gender" value="null">
+               <label for="gender3">無回答</label>
+            </div>
+            <div>
+               <button type="submit">完了</button>
+            </div>
         </form>
         <a href="profile.php"><button type="button">戻る</button></a>
     </body>

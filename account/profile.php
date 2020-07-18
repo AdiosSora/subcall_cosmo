@@ -32,15 +32,15 @@ if(isset($_SESSION['bool'])==false){
       $regist_address = $_SESSION['regist_address'];
       $data[] = $regist_address;
 
-      $sql = 'SELECT img FROM account WHERE mail_address=?';
+      $sql = 'SELECT image FROM account WHERE mail_address=?';
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if(empty($rec['img'])){
-         print'<img src="/download/default.png"><br><br>';
+      if(empty($rec['image'])){
+         print'<image src="/download/default.png"><br><br>';
       }else{
-         print $rec['img'].'<br><br>';
+         print $rec['image'].'<br><br>';
       }
 
 
