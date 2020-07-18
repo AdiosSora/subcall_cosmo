@@ -35,9 +35,9 @@ if(isset($_SESSION['bool'])==false){
             	fileReader.readAsDataURL(obj.files[0]);
             }
             </script>
-            <form method='POST' action="profile.php"
+            <form method='POST' action="register_update_done.php">
                       生年月日<br>
-                      <select name="year">
+                      <select name="year" id="year">
                         <option value="">-</option>
                         <option value="1951">1951</option>
                         <option value="1952">1952</option>
@@ -99,19 +99,9 @@ if(isset($_SESSION['bool'])==false){
                         <option value="2008">2008</option>
                         <option value="2009">2009</option>
                         <option value="2010">2010</option>
-                        <option value="2011">2011</option>
-                        <option value="2012">2012</option>
-                        <option value="2013">2013</option>
-                        <option value="2014">2014</option>
-                        <option value="2015">2015</option>
-                        <option value="2016">2016</option>
-                        <option value="2017">2017</option>
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
                       </select>  年
 
-                    <select name="month">
+                    <select name="month" id="month">
                       <option value="">-</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -127,7 +117,7 @@ if(isset($_SESSION['bool'])==false){
                       <option value="12">12</option>
                     </select>  月
 
-                    <select name="day">
+                    <select name="day" id="day">
                       <option value="">-</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -163,7 +153,7 @@ if(isset($_SESSION['bool'])==false){
                     </select>  日<br/><br/>
 
                       国<br>
-                    　<select name = "country">
+                    　<select name = "country" id="country">
                         <option value="">-</option>
                         <option value="アメリカ">アメリカ</option>
                         <option value="イギリス">イギリス</option>
@@ -187,14 +177,13 @@ if(isset($_SESSION['bool'])==false){
                       <br>
 
                     性別<br>
-                    <input type="radio" name="gender" value="male">男性
-                    <input type="radio" name="gender" value="female">女性
-                    <input type="radio" name="gender" value="null">その他
+                    <input type="radio" name="gender[]" id="male" value="male">男性
+                    <input type="radio" name="gender[]" id="female" value="female">女性
+                    <input type="radio" name="gender[]" id="null" value="null">その他
                     <br>
                     <br>
 
-
-                      <button type="submit">完了</button>
+                    <button type="submit">完了</button>
 
                   </form>
 
