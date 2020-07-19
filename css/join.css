@@ -1,0 +1,33 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  width: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px;
+}
+
+#main {
+  width:80%;
+  height:100vh;
+  position: absolute;
+  left: 0%;
+}
+#sub {
+  width: 20%;
+  height:100vh;
+  position: absolute;
+  right: 0%;
+  overflow: auto;
+}
+
+/* ローカルビデオの位置指定 */
+#js-local-stream {
+  width: 192px;
+  heigh: 96px;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+}
