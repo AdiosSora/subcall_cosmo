@@ -27,7 +27,7 @@ if(isset($_SESSION['bool'])==false){
 
 
         <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
-              <input type="file" name="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
+              <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
               ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
               E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
 
