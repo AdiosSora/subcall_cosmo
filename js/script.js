@@ -47,6 +47,7 @@ const Peer = window.Peer;
   const peer = (window.peer = new Peer({
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
+    nickname: guestname,
   }));
 
   // Register join handler
@@ -94,7 +95,7 @@ const Peer = window.Peer;
       remoteVideo.srcObject = null;
       remoteVideo.remove();
 
-      messages.textContent += `=== ${peerId} left ===\n`;
+      messages.textContent += `=== ${guestname} left ===\n`;
     });
 
     // for closing myself
@@ -115,10 +116,10 @@ const Peer = window.Peer;
       // Send message to all of the peers in the room via websocket
       room.send(localText.value);
 
-      messages.textContent += `${peer.id}: ${localText.value}\n`;
+      messages.textContent += `${peer.nickname}: ${localText.value}\n`;
       localText.value = '';
     }
-  }, 1000);
+  },1000);
 
   peer.on('error', console.error);
 })();
