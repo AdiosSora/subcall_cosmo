@@ -18,15 +18,13 @@
   }
   else
   {
-    print $_SESSION['regist_name'];
     print '<form method="post" action="./delete_check.php">';
-    print $_SESSION['regist_name'].'　様の退会処理を開始します。'.'<br>';
+    print $_SESSION['regist_name'].'　様の退会処理を開始します。';
     print'<input type="hidden" name="name" value="'.$_SESSION['regist_name'].'">';
-    print $_SESSION['regist_address'];
     print'<input type="hidden" name="address" value="'.$_SESSION['regist_address'].'"><br>';
     print 'パスワードを入力してください。'.'<br>';
     print '<input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off"><br>';
-	  print '<a href="../index.php">戻る</a><br>';
+    print '<a href="../index.php">戻る</a><br>';
 	  print '<input type="submit" value="OK">';
     print '</form>';
   }

@@ -1,3 +1,16 @@
+<?php
+try
+{
+  session_start();
+  $_SESSION=array();
+
+  if(isset($_COOKIE[session_name()]) == true)
+    {
+    	setcookie(session_name(),'',time()-42000,'/');
+    }
+    session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,32 +19,28 @@
 <body>
 
 <?php
+    require_once('../common.php');
 
-try
-{
+    $post = sanitize($_POST);
 
-  require_once('../common.php');
+    $name = $post['name'];
+    $pass = $post['pass'];
 
-  $post = sanitize($_POST);
+    $regist_pass = hash('sha256' , $pass);
 
-  $name = $post['name'];
-  $pass = $post['pass'];
+  	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
+  	$user = 'root';
+  	$password = 'kcsf';
+  	$dbh = new PDO($dsn,$user,$password);
+  	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-  $regist_pass = hash('sha256' , $pass);
+  	$sql = 'DELETE FROM account WHERE name=? AND pass=?';
+  	$stmt = $dbh->prepare($sql);
+  	$data[] = $name;
+    $data[] = $regist_pass;
+  	$stmt->execute($data);
 
-	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = 'kcsf';
-	$dbh = new PDO($dsn,$user,$password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-	$sql = 'DELETE FROM account WHERE name=? AND pass=?';
-	$stmt = $dbh->prepare($sql);
-	$data[] = $name;
-  $data[] = $regist_pass;
-	$stmt->execute($data);
-
-	$dbh = null;
+  	$dbh = null;
 
 }
 catch (Exception $e)

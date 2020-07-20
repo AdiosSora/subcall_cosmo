@@ -6,52 +6,49 @@
 <body>
 
 <?php
-
 try
 {
-  require_once('../common.php');
+    require_once('../common.php');
 
-  $post = sanitize($_POST);
+    $post = sanitize($_POST);
 
-	$name = $post['name'];
-  $pass = $post['pass'];
-  //$address = $post['address'];
+  	$name = $post['name'];
+    $pass = $post['pass'];
+    $address = $post['address'];
 
-  $regist_pass = hash('sha256' , $pass);
+    $regist_pass = hash('sha256' , $pass);
 
-	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = 'kcsf';
-	$dbh = new PDO($dsn,$user,$password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
+  	$user = 'root';
+  	$password = 'kcsf';
+  	$dbh = new PDO($dsn,$user,$password);
+  	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
-	$stmt = $dbh->prepare($sql);
-	$data[] = $name;
-  $data[] = $regist_pass;
-	$stmt->execute($data);
+  	$sql = 'SELECT name FROM account WHERE name=? AND pass=? AND mail_address=?';
+  	$stmt = $dbh->prepare($sql);
+  	$data[] = $name;
+    $data[] = $regist_pass;
+    $data[] = $address;
+  	$stmt->execute($data);
 
-	$dbh = null;
+  	$dbh = null;
 
-  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	if($rec == true){
-    foreach ($rec as $value) {
-      print $value.'<br>';
+  	if($rec == true){
+      print '本当に削除しますか？'.'<br>';
+      print 'お名前：'.$name.'<br>';
+      print 'メールアドレス：'.$address;
+      print'<form method="post" action="delete_done.php">';
+    	print'<input type="hidden" name="name" value="'.$name.'">';
+    	print'<input type="hidden" name="pass" value="'.$pass.'">';
+    	print'<input type="submit" value="はい">';
+    	print'</form>';
+      print '<a href="../index.php">いいえ</a>';
+    }else{
+      print 'パスワードが間違っています。'.'<br>';
+      print '<a href="./delete.php">戻る</a>';
     }
-    print '本当に削除しますか？'.'<br>';
-    print'<form method="post" action="delete_done.php">';
-  	print'<input type="hidden" name="name" value="'.$name.'">';
-  	print'<input type="hidden" name="pass" value="'.$pass.'">';
-  	print'<br />';
-  	print'<input type="submit" value="はい">';
-  	print'</form>';
-    print '<a href="../index.php">いいえ</a>';
-  }else{
-    print 'パスワードが間違っています。'.'<br>';
-    print '<a href="./delete.php">戻る</a>';
-  }
-
 }
 catch (Exception $e)
 {
