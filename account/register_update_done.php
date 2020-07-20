@@ -9,6 +9,7 @@ if(isset($_SESSION['bool'])==false){
   exit();
 }
 
+
 require_once('../common.php');
 $post = sanitize($_POST);
 
@@ -19,13 +20,15 @@ $month = $post['month'];
 $day = $post['day'];
 $country = $post['country'];
 $gender = $post['gender'];
-$image = $_FILES['image']['tmp_name'];
+$image = $_FILES['image'];
+
+
 
 // ファイルがアップロードされているかと、POST通信でアップロードされたかを確認
-if( !empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+if( !empty($_FILES['image']['tmp_name']) ) {
 
 	// ファイルを指定したパスへ保存する
-	if(move_uploaded_file($_FILES['image']['tmp_name'],'../download/'.$_FILES['image']['tmp_name'])) {
+	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
 		print 'アップロードされたファイルを保存しました。';
 	} else {
 		print 'アップロードされたファイルの保存に失敗しました。';
@@ -33,6 +36,8 @@ if( !empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['t
     exit();
 	}
 }
+
+$_SESSION['img'] = $image['name'];
 
 $borne = $year.'/'.$month.'/'.$day;
 
@@ -47,7 +52,7 @@ $data[] = $name;
 $data[] = $borne;
 $data[] = $country;
 $data[] = $gender;
-$data[] = $image;
+$data[] = $image['name'];
 $data[] = $_SESSION['regist_address'];
 
 $sql = 'UPDATE account SET  mail_address=?,name=?,borne=?,country=?,gender=?,image=? WHERE mail_address=?';
@@ -55,8 +60,6 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
 $dbh = null;
-
-print'正常に送信されました。';
 
 print'<a href="profile.php">戻る</a>';
 
