@@ -16,6 +16,11 @@
   </head>
   <body>
     <div id="main">
+        <video id="js-local-stream"></video>
+        <div class="remote-streams" id="js-remote-streams"></div>
+
+    </div>
+    <div id="sub"><div class="room">
       <h1 class="heading">
         <?php print $room;?>
       </h1>
@@ -23,11 +28,6 @@
         Change Room mode (before join in a room):
         <a href="#">mesh</a> / <a href="#sfu">sfu</a>
       </p>
-        <video id="js-local-stream"></video>
-        <div class="remote-streams" id="js-remote-streams"></div>
-
-    </div>
-    <div id="sub"><div class="room">
       <div>
         <span id="js-room-mode"></span>:
         <?php
@@ -45,13 +45,10 @@
 
       <p class="meta" id="js-meta"></p>
     </div>
-<<<<<<< HEAD
     音声認識ログ<input type="text" name="speechText">
     <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
     <script src="/js/script.js"></script>
-=======
     </div>
->>>>>>> 2ae67e300e228bf73ca5b1d20a897b4f5ca9a3d4
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
