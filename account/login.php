@@ -21,6 +21,7 @@
           <div class="col offset-s2 s8 center">
             <form method="post" name="regiser_form" action="login_check.php" id="check" class="pw-form-container">
                 <h2 style="color:black !important;">ログイン</h2><br/>
+                <div id="error_alert" class="alert error" style="display:none;">IDかパスワードが間違っています、もう一度入力してください。</div>
 
                 <div class="form_title">
                   <label for="name" class="form_name">お名前</label>
@@ -43,5 +44,22 @@
     </div>
   </div>
   <?php include '../footer.php'; ?>
+  <?php
+  try{
+    $check='';
+    if (isset($_GET['check'])){
+      $check=htmlspecialchars($_GET['check']);
+    }
+    if($check == 'error'){
+      ?>
+      <script>
+        document.getElementById("error_alert").style.display="inline";
+      </script>
+      <?php
+    }
+  } catch(Exception $e) {
+    print '';
+  }
+  ?>
   </body>
 </html>
