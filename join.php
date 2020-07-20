@@ -45,7 +45,13 @@
 
       <p class="meta" id="js-meta"></p>
     </div>
+<<<<<<< HEAD
+    音声認識ログ<input type="text" name="speechText">
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script src="/js/script.js"></script>
+=======
     </div>
+>>>>>>> 2ae67e300e228bf73ca5b1d20a897b4f5ca9a3d4
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
