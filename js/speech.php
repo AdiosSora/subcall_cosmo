@@ -1,35 +1,65 @@
-<div id="result-div"></div>
-<button id="stop-btn">stop</button>
-<script>
-  const startBtn = document.querySelector('#start-btn');
-  const stopBtn = document.querySelector('#stop-btn');
-  const resultDiv = document.querySelector('#result-div');
-  const speech= document.getElementById('speechAPI');
+<!DOCTYPE html>
+<html>
 
-  SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
-  let recognition = new SpeechRecognition();
-	recognition.start();
+<head>
+    <meta charset="UTF-8">
+    <title>Web Speech API</title>
+    <script>
+        var flag_speech = 0;
 
-  recognition.lang = 'ja-JP';
-  recognition.interimResults = true;
-  recognition.continuous = true;
+        function vr_function() {
+            window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = 'ja';
+            recognition.interimResults = true;
+            recognition.continuous = true;
 
-  let finalTranscript = ''; // 確定した(黒の)認識結果
+            recognition.onsoundstart = function() {
+                document.getElementById('status').innerHTML = "認識中";
+            };
+            recognition.onnomatch = function() {
+                document.getElementById('status').innerHTML = "もう一度試してください";
+            };
+            recognition.onerror = function() {
+                document.getElementById('status').innerHTML = "エラー";
+                if(flag_speech == 0)
+                  vr_function();
+            };
+            recognition.onsoundend = function() {
+                document.getElementById('status').innerHTML = "停止中";
+                  vr_function();
+            };
 
-  recognition.onresult = (event) => {
-    let interimTranscript = ''; // 暫定(灰色)の認識結果
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      let transcript = event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        finalTranscript += transcript;
-      } else {
-        interimTranscript = transcript;
-      }
-    }
-    resultDiv.innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</i>';
-  }
+            recognition.onresult = function(event) {
+                var results = event.results;
+                for (var i = event.resultIndex; i < results.length; i++) {
+                    if (results[i].isFinal)
+                    {
+                        document.getElementById('result_text').innerHTML = results[i][0].transcript;
+                        vr_function();
+                    }
+                    else
+                    {
+                        document.getElementById('result_text').innerHTML = "[途中経過] " + results[i][0].transcript;
+                        flag_speech = 1;
+                    }
+                }
+            }
+            flag_speech = 0;
+            document.getElementById('status').innerHTML = "start";
+            recognition.start();
+        }
+    </script>
+</head>
 
-  stopBtn.onclick = () => {
-    recognition.stop();
-  }
-</script>
+<body>
+    <textarea id="result_text" cols="100" rows="10">
+    </textarea>
+    <br>
+    <textarea id="status" cols="100" rows="1">
+    </textarea>
+    <br>
+    <input type="button" onClick="vr_function();" value="音認開始">
+</body>
+
+</html>
