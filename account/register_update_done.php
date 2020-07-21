@@ -9,6 +9,43 @@ if(isset($_SESSION['bool'])==false){
   exit();
 }
 
+// リサイズ前画像ファイル名
+$imageFile1 = $_FILES['image'];
+
+// リサイズ後画像ファイル名
+$imageFile2 = $_FILES['image'];
+
+// コピー先画像サイズ指定
+$dst_w = 512;
+$dst_h = 512;
+
+// コピー先画像作成
+$dst_image = imagecreate($dst_w, $dst_h);
+
+// コピー元画像読み込み
+$src_image = imagecreatefromjpeg($imageFile1['tmp_name']);
+
+// コピー元画像のサイズ取得
+$imagesize = getimagesize($imageFile1['tmp_name']);
+$src_w = $imagesize[0];
+$src_h = $imagesize[1];
+
+// リサイズしてコピー
+imagecopyresampled(
+	$dst_image, // コピー先の画像
+	$src_image, // コピー元の画像
+	0,          // コピー先の x 座標
+	0,          // コピー先の y 座標。
+	0,          // コピー元の x 座標
+	20,          // コピー元の y 座標
+	$dst_w,     // コピー先の幅
+	$dst_h,     // コピー先の高さ
+	$src_w,     // コピー元の幅
+	$src_h
+); // コピー元の高さ
+
+// 画像をファイルに出力
+imagejpeg($dst_image, $imageFile2['name'],);
 
 require_once('../common.php');
 $post = sanitize($_POST);

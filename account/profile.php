@@ -70,7 +70,7 @@ if(isset($_SESSION['bool'])==false){
          print $rec['borne'].'<br><br>';
       }
 
-      print'国 : ';
+      print'居住国 : ';
       $sql = 'SELECT country FROM account WHERE mail_address=?';
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
@@ -97,7 +97,6 @@ if(isset($_SESSION['bool'])==false){
       $dbh = null;
   ?>
     <a href="register_update.php"><button type="button">編集</button></a><br/><br/><br/>
-    </form>
-    <a href="delete.php">退会</a>
+  </form>
   </body>
 </html>

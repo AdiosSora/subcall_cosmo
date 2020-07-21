@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>アカウント登録完了</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/js/jquery.validate.js"></script>
+  <script src="/js/jquery.validate.min.js"></script>
+  <script src="/js/register.js"></script>
+<title>会員登録完了 - Stable</title>
 </head>
 <body>
+	<!DOCTYPE html>
+
+	<html lang="ja">
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  <script src="/js/jquery.validate.js"></script>
+	  <script src="/js/jquery.validate.min.js"></script>
+	  <script src="/js/register.js"></script>
+
+	  <title>会員登録 - Stable </title>
+	  <?php include '../header.php'; ?>
+	  </head>
+	  <body>
+	    <?php include '../nav.php'; ?>
+
+	    <div id="index-banner" class="parallax-container">
+	      <div class="container">
+	        <div class="section no-pad-bot">
+	          <br><br>
+	          <div class="row">
+	            <div class="col col s10 offset-m1 m8 offset-m2 center">
 
 <?php
 
@@ -32,10 +61,8 @@ try
 
 	$dbh = null;
 
-	print 'アカウントの登録が完了しました。 <br />';
-	print '<form method="post" action="profile.php">';
-	print '<input type="hidden" name="name" value="'.$regist_name.'">';
-	print '<input type="hidden" name="address" value="'.$regist_address.'">';
+
+	print '<h2 style="color:black;">会員登録完了</h2> <br />';
 
 }
 catch (Exception $e)
@@ -51,7 +78,13 @@ catch (Exception $e)
 
 ?>
 
-<a href="../index.php">戻る</a>
-
-</body>
+<a class="waves-effect waves-light btn" href="../index.php">トップページへ</a>
+						</div>
+					</div>
+				<br><br>
+				</div>
+			</div>
+		</div>
+		<?php include '../footer.php'; ?>
+	</body>
 </html>
