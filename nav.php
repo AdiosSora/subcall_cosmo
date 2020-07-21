@@ -35,7 +35,7 @@ session_regenerate_id(true);
           print '<li><a href="/account/profile.php">ようこそ';
           print $_SESSION['regist_name'];
           print '様</a></li>';
-          print '<li><a href="/account/logout.php">ログアウト</a></li>';
+          print '<li><a href="/account/logout.php">Log out</a></li>';
         }
        ?>
     </ul>
