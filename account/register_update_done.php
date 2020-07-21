@@ -19,13 +19,21 @@ $month = $post['month'];
 $day = $post['day'];
 $country = $post['country'];
 $gender = $post['gender'];
-$image = $_FILES['image']['tmp_name'];
+$image = $_FILES['image'];//['tmp_name'];
 
 // ファイルがアップロードされているかと、POST通信でアップロードされたかを確認
-if( !empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+if( !empty($_FILES//['image']
+['tmp_name']
+) && is_uploaded_file($_FILES//['image']
+['tmp_name']
+)) {
 
 	// ファイルを指定したパスへ保存する
-	if(move_uploaded_file($_FILES['image']['tmp_name'],'../download/'.$_FILES['image']['tmp_name'])) {
+	if(move_uploaded_file($_FILES//['image']
+  ['tmp_name']
+  ,'../download/'.$_FILES//['image']
+  ['tmp_name']
+)){
 		print 'アップロードされたファイルを保存しました。';
 	} else {
 		print 'アップロードされたファイルの保存に失敗しました。';
@@ -33,6 +41,7 @@ if( !empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['t
     exit();
 	}
 }
+
 
 $borne = $year.'/'.$month.'/'.$day;
 
