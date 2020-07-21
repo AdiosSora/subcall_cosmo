@@ -12,9 +12,8 @@ const Peer = window.Peer;
   const messages = document.getElementById('js-messages');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
-
   const guestname = document.getElementById('js-guest-name').innerHTML;
-
+  var remotevideoId = 0
   //ブラウザの情報
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -47,13 +46,11 @@ const Peer = window.Peer;
   const peer = (window.peer = new Peer({
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
-    nickname: guestname,
   }));
 
   // Register join handler
   window.setTimeout(() => {
-    // Note that you need to ensure the peer has connected to signaling server
-    // before using methods of peer instance.
+// before using methods of peer instance.
     if (!peer.open) {
       return;
     }
@@ -67,7 +64,7 @@ const Peer = window.Peer;
       messages.textContent += '=== You joined ===\n';
     });
     room.on('peerJoin', peerId  => {
-      messages.textContent += `=== ${guestname}  joined ===\n`;
+      messages.textContent += `=== ${peer.metadata.nickname}  joined ===\n`;
     });
 
     // Render remote stream for new peer join in the room
@@ -77,6 +74,8 @@ const Peer = window.Peer;
       newVideo.playsInline = true;
       // mark peerId to find it later at peerLeave event
       newVideo.setAttribute('data-peer-id', stream.peerId);
+      newVideo.setAttribute('class', 'remoteVideos');
+
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
     });

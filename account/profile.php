@@ -38,9 +38,18 @@ if(isset($_SESSION['bool'])==false){
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(empty($rec['image'])){
-         print'<image src="/download/default.png"><br><br>';
+         print'<image src="../download/default.png"><br><br>';
       }else{
-         print $rec['image'].'<br><br>';
+
+          $sql = 'SELECT image FROM account WHERE mail_address=?';
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+          $img = $rec['image'];
+
+
+          print'<image src="../download/'; print $img.'"><br><br>';
+
       }
 
 
