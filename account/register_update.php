@@ -27,7 +27,9 @@ if(isset($_SESSION['bool'])==false){
 
 
         <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
-              <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
+              <input type="file" name="image" id="image"
+              accept='image/*' onchange="previewImage(this);"
+              ><br/><br/>
               ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
               E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
 
@@ -148,7 +150,7 @@ if(isset($_SESSION['bool'])==false){
               </select>  日<br/><br/>
 
               居住国  :
-              <select name = "country" id="country">
+            　<select name = "country" id="country">
                 <option value="">-</option>
                 <option value="アメリカ">アメリカ</option>
                 <option value="イギリス">イギリス</option>
@@ -177,7 +179,7 @@ if(isset($_SESSION['bool'])==false){
                <input type="radio" id="gender2" name="gender" value="female">
                <label for="gender2">女性</label>
 
-               <input type="radio" id="gender3" name="gender" value="none">
+               <input type="radio" id="gender3" name="gender" value="null">
                <label for="gender3">無回答</label>
             </div>
             <div>

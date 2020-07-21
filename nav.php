@@ -36,6 +36,7 @@ session_regenerate_id(true);
           print $_SESSION['regist_name'];
           print '様</a></li>';
           print '<li><a href="/account/logout.php">ログアウト</a></li>';
+          print '<li><a href="/account/delete.php">退会</a></li>';
         }
        ?>
     </ul>

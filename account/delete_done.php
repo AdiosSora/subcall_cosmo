@@ -42,6 +42,8 @@ try
 
   	$dbh = null;
 
+    print $name.'　様の情報を削除しました。';
+
 }
 catch (Exception $e)
 {
@@ -51,7 +53,6 @@ catch (Exception $e)
 
 ?>
 
-削除しました。<br />
 <br />
 <a href="../index.php">戻る</a>
 
