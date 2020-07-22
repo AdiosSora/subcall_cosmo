@@ -45,7 +45,7 @@ imagecopyresampled(
 ); // コピー元の高さ
 
 // 画像をファイルに出力
-imagejpeg($dst_image, $imageFile2['name'],);
+imagejpeg($dst_image, $imageFile2['name']);
 
 require_once('../common.php');
 $post = sanitize($_POST);
