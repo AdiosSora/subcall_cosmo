@@ -82,8 +82,10 @@ const Peer = window.Peer;
       // mark peerId to find it later at peerLeave event
       newVideo.setAttribute('class', 'remoteVideos');
       newVideo.setAttribute('data-peer-id', stream.peerId);
-
       div.append(newVideo);
+      const subdiv = document.createElement('div')
+      subdiv.setAttribute('class', 'videoSub');
+      div.append(subdiv);
       await newVideo.play().catch(console.error);
     });
 
