@@ -69,14 +69,21 @@ const Peer = window.Peer;
 
     // Render remote stream for new peer join in the room
     room.on('stream', async stream => {
+      // div要素を生成
+      const div = document.createElement('div');
+      // classを追加
+      div.className = 'remoteVideo_div';
+      div.setAttribute('data-peer-id', stream.peerId);
+      // 生成したdiv要素を追加する
+      remoteVideos.appendChild(div);
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
       // mark peerId to find it later at peerLeave event
-      newVideo.setAttribute('data-peer-id', stream.peerId);
       newVideo.setAttribute('class', 'remoteVideos');
+      newVideo.setAttribute('data-peer-id', stream.peerId);
 
-      remoteVideos.append(newVideo);
+      div.append(newVideo);
       await newVideo.play().catch(console.error);
     });
 
@@ -90,8 +97,6 @@ const Peer = window.Peer;
       const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
-      remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-      remoteVideo.srcObject = null;
       remoteVideo.remove();
 
       messages.textContent += `=== ${guestname} left ===\n`;

@@ -3,31 +3,117 @@ html {
 }
 
 body {
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
   margin: 0px;
 }
 
 #main {
-  width:80%;
-  height:100vh;
+  width: 80%;
+  height: 100vh;
   position: absolute;
   left: 0%;
+  background-color: black;
 }
+
 #sub {
   width: 20%;
-  height:100vh;
+  height: 100vh;
   position: absolute;
   right: 0%;
   overflow: auto;
 }
 
+#chatbox {
+  padding: 5px;
+}
+
 /* ローカルビデオの位置指定 */
 #js-local-stream {
   width: 192px;
-  heigh: 96px;
+  height: 108px;
   position: absolute;
   bottom: 0%;
   left: 0%;
+  z-index: 2;
+}
+
+#js-remote-streams {
+  width: 80vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+video {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.remoteVideo_div {
+  display: inline-block;
+  float: left;
+  margin: 0;
+}
+
+.remote_streams:only-child {
+  width: 100%;
+  height: 100%;
+}
+
+/* 2つの場合 */
+.remoteVideo_div:first-child:nth-last-child(2),
+.remoteVideo_div:first-child:nth-last-child(2)~.remoteVideo_div {
+  width: 50%;
+  height: 100%;
+}
+
+/* 3つの場合 */
+.remoteVideo_div:first-child:nth-last-child(3),
+.remoteVideo_div:first-child:nth-last-child(3)~.remoteVideo_div {
+  width: 50%;
+  height: 50%;
+}
+
+/* 4つの場合 */
+.remoteVideo_div:first-child:nth-last-child(4),
+.remoteVideo_div:first-child:nth-last-child(4)~.remoteVideo_div {
+  width: 50%;
+  height: 50%;
+}
+
+/* 5つの場合 */
+.remoteVideo_div:first-child:nth-last-child(5),
+.remoteVideo_div:first-child:nth-last-child(5)~.remoteVideo_div {
+  width: 33%;
+  height: 50%;
+}
+
+/* 6つの場合 */
+.remoteVideo_div:first-child:nth-last-child(6),
+.remoteVideo_div:first-child:nth-last-child(6)~.remoteVideo_div {
+  width: 33%;
+  height: 50%;
+}
+
+/* 7つの場合 */
+.remoteVideo_div:first-child:nth-last-child(7),
+.remoteVideo_div:first-child:nth-last-child(7)~.remoteVideo_div {
+  width: 33%;
+  height: 33%;
+}
+
+/* 8つの場合 */
+.remoteVideo_div:first-child:nth-last-child(8),
+.remoteVideo_div:first-child:nth-last-child(8)~.remoteVideo_div {
+  width: 33%;
+  height: 33%;
+}
+
+/* 9つの場合 */
+.remoteVideo_div:first-child:nth-last-child(9),
+.remoteVideo_div:first-child:nth-last-child(9)~.remoteVideo_div {
+  width: 33%;
+  height: 33%;
 }
