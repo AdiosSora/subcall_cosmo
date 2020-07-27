@@ -139,3 +139,4 @@ print'<a href="profile.php">戻る</a>';
 } catch (Exception $e) {
   print $e;
 }
+?>

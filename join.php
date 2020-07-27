@@ -41,9 +41,68 @@
         <button id="js-send-trigger">Send</button>
       </div>
       <p class="meta" id="js-meta"></p>
+<<<<<<< HEAD
+      <div id="test"></div>
+    </div>
+    音声認識ログ<input type="text" name="speechText">
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script src="/js/script.js"></script>
+    </div>
+=======
       <p><iframe src="/test/speech.html"></iframe></p>
       </div>
+>>>>>>> 4e6726ee9f58b565e8dfb528e757fa6018dce763
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
+  <script>
+      const speech = new webkitSpeechRecognition();
+      speech.lang = 'ja-JP';
+
+      const content = document.getElementById('test');
+
+      start_btn.addEventListener('click', function () {
+          // 音声認識をスタート
+          speech.start();
+      });
+
+      //音声自動文字起こし機能
+      speech.onresult = function (e) {
+          speech.stop();
+          if (e.results[0].isFinal) {
+              var autotext = e.results[0][0].transcript
+              content.innerHTML += '<div>' + autotext + '</div>';
+          }
+      }
+
+      speech.onend = () =>
+      {
+          speech.start()
+      };
+
+  </script>
 </html>
+<script>
+window.setTimeout(() => {
+    const speech = new webkitSpeechRecognition();
+    speech.lang = 'ja-JP';
+
+    speech.start();
+    const content = document.getElementById('videoSub');
+
+    //音声自動文字起こし機能
+    speech.onresult = function (e) {
+        speech.stop();
+        if (e.results[0].isFinal) {
+            var autotext = e.results[0][0].transcript
+            content.innerHTML += autotext;
+        }
+    }
+
+    speech.onend = () =>
+    {
+        speech.start();
+    };
+  },3000);
+
+</script>
