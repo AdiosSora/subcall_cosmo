@@ -67,7 +67,7 @@ const Peer = window.Peer;
       messages.textContent += `=== ${peer.metadata.nickname}  joined ===\n`;
     });
 
-    // Render remote stream for new peer join in the room
+    // Render remote stream for new peer join in the room　
     room.on('stream', async stream => {
       // div要素を生成
       const div = document.createElement('div');
@@ -84,7 +84,7 @@ const Peer = window.Peer;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       div.append(newVideo);
       const subdiv = document.createElement('div')
-      subdiv.setAttribute('class', 'videoSub');
+      subdiv.setAttribute('id', 'videoSub');
       div.append(subdiv);
       await newVideo.play().catch(console.error);
     });
