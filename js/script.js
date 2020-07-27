@@ -1,5 +1,4 @@
 const Peer = window.Peer;
-
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
@@ -67,16 +66,25 @@ const Peer = window.Peer;
       messages.textContent += `=== ${peer.metadata.nickname}  joined ===\n`;
     });
 
-    // Render remote stream for new peer join in the room
+    // Render remote stream for new peer join in the room　
     room.on('stream', async stream => {
+      // div要素を生成
+      const div = document.createElement('div');
+      // classを追加
+      div.className = 'remoteVideo_div';
+      div.setAttribute('data-peer-id', stream.peerId);
+      // 生成したdiv要素を追加する
+      remoteVideos.appendChild(div);
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
       // mark peerId to find it later at peerLeave event
-      newVideo.setAttribute('data-peer-id', stream.peerId);
       newVideo.setAttribute('class', 'remoteVideos');
-
-      remoteVideos.append(newVideo);
+      newVideo.setAttribute('data-peer-id', stream.peerId);
+      div.append(newVideo);
+      const subdiv = document.createElement('div')
+      subdiv.setAttribute('id', 'videoSub');
+      div.append(subdiv);
       await newVideo.play().catch(console.error);
     });
 
@@ -90,8 +98,6 @@ const Peer = window.Peer;
       const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
-      remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-      remoteVideo.srcObject = null;
       remoteVideo.remove();
 
       messages.textContent += `=== ${guestname} left ===\n`;
@@ -121,4 +127,5 @@ const Peer = window.Peer;
   },1000);
 
   peer.on('error', console.error);
+
 })();
