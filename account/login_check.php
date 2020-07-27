@@ -16,7 +16,9 @@ try
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+
 	$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
+
 	$stmt = $dbh->prepare($sql);
 	$data[] = $regist_name;
 	$data[] = $regist_pass;

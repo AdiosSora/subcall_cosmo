@@ -150,7 +150,7 @@ if(isset($_SESSION['bool'])==false){
               </select>  日<br/><br/>
 
               居住国  :
-            　<select name = "country" id="country">
+              <select name = "country" id="country">
                 <option value="">-</option>
                 <option value="アメリカ">アメリカ</option>
                 <option value="イギリス">イギリス</option>
@@ -179,7 +179,7 @@ if(isset($_SESSION['bool'])==false){
                <input type="radio" id="gender2" name="gender" value="female">
                <label for="gender2">女性</label>
 
-               <input type="radio" id="gender3" name="gender" value="null">
+               <input type="radio" id="gender3" name="gender" value="none">
                <label for="gender3">無回答</label>
             </div>
             <div>
