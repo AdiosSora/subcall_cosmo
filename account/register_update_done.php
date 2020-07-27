@@ -57,22 +57,11 @@ $month = $post['month'];
 $day = $post['day'];
 $country = $post['country'];
 $gender = $post['gender'];
-$image = $_FILES['image'];
 
 
 
-// ファイルがアップロードされているかと、POST通信でアップロードされたかを確認
-if( !empty($_FILES['image']['tmp_name']) ) {
 
-	// ファイルを指定したパスへ保存する
-	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
-		print 'アップロードされたファイルを保存しました。';
-	} else {
-		print 'アップロードされたファイルの保存に失敗しました。';
-    print'<a href="profile.php">戻る</a>';
-    exit();
-	}
-}
+
 
 $_SESSION['img'] = $image['name'];
 
@@ -105,3 +94,4 @@ print'<a href="profile.php">戻る</a>';
 } catch (Exception $e) {
   print $e;
 }
+?>

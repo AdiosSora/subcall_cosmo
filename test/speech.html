@@ -8,7 +8,6 @@
 <div>
     <h2 style="text-align: center;">音声認識</h2>
     <div style="margin: 0px 47%;">
-        <button id="start_btn" style="text-align: center; height: 50px; width: 100px;">start</button>
     </div>
 </div>
 <div id="content" style="text-align: center;"></div>
@@ -17,14 +16,10 @@
     const speech = new webkitSpeechRecognition();
     speech.lang = 'ja-JP';
 
+    speech.start();
     const start_btn = document.getElementById('start_btn');
     const end_btn = document.getElementById('end_btn');
     const content = document.getElementById('content');
-
-    start_btn.addEventListener('click', function () {
-        // 音声認識をスタート
-        speech.start();
-    });
 
     //音声自動文字起こし機能
     speech.onresult = function (e) {
