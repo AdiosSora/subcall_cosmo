@@ -49,8 +49,7 @@
         const speech = new webkitSpeechRecognition();
         speech.lang = 'ja-JP';
 
-          const content = document.getElementById('test');
-          const content2 = document.getElementById('videoSub');
+          const content = document.getElementById('videoSub');
 
         // 音声認識をスタート
         speech.start();
@@ -59,9 +58,9 @@
         speech.onresult = function (e) {
             speech.stop();
             if (e.results[0].isFinal) {
+                content.innerHTML = '';
                 var autotext = e.results[0][0].transcript
                 content.innerHTML += '<div>' + autotext + '</div>';
-                content2.innerHTML += '<div>' + autotext + '</div>';
             }
         }
 
@@ -69,7 +68,7 @@
         {
             speech.start()
         };
-      },1000);
+      },5000);
 
     </script>
   </body>
