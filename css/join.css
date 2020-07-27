@@ -55,7 +55,7 @@ body {
   top:-5%; left:0%;
 }
 
-.videoSub{
+#videoSub{
   width:90%;
   height: 8%;
   background-color:rgba(255,255,255,0.8);
@@ -63,6 +63,9 @@ body {
   position: absolute;
   bottom:0%;
   left:5%;
+  text-align: center;
+  font-size: 40px;
+  
 
 }
 
@@ -91,8 +94,8 @@ body {
   padding: 20vh 0 0 0;
 }
 
-.remoteVideo_div:first-child:nth-last-child(2) > .videoSub,
-.remoteVideo_div:first-child:nth-last-child(2)~.remoteVideo_div > .videoSub{
+.remoteVideo_div:first-child:nth-last-child(2) > #videoSub,
+.remoteVideo_div:first-child:nth-last-child(2)~.remoteVideo_div > #videoSub{
   margin: 0 0 27vh 0;
 }
 

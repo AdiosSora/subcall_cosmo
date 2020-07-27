@@ -40,12 +40,33 @@
         <input type="text" id="js-local-text">
         <button id="js-send-trigger">Send</button>
       </div>
-
       <p class="meta" id="js-meta"></p>
       </div>
-    音声認識ログ<input type="text" name="speechText">
-    </div>
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
 </html>
+<script>
+window.setTimeout(() => {
+    const speech = new webkitSpeechRecognition();
+    speech.lang = 'ja-JP';
+
+    speech.start();
+    const content = document.getElementById('videoSub');
+
+    //音声自動文字起こし機能
+    speech.onresult = function (e) {
+        speech.stop();
+        if (e.results[0].isFinal) {
+            var autotext = e.results[0][0].transcript
+            content.innerHTML += autotext;
+        }
+    }
+
+    speech.onend = () =>
+    {
+        speech.start();
+    };
+  },3000);
+
+</script>
