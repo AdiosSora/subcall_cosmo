@@ -41,6 +41,7 @@
         <button id="js-send-trigger">Send</button>
       </div>
       <p class="meta" id="js-meta"></p>
+      <p><iframe src="/test/speech.html"></iframe></p>
       </div>
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
