@@ -29,7 +29,7 @@ body {
   padding: 5px;
 }
 
-/* ローカルビデオの位置指定 */
+/* ローカルビデオの位置指定  */
 #js-local-stream {
   width: 192px;
   height: 108px;
@@ -65,7 +65,7 @@ body {
   left:5%;
   text-align: center;
   font-size: 40px;
-  
+
 
 }
 
