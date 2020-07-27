@@ -9,6 +9,7 @@ if(isset($_SESSION['bool'])==false){
   exit();
 }
 
+<<<<<<< HEAD
 // リサイズ前画像ファイル名
 $imageFile1 = $_FILES['image'];
 
@@ -45,7 +46,37 @@ imagecopyresampled(
 ); // コピー元の高さ
 
 // 画像をファイルに出力
-imagejpeg($dst_image, $imageFile2['name'],);
+imagejpeg($dst_image, $imageFile2['name']);
+=======
+$image = $_FILES['image'];
+
+// ファイルがアップロードされているかと、POST通信でアップロードされたかを確認
+if( !empty($_FILES['image']['tmp_name']) ) {
+
+	// ファイルを指定したパスへ保存する
+	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
+		print 'アップロードされたファイルを保存しました。';
+	} else {
+		print 'アップロードされたファイルの保存に失敗しました。';
+    print'<a href="profile.php">戻る</a>';
+    exit();
+	}
+}
+
+//$img = ImageCreateFromJPEG('../download/'.$_FILES['image']['name']);
+
+//$width = ImageSx($img);
+//$height = ImageSy($img);
+
+//$out = ImageCreateTrueColor($width/2, $height/2);
+//ImageCopyResampled($out, $img,
+    //0,0,0,0, $width/4, $height/4, $width, $height);
+
+//move_uploaded_file($out,'../download/'.$image['name']);
+
+
+
+>>>>>>> 4730eefbc3656ccd70ca0dde56bb24350da2c430
 
 require_once('../common.php');
 $post = sanitize($_POST);
@@ -57,6 +88,7 @@ $month = $post['month'];
 $day = $post['day'];
 $country = $post['country'];
 $gender = $post['gender'];
+<<<<<<< HEAD
 $image = $_FILES['image'];
 /*
 //改良１ここから
@@ -82,6 +114,8 @@ switch ($type) {
     default:
         throw new RuntimeException('対応していないファイル形式です。: ', $type);
 }
+=======
+>>>>>>> 4599f400af9505a8abe80e5364ecee2926225487
 
 // 新しく描画するキャンバスを作成
 $canvas = imagecreatetruecolor($w, $h);
@@ -118,18 +152,8 @@ imagedestroy($canvas);
 //改良１ここまで
 */
 
-// ファイルがアップロードされているかと、POST通信でアップロードされたかを確認
-if( !empty($_FILES['image']['tmp_name']) ) {
 
-	// ファイルを指定したパスへ保存する
-	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
-		print 'アップロードされたファイルを保存しました。';
-	} else {
-		print 'アップロードされたファイルの保存に失敗しました。';
-    print'<a href="profile.php">戻る</a>';
-    exit();
-	}
-}
+
 
 $_SESSION['img'] = $image['name'];
 

@@ -199,6 +199,7 @@ label.address-error {
 /* ログインチェック */
 @charset "UTF-8";
 @import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
+
 .alert {
   border-radius: 3px;
   display: flex;
@@ -207,6 +208,7 @@ label.address-error {
   margin: 20px 0;
   padding: 15px;
 }
+
 .alert:before {
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -220,6 +222,7 @@ label.address-error {
   vertical-align: top;
   width: 22px;
 }
+
 .alert .button {
   color: #fff;
   border-radius: 3px;
@@ -228,43 +231,55 @@ label.address-error {
   margin: -5px 0 -5px auto;
   padding: 5px 8px;
 }
+
 .alert.info {
   background: #F5F5F5;
   color: #757575;
 }
+
 .alert.info:before {
   content: "";
 }
+
 .alert.info .button {
   background: #757575;
 }
+
 .alert.warning {
   background: #FFF4C1;
   color: #F49A26;
 }
+
 .alert.warning:before {
   content: "";
 }
+
 .alert.warning .button {
   background: #F49A26;
 }
+
 .alert.error {
   background: #FCE8E6;
   color: #FF4C10;
 }
+
 .alert.error:before {
   content: "";
 }
+
 .alert.error .button {
   background: #FF4C10;
 }
+
 .alert.success {
   background: #DDF2F2;
   color: #00A69F;
 }
+
 .alert.success:before {
   content: "";
 }
+
 .alert.success .button {
   background: #00A69F;
 }
