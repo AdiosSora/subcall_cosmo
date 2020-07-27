@@ -97,6 +97,7 @@ if(isset($_SESSION['bool'])==false){
       $dbh = null;
   ?>
     <a href="register_update.php"><button type="button">編集</button></a><br/><br/><br/>
+    <a href="register_update.php"><button type="button">退会</button></a><br/><br/><br/>
   </form>
   </body>
 </html>
