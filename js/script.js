@@ -1,5 +1,4 @@
 const Peer = window.Peer;
-
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
@@ -128,4 +127,5 @@ const Peer = window.Peer;
   },1000);
 
   peer.on('error', console.error);
+
 })();

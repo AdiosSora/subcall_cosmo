@@ -40,11 +40,9 @@
         <input type="text" id="js-local-text">
         <button id="js-send-trigger">Send</button>
       </div>
-
       <p class="meta" id="js-meta"></p>
+      <p><iframe src="/test/speech.html"></iframe></p>
       </div>
-    音声認識ログ<input type="text" name="speechText">
-    </div>
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
