@@ -15,6 +15,21 @@
       <title>会議室 - Stable</title>
   </head>
   <body>
+    <div id="loading">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1">S</div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4">T</div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6">E</div>
+        <div class="sk-cube sk-cube7">A</div>
+        <div class="sk-cube sk-cube8">B</div>
+        <div class="sk-cube sk-cube9">L</div>
+      </div>
+    </div>
+</div>
+    </div>
     <div id="main">
         <video id="js-local-stream"></video>
         <div class="remote-streams" id="js-remote-streams"></div>
@@ -37,11 +52,13 @@
           ?>
         </div>
         <pre class="messages" id="js-messages"></pre>
+
+        </div>
         <input type="text" id="js-local-text">
         <button id="js-send-trigger">Send</button>
       </div>
 
-      <p class="meta" id="js-meta"></p>
+      <p class="meta" id="js-meta" style="display:none;"></p>
       <div id="test"></div>
     </div>
     <script>
@@ -71,8 +88,15 @@
       },5000);
 
     </script>
+    <script>
+    window.setTimeout(() => {
+        const loading = document.getElementById('loading');
+        loading.classList.add('loaded');
+      },2000);
+    </script>
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </html>
