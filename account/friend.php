@@ -35,9 +35,7 @@ else
 	// DB接続(mysql, xampp)
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
-	// XAMPP用のpassword
-    $password = '';
-	//$password = 'kcsf';
+	$password = 'kcsf';
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
@@ -113,7 +111,7 @@ else
 		</div>
         <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
         <br>
-             
+
         <div>
 			<button type="submit">検索(画面未作成）</button>
         </div>

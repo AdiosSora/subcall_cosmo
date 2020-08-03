@@ -12,13 +12,11 @@ try
 
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
-	// XAMPP—p‚Ìmysql
-    $password = '';
-	//$password = 'kcsf';
+	$password = 'kcsf';
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	// “o˜^”Ô†‚àæ“¾
+	// ï¿½oï¿½^ï¿½Ôï¿½ï¿½ï¿½ï¿½æ“¾
 	$sql = 'SELECT number, name, mail_address FROM account WHERE name=? AND pass=?';
 	//$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
 
@@ -34,9 +32,9 @@ try
 	if($rec == true){
 		session_start();
 		$_SESSION['bool']=1;
-		// “o˜^”Ô†æ“¾
+		// ï¿½oï¿½^ï¿½Ôï¿½ï¿½æ“¾
 		$_SESSION['regist_number']=$rec['number'];
-		
+
 		$_SESSION['regist_name']=$rec['name'];
 		$_SESSION['regist_address']=$rec['mail_address'];
 		header('Location: /index.php');
