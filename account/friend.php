@@ -1,51 +1,3 @@
-<<<<<<< HEAD
-<?php
-session_start();
-session_regenerate_id(true);
-if(isset($_SESSION['bool']) == false)
-{
-	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../index.php">top画面へ</a><br />';
-	print '<br />';
-}
-else
-{
-	print 'ようこそ';
-	print $_SESSION['regist_name'];
-	print '様　';
-}
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>フレンド機能</title>
-</head>
-<body>
-
-<?php
-	$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = '';
-	$dbh = new PDO($dsn,$user,$password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-	$sql = 'SELECT FriendNumber FROM friendlist
-		WHERE UserNumber = ? AND flag = false';
-	$stmt = $dbh->prepare($sql);
-	$data[] =
-	$data[] =
-	$data[] = 
-	$stmt->execute($data);
-
-	$dbh = null;
-
-?>
-
-</body>
-</html>
-=======
 <?php
 session_start();
 session_regenerate_id(true);
@@ -63,7 +15,7 @@ else
 	print '<br />';
 	// ユーザー番号取得
 	$user_num = $_SESSION['regist_number'];
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +55,7 @@ else
 	print $count_send.'件';
 
 	if($count_send > 0){
-		print '<a href="friend_get.php">申請の詳細へ(画面未作成)</a>';
+		print '<a href="friend_get.php">申請の詳細へ</a>';
 	}
 
 	print '</br>';
@@ -166,7 +118,8 @@ else
 	</form>
 
 	<a href="../index.php">トップ画面へ</a>
-
+<?php
+}
+?>
 </body>
 </html>
->>>>>>> 7ec88ac63be7e31aa73f7e9296dacfdf7e6bb0a9

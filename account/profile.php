@@ -53,7 +53,7 @@ if(isset($_SESSION['bool'])==false){
 
       }
 
-
+      print '会員番号：'.$_SESSION['regist_number'].'<br/><br/>';
       print'ユーザ名：'.$_SESSION['regist_name'].'<br/><br/>';
       print'E-mail：'.$_SESSION['regist_address'].'<br/><br/>';
 
