@@ -16,8 +16,9 @@ try
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-
-	$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
+	// �o�^�ԍ����擾
+	$sql = 'SELECT number, name, mail_address FROM account WHERE name=? AND pass=?';
+	//$sql = 'SELECT name, mail_address FROM account WHERE name=? AND pass=?';
 
 	$stmt = $dbh->prepare($sql);
 	$data[] = $regist_name;
@@ -31,6 +32,9 @@ try
 	if($rec == true){
 		session_start();
 		$_SESSION['bool']=1;
+		// �o�^�ԍ��擾
+		$_SESSION['regist_number']=$rec['number'];
+
 		$_SESSION['regist_name']=$rec['name'];
 		$_SESSION['regist_address']=$rec['mail_address'];
 		header('Location: /index.php');
