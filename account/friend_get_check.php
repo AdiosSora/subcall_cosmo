@@ -8,9 +8,11 @@ if(isset($_SESSION['bool']) == false)
 	print '<a href="../index.php">top画面へ</a><br />';
 	print '<br />';
 }
-else if($_POST['cancel_num'] == false){
-  print '申請を取り下げる方を選択していません'.'</br>';
-  print '<a href="friend_get.php">戻る</a></br>';
+// 選択されているか,不正に入ったかチェック
+else if(isset($_POST['cancel_num']) == false || isset($_POST['get_check']) == false)
+{
+  header('Location: friend_ng.php');
+  exit();
 }
 else
 {
@@ -58,8 +60,8 @@ else
   print '<input type="hidden" name="cancel_num" value="'.$cancel_num.'">';
   print '<input type="hidden" name="cancel_name" value="'.$cancel_name.'">';
   print '<br />';
-  print '<button type="submit" value="yes">はい</button>';
-  print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
+  print '<input type="submit" name="get_yes" value="はい">';
+  print '<button type="submit" onclick="history.back()" value="get_no">いいえ</button>';
   print '</form>';
 	}
   ?>

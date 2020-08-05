@@ -12,7 +12,7 @@ else
 	print 'ようこそ';
 	print $_SESSION['regist_name'];
 	print '様　';
-	print '<br />';
+	print '<br /><br />';
 	// ユーザー番号取得
 	$user_num = $_SESSION['regist_number'];
 
@@ -51,15 +51,15 @@ else
 
 	$count_send = $rec['count(friend_number)'];
 
+	print '<form method="post" action="friend_get.php">';
 	print '送ったフレンド申請：';
-	print $count_send.'件';
+	print $count_send.'件　　　';
 
 	if($count_send > 0){
-		print '<a href="friend_get.php">申請の詳細へ</a>';
+		print '<input type="submit" name="get" value="申請の詳細へ">';
 	}
 
-	print '</br>';
-
+	print '</form>';
 
 	// 届いたフレンド申請
 	// 届いたフレンド申請の数を取得
@@ -73,22 +73,23 @@ else
 
 	$count_get = $rec['count(user_number)'];
 
+	print '<form method="post" action="friend_add.php">';
 	print '届いたフレンド申請：';
-	print $count_get.'件';
+	print $count_get.'件　　　';
 
 	if($count_get > 0){
-		print '<a href="friend_get.php">登録の可否へ(画面未作成)</a>';
+		print '<input type="submit" name="add" value="登録の可否へ">';
 	}
 
-	print '</br>';
-
+	print '</form>';
 
 	// フレンド数
-	// フレンドの数を取得
-	$sql = 'SELECT count(user_number) FROM friendlist WHERE user_number=? and flag=true';
+	// フレンドの数を取得(flagがtrue かつ user_number か friend_number に自身の番号があればカウント)
+	$sql = 'SELECT count(user_number) FROM friendlist
+					WHERE (user_number=? or friend_number=?) and flag=true';
 
 	$stmt = $dbh->prepare($sql);
-	// $data[]は不要
+	$data[] = $user_num;
 	$stmt->execute($data);
 
 	$dbh = null;
@@ -97,11 +98,12 @@ else
 
 	$count_user = $rec['count(user_number)'];
 
+	print '<form method="post" action="friend_list.php">';
 	print 'フレンド数：　';
 	print $count_user;
-	print '　／　１０';
-	print '<a href="friend_list.php">フレンドリストへ(画面未作成)</a>';
-	print '</br>';
+	print '　／　１０　　';
+	print '<input type="submit" name="list" value="フレンドリストへ（画面未作成）">';
+	print '</form>';
 
 ?>
 	<!--フレンド申請、指定の名前を検索する-->
@@ -111,9 +113,8 @@ else
 		</div>
         <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
         <br>
-
         <div>
-			<button type="submit">検索(画面未作成）</button>
+			<input type="submit" name="search" value="検索（画面未作成）">
         </div>
 	</form>
 

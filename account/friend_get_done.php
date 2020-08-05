@@ -8,6 +8,12 @@ if(isset($_SESSION['bool']) == false)
 	print '<a href="../index.php">top画面へ</a><br />';
 	print '<br />';
 }
+// 選択されているか,不正に入ったかチェック
+else if(isset($_POST['cancel_num']) == false || isset($_POST['get_yes']) == false)
+{
+  header('Location: friend_ng.php');
+  exit();
+}
 else
 {
 	print $_SESSION['regist_name'];
