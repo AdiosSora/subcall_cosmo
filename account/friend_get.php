@@ -51,7 +51,7 @@ else
   $dbh = null;
 
 	print '申請した者一覧'.'</br>';
-	print '<form method="post" action="friend_get_check.php">';
+
 	while(true){
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -59,14 +59,16 @@ else
   	if($rec == false){
 			break;
 		}
+		print '<form method="post" action="friend_get_check.php">';
+    print '会員番号：'.$rec['number'];
+    print '　　会員名：'.$rec['name'];
+    print '<input type="hidden" name="get_num" value="'.$rec['number'].'">';
+    print '<input type="hidden" name="get_name" value="'.$rec['name'].'">'.'</br>';
+    print '<input type="submit" name="get_check" value="申請取り下げ" >'.'</br>'.'</br>';
+    print '</form>';
 
-
-		print '<input type="radio" name="cancel_num" value="'.$rec['number'].'" >'.'会員番号：'.$rec['number'].
-					'　　会員名：'.$rec['name'].'</br>';
 		}
-		print '<input type="submit" name="get_check" value="選択した方の申請取り下げ"><br />';
-		print '</form>';
-
+		
 		print '<a href="friend.php">フレンド画面へ</a></br>';
 		print '<a href="../index.php">トップ画面へ</a>';
 

@@ -9,7 +9,7 @@ if(isset($_SESSION['bool']) == false)
 	print '<br />';
 }
 // 選択されているか,不正に入ったかチェック
-else if(isset($_POST['cancel_num']) == false || isset($_POST['get_check']) == false)
+else if(isset($_POST['get_check']) == false)
 {
   header('Location: friend_ng.php');
   exit();
@@ -17,10 +17,11 @@ else if(isset($_POST['cancel_num']) == false || isset($_POST['get_check']) == fa
 else
 {
 	print $_SESSION['regist_name'];
-	print '様の申請取り消し';
+	print '様の以下の申請を取り消します';
 	print '<br />';
   // 変数の定義、初期化
-	$cancel_num = $_POST['cancel_num'];	// 選択した者の会員番号
+	$get_num = $_POST['get_num'];	// 選択した者の会員番号
+	$get_name = $_POST['get_name']; // 選択した者の名前
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
 
 ?>
@@ -33,36 +34,16 @@ else
 </head>
 <body>
   <?php
-  // DB接続(mysql, xampp)
-	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = 'kcsf';
-	$dbh = new PDO($dsn,$user,$password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-  // account から選択した番号の名前を取得
-  $sql = 'SELECT name FROM account WHERE number=? ';
-
-	$stmt = $dbh->prepare($sql);
-	$data[] = $cancel_num;
-	$stmt->execute($data);
-
-  $dbh = null;
-
-  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  $cancel_name = $rec['name'];
-
-  print '以下の方への申請を取り下げますか？'.'</br>';
-  print '会員番号：'.$cancel_num;
-  print '　　会員名：'.$cancel_name.'</br>';
-  print '<form method="post" action="friend_get_done.php">';
-  print '<input type="hidden" name="cancel_num" value="'.$cancel_num.'">';
-  print '<input type="hidden" name="cancel_name" value="'.$cancel_name.'">';
-  print '<br />';
-  print '<input type="submit" name="get_yes" value="はい">';
-  print '<button type="submit" onclick="history.back()" value="get_no">いいえ</button>';
+	print '<form method="post" action="friend_get_done.php">';
+  print '会員番号：'.$get_num;
+  print '　　会員名：'.$get_name;
+  print '<input type="hidden" name="get_done_num" value="'.$get_num.'">';
+  print '<input type="hidden" name="get_done_name" value="'.$get_name.'">'.'</br>';
+  print '<input type="submit" name="get_done" value="申請取り下げ" >';
+  print '<button type="button" onclick="history.back()" value="no">取り下げない</button>';
   print '</form>';
+
+  print '<a href="../index.php">トップ画面へ</a>';
 	}
   ?>
 </body>

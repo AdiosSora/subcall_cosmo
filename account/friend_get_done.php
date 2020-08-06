@@ -9,7 +9,7 @@ if(isset($_SESSION['bool']) == false)
 	print '<br />';
 }
 // 選択されているか,不正に入ったかチェック
-else if(isset($_POST['cancel_num']) == false || isset($_POST['get_yes']) == false)
+else if(isset($_POST['get_done']) == false)
 {
   header('Location: friend_ng.php');
   exit();
@@ -20,8 +20,8 @@ else
 	print '様の申請取り消し完了';
 	print '<br />';
   // 変数の定義、初期化
-	$cancel_num = $_POST['cancel_num'];	// 選択した者の会員番号
-  $cancel_name = $_POST['cancel_name'];
+	$get_done_num = $_POST['get_done_num'];	// 選択した者の会員番号
+  $get_done_name = $_POST['get_done_name'];
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
 
 ?>
@@ -45,13 +45,13 @@ else
   $sql = 'DELETE FROM friendlist where user_number=? AND friend_number=? AND flag=false';
 
 	$stmt = $dbh->prepare($sql);
-	$data[] = $cancel_num; // 申請された番号
+	$data[] = $get_done_num; // 申請された番号
   $data[] = $user_num;   // 申請した（自身の）番号
 	$stmt->execute($data);
 
   $dbh = null;
 
-  print '会員番号：'.$cancel_num.'　　会員名：'.$cancel_name.'</br>';
+  print '会員番号：'.$get_done_num.'　　会員名：'.$get_done_name.'</br>';
   print '申請を取り下げました';
   print '</br>';
 

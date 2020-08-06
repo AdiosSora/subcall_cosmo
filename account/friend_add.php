@@ -18,6 +18,13 @@ else
 	print $_SESSION['regist_name'];
 	print '様に届いた申請を管理します';
 	print '<br />';
+	print '現在のフレンド数：';
+	print $_POST['count_friend'];
+	print '　／　10';
+	if($_POST['count_friend'] >=10){
+		print '<br />'.'※10人までしか登録できません※';
+	}
+	print '</br></br>';
 
   // 変数の定義、初期化
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
@@ -50,8 +57,9 @@ else
   $dbh = null;
 
 	print '届いた申請者一覧'.'</br>';
-  print '選択後、「許可」「不可」を選んでください'.'</br>';
-  print '<form method="post" action="friend_add_check.php">';
+
+	print '</br>';
+
 	while(true){
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -60,12 +68,19 @@ else
 			break;
 		}
 
-		print '<input type="radio" name="send_num" value="'.$rec['number'].'" >'.'会員番号：'.$rec['number'].
-					'　　会員名：'.$rec['name'].'</br>';
+		print '<form method="post" action="friend_add_check.php">';
+		print '会員番号：'.$rec['number'];
+		print '　　会員名：'.$rec['name'];
+		print '<input type="hidden" name="add_num" value="'.$rec['number'].'">';
+		print '<input type="hidden" name="add_name" value="'.$rec['name'].'">'.'</br>';
+		if($_POST['count_friend'] < 10){
+			print '<input type="submit" name="add_yes" value="許可">';
 		}
-  print '<input type="submit" name="add_yes" value="許可">';
-  print '<input type="submit" name="add_no" value="不可">';
-  print '</form>';
+	  print '<input type="submit" name="add_no" value="不可">';
+		print '</form>';
+
+		}
+
   print '</br>';
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';

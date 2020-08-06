@@ -9,7 +9,7 @@ if(isset($_SESSION['bool']) == false)
 	print '<br />';
 }
 // 不正に入ったかチェック
-else if(isset($_POST['send_num']) == false)
+else if(isset($_POST['add_done_num']) == false)
 {
   header('Location: friend_ng.php');
   exit();
@@ -18,8 +18,8 @@ else
 {
   // 変数の定義
   $user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
-	$send_num = $_POST['send_num'];		// 選択した会員番号取得
-  $send_name = $_POST['send_name'];   // 選択した名前取得
+	$add_done_num = $_POST['add_done_num'];		// 選択した会員番号取得
+  $add_done_name = $_POST['add_done_name'];   // 選択した名前取得
 
 ?>
 <!DOCTYPE html>
@@ -49,13 +49,13 @@ else
 
   	$stmt = $dbh->prepare($sql);
     $data[] = $user_num;   // 申請された（自身の）番号
-    $data[] = $send_num; // 申請が来た（相手の）番号
+    $data[] = $add_done_num; // 申請が来た（相手の）番号
   	$stmt->execute($data);
 
     $dbh = null;
 
-		print '会員番号：'.$send_num;
-	  print '　　会員名：'.$send_name.'</br>';
+		print '会員番号：'.$add_done_num;
+	  print '　　会員名：'.$add_done_name.'</br>';
 	 	print '<br />';
 	}
 	else if(isset($_POST['add_done_no']) == true)
@@ -69,13 +69,13 @@ else
 
   	$stmt = $dbh->prepare($sql);
     $data[] = $user_num;   // 申請された（自身の）番号
-    $data[] = $send_num; // 申請が来た（相手の）番号
+    $data[] = $add_done_num; // 申請が来た（相手の）番号
   	$stmt->execute($data);
 
     $dbh = null;
 
-		print '会員番号：'.$send_num;
-		print '　　会員名：'.$send_name.'</br>';
+		print '会員番号：'.$add_done_num;
+		print '　　会員名：'.$add_done_name.'</br>';
 		print '<br />';
 	}
 }

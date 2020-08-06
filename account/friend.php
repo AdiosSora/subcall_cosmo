@@ -39,6 +39,20 @@ else
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+	$sql = 'SELECT count(user_number) FROM friendlist
+					WHERE (user_number=? or friend_number=?) and flag=true';
+
+	$stmt = $dbh->prepare($sql);
+	$data_count[] = $user_num;
+	$data_count[] = $user_num;
+	$stmt->execute($data_count);
+
+
+
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	$count_user = $rec['count(user_number)'];
+
 	// 送ったフレンド申請
 	// 送ったフレンド申請の数を取得
 	$sql = 'SELECT count(friend_number) FROM friendlist WHERE friend_number=? and flag=false';
@@ -73,11 +87,14 @@ else
 
 	$count_get = $rec['count(user_number)'];
 
+	$dbh = null;
+
 	print '<form method="post" action="friend_add.php">';
 	print '届いたフレンド申請：';
 	print $count_get.'件　　　';
 
 	if($count_get > 0){
+		print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
 		print '<input type="submit" name="add" value="登録の可否へ">';
 	}
 
@@ -85,26 +102,15 @@ else
 
 	// フレンド数
 	// フレンドの数を取得(flagがtrue かつ user_number か friend_number に自身の番号があればカウント)
-	$sql = 'SELECT count(user_number) FROM friendlist
-					WHERE (user_number=? or friend_number=?) and flag=true';
-
-	$stmt = $dbh->prepare($sql);
-	$data[] = $user_num;
-	$stmt->execute($data);
-
-	$dbh = null;
-
-	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-	$count_user = $rec['count(user_number)'];
 
 	print '<form method="post" action="friend_list.php">';
 	print 'フレンド数：　';
 	print $count_user;
-	print '　／　１０　　';
-	print '<input type="submit" name="list" value="フレンドリストへ（画面未作成）">';
+	print '　／　10　　';
+	if($count_user > 0){
+		print '<input type="submit" name="list" value="フレンドリストへ">';
+	}
 	print '</form>';
-
 ?>
 	<!--フレンド申請、指定の名前を検索する-->
 	<form method='POST' action="friend_search.php" enctype="multipart/form-data">
