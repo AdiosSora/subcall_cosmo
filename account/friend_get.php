@@ -22,6 +22,7 @@ else
 
   // 変数の定義、初期化
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+	$count_friend = $_POST['count_friend'];		// 現在のフレンド数取得
 
 ?>
 
@@ -50,6 +51,11 @@ else
 
   $dbh = null;
 
+	print '現在のフレンド数：　';
+	print $count_friend;
+	print '　／　10　　';
+	print '<br /><br />';
+
 	print '申請した者一覧'.'</br>';
 
 	while(true){
@@ -68,7 +74,7 @@ else
     print '</form>';
 
 		}
-		
+
 		print '<a href="friend.php">フレンド画面へ</a></br>';
 		print '<a href="../index.php">トップ画面へ</a>';
 

@@ -39,6 +39,7 @@ else
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+	// フレンド数取得
 	$sql = 'SELECT count(user_number) FROM friendlist
 					WHERE (user_number=? or friend_number=?) and flag=true';
 
@@ -70,6 +71,7 @@ else
 	print $count_send.'件　　　';
 
 	if($count_send > 0){
+		print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
 		print '<input type="submit" name="get" value="申請の詳細へ">';
 	}
 
@@ -101,7 +103,6 @@ else
 	print '</form>';
 
 	// フレンド数
-	// フレンドの数を取得(flagがtrue かつ user_number か friend_number に自身の番号があればカウント)
 
 	print '<form method="post" action="friend_list.php">';
 	print 'フレンド数：　';
@@ -117,10 +118,10 @@ else
 		<div class="form_title">
 			<label for="name" class="form_name">フレンドを探す</label>
 		</div>
-        <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
-        <br>
+        <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
+				<br>
         <div>
-			<input type="submit" name="search" value="検索（画面未作成）">
+			<input type="submit" name="search" value="検索">
         </div>
 	</form>
 

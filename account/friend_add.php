@@ -54,8 +54,6 @@ else
 	$data[] = $user_num;
 	$stmt->execute($data);
 
-  $dbh = null;
-
 	print '届いた申請者一覧'.'</br>';
 
 	print '</br>';
@@ -71,16 +69,40 @@ else
 		print '<form method="post" action="friend_add_check.php">';
 		print '会員番号：'.$rec['number'];
 		print '　　会員名：'.$rec['name'];
+
+		// 申請された相手のフレンド登録件数を取得
+		$sql_count = 'SELECT count(user_number) FROM friendlist
+										WHERE (user_number=? or friend_number=?) and flag=true';
+		$stmt_count = $dbh->prepare($sql_count);
+		$data_count[0] = $rec['number'];
+		$data_count[1] = $rec['number'];
+
+		$stmt_count->execute($data_count);
+
+		$rec_count = $stmt_count->fetch(PDO::FETCH_ASSOC);
+
+		print '　　フレンド数：　';
+		print $rec_count['count(user_number)'];
+		print '　／　10　　';
+
 		print '<input type="hidden" name="add_num" value="'.$rec['number'].'">';
 		print '<input type="hidden" name="add_name" value="'.$rec['name'].'">'.'</br>';
+
 		if($_POST['count_friend'] < 10){
-			print '<input type="submit" name="add_yes" value="許可">';
+			// 自身のフレンドが上限に達していない場合
+			if($rec_count['count(user_number)'] < 10){
+				// 相手のフレンドが上限に達していない場合
+				print '<input type="submit" name="add_yes" value="申請の許可">'.'<br />';
+			}else{
+				// 相手のフレンドが上限に達している場合
+				print '相手が上限に達しているため、申請の許可ができません。'.'<br />';
+			}
 		}
-	  print '<input type="submit" name="add_no" value="不可">';
+	  print '<input type="submit" name="add_no" value="申請の不可">';
 		print '</form>';
 
 		}
-
+	$dbh = null;
   print '</br>';
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
