@@ -7,9 +7,8 @@ session_regenerate_id(true);
 
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="login.php">ログイン画面へ</a>';
-  exit();
-}
+ print'<a href="login.php">ログイン画面へ</a>';
+ exit();
 
 $image = $_FILES['image'];
 
@@ -24,7 +23,7 @@ $day = $post['day'];
 $country = $post['country'];
 $gender = $post['gender'];
 $_SESSION['img'] = $image['name'];
-$borne = $year.'/'.$month.'/'.$day;
+$bone = $year.'/'.$month.'/'.$day;
 
 $dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 $user = 'root';
@@ -34,13 +33,13 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 $data[] = $mail_address;
 $data[] = $name;
-$data[] = $borne;
+$data[] = $bone;
 $data[] = $country;
 $data[] = $gender;
 $data[] = $image['name'];
 $data[] = $_SESSION['regist_address'];
 
-$sql = 'UPDATE account SET  mail_address=?,name=?,borne=?,country=?,gender=?,image=? WHERE mail_address=?';
+$sql = 'UPDATE account SET  mail_address=?,name=?,bone=?,country=?,gender=?,image=? WHERE mail_address=?';
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dbh = null;
@@ -61,8 +60,8 @@ if( !empty($_FILES['image']['tmp_name']) ) {
 // 縦横、51pxに収まるように縮小したい
 $width = 512;
 $height = 512;
-header('Content-type: image/png')
-$icon = new Imagick('無題.png');
+header('Content-type: image/png');
+$icon = new Imagick('../download/'.$image['name']);
 // オリジナルのサイズ取得
 $width_org = $icon->getImageWidth();
 $height_org = $icon->getImageHeight();

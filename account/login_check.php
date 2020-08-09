@@ -6,8 +6,6 @@ try
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
 	$regist_pass = $post['pass'];
-	$regist_address =$post['address'];
-
 	$regist_pass = hash('sha256' , $regist_pass);
 
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
@@ -40,6 +38,7 @@ try
 		header('Location: /index.php');
 		exit();
 	}else{
+
 			header('Location: /account/login.php?check=error');
 			exit();
 	}

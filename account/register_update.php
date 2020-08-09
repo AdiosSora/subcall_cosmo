@@ -10,6 +10,7 @@ if(isset($_SESSION['bool'])==false){
 }
 
 } catch (Exception $e) {
+  print $e;
 }
 
 ?>

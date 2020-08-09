@@ -24,7 +24,7 @@
                 <div id="error_alert" class="alert error" style="display:none;">IDかパスワードが間違っています、もう一度入力してください。</div>
 
                 <div class="form_title">
-                  <label for="name" class="form_name">お名前</label>
+                  <label for="name" class="form_name">ユーザ名</label>
                 </div>
                 <input type="text" name="name" id="name" size="100" maxlength="100" placeholder="例:たろう" autocomplete="off">
                 <br>
