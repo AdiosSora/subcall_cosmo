@@ -12,8 +12,16 @@ const Peer = window.Peer;
   const messages = document.getElementById('js-messages');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
-  const guestname = document.getElementById('js-guest-name').innerHTML;
+  const myname = document.getElementById('js-guest-name').innerHTML;
   var remotevideoId = 0
+  //一時的にPeerIDをランダム生成
+  var l = 8;
+  var c = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var cl = c.length;
+  var mypeerID = "";
+  for(var i=0; i<l; i++){
+      mypeerID += c[Math.floor(Math.random()*cl)];
+  }
   //ブラウザの情報
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -43,7 +51,7 @@ const Peer = window.Peer;
   await localVideo.play().catch(console.error);
 
   // eslint-disable-next-line require-atomic-updates
-  const peer = (window.peer = new Peer({
+  const peer = (window.peer = new Peer(`${mypeerID}`,{
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
   }));
@@ -61,7 +69,7 @@ const Peer = window.Peer;
     });
 
     room.once('open', () => {
-      messages.textContent += '=== You joined ===\n';
+      messages.textContent += `=== You${mypeerID} joined ===\n`;
     });
 
     room.on('peerJoin', peerId => {
@@ -74,7 +82,6 @@ const Peer = window.Peer;
       const div = document.createElement('div');
       // classを追加
       div.className = 'remoteVideo_div';
-      div.setAttribute('data-peer-id', stream.peerId);
       // 生成したdiv要素を追加する
       remoteVideos.appendChild(div);
       const newVideo = document.createElement('video');
@@ -85,14 +92,34 @@ const Peer = window.Peer;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       div.append(newVideo);
       const subdiv = document.createElement('div')
-      subdiv.setAttribute('id', 'videoSub');
+      subdiv.setAttribute('id', stream.peerId);
+      subdiv.setAttribute('class', 'videoSub');
       div.append(subdiv);
       await newVideo.play().catch(console.error);
     });
 
     room.on('data', ({ data, src }) => {
-      // Show a message sent to the room and who sent
-      messages.textContent += `${src}: ${data}\n`;
+      console.log('データ受け取り');
+      //チャットor字幕の比較
+      var result_num = data.substr( 0, 1 );
+      var result_message = data.substr(1);
+      //「１」チャットの場合
+      if(result_num == '1'){
+        console.log('データ受け取り1発火');
+        messages.textContent += `${src}: ${result_message}\n`;
+      }else
+      if(result_num == '2'){
+        console.log('データ受け取り2発火');
+        var peerID_length = mypeerID.length;
+        console.log(`${peerID_length}`);
+        var subtext_area = document.getElementById(`${src}`);
+        console.log(`${subtext_area}`);
+        subtext_area.innerHTML = '';
+        subtext_area.innerHTML += result_message.substring(peerID_length); // かきくけこ
+
+        console.log(result_message.substring(result_message));
+        console.log(result_message.substring(peerID_length));
+      }
     });
 
     // for closing room members
@@ -102,7 +129,7 @@ const Peer = window.Peer;
       );
       remoteVideo.remove();
 
-      messages.textContent += `=== ${guestname} left ===\n`;
+      messages.textContent += `=== ${myname} left ===\n`;
     });
 
     // for closing myself
@@ -117,13 +144,19 @@ const Peer = window.Peer;
     });
 
     sendTrigger.addEventListener('click', onClickSend);
+    sendTrigger.addEventListener('click', onSubSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
-      room.send(localText.value);
+      room.send('1'+localText.value);
 
-      messages.textContent += `${peer.nickname}: ${localText.value}\n`;
+      messages.textContent += `${myname} : ${localText.value}\n`;
+
+    }
+    function onSubSend() {
+      // Send message to all of the peers in the room via websocket
+      room.send('2'+mypeerID+localText.value);
       localText.value = '';
     }
   },1000);
