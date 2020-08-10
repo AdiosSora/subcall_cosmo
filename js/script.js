@@ -63,8 +63,9 @@ const Peer = window.Peer;
     room.once('open', () => {
       messages.textContent += '=== You joined ===\n';
     });
-    room.on('peerJoin', peerId  => {
-      messages.textContent += `=== ${peer.metadata.nickname}  joined ===\n`;
+
+    room.on('peerJoin', peerId => {
+      messages.textContent += `=== ${peerId} joined ===\n`;
     });
 
     // Render remote stream for new peer join in the room　
