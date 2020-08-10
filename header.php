@@ -12,9 +12,7 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>
 <script src="/js/init.js"></script>
-<script src="/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-<script src="/js/speechAPI.js"></script>
 <!---<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>--->
 
 <!--- favicon --->
