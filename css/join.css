@@ -164,7 +164,7 @@ body {
   left: 0%;
 }
 
-#videoSub {
+.videoSub {
   width: 90%;
   height: 8%;
   background-color: rgba(255, 255, 255, 0.8);
