@@ -15,6 +15,7 @@
       <title>会議室 - Stable</title>
   </head>
   <body>
+  <!---ローディングアニメーション用 --->
     <div id="loading">
       <div class="sk-cube-grid">
         <div class="sk-cube sk-cube1">S</div>
@@ -28,8 +29,7 @@
         <div class="sk-cube sk-cube9">L</div>
       </div>
     </div>
-</div>
-    </div>
+
     <div id="main">
         <video id="js-local-stream"></video>
         <div class="remote-streams" id="js-remote-streams"></div>
@@ -58,7 +58,7 @@
         <button id="js-send-trigger">Send</button>
       </div>
 
-      <p class="meta" id="js-meta" style="display:none;"></p>
+      <p class="meta" id="js-meta" ></p>
       <div id="test"></div>
     </div>
     <script>
@@ -97,6 +97,4 @@
   </body>
   <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script src="/js/script.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </html>
