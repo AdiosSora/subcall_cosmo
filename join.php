@@ -71,30 +71,31 @@
       <div id="test"></div>
     </div>
     <script>
-    window.setTimeout(async () => {
-        console.log('1');
-        const speech = new webkitSpeechRecognition();
-        speech.lang = 'ja-JP';
-        // 音声認識をスタート
-        speech.start();
-        console.log('2');
-
-        //音声自動文字起こし機能
-        speech.onresult = function (e) {
-            speech.stop();
-            console.log('4');
-            if (e.results[0].isFinal) {
-              console.log('4');
-              var autotext = e.results[0][0].transcript
-              console.log(autotext);
-            }
-        }
-
-        speech.onend = () =>
-        {
-            speech.start()
-        };
-      },5000);
+    // window.setTimeout(async () => {
+    //     console.log('1');
+    //     const speech = new webkitSpeechRecognition();
+    //     speech.lang = 'ja-JP';
+    //     // 音声認識をスタート
+    //     speech.start();
+    //     console.log('2');
+    //
+    //     //音声自動文字起こし機能
+    //     speech.onresult = function (e) {
+    //         speech.stop();
+    //         console.log('4');
+    //         if (e.results[0].isFinal) {
+    //           console.log('4');
+    //           var autotext = e.results[0][0].transcript
+    //           console.log(autotext);
+    //         }
+    //     }
+    //
+    //     speech.onend = () =>
+    //     {
+    //         speech.start()
+    //         console.log('スピーチ再起動')
+    //     };
+    //   },4000);
 
     </script>
     <script>

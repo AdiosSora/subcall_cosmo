@@ -1,6 +1,6 @@
 const Peer = window.Peer;
 
-(async function main() {
+(async function () {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
@@ -13,7 +13,7 @@ const Peer = window.Peer;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
   const myname = document.getElementById('js-guest-name').innerHTML;
-  var remotevideoId = 0
+  var remotevideoId = 0;
   //一時的にPeerIDをランダム生成
   var l = 8;
   var c = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -149,7 +149,6 @@ const Peer = window.Peer;
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
       room.send('1'+localText.value);
-
       messages.textContent += `${myname} : ${localText.value}\n`;
       localText.value='';
 
@@ -159,6 +158,36 @@ const Peer = window.Peer;
       room.send('2'+mypeerID+subtext);
       localText.value = '';
     }
+
+
+//^webspeech^^^^^^^webspeech^^^^^webspeech
+      (async function(){
+        console.log('webspeechAPI準備');
+        const speech = new webkitSpeechRecognition();
+        speech.lang = 'ja-JP';
+        // 音声認識をスタート
+        speech.start();
+        console.log('音声入力開始');
+
+        //音声自動文字起こし機能
+        speech.onresult = function (e) {
+            speech.stop();
+            if (e.results[0].isFinal) {
+              var autotext = e.results[0][0].transcript
+              console.log(autotext);
+              var speechflg=true;
+            }
+        }
+
+
+        speech.onend = () =>
+        {
+            speech.start()
+            console.log('API再起動')
+        };
+      })();
+//webspeech終了時点
+
   },1000);
 
   peer.on('error', console.error);
