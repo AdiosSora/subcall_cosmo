@@ -72,21 +72,21 @@
     </div>
     <script>
     window.setTimeout(async () => {
+        console.log('1');
         const speech = new webkitSpeechRecognition();
         speech.lang = 'ja-JP';
-
-          const content = document.getElementById('videoSub');
-
         // 音声認識をスタート
         speech.start();
+        console.log('2');
 
         //音声自動文字起こし機能
         speech.onresult = function (e) {
             speech.stop();
+            console.log('4');
             if (e.results[0].isFinal) {
-                content.innerHTML = '';
-                var autotext = e.results[0][0].transcript
-                onSubSend(autotext);
+              console.log('4');
+              var autotext = e.results[0][0].transcript
+              console.log(autotext);
             }
         }
 
