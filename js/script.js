@@ -151,6 +151,7 @@ const Peer = window.Peer;
       room.send('1'+localText.value);
 
       messages.textContent += `${myname} : ${localText.value}\n`;
+      localText.value='';
 
     }
     function onSubSend(subtext) {
