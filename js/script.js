@@ -144,7 +144,6 @@ const Peer = window.Peer;
     });
 
     sendTrigger.addEventListener('click', onClickSend);
-    sendTrigger.addEventListener('click', onSubSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
@@ -154,9 +153,9 @@ const Peer = window.Peer;
       messages.textContent += `${myname} : ${localText.value}\n`;
 
     }
-    function onSubSend() {
+    function onSubSend(subtext) {
       // Send message to all of the peers in the room via websocket
-      room.send('2'+mypeerID+localText.value);
+      room.send('2'+mypeerID+subtext);
       localText.value = '';
     }
   },1000);

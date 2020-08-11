@@ -86,7 +86,7 @@
             if (e.results[0].isFinal) {
                 content.innerHTML = '';
                 var autotext = e.results[0][0].transcript
-                content.innerHTML += '<div>' + autotext + '</div>';
+                onSubSend(autotext);
             }
         }
 
