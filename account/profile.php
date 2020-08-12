@@ -16,7 +16,7 @@ if(isset($_SESSION['bool'])==false){
 ?>
 <!DOCTYPE html>
 <html lang="ja">
-<<<<<<< HEAD
+
   <head>
     <meta charset="utf-8"/>
   </head>
@@ -60,15 +60,15 @@ if(isset($_SESSION['bool'])==false){
 
 
       print'生年月日 : ';
-      $sql = 'SELECT borne FROM account WHERE mail_address=?';
+      $sql = 'SELECT bone FROM account WHERE mail_address=?';
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if(empty($rec['borne'])){
+      if(empty($rec['bone'])){
          print'未設定<br><br>';
       }else{
-         print $rec['borne'].'<br><br>';
+         print $rec['bone'].'<br><br>';
       }
 
       print'居住国 : ';
@@ -100,7 +100,7 @@ if(isset($_SESSION['bool'])==false){
     <a href="register_update.php"><button type="button">編集</button></a><br/><br/><br/>
   </form>
   </body>
-=======
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -175,15 +175,15 @@ if(isset($_SESSION['bool'])==false){
 
 
               print'<p>生年月日 : ';
-              $sql = 'SELECT borne FROM account WHERE mail_address=?';
+              $sql = 'SELECT bone FROM account WHERE mail_address=?';
               $stmt = $dbh->prepare($sql);
               $stmt->execute($data);
               $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-              if(empty($rec['borne'])){
+              if(empty($rec['bone'])){
                  print'未設定</p><br><br>';
               }else{
-                 print $rec['borne'].'</p><br><br>';
+                 print $rec['bone'].'</p><br><br>';
               }
 
               print'<p>居住国 : ';
@@ -221,5 +221,4 @@ if(isset($_SESSION['bool'])==false){
   </div>
   <?php include '../footer.php'; ?>
 </body>
->>>>>>> 05f5a88d047b13a0cd0fea2d28b19e8c99aca08f
 </html>
