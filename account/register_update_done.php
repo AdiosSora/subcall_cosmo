@@ -49,22 +49,24 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dbh = null;
 
+$file_path = '';
 // ファイルがアップロードされているかの確認
 if(!empty($_FILES['image']['tmp_name']) ) {
-
     	// ファイルを指定したパスへ保存する
     	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
-      		print 'アップロードされたファイルを保存しました。';
+      		print 'プロフィール情報を保存しました。';
+          // ファイルの読み込み
+          $file_path = 'C:/xampp/htdocs/download/'.$image['name'];
     	} else {
-      		print 'アップロードされたファイルの保存に失敗しました。';
+      		print 'プロフィール情報の保存に失敗しました。';
           print'<a href="profile.php">戻る</a>';
           exit();
     	}
-
+}else{
+    print 'プロフィール情報を保存しました。';
+    $file_path = 'C:/xampp/htdocs/download/default.png';
 }
-// ファイルの読み込み
-$file_path = 'C:/xampp/htdocs/download/'.$image['name'];
-//header('Content-type: image/jpeg');
+
 $icon = new Imagick($file_path);
 
 // 縦横、最大512pxに収まるように縮小したい
