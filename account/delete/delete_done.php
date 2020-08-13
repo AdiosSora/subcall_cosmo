@@ -19,7 +19,7 @@ try
 <body>
 
 <?php
-    require_once('../common.php');
+    require_once('../../common.php');
 
     $post = sanitize($_POST);
 
@@ -53,7 +53,7 @@ catch (Exception $e)
 
 削除しました。<br />
 <br />
-<a href="../index.php">戻る</a>
+<a href="../../index.php">戻る</a>
 
 </body>
 </html>

@@ -10,10 +10,10 @@
   <script src="/js/register.js"></script>
 
   <title>会員登録確認 - Stable</title>
-  <?php include '../header.php'; ?>
+  <?php include '../../header.php'; ?>
 </head>
 <body>
-  <?php include '../nav.php'; ?>
+  <?php include '../../nav.php'; ?>
 
   <div id="index-banner" class="parallax-container">
     <div class="container">
@@ -33,13 +33,13 @@
 
   //
   if(empty($regist_name) || empty($regist_pass) || empty($regist_address)){
-    header('Location: /account/register.php?check=empty_error');
+    header('Location: register.php?check=empty_error');
     exit();
   }else if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/' ,$regist_pass)||$regist_pass != $regist_pass2){
-    header('Location: /account/register.php?check=missmatch_error');
+    header('Location: register.php?check=missmatch_error');
     exit();
   }else if(!preg_match("/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/",$regist_address)){
-    header('Location: /account/register.php?check=mailaddress_error');
+    header('Location: register.php?check=mailaddress_error');
     exit();
   }else
 
@@ -96,6 +96,6 @@
 </div>
 </div>
 </div>
-  <?php include '../footer.php'; ?>
+  <?php include '../../footer.php'; ?>
 </body>
 </html>

@@ -8,7 +8,7 @@ session_regenerate_id(true);
 
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="login.php">ログイン画面へ</a>';
+  print'<a href="../login/login.php">ログイン画面へ</a>';
   exit();
 }
 
@@ -16,7 +16,7 @@ if(isset($_SESSION['bool'])==false){
 $image = $_FILES['image'];
 
 //POSTデータのサニタイジング
-require_once('../common.php');
+require_once('../../common.php');
 $post = sanitize($_POST);
 
 //SQLに使用する変数の準備
@@ -59,7 +59,7 @@ if(!empty($_FILES['image']['tmp_name']) ) {
           $file_path = 'C:/xampp/htdocs/download/'.$image['name'];
     	} else {
       		print 'プロフィール情報の保存に失敗しました。';
-          print'<a href="profile.php">戻る</a>';
+          print'<a href="../profile.php">戻る</a>';
           exit();
     	}
 }else{
@@ -95,7 +95,7 @@ $icon->writeImage($file_path);
 // 破棄
 $icon->destroy();
 
-print'<a href="profile.php">戻る</a>';
+print'<a href="../profile.php">戻る</a>';
 
 } catch (Exception $e) {
   print $e;

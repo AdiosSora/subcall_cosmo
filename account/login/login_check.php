@@ -1,7 +1,7 @@
 <?php
 try
 {
-	require_once('../common.php');
+	require_once('../../common.php');
 
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
@@ -35,18 +35,18 @@ try
 
 		$_SESSION['regist_name']=$rec['name'];
 		$_SESSION['regist_address']=$rec['mail_address'];
-		header('Location: /index.php');
+		header('Location: ../../index.php');
 		exit();
 	}else{
 
-			header('Location: /account/login.php?check=error');
+			header('Location: login.php?check=error');
 			exit();
 	}
 
 }
 catch (Exception $e)
 {
-	header('Location: /account/login.php?check=error');
+	header('Location: login.php?check=error');
 	exit();
 }
 

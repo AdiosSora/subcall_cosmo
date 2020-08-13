@@ -13,7 +13,7 @@
   if(isset($_SESSION['bool']) == false)
   {
     print 'お客様はゲストユーザーか、ログインしていないため、退会はできません。'.'<br>';
-    print '<a href="../index.php">戻る</a>';
+    print '<a href="../../index.php">戻る</a>';
     print '<br />';
   }
   else
@@ -24,7 +24,7 @@
     print'<input type="hidden" name="address" value="'.$_SESSION['regist_address'].'"><br>';
     print 'パスワードを入力してください。'.'<br>';
     print '<input type="password" name="pass" id="pass" size="30" maxlength="20" placeholder="パスワード" autocomplete="off"><br>';
-    print '<a href="../index.php">戻る</a><br>';
+    print '<a href="../../index.php">戻る</a><br>';
 	  print '<input type="submit" value="OK">';
     print '</form>';
   }

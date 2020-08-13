@@ -26,7 +26,7 @@ session_regenerate_id(true);
         // セッション名は統一
         if(isset($_SESSION['bool']) == false)
         {
-          print '<li><a href="/account/login.php">Log in</a></li>';
+          print '<li><a href="/account/login/login.php">Log in</a></li>';
           print '<li><a href="/account/register.php">Sign up</a></li>';
           print '<br />';
         }

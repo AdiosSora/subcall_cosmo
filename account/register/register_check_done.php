@@ -23,10 +23,10 @@
 	  <script src="/js/register.js"></script>
 
 	  <title>会員登録 - Stable </title>
-	  <?php include '../header.php'; ?>
+	  <?php include '../../header.php'; ?>
 	  </head>
 	  <body>
-	    <?php include '../nav.php'; ?>
+	    <?php include '../../nav.php'; ?>
 
 	    <div id="index-banner" class="parallax-container">
 	      <div class="container">
@@ -39,7 +39,7 @@
 
 try
 {
-	require_once('../common.php');
+	require_once('../../common.php');
 
 	$post = sanitize($_POST);
 	$regist_address = $post['address'];
@@ -78,13 +78,13 @@ catch (Exception $e)
 
 ?>
 
-<a class="waves-effect waves-light btn" href="../index.php">トップページへ</a>
+<a class="waves-effect waves-light btn" href="../../index.php">トップページへ</a>
 						</div>
 					</div>
 				<br><br>
 				</div>
 			</div>
 		</div>
-		<?php include '../footer.php'; ?>
+		<?php include '../../footer.php'; ?>
 	</body>
 </html>
