@@ -39,15 +39,13 @@ if(isset($_SESSION['bool'])==false){
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(empty($rec['image'])){
-         print'<image src="../download/default.png"><br><br>';
+           print'<image src="../download/default.png"><br><br>';
       }else{
-
           $sql = 'SELECT image FROM account WHERE mail_address=?';
           $stmt = $dbh->prepare($sql);
           $stmt->execute($data);
           $rec = $stmt->fetch(PDO::FETCH_ASSOC);
           $img = $rec['image'];
-
 
           print'<image src="../download/'; print $img.'"><br><br>';
 
@@ -65,10 +63,11 @@ if(isset($_SESSION['bool'])==false){
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if(empty($rec['bone'])){
+      if(empty($rec['bone']) || strcmp($rec['bone'], "―") == 0){
          print'未設定<br><br>';
       }else{
          print $rec['bone'].'<br><br>';
+         $_SESSION['regist_bone'] = $rec['bone'];
       }
 
       print'居住国 : ';
@@ -77,10 +76,11 @@ if(isset($_SESSION['bool'])==false){
       $stmt->execute($data);
 
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-      if(empty($rec['country'])){
+      if(empty($rec['country']) || strcmp($rec['country'] , "―") == 0){
          print'未設定<br><br>';
       }else{
          print $rec['country'].'<br><br>';
+         $_SESSION['regist_country'] = $rec['country'];
       }
 
       print'性別 : ';
@@ -89,10 +89,11 @@ if(isset($_SESSION['bool'])==false){
       $stmt->execute($data);
 
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-      if(empty($rec['gender'])){
+      if(empty($rec['gender']) || strcmp($rec['gender'], "―") == 0){
          print'未設定<br><br>';
       }else{
          print $rec['gender'].'<br><br>';
+         $_SESSION['regist_gender'] = $rec['gender'];
       }
 
       $dbh = null;

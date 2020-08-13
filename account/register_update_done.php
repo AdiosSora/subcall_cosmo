@@ -62,27 +62,6 @@ if(!empty($_FILES['image']['tmp_name']) ) {
     	}
 
 }
-
-
-//画像ロード
-
-//$files_path = '../download/'.$image['name'];
-//画像サイズの取得
-//$image_info = getimagesize($files_path);
-//$width = $image_info["0"] * 0.9;
-//$height = $image_info["1"] * 0.9;
-//$save_path = '../download/'.time().'jpg';
-//$image1 = imagecreatefromjpeg($files_path);
-//白紙の画像を作成
-//$image2 = ImageCreateTrueColor($width, $height);
-//リサイズ処理
-//imagecopyresampled($image2, $image1, 0, 0, 0, 0, 640, 480, 1920, 1080);
-//JPEG 品質85で保存
-//header('Content-Type: image/jpeg');
-//imagejpeg($image2, $files_path, 85);
-//imagedestroy($image2);
-
-
 // ファイルの読み込み
 $file_path = 'C:/xampp/htdocs/download/'.$image['name'];
 //header('Content-type: image/jpeg');

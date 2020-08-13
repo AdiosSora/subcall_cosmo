@@ -12,7 +12,6 @@ if(isset($_SESSION['bool'])==false){
 } catch (Exception $e) {
   print $e;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,9 +33,22 @@ if(isset($_SESSION['bool'])==false){
               ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
               E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
 
+              <?php
+              if(!empty($_SESSION['regist_bone'])){
+                $bone = $_SESSION['regist_bone'];
+                $year = substr($bone , 0 , 4);
+                $month = substr($bone , 5 , 2);
+                $day = substr($bone , 8 , 2);
+              }else{
+                $year = '―';
+                $month = '―';
+                $day = '―';
+              }
+              ?>
+
               生年月日 :&nbsp;
               <select name="year" id="year">
-                <option value="">-</option>
+                <option value="<?php print $year; ?>" checked><?php print $year; ?></option>
                 <option value="1951">1951</option>
                 <option value="1952">1952</option>
                 <option value="1953">1953</option>
@@ -100,32 +112,32 @@ if(isset($_SESSION['bool'])==false){
               </select>  年
 
               <select name="month" id="month">
-                <option value="">-</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
+                <option value="<?php print $month; ?>" checked><?php print $month; ?></option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
                 <option value="10">10</option>
                 <option value="11">11</option>
                 <option value="12">12</option>
               </select>  月
 
               <select name="day" id="day">
-                <option value="">-</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
+                <option value="<?php print $day; ?>" checked><?php print $day; ?></option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
                 <option value="10">10</option>
                 <option value="11">11</option>
                 <option value="12">12</option>
@@ -150,9 +162,16 @@ if(isset($_SESSION['bool'])==false){
                 <option value="31">31</option>
               </select>  日<br/><br/>
 
+              <?php
+              if(!empty($_SESSION['regist_country'])){
+                $country = $_SESSION['regist_country'];
+              }else{
+                $country = '―';
+              }
+              ?>
               居住国  :
               <select name = "country" id="country">
-                <option value="">-</option>
+                <option value="<?php print $country; ?>" checked><?php print $country; ?></option>
                 <option value="アメリカ">アメリカ</option>
                 <option value="イギリス">イギリス</option>
                 <option value="イタリア">イタリア</option>
@@ -174,15 +193,52 @@ if(isset($_SESSION['bool'])==false){
 
             性別 :&nbsp;
             <div>
-               <input type="radio" id="gender1" name="gender" value="male">
-               <label for="gender1">男性</label>
+              <?php
+              if(!empty($_SESSION['regist_gender'])){
+                switch($_SESSION['regist_gender']){
+                  case '男性':
+                       print'<input type="radio" id="gender1" name="gender" value="男性" checked>';
+                       print'<label for="gender1">男性</label>';
 
-               <input type="radio" id="gender2" name="gender" value="female">
-               <label for="gender2">女性</label>
+                       print'<input type="radio" id="gender2" name="gender" value="女性">';
+                       print'<label for="gender2">女性</label>';
 
-               <input type="radio" id="gender3" name="gender" value="none">
-               <label for="gender3">無回答</label>
-            </div>
+                       print'<input type="radio" id="gender3" name="gender" value="その他">';
+                       print'<label for="gender3">無回答</label>';
+                       break;
+                 case '女性':
+                      print'<input type="radio" id="gender1" name="gender" value="男性">';
+                      print'<label for="gender1">男性</label>';
+
+                      print'<input type="radio" id="gender2" name="gender" value="女性" checked>';
+                      print'<label for="gender2">女性</label>';
+
+                      print'<input type="radio" id="gender3" name="gender" value="その他">';
+                      print'<label for="gender3">無回答</label>';
+                      break;
+                  case 'その他':
+                       print'<input type="radio" id="gender1" name="gender" value="男性" checked>';
+                       print'<label for="gender1">男性</label>';
+
+                       print'<input type="radio" id="gender2" name="gender" value="女性">';
+                       print'<label for="gender2">女性</label>';
+
+                       print'<input type="radio" id="gender3" name="gender" value="その他">';
+                       print'<label for="gender3">無回答</label>';
+                       break;
+                }
+
+              }else{
+                      print'<input type="radio" id="gender1" name="gender" value="男性" checked>';
+                      print'<label for="gender1">男性</label>';
+
+                      print'<input type="radio" id="gender2" name="gender" value="女性">';
+                      print'<label for="gender2">女性</label>';
+
+                      print'<input type="radio" id="gender3" name="gender" value="その他">';
+                      print'<label for="gender3">無回答</label>';
+              }?>
+      </div>
             <div>
                <button type="submit">完了</button>
             </div>
