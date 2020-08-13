@@ -14,7 +14,7 @@ session_regenerate_id(true);
   <div class="nav-wrapper container">
     <a id="logo-container" href="/index.php" class="brand-logo">
       <div>
-        <object id="front-page-logo" class="responsive-img" width="170px" type="image/svg+xml" data="/STABLE_logo.svg">
+        <object id="front-page-logo" class="responsive-img" width="170px" type="image/svg+xml" data="/images/STABLE_logo.svg">
           Your browser does not support SVG.
         </object>
       </div>
