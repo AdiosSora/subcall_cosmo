@@ -95,7 +95,7 @@ $icon->writeImage($file_path);
 // 破棄
 $icon->destroy();
 
-print'<a href="profile.php">戻る</a>';
+print'<a href="../">トップページに戻る</a>';
 
 } catch (Exception $e) {
   print $e;
