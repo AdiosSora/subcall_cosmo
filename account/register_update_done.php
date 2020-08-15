@@ -97,6 +97,7 @@ $icon->destroy();
 
 print'<a href="../">トップページに戻る</a>';
 
+
 } catch (Exception $e) {
   print $e;
 }
