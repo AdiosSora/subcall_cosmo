@@ -124,7 +124,7 @@ $(function() {
       const id = 'video_' + peerId + '_' + stream.id.replace('{', '').replace('}', '');
 
       $('#their-videos').append($(
-        '<div class="remoteVideo_div video_' + peerId +'" id="' + id + '">' +
+        '<div class="video_' + peerId +'" id="' + id + '">' +
           '<label>' + stream.peerId + ':' + stream.id + '</label>' +
           '<video class="remoteVideos" autoplay playsinline>' +
         '</div>'));

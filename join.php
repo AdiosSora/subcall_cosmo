@@ -3,24 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="/css/join.css" type="text/css" rel="stylesheet">
-      <?php
-      $room = $_POST['room_id'];
-      $guestName=$_POST['guest_name'];
-      if($room!=null && $guestName!=null){
-      }else{
-        header('Location: index.php');
-      }
-      ?>
-      <title>会議室 - Stable</title>
-      <!--- favicon --->
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-      <link rel="manifest" href="/favicon/site.webmanifest">
-      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-      <meta name="msapplication-TileColor" content="#ffc40d">
-      <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/join.min.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script type="text/javascript" src="../key.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <title>会議室 - Stable</title>
+    <!--- favicon --->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
   <!---ローディングアニメーション用 --->
@@ -37,74 +34,87 @@
         <div class="sk-cube sk-cube9">L</div>
       </div>
     </div>
-
     <div id="main">
-        <video id="js-local-stream"></video>
-        <div class="remote-streams" id="js-remote-streams"></div>
+      <video id="my-video" muted="true" autoplay playsinline></video>
+      <div class="remote-streams" id="their-videos"></div>
+    </div>
 
     </div>
     <div id="sub">
-      <div id="chatbox">
-        <h1 class="heading">
-          <?php print $room;?>
-        </h1>
-        <p class="note">
-          Change Room mode (before join in a room):
-          <a href="#">mesh</a> / <a href="#sfu">sfu</a>
-        </p>
-        <div>
-          <span id="js-room-mode"></span>:
-          <?php
-            print '<input type="text" placeholder="Room Name" id="js-room-id" value="'.$room.'">';
-            print '<div id="js-guest-name">'.$guestName.'</div>';
-          ?>
-        </div>
-        <pre class="messages" id="js-messages"></pre>
+      <h2>SkyWay Video Chat</h2>
 
-        </div>
-        <input type="text" id="js-local-text">
-        <button id="js-send-trigger">Send</button>
-        <button id="js-leave-trigger">Leave</button>
+      <div class="select">
+        <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
       </div>
 
-      <p class="meta" id="js-meta" ></p>
-      <div id="test"></div>
-    </div>
-    <script>
-    // window.setTimeout(async () => {
-    //     console.log('1');
-    //     const speech = new webkitSpeechRecognition();
-    //     speech.lang = 'ja-JP';
-    //     // 音声認識をスタート
-    //     speech.start();
-    //     console.log('2');
-    //
-    //     //音声自動文字起こし機能
-    //     speech.onresult = function (e) {
-    //         speech.stop();
-    //         console.log('4');
-    //         if (e.results[0].isFinal) {
-    //           console.log('4');
-    //           var autotext = e.results[0][0].transcript
-    //           console.log(autotext);
-    //         }
-    //     }
-    //
-    //     speech.onend = () =>
-    //     {
-    //         speech.start()
-    //         console.log('スピーチ再起動')
-    //     };
-    //   },4000);
+      <div class="select">
+        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+      </div>
 
-    </script>
+      <!-- Get local audio/video stream -->
+      <div id="step1">
+        <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+        <div id="step1-error">
+          <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+          <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        </div>
+      </div>
+
+      <p>Your id: <span id="my-id">...</span></p>
+      <!-- Make calls to others -->
+      <div id="step2">
+        <h3>Make a call</h3>
+        <form id="make-call" class="pure-form">
+          <input type="text" placeholder="Join room..." id="join-room">
+          <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
+        </form>
+        <p><strong>Warning:</strong> You may connect with people you don't know if you both use the same room name.</p>
+        <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
+      </div>
+
+      <!-- Call in progress -->
+      <div id="step3">
+        <p>Currently in room <span id="room-id">...</span></p>
+        <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+      </div>
+    </div>
+    <p class="meta" id="js-meta" ></p>
+    <div id="test"></div>
     <script>
-    window.setTimeout(() => {
-        const loading = document.getElementById('loading');
-        loading.classList.add('loaded');
-      },2000);
+      const btn = document.getElementById('btn');
+
+      const speech = new webkitSpeechRecognition();
+      speech.lang = 'ja-JP';
+
+      btn.addEventListener('click' , function() {
+      // 音声認識をスタート
+      //speech.start();
+
+      console.log('認識スタート');
+      });
+
+      speech.onresult = function (e) {
+        console.log('認識完了');
+          speech.stop();
+          if (e.results[0].isFinal) {
+            var autotext = e.results[0][0].transcript
+
+            //文字識別結果
+            console.log(e);
+            console.log(autotext);
+          }
+      }
+
+      speech.onend = () => {
+
+        console.log('認識再開');
+          speech.start()
+      };
+
+      window.setTimeout(() => {
+          const loading = document.getElementById('loading');
+          loading.classList.add('loaded');
+        },1000);
     </script>
   </body>
-  <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-  <script src="/js/script.js"></script>
   </html>
