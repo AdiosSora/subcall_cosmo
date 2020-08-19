@@ -31,66 +31,43 @@ body {
   width: 150px;
   height: 150px;
   margin: 20% auto;
+
+  .sk-cube {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    width: 33%;
+    height: 33%;
+    background-color: #2BBAAC;
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+  }
 }
 
-.sk-cube {
-  text-align: center;
-  font-size: 30px;
-  color: white;
-}
-
-.sk-cube-grid .sk-cube {
-  width: 33%;
-  height: 33%;
-  background-color: #2BBAAC;
-  float: left;
-  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
-  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
-}
-
-.sk-cube-grid .sk-cube1 {
+.sk-cube1 .sk-cube5 .sk-cube9 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
 
-.sk-cube-grid .sk-cube2 {
+.sk-cube2 .sk-cube6 {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
 
-.sk-cube-grid .sk-cube3 {
+.sk-cube3 {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
-.sk-cube-grid .sk-cube4 {
+.sk-cube4 .sk-cube8 {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 
-.sk-cube-grid .sk-cube5 {
-  -webkit-animation-delay: 0.2s;
-  animation-delay: 0.2s;
-}
-
-.sk-cube-grid .sk-cube6 {
-  -webkit-animation-delay: 0.3s;
-  animation-delay: 0.3s;
-}
-
-.sk-cube-grid .sk-cube7 {
+.sk-cube7 {
   -webkit-animation-delay: 0s;
   animation-delay: 0s;
-}
-
-.sk-cube-grid .sk-cube8 {
-  -webkit-animation-delay: 0.1s;
-  animation-delay: 0.1s;
-}
-
-.sk-cube-grid .sk-cube9 {
-  -webkit-animation-delay: 0.2s;
-  animation-delay: 0.2s;
 }
 
 @-webkit-keyframes sk-cubeGridScaleDelay {
@@ -133,18 +110,23 @@ body {
   overflow: auto;
 }
 
-#chatbox {
-  padding: 5px;
-}
-
 /* ローカルビデオの位置指定  */
 #my-video {
-  width: 192px;
-  height: 108px;
+  width: 20%;
+  height: auto;
   position: absolute;
   bottom: 0%;
   left: 0%;
   z-index: 3;
+}
+#nav-my-video{
+  width: 20%;
+  height: 10px;
+  position: absolute;
+  bottom: 20%;
+  left: 0%;
+  z-index: 3;
+  background-color: blue;
 }
 
 #their-videos {
@@ -182,65 +164,34 @@ body {
   position: relative;
   float: left;
   margin: 0;
-}
 
-.remote_streams:only-child{
-  width: 100%;
-  height: 100%;
-}
+  &:first-child:nth-last-child(2),
+  &:first-child:nth-last-child(2)~.remoteVideo_div {
+    width: 50%;
+    height: 100%;
+  }
 
-/* 2つの場合 */
-.remoteVideo_div:first-child:nth-last-child(2),
-.remoteVideo_div:first-child:nth-last-child(2)~.remoteVideo_div {
-  width: 50%;
-  height: 100%;
-}
+  @for $i from 3 through 4 {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i})~.remoteVideo_div {
+      width: 50%;
+      height: 50%;
+    }
+  }
 
-/* 3つの場合 */
-.remoteVideo_div:first-child:nth-last-child(3),
-.remoteVideo_div:first-child:nth-last-child(3)~.remoteVideo_div {
-  width: 50%;
-  height: 50%;
-}
+  @for $i from 5 through 6 {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i})~.remoteVideo_div {
+      width: 33%;
+      height: 50%;
+    }
+  }
 
-/* 4つの場合 */
-.remoteVideo_div:first-child:nth-last-child(4),
-.remoteVideo_div:first-child:nth-last-child(4)~.remoteVideo_div {
-  width: 50%;
-  height: 50%;
-}
-
-/* 5つの場合 */
-.remoteVideo_div:first-child:nth-last-child(5),
-.remoteVideo_div:first-child:nth-last-child(5)~.remoteVideo_div {
-  width: 33%;
-  height: 50%;
-}
-
-/* 6つの場合 */
-.remoteVideo_div:first-child:nth-last-child(6),
-.remoteVideo_div:first-child:nth-last-child(6)~.remoteVideo_div {
-  width: 33%;
-  height: 50%;
-}
-
-/* 7つの場合 */
-.remoteVideo_div:first-child:nth-last-child(7),
-.remoteVideo_div:first-child:nth-last-child(7)~.remoteVideo_div {
-  width: 33%;
-  height: 33%;
-}
-
-/* 8つの場合 */
-.remoteVideo_div:first-child:nth-last-child(8),
-.remoteVideo_div:first-child:nth-last-child(8)~.remoteVideo_div {
-  width: 33%;
-  height: 33%;
-}
-
-/* 9つの場合 */
-.remoteVideo_div:first-child:nth-last-child(9),
-.remoteVideo_div:first-child:nth-last-child(9)~.remoteVideo_div {
-  width: 33%;
-  height: 33%;
+  @for $i from 7 through 6 {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i})~.remoteVideo_div {
+      width: 33%;
+      height: 33%;
+    }
+  }
 }

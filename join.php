@@ -35,6 +35,7 @@
       </div>
     </div>
     <div id="main">
+      <div id="nav-my-video">メニューバー</div>
       <video id="my-video" muted="true" autoplay playsinline></video>
       <div class="remote-streams" id="their-videos"></div>
     </div>
