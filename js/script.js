@@ -127,6 +127,7 @@ $(function() {
         '<div class="remoteVideo_div video_' + peerId +'" id="' + id + '">' +
           '<label>' + stream.peerId + ':' + stream.id + '</label>' +
           '<video class="remoteVideos" autoplay playsinline>' +
+          '<p class="subtext_field">' +
         '</div>'));
       const el = $('#' + id).find('video').get(0);
       el.srcObject = stream;
