@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  session_regenerate_id(true);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +13,15 @@
 <?php
 try
 {
+if(isset($_SESSION['bool']) == false)
+  {
+    print 'お客様はゲストユーザーか、ログインしていないため、退会はできません。'.'<br>';
+    print '<a href="../index.php">戻る</a>';
+    print '<br />';
+  }
+  else 
+  {
+
     require_once('../common.php');
 
     $post = sanitize($_POST);
@@ -40,15 +54,15 @@ try
       print 'お名前：'.$name.'<br>';
       print 'メールアドレス：'.$address;
       print'<form method="post" action="delete_done.php">';
-    	print'<input type="hidden" name="name" value="'.$name.'">';
-    	print'<input type="hidden" name="pass" value="'.$pass.'">';
+        print'<input type="hidden" name="number" value="'.$_SESSION['regist_number'].'">';
     	print'<input type="submit" value="はい">';
+        print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
     	print'</form>';
-      print '<a href="../index.php">いいえ</a>';
     }else{
       print 'パスワードが間違っています。'.'<br>';
-      print '<a href="./delete.php">戻る</a>';
+      print '<button type="button" onclick="history.back()" value="no">戻る</button>';
     }
+  }
 }
 catch (Exception $e)
 {
