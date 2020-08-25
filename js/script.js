@@ -8,6 +8,7 @@ $(function() {
 
   const localText = document.getElementById('chat-textarea');
   const messages = document.getElementById('chat-text');
+  const sub_messages = document.getElementById('sub-text');
 
   let localStream;
   let room;
@@ -31,13 +32,14 @@ $(function() {
     if (!roomName) {
       return;
     }
-    room = peer.joinRoom('mesh_video_' + roomName, {
+    room = peer.joinRoom('sfu_video_' + roomName, {
       mode: 'sfu',
       stream: localStream
     });
 
     $('#room-id').text(roomName);
     step3();
+    step4();
   });
 
   $('#end-call').on('click', () => {
@@ -57,9 +59,16 @@ $(function() {
   function onClickSend() {
     // Send message to all of the peers in the room via websocket
     console.log('チャット送信');
-    room.send(localText.value);
-    console.log(localText.value);
+    room.send('1'+localText.value);
+    messages.textContent += `${peer.id} : ${localText.value}\n`;
     localText.value='';
+
+  }
+  function onSubSend(subtext) {
+    // Send message to all of the peers in the room via websocket
+    console.log('字幕送信');
+    room.send('2'+peer.id+subtext);
+    localText.value = '';
   }
 
   // set up audio and video input selectors
@@ -166,33 +175,59 @@ $(function() {
 
     room.on('data', ({ data, src }) => {
       console.log('データ受け取り');
-
-      messages.textContent += `${src}: ${data}\n`;
       //チャットor字幕の比較
       var result_num = data.substr( 0, 1 );
       var result_message = data.substr(1);
       //「１」チャットの場合
       if(result_num == '1'){
         console.log('データ受け取り1発火');
-      }
-      //else
-      //if(result_num == '2'){
-        //console.log('データ受け取り2発火');
-        //var peerID_length = mypeerID.length;
-        //console.log(`${peerID_length}`);
-        //var subtext_area = document.getElementById(`${src}`);
-        //console.log(`${subtext_area}`);
-        //subtext_area.innerHTML = '';
-        //subtext_area.innerHTML += result_message.substring(peerID_length); // かきくけこ
+        messages.textContent += `${src}: ${result_message}\n`;
+      }else
+      if(result_num == '2'){
+        console.log('データ受け取り2発火');
+        var peerID_length = src.length;
+        console.log(`${peerID_length}`);
+        var subtext_area = document.getElementById(`${src}`);
+        console.log(`${subtext_area}`);
+        sub_messages.innerHTML += result_message.substring(peerID_length);
 
-        //console.log(result_message.substring(result_message));
-        //console.log(result_message.substring(peerID_length));
-      //}
+        console.log(result_message.substring(result_message));
+        console.log(result_message.substring(peerID_length));
+      }
     });
+
     room.on('peerLeave', peerId => {
       $('.video_' + peerId).remove();
     });
+
     $('#step1, #step2').hide();
     $('#step3').show();
+  }
+  function step4(){
+
+    const speech = new webkitSpeechRecognition();
+    speech.lang = 'ja-JP';
+    speech.start();
+
+    console.log('認識スタート');
+
+    speech.onresult = function (e) {
+      console.log('認識完了');
+        speech.stop();
+        if (e.results[0].isFinal) {
+          var autotext = e.results[0][0].transcript
+
+          //文字識別結果
+          console.log(e);
+          console.log(autotext);
+          onSubSend(autotext)
+        }
+    }
+
+    speech.onend = () => {
+
+      console.log('認識再開');
+        speech.start()
+    };
   }
 });
