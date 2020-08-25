@@ -2,16 +2,13 @@
 try
 {
 	require_once('../common.php');
-
+	include('dbConnecter.php');
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
 	$regist_pass = $post['pass'];
 	$regist_pass = hash('sha256' , $regist_pass);
 
-	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = 'kcsf';
-	$dbh = new PDO($dsn,$user,$password);
+	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 	// �o�^�ԍ����擾

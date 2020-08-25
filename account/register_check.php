@@ -10,7 +10,8 @@
   <script src="/js/register.js"></script>
 
   <title>会員登録確認 - Stable</title>
-  <?php include '../header.php'; ?>
+  <?php include '../header.php';
+        include('dbConnecter.php'); ?>
 </head>
 <body>
   <?php include '../nav.php'; ?>
@@ -43,10 +44,7 @@
     exit();
   }else
 
-  $dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = 'kcsf';
-  $dbh = new PDO($dsn,$user,$password);
+  $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   $sql = 'SELECT name FROM account WHERE mail_address=?';

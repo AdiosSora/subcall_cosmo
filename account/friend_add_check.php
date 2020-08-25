@@ -2,6 +2,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
+include('dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザーではこの機能は使えません';
@@ -30,10 +31,8 @@ else
 <body>
   <?php
 	// DB接続(mysql, xampp)
-  $dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = 'kcsf';
-  $dbh = new PDO($dsn,$user,$password);
+
+  $dbh = db_get();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 	// 許可する相手のフレンド登録数を取得

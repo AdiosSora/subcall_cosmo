@@ -3,7 +3,7 @@ try
 {
   session_start();
   $_SESSION=array();
-
+  include('dbConnecter.php');
   if(isset($_COOKIE[session_name()]) == true)
     {
     	setcookie(session_name(),'',time()-42000,'/');
@@ -19,25 +19,20 @@ try
 <body>
 
 <?php
-    require_once('../common.php');
+    $number = $_POST['number'];
 
-    $post = sanitize($_POST);
 
-    $name = $post['name'];
-    $pass = $post['pass'];
-
-    $regist_pass = hash('sha256' , $pass);
-
-  	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-  	$user = 'root';
-    $password = 'kcsf';
-  	$dbh = new PDO($dsn,$user,$password);
+  	$dbh = get_DBobj();
   	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-  	$sql = 'DELETE FROM account WHERE name=? AND pass=?';
+  	$sql = 'DELETE FROM account WHERE number=?';
   	$stmt = $dbh->prepare($sql);
-  	$data[] = $name;
-    $data[] = $regist_pass;
+  	$data[] = $number;
+  	$stmt->execute($data);
+
+    $sql = 'DELETE FROM friendlist WHERE user_number=? OR friend_number=?';
+  	$stmt = $dbh->prepare($sql);
+  	$data[] = $number;
   	$stmt->execute($data);
 
   	$dbh = null;
