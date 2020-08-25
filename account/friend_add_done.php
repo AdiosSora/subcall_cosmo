@@ -33,7 +33,7 @@ else
   <?php
   // DB接続(mysql, xampp)
 
-  $dbh = new get_DBobj()
+  $dbh = new get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   if(isset($_POST['add_done_yes']) == true)
