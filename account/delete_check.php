@@ -1,6 +1,7 @@
 <?php
   session_start();
   session_regenerate_id(true);
+  include('dbConnecter.php');
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ if(isset($_SESSION['bool']) == false)
     print '<a href="../index.php">戻る</a>';
     print '<br />';
   }
-  else 
+  else
   {
 
     require_once('../common.php');
@@ -32,10 +33,8 @@ if(isset($_SESSION['bool']) == false)
 
     $regist_pass = hash('sha256' , $pass);
 
-  	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-  	$user = 'root';
-    $password = 'kcsf';
-  	$dbh = new PDO($dsn,$user,$password);
+
+  	$dbh = get_DBobj();
   	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   	$sql = 'SELECT name FROM account WHERE name=? AND pass=? AND mail_address=?';

@@ -2,6 +2,7 @@
 try{
 session_start();
 session_regenerate_id(true);
+include('dbConnecter.php');
 
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';

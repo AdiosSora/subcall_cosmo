@@ -3,6 +3,7 @@
 try{
 
 session_start();
+include('dbConnecter.php');
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
   print'<a href="login.php">ログイン画面へ</a>';
@@ -24,10 +25,7 @@ if(isset($_SESSION['bool'])==false){
   <h1>Profile</h1>
 
   <?php
-      $dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-      $user = 'root';
-      $password = 'kcsf';
-      $dbh = new PDO($dsn,$user,$password);
+      $dbh = get_DBobj();
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
       $regist_address = $_SESSION['regist_address'];

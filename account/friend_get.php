@@ -2,6 +2,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
+include('dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
 	// ゲストユーザ分岐
@@ -35,10 +36,7 @@ else
 <body>
   <?php
   // DB接続(mysql, xampp)
-	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-	$user = 'root';
-	$password = 'kcsf';
-	$dbh = new PDO($dsn,$user,$password);
+$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   // friendlist から条件に合う番号の名前を account から取得

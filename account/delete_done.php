@@ -3,7 +3,7 @@ try
 {
   session_start();
   $_SESSION=array();
-
+  include('dbConnecter.php');
   if(isset($_COOKIE[session_name()]) == true)
     {
     	setcookie(session_name(),'',time()-42000,'/');
@@ -21,10 +21,8 @@ try
 <?php
     $number = $_POST['number'];
 
-  	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-  	$user = 'root';
-    $password = 'kcsf';
-  	$dbh = new PDO($dsn,$user,$password);
+
+  	$dbh = get_DBobj();
   	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   	$sql = 'DELETE FROM account WHERE number=?';

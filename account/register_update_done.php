@@ -5,7 +5,7 @@
 try{
 session_start();
 session_regenerate_id(true);
-
+include('dbConnecter.php');
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
   print'<a href="login.php">ログイン画面へ</a>';
@@ -30,10 +30,7 @@ $gender = $post['gender'];
 
 $bone = $year.'/'.$month.'/'.$day;
 
-$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
-$user = 'root';
-$password = 'kcsf';
-$dbh = new PDO($dsn,$user,$password);
+$dbh = get_DBobj();
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 $data[] = $mail_address;
