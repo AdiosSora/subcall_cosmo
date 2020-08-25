@@ -6,6 +6,9 @@ $(function() {
     debug: 3,
   });
 
+  const localText = document.getElementById('chat-textarea');
+  const messages = document.getElementById('chat-text');
+
   let localStream;
   let room;
   peer.on('open', () => {
@@ -20,6 +23,7 @@ $(function() {
     step2();
   });
 
+
   $('#make-call').on('submit', e => {
     e.preventDefault();
     // Initiate a call!
@@ -27,10 +31,13 @@ $(function() {
     if (!roomName) {
       return;
     }
-    room = peer.joinRoom('mesh_video_' + roomName, {stream: localStream});
+    room = peer.joinRoom('mesh_video_' + roomName, {
+      mode: 'sfu',
+      stream: localStream
+    });
 
     $('#room-id').text(roomName);
-    step3(room);
+    step3();
   });
 
   $('#end-call').on('click', () => {
@@ -38,11 +45,22 @@ $(function() {
     step2();
   });
 
-  // Retry if getUserMedia fails
   $('#step1-retry').on('click', () => {
     $('#step1-error').hide();
     step1();
   });
+
+  $('#btn-send').on('click', () => {
+    onClickSend();
+  });
+
+  function onClickSend() {
+    // Send message to all of the peers in the room via websocket
+    console.log('チャット送信');
+    room.send(localText.value);
+    console.log(localText.value);
+    localText.value='';
+  }
 
   // set up audio and video input selectors
   const audioSelect = $('#audioSource');
@@ -117,7 +135,7 @@ $(function() {
     $('#join-room').focus();
   }
 
-  function step3(room) {
+  function step3() {
     // Wait for stream on the call, then set peer video display
     room.on('stream', stream => {
       const peerId = stream.peerId;
@@ -141,6 +159,36 @@ $(function() {
 
     // UI stuff
     room.on('close', step2);
+
+    room.once('open', () => {
+      messages.textContent += `=== You` + peer.id + `joined ===\n`;
+    });
+
+    room.on('data', ({ data, src }) => {
+      console.log('データ受け取り');
+
+      messages.textContent += `${src}: ${data}\n`;
+      //チャットor字幕の比較
+      var result_num = data.substr( 0, 1 );
+      var result_message = data.substr(1);
+      //「１」チャットの場合
+      if(result_num == '1'){
+        console.log('データ受け取り1発火');
+      }
+      //else
+      //if(result_num == '2'){
+        //console.log('データ受け取り2発火');
+        //var peerID_length = mypeerID.length;
+        //console.log(`${peerID_length}`);
+        //var subtext_area = document.getElementById(`${src}`);
+        //console.log(`${subtext_area}`);
+        //subtext_area.innerHTML = '';
+        //subtext_area.innerHTML += result_message.substring(peerID_length); // かきくけこ
+
+        //console.log(result_message.substring(result_message));
+        //console.log(result_message.substring(peerID_length));
+      //}
+    });
     room.on('peerLeave', peerId => {
       $('.video_' + peerId).remove();
     });
