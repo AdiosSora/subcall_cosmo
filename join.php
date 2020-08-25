@@ -75,9 +75,6 @@
           <input type="text" placeholder="Join room..." id="join-room">
           <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
         </form>
-        <p><strong>Warning:</strong> You may connect with people you don't know if you both use the same room name.</p>
-        <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
-        <p class="meta" id="js-meta" ></p>
 
       </div>
 
@@ -89,36 +86,6 @@
     </div>
 
     <script>
-      const btn = document.getElementById('btn');
-
-      const speech = new webkitSpeechRecognition();
-      speech.lang = 'ja-JP';
-
-      btn.addEventListener('click' , function() {
-      // 音声認識をスタート
-      //speech.start();
-
-      console.log('認識スタート');
-      });
-
-      speech.onresult = function (e) {
-        console.log('認識完了');
-          speech.stop();
-          if (e.results[0].isFinal) {
-            var autotext = e.results[0][0].transcript
-
-            //文字識別結果
-            console.log(e);
-            console.log(autotext);
-          }
-      }
-
-      speech.onend = () => {
-
-        console.log('認識再開');
-          speech.start()
-      };
-
       window.setTimeout(() => {
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');

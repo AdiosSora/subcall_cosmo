@@ -1,0 +1,28 @@
+{
+  "name": "htdocs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdiosSora/subcall_cosmo.git"
+  },
+  "keywords": [
+    "stable"
+  ],
+  "author": "AdiosSora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdiosSora/subcall_cosmo/issues"
+  },
+  "homepage": "https://github.com/AdiosSora/subcall_cosmo#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
+}
