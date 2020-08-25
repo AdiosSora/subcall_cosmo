@@ -5,10 +5,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>エラー - Stable</title>
-  <?php include('../header.php'); ?>
+  <?php include('../../header.php'); ?>
 </head>
 <body>
-  <?php include('../nav.php'); ?>
+  <?php include('../../nav.php'); ?>
 
   <div id="index-banner" class="parallax-container">
     <br><br>
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <?php include('../footer.php'); ?>
+  <?php include('../../footer.php'); ?>
 
   </body>
 </html>

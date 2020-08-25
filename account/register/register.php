@@ -5,15 +5,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/js/jquery.validate.js"></script>
-  <script src="/js/jquery.validate.min.js"></script>
-  <script src="/js/register.js"></script>
+  <script src="../../js/jquery.validate.js"></script>
+  <script src="../../js/jquery.validate.min.js"></script>
+  <script src="../../js/register.js"></script>
 
   <title>会員登録 - Stable </title>
-  <?php include '../header.php'; ?>
+  <?php include '../../header.php'; ?>
   </head>
   <body>
-    <?php include '../nav.php'; ?>
+    <?php include '../../nav.php'; ?>
 
     <div id="index-banner" class="parallax-container">
       <div class="container">
@@ -45,7 +45,7 @@
                     <input type="email" name="address" id="address" data-length="50" placeholder="例:Stable@example.com" autocomplete="off">
                   </div>
                   <div id="button_box" style="margin: 20px;">
-                    <a class="waves-effect waves-light btn-large grey darken-1" href="../index.php">戻る</a>
+                    <a class="waves-effect waves-light btn-large grey darken-1" href="../../index.php">戻る</a>
                     <a class="waves-effect waves-light btn-large" href="javascript:regiser_form.submit()">確認</a>
                   </div>
               </form>
@@ -56,7 +56,7 @@
       </div>
       <div class="parallax" style="background:white;"></div>
     </div>
-    <?php include '../footer.php'; ?>
+    <?php include '../../footer.php'; ?>
   </body>
   <?php
   try{

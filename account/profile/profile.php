@@ -3,10 +3,10 @@
 try{
 
 session_start();
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="login.php">ログイン画面へ</a>';
+  print'<a href="../login/login.php">ログイン画面へ</a>';
   exit();
 }
 
@@ -37,7 +37,7 @@ if(isset($_SESSION['bool'])==false){
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(empty($rec['image'])){
-           print'<image src="../download/default.png"><br><br>';
+           print'<image src="../../download/default.png"><br><br>';
       }else{
           $sql = 'SELECT image FROM account WHERE mail_address=?';
           $stmt = $dbh->prepare($sql);
@@ -45,7 +45,7 @@ if(isset($_SESSION['bool'])==false){
           $rec = $stmt->fetch(PDO::FETCH_ASSOC);
           $img = $rec['image'];
 
-          print'<image src="../download/'; print $img.'"><br><br>';
+          print'<image src="../../download/'; print $img.'"><br><br>';
 
       }
 
@@ -96,7 +96,7 @@ if(isset($_SESSION['bool'])==false){
 
       $dbh = null;
   ?>
-    <a href="register_update.php"><button type="button">編集</button></a><br/><br/><br/>
+    <a href="../register/register_update.php"><button type="button">編集</button></a><br/><br/><br/>
   </form>
   </body>
 

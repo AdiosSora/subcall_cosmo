@@ -1,8 +1,8 @@
 <?php
 try
 {
-	require_once('../common.php');
-	include('dbConnecter.php');
+	require_once('../../common.php');
+	include('../db/dbConnecter.php');
 	$post = sanitize($_POST);
 	$regist_name = $post['name'];
 	$regist_pass = $post['pass'];
@@ -32,18 +32,18 @@ try
 
 		$_SESSION['regist_name']=$rec['name'];
 		$_SESSION['regist_address']=$rec['mail_address'];
-		header('Location: /index.php');
+		header('Location: ../../index.php');
 		exit();
 	}else{
 
-			header('Location: /account/login.php?check=error');
+			header('Location: ../login/login.php?check=error');
 			exit();
 	}
 
 }
 catch (Exception $e)
 {
-	header('Location: /account/login.php?check=error');
+	header('Location: ../login/login.php?check=error');
 	exit();
 }
 

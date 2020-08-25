@@ -5,7 +5,7 @@ session_regenerate_id(true);
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザは機能が制限されています。<br />';
-	print '<a href="../index.php">トップ画面へ</a>';
+	print '<a href="../../index.php">トップ画面へ</a>';
 	exit();
 }
 else

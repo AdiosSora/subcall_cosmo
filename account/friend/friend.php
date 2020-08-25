@@ -1,11 +1,11 @@
 <?php
 session_start();
 session_regenerate_id(true);
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../index.php">top画面へ</a><br />';
+	print '<a href="../../index.php">top画面へ</a><br />';
 	print '<br />';
 }
 else
@@ -123,7 +123,7 @@ else
         </div>
 	</form>
 
-	<a href="../index.php">トップ画面へ</a>
+	<a href="../../index.php">トップ画面へ</a>
 <?php
 }
 ?>

@@ -2,11 +2,11 @@
 <?php
 session_start();
 session_regenerate_id(true);
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../index.php">top画面へ</a><br />';
+	print '<a href="../../index.php">top画面へ</a><br />';
 	print '<br />';
 }
 // 選択されているか,不正に入ったかチェック
@@ -54,7 +54,7 @@ else
   print '</br>';
 
   print '<a href="friend.php">フレンド管理画面へ(friend.phpへ)</a></br>';
-  print '<a href="../index.php">トップ画面へ</a>';
+  print '<a href="../../index.php">トップ画面へ</a>';
 	}
   ?>
 </body>

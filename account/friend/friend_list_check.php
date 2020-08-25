@@ -5,7 +5,7 @@ session_regenerate_id(true);
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../index.php">top画面へ</a><br />';
+	print '<a href="../../index.php">top画面へ</a><br />';
 	print '<br />';
 }
 else if(isset($_POST['list_check']) == false){
@@ -43,7 +43,7 @@ else
   print '<button type="button" onclick="history.back()" value="no">削除しない</button>';
   print '</form>';
 
-  print '<a href="../index.php">トップ画面へ</a>';
+  print '<a href="../../index.php">トップ画面へ</a>';
 
 }
 ?>

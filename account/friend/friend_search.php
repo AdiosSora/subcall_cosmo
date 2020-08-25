@@ -2,16 +2,16 @@
 <?php
 session_start();
 session_regenerate_id(true);
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
 	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../index.php">top画面へ</a><br />';
+	print '<a href="../../index.php">top画面へ</a><br />';
 	print '<br />';
 }
 else
 {
-  require_once('../common.php');
+  require_once('../../common.php');
 
 	$post = sanitize($_POST);
   $search_name = $post['search_name'];
@@ -164,7 +164,7 @@ else
   }
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
-	print '<a href="../index.php">トップ画面へ</a>';
+	print '<a href../../index.php">トップ画面へ</a>';
 
 }
 ?>

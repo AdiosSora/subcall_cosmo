@@ -5,10 +5,10 @@
 try{
 session_start();
 session_regenerate_id(true);
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="login.php">ログイン画面へ</a>';
+  print'<a href="../login/login.php">ログイン画面へ</a>';
   exit();
 }
 
@@ -16,7 +16,7 @@ if(isset($_SESSION['bool'])==false){
 $image = $_FILES['image'];
 
 //POSTデータのサニタイジング
-require_once('../common.php');
+require_once('../../common.php');
 $post = sanitize($_POST);
 
 //SQLに使用する変数の準備
@@ -50,13 +50,13 @@ $file_path = '';
 // ファイルがアップロードされているかの確認
 if(!empty($_FILES['image']['tmp_name']) ) {
     	// ファイルを指定したパスへ保存する
-    	if(move_uploaded_file($image['tmp_name'],'../download/'.$image['name'])) {
+    	if(move_uploaded_file($image['tmp_name'],'../../download/'.$image['name'])) {
       		print 'プロフィール情報を保存しました。';
           // ファイルの読み込み
           $file_path = 'C:/xampp/htdocs/download/'.$image['name'];
     	} else {
       		print 'プロフィール情報の保存に失敗しました。';
-          print'<a href="profile.php">戻る</a>';
+          print'<a href="../profile/profile.php">戻る</a>';
           exit();
     	}
 }else{
@@ -92,7 +92,7 @@ $icon->writeImage($file_path);
 // 破棄
 $icon->destroy();
 
-print'<a href="../">トップページに戻る</a>';
+print'<a href="../../index.php">トップページに戻る</a>';
 
 
 } catch (Exception $e) {

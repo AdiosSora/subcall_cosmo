@@ -2,11 +2,11 @@
 try{
 session_start();
 session_regenerate_id(true);
-include('dbConnecter.php');
+include('../db/dbConnecter.php');
 
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="login.php">ログイン画面へ</a>';
+  print'<a href="../login/login.php">ログイン画面へ</a>';
   exit();
 }
 
@@ -244,6 +244,6 @@ if(isset($_SESSION['bool'])==false){
                <button type="submit">完了</button>
             </div>
         </form>
-        <a href="profile.php"><button type="button">戻る</button></a>
+        <a href="../profile/profile.php"><button type="button">戻る</button></a>
     </body>
 </html>

@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/js/jquery.validate.js"></script>
-  <script src="/js/jquery.validate.min.js"></script>
-  <script src="/js/register.js"></script>
+  <script src="../../js/jquery.validate.js"></script>
+  <script src="../../js/jquery.validate.min.js"></script>
+  <script src="../../js/register.js"></script>
 <title>会員登録完了 - Stable</title>
 </head>
 <body>
@@ -18,15 +18,15 @@
 	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	  <script src="/js/jquery.validate.js"></script>
-	  <script src="/js/jquery.validate.min.js"></script>
-	  <script src="/js/register.js"></script>
+	  <script src="../../js/jquery.validate.js"></script>
+	  <script src="../../js/jquery.validate.min.js"></script>
+	  <script src="../../js/register.js"></script>
 
 	  <title>会員登録 - Stable </title>
-	  <?php include '../header.php'; ?>
+	  <?php include '../../header.php'; ?>
 	  </head>
 	  <body>
-	    <?php include '../nav.php'; ?>
+	    <?php include '../../nav.php'; ?>
 
 	    <div id="index-banner" class="parallax-container">
 	      <div class="container">
@@ -39,8 +39,8 @@
 
 try
 {
-	require_once('../common.php');
-  include('dbConnecter.php');
+	require_once('../../common.php');
+  include('../db/dbConnecter.php');
 	$post = sanitize($_POST);
 	$regist_address = $post['address'];
 	$regist_name = $post['name'];
@@ -75,13 +75,13 @@ catch (Exception $e)
 
 ?>
 
-<a class="waves-effect waves-light btn" href="../index.php">トップページへ</a>
+<a class="waves-effect waves-light btn" href="../../index.php">トップページへ</a>
 						</div>
 					</div>
 				<br><br>
 				</div>
 			</div>
 		</div>
-		<?php include '../footer.php'; ?>
+		<?php include '../../footer.php'; ?>
 	</body>
 </html>

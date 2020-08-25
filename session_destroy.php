@@ -18,7 +18,7 @@ session_destroy();
 <body>
 セッションを破棄しました。<br />
 <br />
-<a href="../index.php">戻る</a>
+<a href="../../index.php">戻る</a>
 
 </body>
 </html>
