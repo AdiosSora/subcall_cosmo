@@ -36,8 +36,8 @@ session_regenerate_id(true);
           print $_SESSION['regist_name'];
           print '様</a></li>';
           // フレンド機能へ
-          print '<li><a href="/account/friend.php">フレンド一覧</a></li>';
-          print '<li><a href="/account/logout.php">ログアウト</a></li>';
+          print '<li><a href="/account/friend/friend.php">フレンド一覧</a></li>';
+          print '<li><a href="/account/logout/logout.php">ログアウト</a></li>';
         }
        ?>
     </ul>
