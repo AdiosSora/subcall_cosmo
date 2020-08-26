@@ -165,7 +165,7 @@ else
   }
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
-	print '<a href../../index.php">トップ画面へ</a>';
+	print '<a href="../../index.php">トップ画面へ</a>';
 
 }
 ?>

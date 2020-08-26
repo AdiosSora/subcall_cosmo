@@ -17,9 +17,6 @@ else if(isset($_POST['get_done']) == false)
 }
 else
 {
-	print $_SESSION['regist_name'];
-	print '様の申請取り消し完了';
-	print '<br />';
   // 変数の定義、初期化
 	$get_done_num = $_POST['get_done_num'];	// 選択した者の会員番号
   $get_done_name = $_POST['get_done_name'];
@@ -70,41 +67,26 @@ else
 
 	}else{
 		// 相手が先に更新した場合
-		print '申請の取り下げ処理中に、'.$search_done_name.'様が申請を許可したため、処理を中断しました。';
+		print '申請の取り下げ処理中に、'.$get_done_name.'様が申請を許可したため、処理を中断しました。';
 
 		// 以下、8/25以降修正
 		print '<br />';
-		print '申請を許可しますか？'.'<br />';
-    print '<form method="post" action="friend_add_check.php">';
-    print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
-		print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
-    print '<input type="submit" name="add_yes" value="許可">';
-    print '<input type="submit" name="add_no" value="不可">';
-  	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
-    print '</form>';
+		print 'フレンドリストから削除しますか？'.'<br />';
+    print '<form method="post" action="friend_list_check.php">';
+    print '<input type="hidden" name="list_num" value="'.$get_done_num.'">';
+		print '<input type="hidden" name="list_name" value="'.$get_done_name.'">'.'</br>';
+    print '<input type="submit" name="list_check" value="削除する">';
+		print '</form>';
+		print '<form method="post" action="friend.php">';
+    print '<input type="submit" name="add_no" value="削除しない">';
+		print '</form>';
 	}
-  // friendlist から条件に合う番号の名前を account から取得
-  $sql = 'DELETE FROM friendlist where user_number=? AND friend_number=? AND flag=false';
-
-	$stmt = $dbh->prepare($sql);
-	$data[] = $get_done_num; // 申請された番号
-  $data[] = $user_num;   // 申請した（自身の）番号
-	$stmt->execute($data);
 
   $dbh = null;
 
-  print '会員番号：'.$get_done_num.'　　会員名：'.$get_done_name.'</br>';
-  print '申請を取り下げました';
-  print '</br>';
-
-<<<<<<< HEAD:account/friend_get_done.php
   print '<a href="friend.php">フレンド管理画面へ</a></br>';
   print '<a href="../index.php">トップ画面へ</a>';
-=======
-  print '<a href="friend.php">フレンド管理画面へ(friend.phpへ)</a></br>';
-  print '<a href="../../index.php">トップ画面へ</a>';
->>>>>>> df7142abbf1909cf4807d122de63396e35da49d1:account/friend/friend_get_done.php
-	}
-  ?>
+}
+?>
 </body>
 </html>
