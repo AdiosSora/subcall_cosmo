@@ -1,3 +1,25 @@
+var id = $('#name').val();
+$.ajax({
+       type: "POST",
+       url: "register_ajax.php",
+       data: { "id" : id },
+       dataType : "json"
+  })
+.then(
+function(param){
+    //ユーザ名重複チェック関数（Isuser)
+    $.validator.addMethod('Isuser', function(element) {
+          // 検証対象の要素にこのルールが設定されているか
+          if ( this.optional(element)){
+              return false;
+          }
+          if (param == true) {
+              return false;
+          }
+});
+}
+);
+
 //メールアドレスチェック用関数(Ispass)を定義
 jQuery.validator.addMethod("Ispass", function(value, element) {
   return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/.test(value);
@@ -7,7 +29,8 @@ jQuery(function($) {
     rules: {
       //ユーザ名チェック
       name: {
-        required: true
+        required: true,
+        Isuser: true
       },
       //メールアドレスチェック
       address: {
