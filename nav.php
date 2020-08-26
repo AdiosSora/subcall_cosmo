@@ -26,18 +26,18 @@ session_regenerate_id(true);
         // セッション名は統一
         if(isset($_SESSION['bool']) == false)
         {
-          print '<li><a href="/account/login.php">ログイン</a></li>';
-          print '<li><a href="/account/register.php">会員登録</a></li>';
+          print '<li><a href="/account/login/login.php">ログイン</a></li>';
+          print '<li><a href="/account/register/register.php">会員登録</a></li>';
           print '<br />';
         }
         else
         {
-          print '<li><a href="/account/profile.php">ようこそ';
+          print '<li><a href="/account/profile/profile.php">ようこそ';
           print $_SESSION['regist_name'];
           print '様</a></li>';
           // フレンド機能へ
-          print '<li><a href="/account/friend.php">フレンド一覧</a></li>';
-          print '<li><a href="/account/logout.php">ログアウト</a></li>';
+          print '<li><a href="/account/friend/friend.php">フレンド一覧</a></li>';
+          print '<li><a href="/account/logout/logout.php">ログアウト</a></li>';
         }
        ?>
     </ul>
