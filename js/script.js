@@ -207,7 +207,7 @@ $(function() {
 
     const speech = new webkitSpeechRecognition();
     speech.lang = 'ja-JP';
-    speech.start();
+    //speech.start();
 
     console.log('認識スタート');
 

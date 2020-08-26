@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="css/join.min.css">
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="../key.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/join_vue.js"></script>
 
     <title>会議室 - Stable</title>
     <!--- favicon --->
@@ -47,29 +49,51 @@
       <div class="remote-streams" id="their-videos"></div>
     </div>
 
-    </div>
     <div id="sub">
-      <h2>SkyWay Video Chat</h2>
-
-      <div class="select">
-        <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
-      </div>
-
-      <div class="select">
-        <label for="videoSource">Video source: </label><select id="videoSource"></select>
-      </div>
-
-      <!-- Get local audio/video stream -->
-      <div id="step1">
-        <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
-        <div id="step1-error">
-          <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
-          <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+      <div id="setting">
+        <button v-on:click="openModal">設定</button>
+        <open-modal v-show="showContent" v-on:from-child="closeModal">
+        <p>Your id: <span id="my-id">...</span></p>
+        <div class="select">
+          <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
         </div>
+        <div class="select">
+          <label for="videoSource">Video source: </label><select id="videoSource"></select>
+        </div>
+        <!-- Get local audio/video stream -->
+        <div id="step1">
+          <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+          <div id="step1-error">
+            <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+            <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+          </div>
+        </div>
+
+
+        <input type="text" placeholder="" id="chat-textarea">
+        <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
+        <div id="chat-text"></div>
+        <div id="sub-text"></div>
+        <!-- Make calls to others -->
+        <div id="step2">
+          <h3>Make a call</h3>
+          <form id="make-call" class="pure-form">
+            <input type="text" placeholder="Join room..." id="join-room">
+            <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
+          </form>
+
+        </div>
+
+        <!-- Call in progress -->
+        <div id="step3">
+          <p>Currently in room <span id="room-id">...</span></p>
+          <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+        </div>
+        </open-modal>
       </div>
+  </div>
 
-      <p>Your id: <span id="my-id">...</span></p>
-
+<<<<<<< HEAD
       <input type="text" placeholder="" id="chat-textarea">
       <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
       <div id="chat-text"></div>
@@ -81,16 +105,46 @@
           <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
           <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
         </form>
+=======
+  <script>
+    window.setTimeout(() => {
+        const loading = document.getElementById('loading');
+        loading.classList.add('loaded');
+      },1000);
+>>>>>>> a114ca1573dcb519c03ad680a44dbbac07201221
 
-      </div>
+      Vue.component('open-modal',{
+        template : `
+          <div id="overlay" v-on:click="clickEvent">
+              <div id="content">
+                <p><slot></slot></p>
+                <button v-on:click="clickEvent">閉じる</button>
+              </div>
+          </div>
+          `,
+        methods :{
+          clickEvent: function(){
+            this.$emit('from-child')
+           }
+        }
+      })
 
-      <!-- Call in progress -->
-      <div id="step3">
-        <p>Currently in room <span id="room-id">...</span></p>
-        <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
-      </div>
-    </div>
+      new Vue({
+        el: '#setting',
+        data: {
+          showContent: false
+        },
+        methods:{
+          openModal: function(){
+            this.showContent = true
+          },
+          closeModal: function(){
+            this.showContent = false
+          },
+        }
+      })
 
+<<<<<<< HEAD
 
     <script>
       window.setTimeout(() => {
@@ -98,5 +152,8 @@
           loading.classList.add('loaded');
         },1000);
     </script>
+=======
+  </script>
+>>>>>>> a114ca1573dcb519c03ad680a44dbbac07201221
   </body>
-  </html>
+</html>
