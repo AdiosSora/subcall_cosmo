@@ -227,8 +227,8 @@ body {
   .msg-send{
     width:80%;
     margin:{
-      top:0;
-      bottom:0;
+      top:5px;
+      bottom:5px;
       left:auto;
       right:0;
     }
@@ -241,6 +241,12 @@ body {
     padding:5px;
     border-radius: 10px;
     background-color: #777777;
+    margin:{
+      top:5px;
+      bottom:5px;
+      left:0;
+      right:auto;
+    }
   }
 }
 #text_input{
