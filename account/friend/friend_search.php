@@ -33,7 +33,7 @@ else
 </head>
 <body>
   <?php
-  // DB接続(mysql, xampp)
+  // DB接続
 	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
@@ -120,7 +120,7 @@ else
 
 			if($rec_search['number'] == $user_num && $rec_search['name'] == $_SESSION['regist_name']){
 				// 入力した名前が自分自身である場合
-				print '<br />'.'自分自身です。';
+				print '自分自身です。';
 				print '</form>';
 
 				$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
@@ -132,15 +132,15 @@ else
 						// 自身のフレンドが上限未満(申請できる)
 						if($rec_count['count(user_number)'] >= 10){
 							// 相手のフレンドが上限の場合、申請のボタン出さない
-							print '<br />'.'フレンドが上限に達しているため申請できません。';
+							print 'フレンドが上限に達しているため申請できません。';
 							print '</form>';
 
 			      	$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
 						}else{
 							// 相手のフレンドが上限に満たない場合、申請ボタン出す
 		      		print '<input type="hidden" name="search_num" value="'.$rec_search['number'].'">';
-		      		print '<input type="hidden" name="search_name" value="'.$rec_search['name'].'">'.'</br>';
-		      		print '<input type="submit" name="search_check" value="フレンド申請" >'.'</br>'.'</br>';
+		      		print '<input type="hidden" name="search_name" value="'.$rec_search['name'].'">';
+		      		print '<input type="submit" name="search_check" value="フレンド申請" >'.'</br>';
 		      		print '</form>';
 
 		      		$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
@@ -148,12 +148,13 @@ else
 					}else{
 						// 自身のフレンドが上限の場合（申請不可）
 						print '</form>';
+						print '</br>';
 
 						$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
 					}
 				}else{
 					// フレンド同士の場合
-					print '<br />'.'すでにフレンド同士です。';
+					print 'すでにフレンド同士です。';
 					print '</form>';
 
 					$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
@@ -164,7 +165,7 @@ else
   }
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
-	print '<a href../../index.php">トップ画面へ</a>';
+	print '<a href="../../index.php">トップ画面へ</a>';
 
 }
 ?>

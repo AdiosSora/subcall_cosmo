@@ -30,9 +30,8 @@ else
 </head>
 <body>
   <?php
-	// DB接続(mysql, xampp)
-
-  $dbh = db_get();
+	// DB接続
+  $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 	// 許可する相手のフレンド登録数を取得
