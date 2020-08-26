@@ -93,7 +93,6 @@
       </div>
     </div>
 
-<<<<<<< HEAD
       <input type="text" placeholder="" id="chat-textarea">
       <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
       <div id="chat-text"></div>
@@ -105,14 +104,11 @@
           <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
           <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
         </form>
-=======
   <script>
     window.setTimeout(() => {
         const loading = document.getElementById('loading');
         loading.classList.add('loaded');
       },1000);
->>>>>>> a114ca1573dcb519c03ad680a44dbbac07201221
-
       Vue.component('open-modal',{
         template : `
           <div id="overlay" v-on:click="clickEvent">
@@ -146,17 +142,10 @@
           }
         }
       })
-
-<<<<<<< HEAD
-
-    <script>
       window.setTimeout(() => {
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
         },1000);
     </script>
-=======
-  </script>
->>>>>>> a114ca1573dcb519c03ad680a44dbbac07201221
   </body>
 </html>
