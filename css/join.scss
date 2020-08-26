@@ -224,6 +224,12 @@ body {
     text-align:center;
     padding:5px;
   }
+  .name-receive{
+
+  }
+  .name-send{
+
+  }
   .msg-send{
     width:80%;
     margin:{
@@ -265,11 +271,9 @@ body {
   background:{
     color:rgba(0,0,0,0.5);
   }
-
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 #content{
