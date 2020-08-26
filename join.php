@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+  require_once('./common.php');
+  $post = sanitize($_POST);
+  $roomID=$post['room_id'];
+
+?>
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
@@ -72,7 +78,7 @@
       <div id="step2">
         <h3>Make a call</h3>
         <form id="make-call" class="pure-form">
-          <input type="text" placeholder="Join room..." id="join-room">
+          <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
           <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
         </form>
 
@@ -84,6 +90,7 @@
         <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
       </div>
     </div>
+
 
     <script>
       window.setTimeout(() => {
