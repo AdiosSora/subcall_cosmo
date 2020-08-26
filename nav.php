@@ -32,7 +32,7 @@ session_regenerate_id(true);
         }
         else
         {
-          print '<li><a href="/account/profile.php">ようこそ';
+          print '<li><a href="/account/profile/profile.php">ようこそ';
           print $_SESSION['regist_name'];
           print '様</a></li>';
           // フレンド機能へ
