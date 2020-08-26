@@ -132,7 +132,6 @@ body {
   overflow: auto;
 }
 /* ローカルビデオの位置指定  */
-
 #my-video {
   width: 20%;
   height: auto;
@@ -140,16 +139,6 @@ body {
   bottom: 0;
   left: 0;
   z-index: 3;
-}
-
-#nav-my-video {
-  width: 20%;
-  height: 10px;
-  position: absolute;
-  bottom: 20%;
-  left: 0;
-  z-index: 3;
-  background-color: blue;
 }
 
 #their-videos {
@@ -215,10 +204,53 @@ body {
     }
   }
 }
-
+/*テキスト要素*/
+#text_content{
+  width:auto;
+  height:90%;
+  #chat-text{
+    height:50%;
+    padding:5px;
+  }
+  #sub-text{
+    height:50%;
+    padding:5px;
+  }
+  .msg-system{
+    font:{
+      size:9px;
+      color:#eeeeee;
+    }
+    text-align:center;
+    padding:5px;
+  }
+  .msg-send{
+    width:80%;
+    margin:{
+      top:0;
+      bottom:0;
+      left:auto;
+      right:0;
+    }
+    padding:5px;
+    border-radius: 10px;
+    background-color: #DDFFDD;
+  }
+  .msg-receive{
+    width:80%;
+    padding:5px;
+    border-radius: 10px;
+    background-color: #777777;
+  }
+}
+#text_input{
+  width:auto;
+  height:10%;
+  padding:5%;
+}
+/*設定画面*/
 #overlay{
   z-index:3;
-
   position:fixed;
   top:0;
   left:0;
