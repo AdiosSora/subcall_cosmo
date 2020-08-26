@@ -63,6 +63,11 @@
       </div>
 
       <p>Your id: <span id="my-id">...</span></p>
+
+      <input type="text" placeholder="" id="chat-textarea">
+      <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
+      <div id="chat-text"></div>
+      <div id="sub-text"></div>
       <!-- Make calls to others -->
       <div id="step2">
         <h3>Make a call</h3>
@@ -70,8 +75,7 @@
           <input type="text" placeholder="Join room..." id="join-room">
           <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
         </form>
-        <p><strong>Warning:</strong> You may connect with people you don't know if you both use the same room name.</p>
-        <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
+
       </div>
 
       <!-- Call in progress -->
@@ -80,39 +84,8 @@
         <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
       </div>
     </div>
-    <p class="meta" id="js-meta" ></p>
-    <div id="test"></div>
+
     <script>
-      const btn = document.getElementById('btn');
-
-      const speech = new webkitSpeechRecognition();
-      speech.lang = 'ja-JP';
-
-      btn.addEventListener('click' , function() {
-      // 音声認識をスタート
-      //speech.start();
-
-      console.log('認識スタート');
-      });
-
-      speech.onresult = function (e) {
-        console.log('認識完了');
-          speech.stop();
-          if (e.results[0].isFinal) {
-            var autotext = e.results[0][0].transcript
-
-            //文字識別結果
-            console.log(e);
-            console.log(autotext);
-          }
-      }
-
-      speech.onend = () => {
-
-        console.log('認識再開');
-          speech.start()
-      };
-
       window.setTimeout(() => {
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
