@@ -35,8 +35,8 @@ else
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	//テスト用、3秒待機
-	//sleep(3);
+	//テスト用、(x)秒待機
+	//sleep(1);
 
 	// friendlist から条件に合う番号の名前を account から取得
 	$sql_comit = 'INSERT INTO friendlist VALUES (?,?,false)';
@@ -84,7 +84,6 @@ else
 		print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
     print '<input type="submit" name="add_yes" value="許可">';
     print '<input type="submit" name="add_no" value="不可">';
-  	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
     print '</form>';
 	}
 

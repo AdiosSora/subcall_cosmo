@@ -32,7 +32,7 @@ else
 </head>
 <body>
   <?php
-  // DB接続(mysql, xampp)
+  // DB接続
 	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
@@ -69,7 +69,6 @@ else
 		// 相手が先に更新した場合
 		print '申請の取り下げ処理中に、'.$get_done_name.'様が申請を許可したため、処理を中断しました。';
 
-		// 以下、8/25以降修正
 		print '<br />';
 		print 'フレンドリストから削除しますか？'.'<br />';
     print '<form method="post" action="friend_list_check.php">';
