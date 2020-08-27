@@ -61,8 +61,12 @@ $(function() {
     console.log('チャット送信');
     room.send('1'+localText.value);
     $("#chat-text").append($(
-      '<p class="name-send">' + peer.id + '</p>'+
-      '<div class="msg-send">' + localText.value + '</div>'));
+      '<div class="msg_content">' +
+      '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
+      '<div class="msg-text">' +
+      '<div class="msg-name"><strong>' + peer.id + '</strong></div>'+
+      '<div class="msg-content">' + localText.value + '</div>' +
+      '</div></div>'));
     localText.value='';
 
   }
@@ -184,8 +188,12 @@ $(function() {
       if(result_num == '1'){
         console.log('データ受け取り1発火');
         $("#chat-text").append($(
-          '<p class="name-receive">' + `${src}` + '</p>'+
-          '<div class="msg-receive">' +  `${result_message}\n` + '</div>'));
+          '<div class="msg_content">' +
+          '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
+          '<div class="msg-text">' +
+          '<div class="msg-name"><strong>' + `${src}` + '</strong></div>'+
+          '<div class="msg-content">' + `${result_message}\n` + '</div>' +
+          '</div></div>'));
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
