@@ -40,6 +40,7 @@ else
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
   // friendlist から条件に合う行を削除
+	// ない場合（相手が先に削除した）は、該当する0行を更新（実質更新されないためDBに影響なし）
   $sql = 'DELETE FROM friendlist WHERE flag=true
           AND user_number IN (?,?)
           AND friend_number IN (?,?)';

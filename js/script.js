@@ -60,7 +60,9 @@ $(function() {
     // Send message to all of the peers in the room via websocket
     console.log('チャット送信');
     room.send('1'+localText.value);
-    $("#chat-text").append($('<div class="msg-send">' + peer.id+ ':'+ localText.value + '</div>'));
+    $("#chat-text").append($(
+      '<p class="name-send">' + peer.id + '</p>'+
+      '<div class="msg-send">' + localText.value + '</div>'));
     localText.value='';
 
   }
@@ -181,7 +183,9 @@ $(function() {
       //「１」チャットの場合
       if(result_num == '1'){
         console.log('データ受け取り1発火');
-        $("#chat-text").append($('<div class="msg-receive">' + `${src}: ${result_message}\n` + '</div>'));
+        $("#chat-text").append($(
+          '<p class="name-receive">' + `${src}` + '</p>'+
+          '<div class="msg-receive">' +  `${result_message}\n` + '</div>'));
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
