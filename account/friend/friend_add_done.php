@@ -19,6 +19,7 @@ else
 {
   // 変数の定義
   $user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+	$user_name = $_SESSION['regist_name'];    	// ユーザー名取得
 	$add_done_num = $_POST['add_done_num'];		// 選択した会員番号取得
   $add_done_name = $_POST['add_done_name'];   // 選択した名前取得
 
@@ -38,6 +39,30 @@ else
 	// 悲観的排他制御の開始
 	$dbh->beginTransaction();
 
+	// 登録する相手のフレンド数取得
+	$sql_count_y = 'SELECT count(user_number) FROM friendlist
+					WHERE (user_number=? or friend_number=?) and flag=true
+					FOR UPDATE';
+
+	$stmt_count_y = $dbh->prepare($sql_count_y);
+	$data_count_y[] = $add_done_num;
+	$data_count_y[] = $add_done_num;
+	$stmt_count_y->execute($data_count_y);
+
+	$rec_count_y = $stmt_count_y->fetch(PDO::FETCH_ASSOC);
+
+	// 自身のフレンド数取得
+	$sql_count_m = 'SELECT count(user_number) FROM friendlist
+					WHERE (user_number=? or friend_number=?) and flag=true
+					FOR UPDATE';
+
+	$stmt_count_m = $dbh->prepare($sql_count_m);
+	$data_count_m[] = $user_num;
+	$data_count_m[] = $user_num;
+	$stmt_count_m->execute($data_count_m);
+
+	$rec_count_m = $stmt_count_m->fetch(PDO::FETCH_ASSOC);
+
 	// 更新処理中にすでに更新されていないかチェック
 	$sql_check = 'SELECT count(user_number) FROM friendlist
 					WHERE user_number in(?,?) AND friend_number in(?,?) AND flag=false
@@ -55,59 +80,82 @@ else
 	//テスト用、(x)秒待機
 	// sleep(3);
 
-	if($rec['count(user_number)'] == 0){
-		// 相手が先に更新した（申請を取り下げた）場合
-		if(isset($_POST['add_done_yes']) == true)
-		{
-			// 許可を押していた場合
-			print '申請の許可の処理中に、'.$add_done_name.'様が申請を取り下げたため、処理を中断しました。'.'</br>';
-		}
-		else if(isset($_POST['add_done_no']) == true)
-		{
-			// 不可を押していた場合
-			print $_SESSION['regist_name'];
-			print '様に届いた申請を却下しました'.'</br>';
-		}
-	}else{
-		// 自身が先に更新した場合
-		if(isset($_POST['add_done_yes']) == true)
-	 	{
-	    // フレンド申請を許可する場合
-	    // friendlist から条件に合う行を更新
-	    $sql = 'UPDATE friendlist SET flag=true
-	            WHERE user_number=? and friend_number=? AND flag=false';
+	if($rec_count_y['count(user_number)'] < 10 &&
+			$rec_count_m['count(user_number)'] < 10)
+	{
+		// 登録処理中に、自分・相手がフレンド上限に達していない場合
+		if($rec['count(user_number)'] == 0){
+			// 相手が先に更新した（申請を取り下げた）場合
+			if(isset($_POST['add_done_yes']) == true)
+			{
+				// 許可を押していた場合
+				print '申請の許可の処理中に、'.$add_done_name.'様が申請を取り下げたため、処理を中断しました。'.'</br>';
+			}
+			else if(isset($_POST['add_done_no']) == true)
+			{
+				// 不可を押していた場合
+				print $_SESSION['regist_name'];
+				print '様に届いた申請を却下しました'.'</br>';
+			}
+		}else{
+			// 自身が先に更新した場合
+			if(isset($_POST['add_done_yes']) == true)
+		 	{
+		    // フレンド申請を許可する場合
+		    // friendlist から条件に合う行を更新
+		    $sql = 'UPDATE friendlist SET flag=true
+		            WHERE user_number=? and friend_number=? AND flag=false';
 
-	  	$stmt = $dbh->prepare($sql);
-	    $data[] = $user_num;   // 申請された（自身の）番号
-	    $data[] = $add_done_num; // 申請が来た（相手の）番号
-	  	$stmt->execute($data);
+		  	$stmt = $dbh->prepare($sql);
+		    $data[] = $user_num;   // 申請された（自身の）番号
+		    $data[] = $add_done_num; // 申請が来た（相手の）番号
+		  	$stmt->execute($data);
 
-			print $_SESSION['regist_name'];
-		 	print '様に届いた申請を許可しました'.'</br>';
-			print '会員番号：'.$add_done_num;
-		  print '　　会員名：'.$add_done_name.'</br>';
-		 	print '<br />';
-		}
-		else if(isset($_POST['add_done_no']) == true)
-		{
-			// フレンド申請を不可する場合
-	    // friendlist から条件に合う行を削除
-	    $sql = 'DELETE FROM friendlist
-	            WHERE user_number=? and friend_number=? AND flag=false';
+				print $_SESSION['regist_name'];
+			 	print '様に届いた申請を許可しました'.'</br>';
+				print '会員番号：'.$add_done_num;
+			  print '　　会員名：'.$add_done_name.'</br>';
+			 	print '<br />';
+			}
+			else if(isset($_POST['add_done_no']) == true)
+			{
+				// フレンド申請を不可する場合
+		    // friendlist から条件に合う行を削除
+		    $sql = 'DELETE FROM friendlist
+		            WHERE user_number=? and friend_number=? AND flag=false';
 
-	  	$stmt = $dbh->prepare($sql);
-	    $data[] = $user_num;   // 申請された（自身の）番号
-	    $data[] = $add_done_num; // 申請が来た（相手の）番号
-	  	$stmt->execute($data);
+		  	$stmt = $dbh->prepare($sql);
+		    $data[] = $user_num;   // 申請された（自身の）番号
+		    $data[] = $add_done_num; // 申請が来た（相手の）番号
+		  	$stmt->execute($data);
 
-			print $_SESSION['regist_name'];
-			print '様に届いた申請を却下しました'.'</br>';
-			print '会員番号：'.$add_done_num;
-			print '　　会員名：'.$add_done_name.'</br>';
-			print '<br />';
+				print $_SESSION['regist_name'];
+				print '様に届いた申請を却下しました'.'</br>';
+				print '会員番号：'.$add_done_num;
+				print '　　会員名：'.$add_done_name.'</br>';
+				print '<br />';
+			}
 		}
 	}
-
+	else
+	{
+		// 登録処理中に、自分か相手がフレンド上限に達した場合
+		if($rec_count_y['count(user_number)'] >= 10 && $rec_count_m['count(user_number)'] >= 10)
+		{
+			// 自分・相手ともにフレンド上限に達した場合
+			print '登録処理中に、'.$add_done_name.'様（相手）と'.$user_name.'様（ご自身）がフレンド上限に達したため、処理を中断しました。'.'</br>';
+		}
+		else if($rec_count_y['count(user_number)'] >= 10)
+		{
+			// 相手がフレンド上限に達した場合
+			print '登録処理中に、'.$add_done_name.'様がフレンド上限に達したため、処理を中断しました。'.'</br>';
+		}
+		else if($rec_count_m['count(user_number)'] >= 10)
+		{
+			// 自身がフレンド上限に達した場合
+			print '登録処理中に、'.$user_name.'様がフレンド上限に達したため、処理を中断しました。'.'</br>';
+		}
+	}
 	// 悲観的排他制御の終了
 	$dbh -> commit();
 
