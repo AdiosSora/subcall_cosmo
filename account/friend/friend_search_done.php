@@ -35,59 +35,58 @@ else
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	//テスト用、(x)秒待機
-	//sleep(1);
-
-	// friendlist から条件に合う番号の名前を account から取得
-	$sql_comit = 'INSERT INTO friendlist VALUES (?,?,false)';
-
-	$stmt_comit = $dbh->prepare($sql_comit);
-	$data_comit[] = $search_done_num; // 申請する相手番号
-  $data_comit[] = $user_num;   // 申請した（自身の）番号
-	$stmt_comit->execute($data_comit);
+	//
+	$dbh->beginTransaction();
 
 	// 更新処理中にすでに更新されていないかチェック
 	$sql_check = 'SELECT count(user_number) FROM friendlist
-					WHERE user_number in(?,?) AND friend_number in(?,?)';
+					WHERE user_number in(?,?) AND friend_number in(?,?)
+					FOR UPDATE';
 
 	$stmt_check = $dbh->prepare($sql_check);
 	$data_check[] = $search_done_num; // 申請する相手番号
-  $data_check[] = $user_num;   // 申請した（自身の）番号
+	$data_check[] = $user_num;   // 申請した（自身の）番号
 	$data_check[] = $search_done_num; // 申請する相手番号
-  $data_check[] = $user_num;   // 申請した（自身の）番号
+	$data_check[] = $user_num;   // 申請した（自身の）番号
 	$stmt_check->execute($data_check);
 
 	$rec = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-	if($rec['count(user_number)'] < 2){
+	//テスト用、(x)秒待機
+	// sleep(3);
+	
+	if($rec['count(user_number)'] == 0){
 		// 申請が重複しない場合
+		// friendlist から条件に合う番号の名前を account から取得
+		$sql_comit = 'INSERT INTO friendlist VALUES (?,?,false)';
+
+		$stmt_comit = $dbh->prepare($sql_comit);
+		$data_comit[] = $search_done_num; // 申請する相手番号
+		$data_comit[] = $user_num;   // 申請した（自身の）番号
+		$stmt_comit->execute($data_comit);
+
 		print $_SESSION['regist_name'];
 		print '様の以下の方への申請が完了しました。';
 		print '<br />';
-	  print '会員番号：'.$search_done_num.'　　会員名：'.$search_done_name.'</br>';
-	  print '</br>';
+		print '会員番号：'.$search_done_num.'　　会員名：'.$search_done_name.'</br>';
+		print '</br>';
 	}else{
 		// 申請が重複した場合
-		$sql_delete = 'DELETE FROM friendlist WHERE user_number=? AND friend_number=?';
-
-	  $stmt_delete = $dbh->prepare($sql_delete);
-		$data_delete[] = $search_done_num; // 申請する相手番号
-	  $data_delete[] = $user_num;   // 申請した（自身の）番号
-
-	  $stmt_delete->execute($data_delete);
-
 		print '申請処理中に、'.$search_done_name.'様からの申請が完了したため、処理を中断しました。';
 		print '<br />';
 		print '申請を許可しますか？'.'<br />';
-    print '<form method="post" action="friend_add_check.php">';
-    print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
+		print '<form method="post" action="friend_add_check.php">';
+		print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
 		print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
-    print '<input type="submit" name="add_yes" value="許可">';
-    print '<input type="submit" name="add_no" value="不可">';
-    print '</form>';
+		print '<input type="submit" name="add_yes" value="許可">';
+		print '<input type="submit" name="add_no" value="不可">';
+		print '</form>';
 	}
 
+	$dbh -> commit();
+
 	$dbh = null;
+
 }
 ?>
 <a href="friend.php">フレンド画面へ</a></br>
