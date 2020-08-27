@@ -2,9 +2,7 @@
 <?php
   require_once('./common.php');
   $post = sanitize($_POST);
-  $roomID=$post['room_id'];
-
-?>
+  $roomID=$post['room_id'];?>
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
@@ -49,12 +47,13 @@
 
     <div id="sub">
       <div id="text_content" class="msg-container">
-        <div id="chat-text" class="msg-content">
-
-        </div>
+        <div id="chat-text" class="msg-content"></div>
         <div id="sub-text"></div>
       </div>
       <div id="text_input">
+        <input type="text" placeholder="テキストを入力" id="chat-textarea">
+        <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
+      </div>
       <div id="setting">
         <button v-on:click="openModal">設定</button>
         <open-modal v-show="showContent" v-on:from-child="closeModal">
@@ -88,22 +87,8 @@
           </div>
         </open-modal>
       </div>
-        <input type="text" placeholder="テキストを入力" id="chat-textarea">
-        <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
-      </div>
     </div>
 
-      <input type="text" placeholder="" id="chat-textarea">
-      <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
-      <div id="chat-text"></div>
-      <div id="sub-text"></div>
-      <!-- Make calls to others -->
-      <div id="step2">
-        <h3>Make a call</h3>
-        <form id="make-call" class="pure-form">
-          <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
-          <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
-        </form>
   <script>
     window.setTimeout(() => {
         const loading = document.getElementById('loading');
