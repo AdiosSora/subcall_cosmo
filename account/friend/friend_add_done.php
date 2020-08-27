@@ -35,9 +35,13 @@ else
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+	// 悲観的排他制御の開始
+	$dbh->beginTransaction();
+
 	// 更新処理中にすでに更新されていないかチェック
 	$sql_check = 'SELECT count(user_number) FROM friendlist
-					WHERE user_number in(?,?) AND friend_number in(?,?) AND flag=false';
+					WHERE user_number in(?,?) AND friend_number in(?,?) AND flag=false
+					FOR UPDATE';
 
 	$stmt_check = $dbh->prepare($sql_check);
 	$data_check[] = $add_done_num; // 申請する相手番号
@@ -48,7 +52,10 @@ else
 
 	$rec = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-	if($rec['count(user_number)'] < 1){
+	//テスト用、(x)秒待機
+	// sleep(3);
+
+	if($rec['count(user_number)'] == 0){
 		// 相手が先に更新した（申請を取り下げた）場合
 		if(isset($_POST['add_done_yes']) == true)
 		{
@@ -66,9 +73,6 @@ else
 		if(isset($_POST['add_done_yes']) == true)
 	 	{
 	    // フレンド申請を許可する場合
-		 	print $_SESSION['regist_name'];
-		 	print '様に届いた申請を許可しました'.'</br>';
-
 	    // friendlist から条件に合う行を更新
 	    $sql = 'UPDATE friendlist SET flag=true
 	            WHERE user_number=? and friend_number=? AND flag=false';
@@ -78,15 +82,15 @@ else
 	    $data[] = $add_done_num; // 申請が来た（相手の）番号
 	  	$stmt->execute($data);
 
+			print $_SESSION['regist_name'];
+		 	print '様に届いた申請を許可しました'.'</br>';
 			print '会員番号：'.$add_done_num;
 		  print '　　会員名：'.$add_done_name.'</br>';
 		 	print '<br />';
 		}
 		else if(isset($_POST['add_done_no']) == true)
 		{
-			print $_SESSION['regist_name'];
-			print '様に届いた申請を却下しました'.'</br>';
-
+			// フレンド申請を不可する場合
 	    // friendlist から条件に合う行を削除
 	    $sql = 'DELETE FROM friendlist
 	            WHERE user_number=? and friend_number=? AND flag=false';
@@ -96,11 +100,17 @@ else
 	    $data[] = $add_done_num; // 申請が来た（相手の）番号
 	  	$stmt->execute($data);
 
+			print $_SESSION['regist_name'];
+			print '様に届いた申請を却下しました'.'</br>';
 			print '会員番号：'.$add_done_num;
 			print '　　会員名：'.$add_done_name.'</br>';
 			print '<br />';
 		}
 	}
+
+	// 悲観的排他制御の終了
+	$dbh -> commit();
+
   $dbh = null;
 }
 ?>
