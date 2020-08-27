@@ -35,7 +35,7 @@ else
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	//
+	// 悲観的排他制御の開始
 	$dbh->beginTransaction();
 
 	// 更新処理中にすでに更新されていないかチェック
@@ -54,7 +54,7 @@ else
 
 	//テスト用、(x)秒待機
 	// sleep(3);
-	
+
 	if($rec['count(user_number)'] == 0){
 		// 申請が重複しない場合
 		// friendlist から条件に合う番号の名前を account から取得
@@ -83,6 +83,7 @@ else
 		print '</form>';
 	}
 
+	// 悲観的排他制御の終了
 	$dbh -> commit();
 
 	$dbh = null;
