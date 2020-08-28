@@ -3,13 +3,14 @@
 <?php
   session_start();
   session_regenerate_id(true);
-  require_once('./common.php');
-  $post = sanitize($_POST);
-<<<<<<< HEAD
-  $roomID=$post['room_id'];
+  // require_once('./common.php');
+  // $post = sanitize($_POST);
+  if(isset($_POST['room_id'])){
+      $roomID=$_POST['room_id'];
+    }
   $rogin_flg=isset($_SESSION['bool']);
 
-  if($rogin_flg){//ログインチェック
+  if($rogin_flg=='true'){//ログインチェック
   //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
     print '<script>console.log("ログイン済み");</script>';
     $regist_name=$_SESSION['regist_name'];
@@ -37,10 +38,6 @@
   }
 ?>
 
-=======
-  $roomID=$post['room_id'];?>
-<html lang="ja">
->>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -126,30 +123,11 @@
       </div>
     </div>
 
-<<<<<<< HEAD
-      <input type="text" placeholder="" id="chat-textarea">
-      <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
-      <div id="chat-text"></div>
-      <div id="sub-text"></div>
-      <!-- Make calls to others -->
-      <div id="step2">
-        <h3>Make a call</h3>
-        <form id="make-call" class="pure-form">
-          <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
-          <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
-        </form>
-=======
->>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
   <script>
     window.setTimeout(() => {
         const loading = document.getElementById('loading');
         loading.classList.add('loaded');
       },1000);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
       Vue.component('open-modal',{
         template : `
           <div id="overlay" v-on:click="clickEvent">
@@ -183,13 +161,6 @@
           }
         }
       })
-<<<<<<< HEAD
-
-
-
-    <script>
-=======
->>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
       window.setTimeout(() => {
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
