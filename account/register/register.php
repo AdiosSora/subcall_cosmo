@@ -22,6 +22,36 @@
           <br><br>
           <div class="row">
             <div class="col col s10 offset-m1 m8 offset-m2 center">
+              <?php
+                  include('../db/dbConnecter.php');
+                  $dbh = get_DBobj();
+                  $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+                  $regist_address = $_SESSION['regist_address'];
+                  $data[] = $regist_address;
+
+                  $sql = 'SELECT name FROM account';
+                  $stmt = $dbh->query($sql);
+                // do{
+                //   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+                // }while($rec!=false);
+                //
+                //   console.log($rec);
+                // while ($row = mysql_fetch_assoc($stmt)){
+                //   console.log($row['name']);
+                // }
+                foreach ($stmt as $row) {
+                  console.log($row);
+                }
+
+
+                  $name_list = [];
+                  foreach ($rec as $row) {
+                    array_push($name_list,$row);
+
+                  }
+                  $php_json = json_encode($name_list);
+                   ?>
               <form method="post" name="regiser_form" action="register_check.php" id="check" class="pw-form-container">
                 <div id="empty_error" class="alert error" style="display:none;">必要な情報が入力されていません。</div>
                 <div id="missmatch_error" class="alert error" style="display:none;">パスワードが一致していないか、条件を満たしていません。</div>
@@ -31,6 +61,7 @@
                     <label for="name" class="form_name">ユーザ名</label>
                     <a class="form_required_mark">必須</a>
                   <input type="text" name="name" id="name" data-length="20" placeholder="例:たろう" autocomplete="off">
+                  <p class="validetion_alart_name">この名前は既に使用されています。</p>
                   </div>
                   <br/>
                   <div class="form_title">
@@ -93,6 +124,19 @@
   <script>
   $(document).ready(function() {
    $('input#name, input#pass, input#pass2, input#address').characterCounter();
- });
+  });
+  var js_name_array = JSON.parse('<?php echo $php_json ?>');
+
+  $("#name").on("input change", function(){
+    js_name_array.indexOf($("#name")[0].value);
+    if(js_name_array.indexOf($("#name")[0].value) == -1){
+      console.log(js_name_array);
+      $('#validetion_alart_name').css('display','none');
+      console.log('ない');
+    }else{
+      $('#validetion_alart_name').css('display','inline');
+      console.log('ある');
+    }
+  });
   </script>
 </html>

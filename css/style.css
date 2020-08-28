@@ -273,3 +273,9 @@ label.address-error {
   font-size: 40px !important;
   color: black !important;
 }
+
+.validetion_alart_name {
+  font-size: 10px;
+  color:red;
+  display:none;
+}
