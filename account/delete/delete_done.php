@@ -25,6 +25,22 @@ try
   	$dbh = get_DBobj();
   	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+    // 悲観的排他制御の開始
+    $dbh->beginTransaction();
+
+    // すでに退会しているかチェック
+    $sql_account = 'SELECT name FROM account WHERE number=?
+                    FOR UPDATE';
+
+    $stmt_account = $dbh->prepare($sql_account);
+    $data_account[] = $number;
+    $stmt_account->execute($data_account);
+
+    $rec_account = $stmt_account->fetch(PDO::FETCH_ASSOC);
+
+    //テスト用、(x)秒待機
+    // sleep(3);
+
   	$sql = 'DELETE FROM account WHERE number=?';
   	$stmt = $dbh->prepare($sql);
   	$data[] = $number;
@@ -34,6 +50,9 @@ try
   	$stmt = $dbh->prepare($sql);
   	$data[] = $number;
   	$stmt->execute($data);
+
+    // 悲観的排他制御の終了
+    $dbh -> commit();
 
   	$dbh = null;
 

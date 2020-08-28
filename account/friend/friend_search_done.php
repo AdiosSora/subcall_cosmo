@@ -38,6 +38,16 @@ else
 	// 悲観的排他制御の開始
 	$dbh->beginTransaction();
 
+	// すでに退会しているかチェック
+	$sql_account = 'SELECT name FROM account WHERE number=?
+									FOR UPDATE';
+
+	$stmt_account = $dbh->prepare($sql_account);
+	$data_account[] = $search_done_num;
+	$stmt_account->execute($data_account);
+
+	$rec_account = $stmt_account->fetch(PDO::FETCH_ASSOC);
+
 	// 更新処理中にすでに更新されていないかチェック
 	$sql_check = 'SELECT count(user_number) FROM friendlist
 					WHERE user_number in(?,?) AND friend_number in(?,?)
@@ -55,39 +65,48 @@ else
 	//テスト用、(x)秒待機
 	// sleep(3);
 
-	if($rec['count(user_number)'] == 0){
-		// 申請が重複しない場合
-		// friendlist から条件に合う番号の名前を account から取得
-		$sql_comit = 'INSERT INTO friendlist VALUES (?,?,false)';
+	if($rec_account['name'] == false)
+	{
+		// すでに退会している場合
+		print $search_done_name.'様はすでに退会しています。'.'<br />';
 
-		$stmt_comit = $dbh->prepare($sql_comit);
-		$data_comit[] = $search_done_num; // 申請する相手番号
-		$data_comit[] = $user_num;   // 申請した（自身の）番号
-		$stmt_comit->execute($data_comit);
+	}
+	else {
+		// 退会していない
+		if($rec['count(user_number)'] == 0){
+			// 申請が重複しない場合
+			// friendlist から条件に合う番号の名前を account から取得
+			$sql_comit = 'INSERT INTO friendlist VALUES (?,?,false)';
 
-		print $_SESSION['regist_name'];
-		print '様の以下の方への申請が完了しました。';
-		print '<br />';
-		print '会員番号：'.$search_done_num.'　　会員名：'.$search_done_name.'</br>';
-		print '</br>';
-	}else{
-		// 申請が重複した場合
-		print '申請処理中に、'.$search_done_name.'様からの申請が完了したため、処理を中断しました。';
-		print '<br />';
-		print '申請を許可しますか？'.'<br />';
-		print '<form method="post" action="friend_add_check.php">';
-		print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
-		print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
-		print '<input type="submit" name="add_yes" value="許可">';
-		print '<input type="submit" name="add_no" value="不可">';
-		print '</form>';
+			$stmt_comit = $dbh->prepare($sql_comit);
+			$data_comit[] = $search_done_num; // 申請する相手番号
+			$data_comit[] = $user_num;   // 申請した（自身の）番号
+			$stmt_comit->execute($data_comit);
+
+			print $_SESSION['regist_name'];
+			print '様の以下の方への申請が完了しました。';
+			print '<br />';
+			print '会員番号：'.$search_done_num.'　　会員名：'.$search_done_name.'</br>';
+			print '</br>';
+		}else{
+			// 申請が重複した場合
+			print '申請処理中に、'.$search_done_name.'様からの申請が完了したため、処理を中断しました。';
+			print '<br />';
+			print '申請を許可しますか？'.'<br />';
+			print '<form method="post" action="friend_add_check.php">';
+			print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
+			print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
+			print '<input type="submit" name="add_yes" value="許可">';
+			print '<input type="submit" name="add_no" value="不可">';
+			print '</form>';
+		}
+
 	}
 
 	// 悲観的排他制御の終了
 	$dbh -> commit();
 
 	$dbh = null;
-
 }
 ?>
 <a href="friend.php">フレンド画面へ</a></br>
