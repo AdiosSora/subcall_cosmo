@@ -53,39 +53,39 @@
       <div id="text_input">
         <input type="text" placeholder="テキストを入力" id="chat-textarea">
         <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
-      </div>
-      <div id="setting">
-        <button v-on:click="openModal">設定</button>
-        <open-modal v-show="showContent" v-on:from-child="closeModal">
-          <p>Your id: <span id="my-id">...</span></p>
-          <div class="select">
-            <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
-          </div>
-          <div class="select">
-            <label for="videoSource">Video source: </label><select id="videoSource"></select>
-          </div>
-          <!-- Get local audio/video stream -->
-          <div id="step1">
-            <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
-            <div id="step1-error">
-              <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
-              <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        <div id="setting">
+          <button v-on:click="openModal">設定</button>
+          <open-modal v-show="showContent" v-on:from-child="closeModal">
+            <p>Your id: <span id="my-id">...</span></p>
+            <div class="select">
+              <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
             </div>
-          </div>
-          <!-- Make calls to others -->
-          <div id="step2">
-            <h3>Make a call</h3>
-            <form id="make-call" class="pure-form">
-              <input type="text" placeholder="Join room..." id="join-room">
-              <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
-            </form>
-          </div>
-          <!-- Call in progress -->
-          <div id="step3">
-            <p>Currently in room <span id="room-id">...</span></p>
-            <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
-          </div>
-        </open-modal>
+            <div class="select">
+              <label for="videoSource">Video source: </label><select id="videoSource"></select>
+            </div>
+            <!-- Get local audio/video stream -->
+            <div id="step1">
+              <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+              <div id="step1-error">
+                <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+                <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+              </div>
+            </div>
+            <!-- Make calls to others -->
+            <div id="step2">
+              <h3>Make a call</h3>
+              <form id="make-call" class="pure-form">
+                <input type="text" placeholder="Join room..." id="join-room">
+                <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
+              </form>
+            </div>
+            <!-- Call in progress -->
+            <div id="step3">
+              <p>Currently in room <span id="room-id">...</span></p>
+              <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+            </div>
+          </open-modal>
+        </div>
       </div>
     </div>
 
