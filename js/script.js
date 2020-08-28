@@ -1,10 +1,29 @@
 /* eslint-disable require-jsdoc */
 $(function() {
+<<<<<<< HEAD
   // Peerオブジェクトを確立
   const peer = new Peer({
     key:   '766085bc-041a-4889-ba90-b8fda1a4615f',
+=======
+  // Peer object
+  let memPeerid=toString(document.getElementById('memberPeer').value);
+  let login_FLG=document.getElementById('login_FLG').value;//TODO　起動時にログインセッションfalse の作成
+
+
+  if(login_FLG=='true'){ //ログイン確認 TODO(PEERIDがundefindになる事象の修正)
+    console.log("loginが完了しています.");
+  }
+  else{
+    console.log("loginが完了していません");
+  }
+
+  const peer = new Peer('aaaaaaa',{
+    key: '766085bc-041a-4889-ba90-b8fda1a4615f',
+>>>>>>> 957959b13782b3cac5a200d00bc870ddab5d64e0
     debug: 3,
   });
+  console.log('peerIDは'+peer.id);
+
 
   const localText = document.getElementById('chat-textarea');
   const messages = document.getElementById('chat-text');
@@ -64,6 +83,7 @@ $(function() {
 
   //チャット送信関数
   function onClickSend() {
+<<<<<<< HEAD
     if(localText.value!=''){
       console.log('チャット送信');
       room.send('1'+localText.value);
@@ -78,13 +98,27 @@ $(function() {
       (bg_chat_color==0)?bg_chat_color=1:bg_chat_color=0;
       localText.value='';
     }
+=======
+    // Send message to all of the peers in the room via websocket
+    console.log('チャット送信');
+    room.send('1'+localText.value);
+    $("#chat-text").append($(
+      '<div class="msg_content">' +
+      '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
+      '<div class="msg-text">' +
+      '<div class="msg-name"><strong>' + `${memPeerid}` + '</strong></div>'+
+      '<div class="msg-content">' + localText.value + '</div>' +
+      '</div></div>'));
+    localText.value='';
+
+>>>>>>> 957959b13782b3cac5a200d00bc870ddab5d64e0
   }
 
   //字幕送信関数
   function onSubSend(subtext) {
     // Send message to all of the peers in the room via websocket
     console.log('字幕送信');
-    room.send('2'+peer.id+subtext);
+    room.send('2'+memPeerid+subtext);
     localText.value = '';
   }
 

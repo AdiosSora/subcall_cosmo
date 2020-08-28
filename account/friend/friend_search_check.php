@@ -17,9 +17,6 @@ else if(isset($_POST['search_check']) == false)
 }
 else
 {
-  print $_SESSION['regist_name'];
-  print '様の出す申請を管理します。';
-	print '<br /><br />';
   // 変数の定義、初期化
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
   $search_num = $_POST['search_num'];   // 申請する相手番号取得
@@ -39,6 +36,19 @@ else
 	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+	// 悲観的排他制御の開始
+	$dbh->beginTransaction();
+
+	// すでに退会しているかチェック
+	$sql_account = 'SELECT name FROM account WHERE number=?
+									FOR UPDATE';
+
+	$stmt_account = $dbh->prepare($sql_account);
+	$data_account[] = $search_num;
+	$stmt_account->execute($data_account);
+
+	$rec_account = $stmt_account->fetch(PDO::FETCH_ASSOC);
+
   // すでに申請されているか確認
 	$sql_add = 'SELECT count(user_number) FROM friendlist
 					WHERE flag=false AND user_number=? AND friend_number=?';
@@ -50,53 +60,52 @@ else
 
 	$rec_add = $stmt_add->fetch(PDO::FETCH_ASSOC);
 
-  // すでに申請しているか確認
-	$sql_get = 'SELECT count(user_number) FROM friendlist
-					WHERE flag=false AND friend_number=? AND user_number=?';
-
-	$stmt_get = $dbh->prepare($sql_get);
-	$stmt_get->execute($data);
-
-	$rec_get = $stmt_get->fetch(PDO::FETCH_ASSOC);
+	// 悲観的排他制御の終了
+	$dbh -> commit();
 
   $dbh = null;
 
-  if($rec_add['count(user_number)'] >0){
-    // すでに相手から申請されている、friend_add_check.php に飛ばせるようにする
-    print 'すでに　'.$search_name.'　様から申請されています。'.'<br />';
-    print '申請を許可しますか？'.'<br />';
-    print '<form method="post" action="friend_add_check.php">';
-    print '<input type="hidden" name="add_num" value="'.$search_num.'">';
-		print '<input type="hidden" name="add_name" value="'.$search_name.'">'.'</br>';
-    print '<input type="submit" name="add_yes" value="許可">';
-    print '<input type="submit" name="add_no" value="不可">';
-  	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
-    print '</form>';
+	if($rec_account['name'] == false){
+		// すでに退会している場合
+		print $search_name.'様はすでに退会しています。'.'<br />';
 
-  }else if($rec_get['count(user_number)'] >0){
-    // すでに相手に申請している、friend_get_check.php に飛ばせるようにする
-    print 'すでに　'.$search_name.'　様へ申請しています。'.'<br />';
-    print '申請を取り下げますか？'.'<br />';
-    print '<form method="post" action="friend_get_check.php">';
-    print '<input type="hidden" name="get_num" value="'.$search_num.'">';
-    print '<input type="hidden" name="get_name" value="'.$search_name.'">'.'</br>';
-    print '<input type="submit" name="get_check" value="取り下げる" >';
-    print '<button type="button" onclick="history.back()" value="no">戻る</button>';
-    print '</form>';
+	}
+	else
+	{
+		// まだ退会していない
+		print $_SESSION['regist_name'];
+		print '様の出す申請を管理します。';
+		print '<br /><br />';
 
-  }else{
-    // それ以外
-    print '以下の方に申請します。'.'<br />';
-    print '<form method="post" action="friend_search_done.php">';
-    print '会員番号：'.$search_num;
-    print '　　会員名：'.$search_name;
-    print '<input type="hidden" name="search_done_num" value="'.$search_num.'">';
-    print '<input type="hidden" name="search_done_name" value="'.$search_name.'">'.'</br>';
-    print '<input type="submit" name="search_done" value="申請する" >';
-    print '<button type="button" onclick="history.back()" value="no">申請しない</button>';
-    print '</form>';
+		if($rec_add['count(user_number)'] >0){
+	    // すでに相手から申請されている、friend_add_check.php に飛ばせるようにする
+	    print 'すでに　'.$search_name.'　様から申請されています。'.'<br />';
+	    print '申請を許可しますか？'.'<br />';
+	    print '<form method="post" action="friend_add_check.php">';
+	    print '<input type="hidden" name="add_num" value="'.$search_num.'">';
+			print '<input type="hidden" name="add_name" value="'.$search_name.'">'.'</br>';
+	    print '<input type="submit" name="add_yes" value="許可">';
+	    print '<input type="submit" name="add_no" value="不可">';
+	  	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
+	    print '</form>';
 
-  }
+	  }
+		else
+		{
+	    // それ以外
+	    print '以下の方に申請します。'.'<br />';
+	    print '<form method="post" action="friend_search_done.php">';
+	    print '会員番号：'.$search_num;
+	    print '　　会員名：'.$search_name;
+	    print '<input type="hidden" name="search_done_num" value="'.$search_num.'">';
+	    print '<input type="hidden" name="search_done_name" value="'.$search_name.'">'.'</br>';
+	    print '<input type="submit" name="search_done" value="申請する" >';
+	    print '<button type="button" onclick="history.back()" value="no">申請しない</button>';
+	    print '</form>';
+
+	  }
+
+	}
 
 }
 ?>

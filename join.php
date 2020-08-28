@@ -1,9 +1,43 @@
 <!DOCTYPE html>
-<?php
-  require_once('./common.php');
-  $post = sanitize($_POST);
-  $roomID=$post['room_id'];?>
 <html lang="ja">
+<?php
+  session_start();
+  session_regenerate_id(true);
+  // require_once('./common.php');
+  // $post = sanitize($_POST);
+  if(isset($_POST['room_id'])){
+      $roomID=$_POST['room_id'];
+    }
+  $rogin_flg=isset($_SESSION['bool']);
+
+  if($rogin_flg=='true'){//ログインチェック
+  //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
+    print '<script>console.log("ログイン済み");</script>';
+    $regist_name=$_SESSION['regist_name'];
+    include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・
+    $dbh=get_DBobj();
+    $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $sql = 'select number from account where name=?';
+    $data[] = $regist_name;
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    $dbh=null;
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $memberPeer=$rec['number'];
+
+    print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
+    print '<input type="hidden" id="memberName" value="'.$regist_name.'">';
+    print '<input type="hidden" id="login_FLG" value="true">';
+  }
+  else //ゲストのためpeerIDをどうするか用検討。
+  {
+    print '<script>console.log("ログインされていない。");</script>';
+    print '<input type="hidden" id="memberPeer" value="ランダム英数字">';//TODO(valueの値は後で変更する)
+    print '<input type="hidden" id="memberName" value="ゲスト">';
+    print '<input type="hidden" id="login_FLG" value="false">';
+  }
+?>
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

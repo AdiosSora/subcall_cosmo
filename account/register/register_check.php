@@ -88,6 +88,9 @@
     print '<button type="submit" value="登録">登録</button>';
     print '</form>';
   }
+else{
+  
+}
 ?>
 </div>
 </div>
