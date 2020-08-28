@@ -1,10 +1,25 @@
 /* eslint-disable require-jsdoc */
 $(function() {
   // Peer object
-  const peer = new Peer({
-    key:   '766085bc-041a-4889-ba90-b8fda1a4615f',
-    debug: 3,
-  });
+  let memPeerid=document.getElementById('memberPeer').value;
+  let login_FLG=document.getElementById('login_FLG').value;//TODO　起動時にログインセッションfalse の作成
+  console.log('ピアーIDは：'+memPeerid);
+
+  if(login_FLG){ //ログイン確認
+    console.log("loginが完了しています.");
+    const peer = new Peer(memPeerid,{
+      key:   '766085bc-041a-4889-ba90-b8fda1a4615f',
+      debug: 3,
+    });
+  }
+  else{
+    console.log("loginが完了していません");
+    const peer = new Peer({
+      key:   '766085bc-041a-4889-ba90-b8fda1a4615f',
+      debug: 3,
+    });
+  }
+
 
   const localText = document.getElementById('chat-textarea');
   const messages = document.getElementById('chat-text');
@@ -60,6 +75,9 @@ $(function() {
     // Send message to all of the peers in the room via websocket
     console.log('チャット送信');
     room.send('1'+localText.value);
+<<<<<<< HEAD
+    messages.textContent += `${memPeerid} : ${localText.value}\n`;
+=======
     $("#chat-text").append($(
       '<div class="msg_content">' +
       '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
@@ -67,13 +85,14 @@ $(function() {
       '<div class="msg-name"><strong>' + peer.id + '</strong></div>'+
       '<div class="msg-content">' + localText.value + '</div>' +
       '</div></div>'));
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
     localText.value='';
 
   }
   function onSubSend(subtext) {
     // Send message to all of the peers in the room via websocket
     console.log('字幕送信');
-    room.send('2'+peer.id+subtext);
+    room.send('2'+memPeerid+subtext);
     localText.value = '';
   }
 

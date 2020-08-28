@@ -1,9 +1,46 @@
 <!DOCTYPE html>
+<html lang="ja">
 <?php
+  session_start();
+  session_regenerate_id(true);
   require_once('./common.php');
   $post = sanitize($_POST);
+<<<<<<< HEAD
+  $roomID=$post['room_id'];
+  $rogin_flg=isset($_SESSION['bool']);
+
+  if($rogin_flg){//ログインチェック
+  //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
+    print '<script>console.log("ログイン済み");</script>';
+    $regist_name=$_SESSION['regist_name'];
+    include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・
+    $dbh=get_DBobj();
+    $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $sql = 'select number from account where name=?';
+    $data[] = $regist_name;
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    $dbh=null;
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $memberPeer=$rec['number'];
+
+    print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
+    print '<input type="hidden" id="memberName" value="'.$regist_name.'">';
+    print '<input type="hidden" id="login_FLG" value="true">';
+  }
+  else //ゲストのためpeerIDをどうするか用検討。
+  {
+    print '<script>console.log("ログインされていない。");</script>';
+    print '<input type="hidden" id="memberPeer" value="ランダム英数字">';//TODO(valueの値は後で変更する)
+    print '<input type="hidden" id="memberName" value="ゲスト">';
+    print '<input type="hidden" id="login_FLG" value="false">';
+  }
+?>
+
+=======
   $roomID=$post['room_id'];?>
 <html lang="ja">
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,47 +90,66 @@
       <div id="text_input">
         <input type="text" placeholder="テキストを入力" id="chat-textarea">
         <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
-      </div>
-      <div id="setting">
-        <button v-on:click="openModal">設定</button>
-        <open-modal v-show="showContent" v-on:from-child="closeModal">
-          <p>Your id: <span id="my-id">...</span></p>
-          <div class="select">
-            <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
-          </div>
-          <div class="select">
-            <label for="videoSource">Video source: </label><select id="videoSource"></select>
-          </div>
-          <!-- Get local audio/video stream -->
-          <div id="step1">
-            <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
-            <div id="step1-error">
-              <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
-              <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        <div id="setting">
+          <button v-on:click="openModal">設定</button>
+          <open-modal v-show="showContent" v-on:from-child="closeModal">
+            <p>Your id: <span id="my-id">...</span></p>
+            <div class="select">
+              <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
             </div>
-          </div>
-          <!-- Make calls to others -->
-          <div id="step2">
-            <h3>Make a call</h3>
-            <form id="make-call" class="pure-form">
-              <input type="text" placeholder="Join room..." id="join-room">
-              <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
-            </form>
-          </div>
-          <!-- Call in progress -->
-          <div id="step3">
-            <p>Currently in room <span id="room-id">...</span></p>
-            <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
-          </div>
-        </open-modal>
+            <div class="select">
+              <label for="videoSource">Video source: </label><select id="videoSource"></select>
+            </div>
+            <!-- Get local audio/video stream -->
+            <div id="step1">
+              <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+              <div id="step1-error">
+                <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+                <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+              </div>
+            </div>
+            <!-- Make calls to others -->
+            <div id="step2">
+              <h3>Make a call</h3>
+              <form id="make-call" class="pure-form">
+                <input type="text" placeholder="Join room..." id="join-room">
+                <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
+              </form>
+            </div>
+            <!-- Call in progress -->
+            <div id="step3">
+              <p>Currently in room <span id="room-id">...</span></p>
+              <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+            </div>
+          </open-modal>
+        </div>
       </div>
     </div>
 
+<<<<<<< HEAD
+      <input type="text" placeholder="" id="chat-textarea">
+      <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
+      <div id="chat-text"></div>
+      <div id="sub-text"></div>
+      <!-- Make calls to others -->
+      <div id="step2">
+        <h3>Make a call</h3>
+        <form id="make-call" class="pure-form">
+          <input type="text" placeholder="Join room..." id="join-room" value="<?php print $roomID; ?>">
+          <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
+        </form>
+=======
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
   <script>
     window.setTimeout(() => {
         const loading = document.getElementById('loading');
         loading.classList.add('loaded');
       },1000);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
       Vue.component('open-modal',{
         template : `
           <div id="overlay" v-on:click="clickEvent">
@@ -127,6 +183,13 @@
           }
         }
       })
+<<<<<<< HEAD
+
+
+
+    <script>
+=======
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
       window.setTimeout(() => {
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
