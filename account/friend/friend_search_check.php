@@ -60,15 +60,6 @@ else
 
 	$rec_add = $stmt_add->fetch(PDO::FETCH_ASSOC);
 
-  // すでに申請しているか確認
-	$sql_get = 'SELECT count(user_number) FROM friendlist
-					WHERE flag=false AND friend_number=? AND user_number=?';
-
-	$stmt_get = $dbh->prepare($sql_get);
-	$stmt_get->execute($data);
-
-	$rec_get = $stmt_get->fetch(PDO::FETCH_ASSOC);
-
 	// 悲観的排他制御の終了
 	$dbh -> commit();
 
@@ -96,19 +87,6 @@ else
 	    print '<input type="submit" name="add_yes" value="許可">';
 	    print '<input type="submit" name="add_no" value="不可">';
 	  	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
-	    print '</form>';
-
-	  }
-		else if($rec_get['count(user_number)'] >0)
-		{
-	    // すでに相手に申請している、friend_get_check.php に飛ばせるようにする
-	    print 'すでに　'.$search_name.'　様へ申請しています。'.'<br />';
-	    print '申請を取り下げますか？'.'<br />';
-	    print '<form method="post" action="friend_get_check.php">';
-	    print '<input type="hidden" name="get_num" value="'.$search_num.'">';
-	    print '<input type="hidden" name="get_name" value="'.$search_name.'">'.'</br>';
-	    print '<input type="submit" name="get_check" value="取り下げる" >';
-	    print '<button type="button" onclick="history.back()" value="no">戻る</button>';
 	    print '</form>';
 
 	  }

@@ -101,8 +101,8 @@ else
 			$rec_count = $stmt_count->fetch(PDO::FETCH_ASSOC);
 
 			// 入力された名前がすでにフレンドかを取得
-			$sql_comit = 'SELECT count(user_number) FROM friendlist
-											WHERE user_number IN(?,?) AND friend_number IN(?,?) AND flag=true';
+			$sql_comit = 'SELECT user_number, friend_number, flag FROM friendlist
+											WHERE user_number IN(?,?) AND friend_number IN(?,?)';
 			$stmt_comit = $dbh->prepare($sql_comit);
 			$data_comit[0] = $rec_search['number'];
 			$data_comit[1] = $user_num;
@@ -126,7 +126,7 @@ else
 				$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
 			}else{
 				// 入力した名前が自分自身ではない場合
-				if($rec_comit['count(user_number)'] < 1){
+				if($rec_comit == false){
 					// フレンド同士でない場合
 					if($flag_friend == 1){
 						// 自身のフレンドが上限未満(申請できる)
@@ -153,10 +153,26 @@ else
 						$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
 					}
 				}else{
-					// フレンド同士の場合
-					print 'すでにフレンド同士です。';
-					print '</form>';
-
+					// 申請する、される、フレンド同士の場合
+					if($rec_comit['flag'] == true){
+						// フレンド同士
+						print 'すでにフレンド同士です。';
+						print '</form>';
+					}
+					else
+					{
+						if($rec_comit['user_number'] == $user_num){
+							// 申請されている
+							print '申請されています。';
+							print '</form>';
+						}
+						else
+						{
+							// 申請している
+							print '申請しています。';
+							print '</form>';
+						}
+					}
 					$rec_search = $stmt_search->fetch(PDO::FETCH_ASSOC);
 				}
 			}
