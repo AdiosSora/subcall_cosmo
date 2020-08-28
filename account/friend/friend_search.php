@@ -33,7 +33,7 @@ else
 </head>
 <body>
   <?php
-  // DB接続(mysql, xampp)
+  // DB接続
 	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 

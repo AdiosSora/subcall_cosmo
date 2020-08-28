@@ -1,13 +1,16 @@
+
 //メールアドレスチェック用関数(Ispass)を定義
 jQuery.validator.addMethod("Ispass", function(value, element) {
   return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/.test(value);
 }, "半角英数大文字を一文字以上入力してください。(8文字以上30文字以下)");
+
 jQuery(function($) {
   $('#check').validate({
     rules: {
       //ユーザ名チェック
       name: {
-        required: true
+        required: true,
+        Isuser: true
       },
       //メールアドレスチェック
       address: {

@@ -132,7 +132,6 @@ body {
   overflow: auto;
 }
 /* ローカルビデオの位置指定  */
-
 #my-video {
   width: 20%;
   height: auto;
@@ -140,16 +139,6 @@ body {
   bottom: 0;
   left: 0;
   z-index: 3;
-}
-
-#nav-my-video {
-  width: 20%;
-  height: 10px;
-  position: absolute;
-  bottom: 20%;
-  left: 0;
-  z-index: 3;
-  background-color: blue;
 }
 
 #their-videos {
@@ -215,10 +204,57 @@ body {
     }
   }
 }
-
+/*テキスト要素*/
+#text_content{
+  width:auto;
+  height:90%;
+  #chat-text{
+    height:50%;
+    padding:5px;
+  }
+  #sub-text{
+    height:50%;
+    padding:5px;
+  }
+}
+.msg_content{
+  width:100%;
+  display: table;
+  table-layout:fixed; /* ブロックレベル要素を均等に配置 */
+}
+.msg-icon {
+  width:20%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.msg-icon img{
+  width:100%;
+}
+.msg-text{
+  display: table-cell;
+  width:80%;
+  .msg-name{
+    width:100%;
+    max-width: 100%;
+    font:{
+      size:10px;
+      color:#444444;
+    }
+  }
+  .msg-content{
+    width:100%;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+}
+#text_input{
+  width:auto;
+  height:10%;
+  padding:5%;
+}
+/*設定画面*/
 #overlay{
   z-index:3;
-
   position:fixed;
   top:0;
   left:0;
@@ -227,11 +263,9 @@ body {
   background:{
     color:rgba(0,0,0,0.5);
   }
-
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 #content{

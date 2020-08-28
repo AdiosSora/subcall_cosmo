@@ -32,13 +32,17 @@ else
 </head>
 <body>
   <?php
-  // DB接続(mysql, xampp)
+  // DB接続
 	$dbh = get_DBobj();
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+	// 悲観的排他制御の開始
+	$dbh->beginTransaction();
+
 	// 更新処理中にすでに更新されていないかチェック
 	$sql_check = 'SELECT count(user_number) FROM friendlist
-					WHERE user_number in(?,?) AND friend_number in(?,?) AND flag=true';
+					WHERE user_number in(?,?) AND friend_number in(?,?) AND flag=true
+					FOR UPDATE';
 
 	$stmt_check = $dbh->prepare($sql_check);
 	$data_check[] = $get_done_num; // 申請する相手番号
@@ -49,9 +53,12 @@ else
 
 	$rec = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-	if($rec['count(user_number)'] < 1){
-		// 自身が先に更新した
-		// friendlist から条件に合う番号の名前を account から取得
+	//テスト用、(x)秒待機
+	// sleep(3);
+
+	if($rec['count(user_number)'] == 0){
+		// 自身が先に申請を取り下げた or 相手が先にフレンド登録を不可にした
+		// 該当する行を削除、ない場合は0行を削除（DBは変化なし）
 	  $sql = 'DELETE FROM friendlist where user_number=? AND friend_number=? AND flag=false';
 
 		$stmt = $dbh->prepare($sql);
@@ -59,17 +66,14 @@ else
 	  $data[] = $user_num;   // 申請した（自身の）番号
 		$stmt->execute($data);
 
-	  $dbh = null;
-
 	  print '会員番号：'.$get_done_num.'　　会員名：'.$get_done_name.'</br>';
 	  print '申請を取り下げました';
 	  print '</br>';
 
 	}else{
-		// 相手が先に更新した場合
+		// 相手が先にフレンド登録した場合
 		print '申請の取り下げ処理中に、'.$get_done_name.'様が申請を許可したため、処理を中断しました。';
 
-		// 以下、8/25以降修正
 		print '<br />';
 		print 'フレンドリストから削除しますか？'.'<br />';
     print '<form method="post" action="friend_list_check.php">';
@@ -81,6 +85,9 @@ else
     print '<input type="submit" name="add_no" value="削除しない">';
 		print '</form>';
 	}
+
+	// 悲観的排他制御の終了
+	$dbh -> commit();
 
   $dbh = null;
 

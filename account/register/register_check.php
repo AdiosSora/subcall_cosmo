@@ -47,9 +47,9 @@
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-  $sql = 'SELECT name FROM account WHERE mail_address=?';
+  $sql = 'SELECT number FROM account WHERE name=?';
   $stmt = $dbh->prepare($sql);
-  $data[] = $regist_address;
+  $data[] = $regist_name;
   $stmt->execute($data);
 
   $dbh = null;

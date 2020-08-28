@@ -75,7 +75,17 @@ $(function() {
     // Send message to all of the peers in the room via websocket
     console.log('チャット送信');
     room.send('1'+localText.value);
+<<<<<<< HEAD
     messages.textContent += `${memPeerid} : ${localText.value}\n`;
+=======
+    $("#chat-text").append($(
+      '<div class="msg_content">' +
+      '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
+      '<div class="msg-text">' +
+      '<div class="msg-name"><strong>' + peer.id + '</strong></div>'+
+      '<div class="msg-content">' + localText.value + '</div>' +
+      '</div></div>'));
+>>>>>>> 44497da06491beb40b90dc86424fda707763d9b2
     localText.value='';
 
   }
@@ -169,7 +179,7 @@ $(function() {
         '<div class="remoteVideo_div video_' + peerId +'" id="' + id + '">' +
           '<label>' + stream.peerId + ':' + stream.id + '</label>' +
           '<video class="remoteVideos" autoplay playsinline>' +
-          '<p class="subtext_field">' +
+          '<p class="subtext_field"></p>' +
         '</div>'));
       const el = $('#' + id).find('video').get(0);
       el.srcObject = stream;
@@ -185,7 +195,7 @@ $(function() {
     room.on('close', step2);
 
     room.once('open', () => {
-      messages.textContent += `=== You` + peer.id + `joined ===\n`;
+    $("#chat-text").append($('<div class="msg-system">あなたが入室しました。</div>'));
     });
 
     room.on('data', ({ data, src }) => {
@@ -196,7 +206,13 @@ $(function() {
       //「１」チャットの場合
       if(result_num == '1'){
         console.log('データ受け取り1発火');
-        messages.textContent += `${src}: ${result_message}\n`;
+        $("#chat-text").append($(
+          '<div class="msg_content">' +
+          '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
+          '<div class="msg-text">' +
+          '<div class="msg-name"><strong>' + `${src}` + '</strong></div>'+
+          '<div class="msg-content">' + `${result_message}\n` + '</div>' +
+          '</div></div>'));
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
