@@ -210,22 +210,28 @@ body {
   height:90%;
   #chat-text{
     height:50%;
-    padding:5px;
   }
   #sub-text{
     height:50%;
-    padding:5px;
   }
+}
+.bg-0{
+  background-color: #ffffff;
+}
+.bg-1{
+  background-color: #dddddd;
 }
 .msg_content{
   width:100%;
   display: table;
   table-layout:fixed; /* ブロックレベル要素を均等に配置 */
+  padding:5px;
+  box-sizing: border-box;
 }
 .msg-icon {
   width:20%;
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .msg-icon img{
   width:100%;
@@ -233,18 +239,34 @@ body {
 .msg-text{
   display: table-cell;
   width:80%;
+  height:100%;
+  box-sizing: border-box;
   .msg-name{
     width:100%;
     max-width: 100%;
+    margin-left: 5px;
+    box-sizing: border-box;
     font:{
-      size:10px;
-      color:#444444;
+      size:12px;
     }
   }
   .msg-content{
     width:100%;
     max-width: 100%;
+    padding:5px;
     word-wrap: break-word;
+    box-sizing: border-box;
+    color:#444444;
+    font:{
+      size:10px;
+    }
+  }
+  .msg-date{
+    color: #eeeeee;
+    text-align:right;
+    font:{
+      size:8px;
+    }
   }
 }
 #text_input{
