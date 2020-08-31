@@ -54,7 +54,16 @@ $dbh = get_DBobj();
 	print '　／　10　　';
 	print '<br /><br />';
 
-	print '申請した者一覧'.'</br>';
+	?>
+	<table border="1">
+		<caption>申請した者一覧</caption>
+    <tr>
+      <th>会員番号</th>
+      <th>会員名</th>
+			<th>取り下げの実行</th>
+    </tr>
+
+	<?php
 
 	while(true){
 
@@ -63,15 +72,19 @@ $dbh = get_DBobj();
   	if($rec == false){
 			break;
 		}
+		print '<tr>';
+    print '<td>'.$rec['number'].'</td>';
+    print '<td>'.$rec['name'].'</td>';
+		print '<td>';
 		print '<form method="post" action="friend_get_check.php">';
-    print '会員番号：'.$rec['number'];
-    print '　　会員名：'.$rec['name'];
     print '<input type="hidden" name="get_num" value="'.$rec['number'].'">';
-    print '<input type="hidden" name="get_name" value="'.$rec['name'].'">'.'</br>';
-    print '<input type="submit" name="get_check" value="申請取り下げ" >'.'</br>'.'</br>';
+    print '<input type="hidden" name="get_name" value="'.$rec['name'].'">';
+    print '<input type="submit" name="get_check" value="申請取り下げ" >';
     print '</form>';
-
+		print '</td>';
+		print '</tr>';
 		}
+		print '</table>';
 
 		print '<a href="friend.php">フレンド画面へ</a></br>';
 		print '<a href="../../index.php">トップ画面へ</a>';
