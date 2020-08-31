@@ -17,8 +17,15 @@ if(isset($_SESSION['bool'])==false){
 <!DOCTYPE html>
 <html lang="ja">
         <head>
-          <script src="/js/register_update.js"></script>
-          <meta charset="utf-8"/>
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="../../js/register_update.js"></script>
+          <script src="../../js/jquery.validate.js"></script>
+          <script src="../../js/jquery.validate.min.js"></script>
+          <script src="../../js/register.js"></script>
+          <title>プロフィール更新画面 - Stable </title>
+          <?php include '../../header.php'; ?>
         </head>
         <body>
           <p>
@@ -27,15 +34,16 @@ if(isset($_SESSION['bool'])==false){
           </p>
 
 
-        <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
+        <form method='POST' action="register_update_done.php" id ="check" enctype="multipart/form-data">
 
               <input type="hidden" name="MAX_FILE_SIZE" id="size_check" value="5242880">
               <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
               ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
+              <a class="form_required_mark">必須</a>
               E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
 
               <?php
-              if(!empty($_SESSION['regist_bone'])){
+              if(!empty($_SESSION['regist_bone']) || !strcmp($_SESSION['regist_bone'] , '―/―/―')){
                 $bone = $_SESSION['regist_bone'];
                 $year = substr($bone , 0 , 4);
                 $month = substr($bone , 5 , 2);

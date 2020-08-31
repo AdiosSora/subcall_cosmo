@@ -4,6 +4,7 @@ try{
 
 session_start();
 include('../db/dbConnecter.php');
+
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
   print'<a href="../login/login.php">ログイン画面へ</a>';
@@ -61,8 +62,9 @@ if(isset($_SESSION['bool'])==false){
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if(empty($rec['bone']) || strcmp($rec['bone'], "―") == 0){
+      if(empty($rec['bone']) || strcmp($rec['bone'], "―/―/―") == 0){
          print'未設定<br><br>';
+          $_SESSION['regist_bone'] = "";
       }else{
          print $rec['bone'].'<br><br>';
          $_SESSION['regist_bone'] = $rec['bone'];
@@ -96,8 +98,9 @@ if(isset($_SESSION['bool'])==false){
 
       $dbh = null;
   ?>
-    <a href="../register/register_update.php"><button type="button">編集</button></a><br/><br/>
+    <a href="../register/register_update.php"><button type="button">編集</button></a>
     <a href="../delete/delete.php"><button type="button">退会</button></a><br/><br/><br/>
+    <a href="../../">トップページに戻る</a>
   </form>
   </body>
 
