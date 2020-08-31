@@ -274,7 +274,12 @@ label.address-error {
   color: black !important;
 }
 
-.validetion_alart_name {
+#validetion_alart_name{
+  font-size: 10px;
+  color:red;
+  display:none;
+}
+#validetion_alart_email{
   font-size: 10px;
   color:red;
   display:none;
