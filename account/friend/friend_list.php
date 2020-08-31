@@ -18,7 +18,7 @@ else
 {
 	print $_SESSION['regist_name'];
 	print '様のフレンドを管理します';
-	print '<br />';
+	print '<br /><br />';
 
   // 変数の定義、初期化
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
@@ -58,23 +58,35 @@ else
 
   $dbh = null;
 
-  print 'フレンド一覧'.'</br>'.'</br>';
+	?>
+	<table border="1">
+		<caption>フレンド一覧</caption>
+    <tr>
+      <th>会員番号</th>
+      <th>会員名</th>
+			<th>削除の実行</th>
+    </tr>
+		<?php
+		while(true){
 
-  while(true){
+	    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if($rec == false){
-      break;
-    }
-    print '<form method="post" action="friend_list_check.php">';
-    print '会員番号：'.$rec['number'];
-    print '　　会員名：'.$rec['name'];
-    print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
-    print '<input type="hidden" name="list_name" value="'.$rec['name'].'">'.'</br>';
-    print '<input type="submit" name="list_check" value="フレンド削除" >'.'</br>'.'</br>';
-    print '</form>';
-    }
+	    if($rec == false){
+	      break;
+	    }
+			print '<tr>';
+	    print '<td>'.$rec['number'].'</td>';
+	    print '<td>'.$rec['name'].'</td>';
+			print '<td>';
+			print '<form method="post" action="friend_list_check.php">';
+	    print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
+	    print '<input type="hidden" name="list_name" value="'.$rec['name'].'">';
+	    print '<input type="submit" name="list_check" value="フレンド削除" >';
+			print '</form>';
+			print '</td>';
+			print '</tr>';
+	    }
+  print '</table>';
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
 	print '<a href="../../index.php">トップ画面へ</a>';

@@ -43,6 +43,7 @@ else
   print '<button type="button" onclick="history.back()" value="no">削除しない</button>';
   print '</form>';
 
+	print '<a href="friend.php">フレンド画面へ</a></br>';
   print '<a href="../../index.php">トップ画面へ</a>';
 
 }

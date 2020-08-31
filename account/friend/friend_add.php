@@ -30,7 +30,11 @@ else
 
   // 変数の定義、初期化
 	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
-
+	// 備考に表示するフラグ
+	// 0=「許可・不可できます」
+	// 1=「相手のフレンドが上限に達しているため、許可できません」
+	// 2=「自身のフレンドが上限に達しているため、許可できません」
+	$flag = 0;
 ?>
 
 <!DOCTYPE html>
@@ -53,9 +57,18 @@ else
 	$data[] = $user_num;
 	$stmt->execute($data);
 
-	print '届いた申請者一覧'.'</br>';
-
-	print '</br>';
+	?>
+	<table border="1">
+		<caption>届いた申請一覧</caption>
+    <tr>
+      <th>会員番号</th>
+      <th>会員名</th>
+			<th>フレンド数</th>
+			<th>許可の実行</th>
+			<th>不可の実行</th>
+			<th>備考</th>
+    </tr>
+	<?php
 
 	while(true){
 
@@ -64,11 +77,6 @@ else
   	if($rec == false){
 			break;
 		}
-
-		print '<form method="post" action="friend_add_check.php">';
-		print '会員番号：'.$rec['number'];
-		print '　　会員名：'.$rec['name'];
-
 		// 申請された相手のフレンド登録件数を取得
 		$sql_count = 'SELECT count(user_number) FROM friendlist
 										WHERE (user_number=? or friend_number=?) and flag=true';
@@ -80,28 +88,51 @@ else
 
 		$rec_count = $stmt_count->fetch(PDO::FETCH_ASSOC);
 
-		print '　　フレンド数：　';
-		print $rec_count['count(user_number)'];
-		print '　／　10　　';
-
+		print '<tr>';
+    print '<td>'.$rec['number'].'</td>';
+    print '<td>'.$rec['name'].'</td>';
+		print '<td align="center">'.$rec_count['count(user_number)'].'　／　10</td>';
+		print '<form method="post" action="friend_add_check.php">';
 		print '<input type="hidden" name="add_num" value="'.$rec['number'].'">';
-		print '<input type="hidden" name="add_name" value="'.$rec['name'].'">'.'</br>';
-
+		print '<input type="hidden" name="add_name" value="'.$rec['name'].'">';
+		print '<td align="center">';
 		if($_POST['count_friend'] < 10){
 			// 自身のフレンドが上限に達していない場合
 			if($rec_count['count(user_number)'] < 10){
 				// 相手のフレンドが上限に達していない場合
-				print '<input type="submit" name="add_yes" value="申請の許可">'.'<br />';
+				print '<input type="submit" name="add_yes" value="申請の許可">';
 			}else{
 				// 相手のフレンドが上限に達している場合
-				print '相手が上限に達しているため、申請の許可ができません。'.'<br />';
+				print '許可できません。';
+				$flag = 1;
+			}
+			print '</td>';
+		}else{
+			// 自身のフレンドが上限に達している場合
+			print '許可できません。';
+			$flag = 2;
+		}
+		print '<td align="center">';
+	  print '<input type="submit" name="add_no" value="申請の不可">';
+		print '</td>';
+		print '<td>';
+		if($flag == 0){
+			print '許可・不可できます。';
+		}else{
+			if($flag == 1){
+				print '相手のフレンドが上限に達しているため、許可できません。';
+			}else{
+				print '自身のフレンドが上限に達しているため、許可できません。';
 			}
 		}
-	  print '<input type="submit" name="add_no" value="申請の不可">';
+		print '</td>';
+		print '</tr>';
 		print '</form>';
 
 		}
 	$dbh = null;
+
+	print '</table>';
   print '</br>';
 
 	print '<a href="friend.php">フレンド画面へ</a></br>';
