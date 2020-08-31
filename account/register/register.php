@@ -23,35 +23,33 @@
           <div class="row">
             <div class="col col s10 offset-m1 m8 offset-m2 center">
               <?php
+
+                function console_log( $data ){
+                echo '<script>';
+                echo 'console.log('. json_encode( $data ) .')';
+                echo '</script>';
+                }
+
                   include('../db/dbConnecter.php');
                   $dbh = get_DBobj();
                   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-                  $regist_address = $_SESSION['regist_address'];
-                  $data[] = $regist_address;
-
-                  $sql = 'SELECT name FROM account';
+                  $sql = 'SELECT name FROM account;';
                   $stmt = $dbh->query($sql);
-                // do{
-                //   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-                // }while($rec!=false);
-                //
-                //   console.log($rec);
-                // while ($row = mysql_fetch_assoc($stmt)){
-                //   console.log($row['name']);
-                // }
-                foreach ($stmt as $row) {
-                  console.log($row);
-                }
-
-
-                  $name_list = [];
-                  foreach ($rec as $row) {
-                    array_push($name_list,$row);
-
+                  $name_list=array();
+                  foreach ($stmt as $row) {
+                    array_push($name_list,$row['name']);
                   }
-                  $php_json = json_encode($name_list);
-                   ?>
+                  $php_json_name = json_encode($name_list);
+
+                  $sql = 'SELECT mail_address FROM account;';
+                  $stmt = $dbh->query($sql);
+                  $email_list=array();
+                  foreach ($stmt as $row) {
+                    array_push($email_list,$row['mail_address']);
+                  }
+                  $php_json_email = json_encode($email_list);
+              ?>
               <form method="post" name="regiser_form" action="register_check.php" id="check" class="pw-form-container">
                 <div id="empty_error" class="alert error" style="display:none;">必要な情報が入力されていません。</div>
                 <div id="missmatch_error" class="alert error" style="display:none;">パスワードが一致していないか、条件を満たしていません。</div>
@@ -61,7 +59,7 @@
                     <label for="name" class="form_name">ユーザ名</label>
                     <a class="form_required_mark">必須</a>
                   <input type="text" name="name" id="name" data-length="20" placeholder="例:たろう" autocomplete="off">
-                  <p class="validetion_alart_name">この名前は既に使用されています。</p>
+                  <p id="validetion_alart_name" style="display:none;">この名前は既に使用されています。</p>
                   </div>
                   <br/>
                   <div class="form_title">
@@ -75,6 +73,7 @@
                     <label for="address" class="form_name">メールアドレス</label>
                     <a class="form_required_mark">必須</a>
                     <input type="email" name="address" id="address" data-length="50" placeholder="例:Stable@example.com" autocomplete="off">
+                    <p id="validetion_alart_email" style="display:none;">このメールアドレスは既に使用されています。</p>
                   </div>
                   <div id="button_box" style="margin: 20px;">
                     <a class="waves-effect waves-light btn-large grey darken-1" href="../../index.php">戻る</a>
@@ -125,7 +124,7 @@
   $(document).ready(function() {
    $('input#name, input#pass, input#pass2, input#address').characterCounter();
   });
-  var js_name_array = JSON.parse('<?php echo $php_json ?>');
+  var js_name_array = JSON.parse('<?php echo $php_json_name ?>');
 
   $("#name").on("input change", function(){
     js_name_array.indexOf($("#name")[0].value);
@@ -135,6 +134,19 @@
       console.log('ない');
     }else{
       $('#validetion_alart_name').css('display','inline');
+      console.log('ある');
+    }
+  });
+
+  var js_email_array = JSON.parse('<?php echo $php_json_email ?>');
+  $("#address").on("input change", function(){
+    js_email_array.indexOf($("#address")[0].value);
+    if(js_email_array.indexOf($("#address")[0].value) == -1){
+      console.log(js_email_array);
+      $('#validetion_alart_email').css('display','none');
+      console.log('ない');
+    }else{
+      $('#validetion_alart_email').css('display','inline');
       console.log('ある');
     }
   });

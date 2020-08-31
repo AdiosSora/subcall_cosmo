@@ -7,6 +7,10 @@ body {
   height: 100vh;
   overflow: hidden;
   margin: 0;
+  background: #74ebd5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: "メイリオ" ;
 }
 /* ローディング画面 */
 
@@ -121,7 +125,6 @@ body {
   height: 100vh;
   position: absolute;
   left: 0;
-  background-color: #555555;
 }
 
 #sub {
@@ -130,6 +133,7 @@ body {
   position: absolute;
   right: 0;
   overflow: auto;
+  background-color: rgba(255,255,255,0.3);
 }
 /* ローカルビデオの位置指定  */
 #my-video {
@@ -208,18 +212,21 @@ body {
 #text_content{
   width:auto;
   height:90%;
+  overflow: hidden;
   #chat-text{
     height:50%;
+    max-height: 50%;
   }
   #sub-text{
     height:50%;
+    max-height: 50%;
   }
 }
 .bg-0{
-  background-color: #ffffff;
+  background-color: rgba(255,255,255,0.3);
 }
 .bg-1{
-  background-color: #dddddd;
+  background-color: rgba(255,255,255,0.6);
 }
 .msg_content{
   width:100%;
@@ -229,7 +236,7 @@ body {
   box-sizing: border-box;
 }
 .msg-icon {
-  width:20%;
+  width:15%;
   display: table-cell;
   vertical-align: top;
 }
@@ -238,7 +245,7 @@ body {
 }
 .msg-text{
   display: table-cell;
-  width:80%;
+  width:85%;
   height:100%;
   box-sizing: border-box;
   .msg-name{
@@ -262,7 +269,7 @@ body {
     }
   }
   .msg-date{
-    color: #eeeeee;
+    color: #222222;
     text-align:right;
     font:{
       size:8px;
@@ -273,6 +280,38 @@ body {
   width:auto;
   height:10%;
   padding:5%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+#chat-textarea{
+    width: calc(100% - 75px);/*常に送信ボタンの横幅を引いたサイズに動的に計算*/
+    line-height: 16px;
+    height: 48px;
+    padding: 14px 6px 0px 6px;/*文字がテキストエリアの中心になる様に隙間調整*/
+    border: 1px solid #ccc;
+    border-radius: 4px;/*角丸*/
+    text-align: left;/*文字を左寄せ*/
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.2) inset;/*内側に影を入れてテキストエリアらしくした*/
+    box-sizing: border-box;/*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
+
+}
+#btn-send {
+    width: 72px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 3em;
+    float: right;/*bms_sendに対して右寄せ*/
+    color: #fff;
+    font-weight: bold;
+    background: #bcbcbc;
+    text-align: center;/*文字をボタン中央に表示*/
+    border: 1px solid #bbb;
+    border-radius: 4px;/*角丸*/
+    box-sizing: border-box;/*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
+}
+#btn-send:hover {
+    background: #13178E; /*マウスポインタを当てた時にアクティブな色になる*/
+    cursor: pointer;/*マウスポインタを当てた時に、カーソルが指の形になる*/
 }
 /*設定画面*/
 #overlay{
