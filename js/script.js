@@ -12,7 +12,7 @@ $(function() {
     console.log("loginが完了していません");
   }
 
-  const peer = new Peer('aaaaaaa',{
+  const peer = new Peer({
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
   });
