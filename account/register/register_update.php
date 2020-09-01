@@ -17,25 +17,40 @@ if(isset($_SESSION['bool'])==false){
 <!DOCTYPE html>
 <html lang="ja">
         <head>
-          <script src="/js/register_update.js"></script>
-          <meta charset="utf-8"/>
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="../../js/register_update.js"></script>
+          <script src="../../js/jquery.validate.js"></script>
+          <script src="../../js/jquery.validate.min.js"></script>
+          <script src="../../js/register.js"></script>
+          <title>プロフィール更新画面 - Stable </title>
+          <?php include '../../header.php'; ?>
         </head>
         <body>
+          <div id="index-banner" class="parallax-container">
+            <div class="container">
+              <div class="section no-pad-bot">
+                <br><br>
+                <div class="row">
+                  <div class="col col s10 offset-m1 m8 offset-m2 center">
           <p>
           Preview:<br/><br/>
           <image id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
           </p>
 
 
-        <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
+        <form method='POST' action="register_update_done.php" id ="check" enctype="multipart/form-data">
 
               <input type="hidden" name="MAX_FILE_SIZE" id="size_check" value="5242880">
-              <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
-              ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>"><br/><br/>
-              E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>"><br/><br/>
+              <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);">
+              ユーザ名 : &nbsp;<input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>">
+              <a class="form_required_mark">必須</a><br><br>
+              E-mail : &nbsp;<input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>">
+              <a class="form_required_mark">必須</a><br><br>
 
               <?php
-              if(!empty($_SESSION['regist_bone'])){
+              if(!empty($_SESSION['regist_bone']) || !strcmp($_SESSION['regist_bone'] , '―/―/―')){
                 $bone = $_SESSION['regist_bone'];
                 $year = substr($bone , 0 , 4);
                 $month = substr($bone , 5 , 2);
@@ -245,5 +260,10 @@ if(isset($_SESSION['bool'])==false){
             </div>
         </form>
         <a href="../profile/profile.php"><button type="button">戻る</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </body>
 </html>

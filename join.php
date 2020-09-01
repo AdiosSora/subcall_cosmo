@@ -5,8 +5,11 @@
   session_regenerate_id(true);
   // require_once('./common.php');
   // $post = sanitize($_POST);
-  if(isset($_POST['room_id'])){
+  if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
       $roomID=$_POST['room_id'];
+    }else{
+      header('Location: ./index.php');
+      exit;
     }
   $rogin_flg=isset($_SESSION['bool']);
 
@@ -32,7 +35,7 @@
   else //ゲストのためpeerIDをどうするか用検討。
   {
     print '<script>console.log("ログインされていない。");</script>';
-    print '<input type="hidden" id="memberPeer" value="ランダム英数字">';//TODO(valueの値は後で変更する)
+    print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
     print '<input type="hidden" id="memberName" value="ゲスト">';
     print '<input type="hidden" id="login_FLG" value="false">';
   }
@@ -164,6 +167,10 @@
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
         },1000);
+      $(window).on('load', function(){
+        console.log("使える使える使える");
+        test();
+      })
     </script>
   </body>
 </html>

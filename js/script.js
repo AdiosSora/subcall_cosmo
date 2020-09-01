@@ -1,18 +1,21 @@
 /* eslint-disable require-jsdoc */
 $(function() {
   // Peer object
-  let memPeerid=toString(document.getElementById('memberPeer').value);
+  let memPeerid
   let login_FLG=document.getElementById('login_FLG').value;//TODO　起動時にログインセッションfalse の作成
 
 
   if(login_FLG=='true'){ //ログイン確認 TODO(PEERIDがundefindになる事象の修正)
     console.log("loginが完了しています.");
+    memPeerid = =toString(document.getElementById('memberPeer').value);
   }
   else{
     console.log("loginが完了していません");
+    var N=16
+    memPeerid = Math.random().toString(36).slice(-8);
   }
 
-  const peer = new Peer({
+  const peer = new Peer(memPeerid,{
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
   });
@@ -281,4 +284,5 @@ $(function() {
   	var s =hour + ":" + min;
   	return s;
   }
+
 });
