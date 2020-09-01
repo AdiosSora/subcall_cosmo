@@ -209,7 +209,7 @@ else
 	$dbh -> commit();
 
   $dbh = null;
-	
+
 }
 ?>
 <a href="friend.php">フレンド画面へ</a></br>
