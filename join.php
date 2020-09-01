@@ -29,7 +29,7 @@
     $memberPeer=$rec['number'];
 
     print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
-    print '<input type="hidden" id="memberName" value="'.$regist_name.'">';
+    print '<input type="hidden" id="name" value="'.$regist_name.'">';
     print '<input type="hidden" id="login_FLG" value="true">';
   }
   else //ゲストのためpeerIDをどうするか用検討。
@@ -37,7 +37,7 @@
     $guestName=$_POST['guest_name'];
     print '<script>console.log("ログインされていない。");</script>';
     print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
-    print '<input type="hidden" id="guest" value="'.$guestName.'">';
+    print '<input type="hidden" id="name" value="'.$guestName.'">';
     print '<input type="hidden" id="login_FLG" value="false">';
     if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
       header('Location: ./index.php');

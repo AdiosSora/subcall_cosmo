@@ -22,7 +22,7 @@ $(function() {
   });
   console.log('peerIDは'+memPeerid);
 
-
+  const userName=document.getElementById('name');
   const localText = document.getElementById('chat-textarea');
   const messages = document.getElementById('chat-text');
   const sub_messages = document.getElementById('sub-text');
@@ -80,12 +80,16 @@ $(function() {
   function onClickSend() {
     if(localText.value!=''){
       console.log('チャット送信');
-      room.send('1'+localText.value);
+
+      chatText='1'+userName.value+"<name>"+localText.value;
+      room.send(chatText);
+
+
       $("#chat-text").append($(
         '<div class="msg_content bg-' + bg_chat_color + '">' +
         '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
         '<div class="msg-text">' +
-        '<div class="msg-name"><strong>' + peer.id + '</strong></div>'+
+        '<div class="msg-name"><strong>' + userName.value + '</strong></div>'+
         '<div class="msg-content">' + localText.value + '</div>' +
         '<div class="msg-date">' + getNow() + '</div>' +
         '</div></div>'));
@@ -211,8 +215,10 @@ $(function() {
     room.on('data', ({ data, src }) => {
       console.log('データ受け取り');
       //チャットor字幕の比較
+
       var result_num = data.substr( 0, 1 );
-      var result_message = data.substr(1);
+      var result_message = data.substr(data.indexOf('<name>'));
+      var result_name=data.slice(1,data.indexOf('<name>'));
       //「１」チャットの場合
       if(result_num == '1'){
         console.log('データ受け取り1発火');
@@ -220,7 +226,7 @@ $(function() {
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
-          '<div class="msg-name"><strong>' + `${src}` + '</strong></div>'+
+          '<div class="msg-name"><strong>' + `${result_name}` + '</strong></div>'+
           '<div class="msg-content">' + `${result_message}\n` + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
