@@ -7,7 +7,8 @@ $(function() {
 
   if(login_FLG=='true'){ //ログイン確認 TODO(PEERIDがundefindになる事象の修正)
     console.log("loginが完了しています.");
-    memPeerid = toString(document.getElementById('memberPeer').value);
+    memPeerid = document.getElementById('memberPeer').value;
+    console.log(memPeerid)
   }
   else{
     console.log("loginが完了していません");
@@ -45,7 +46,7 @@ $(function() {
 
   //ルーム入室ボタンが押された場合
   //$('#make-call').on('submit', e => {
-  window.setTimeout(() => {
+  setTimeout(function(e){
     console.log("onload");
     const roomName = $('#join-room').val();
     room = peer.joinRoom('sfu_video_' + roomName, {
