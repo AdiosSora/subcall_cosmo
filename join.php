@@ -5,7 +5,7 @@
   session_regenerate_id(true);
   // require_once('./common.php');
   // $post = sanitize($_POST);
-  if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
+  if(isset($_POST['room_id']) && $_POST['room_id'] != ''&&isset($_POST['guest_name']) && $_POST['guest_name'] != ''){
       $roomID=$_POST['room_id'];
     }else{
       header('Location: ./index.php');
@@ -34,9 +34,10 @@
   }
   else //ゲストのためpeerIDをどうするか用検討。
   {
+    $guestName=$_POST['guest_name'];
     print '<script>console.log("ログインされていない。");</script>';
     print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
-    print '<input type="hidden" id="memberName" value="ゲスト">';
+    print '<input type="hidden" id="gusest" value="'.$guestName.'">';
     print '<input type="hidden" id="login_FLG" value="false">';
   }
 ?>
