@@ -77,10 +77,10 @@ else
 			print '<tr>';
 	    print '<td>'.$rec['number'].'</td>';
 	    print '<td>'.$rec['name'].'</td>';
-			print '<td>';
 			print '<form method="post" action="friend_list_check.php">';
 	    print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
 	    print '<input type="hidden" name="list_name" value="'.$rec['name'].'">';
+			print '<td align="center">';
 	    print '<input type="submit" name="list_check" value="フレンド削除" >';
 			print '</form>';
 			print '</td>';

@@ -65,12 +65,9 @@ else
 
 	if($count_friend >= 10){
 		$flag_friend = 0;
-		print '<form method="post" action="friend_list.php">';
 		print '※'.$_SESSION['regist_name'];
 		print '様のフレンド数が上限に達しているためフレンド申請はできません。※　　';
-		print '<input type="submit" name="list" value="フレンドリストへ">';
-		print '</form>';
-		print '<br />';
+		print '<br /><br />';
 	}
   if($rec_search == false){
 		// 入力された名前がない場合
