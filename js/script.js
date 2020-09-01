@@ -7,7 +7,7 @@ $(function() {
 
   if(login_FLG=='true'){ //ログイン確認 TODO(PEERIDがundefindになる事象の修正)
     console.log("loginが完了しています.");
-    memPeerid = =toString(document.getElementById('memberPeer').value);
+    memPeerid = toString(document.getElementById('memberPeer').value);
   }
   else{
     console.log("loginが完了していません");
@@ -19,7 +19,7 @@ $(function() {
     key: '766085bc-041a-4889-ba90-b8fda1a4615f',
     debug: 3,
   });
-  console.log('peerIDは'+peer.id);
+  console.log('peerIDは'+memPeerid);
 
 
   const localText = document.getElementById('chat-textarea');
@@ -44,13 +44,10 @@ $(function() {
   });
 
   //ルーム入室ボタンが押された場合
-  $('#make-call').on('submit', e => {
-    e.preventDefault();
-    // Initiate a call!
+  //$('#make-call').on('submit', e => {
+  window.setTimeout(() => {
+    console.log("onload");
     const roomName = $('#join-room').val();
-    if (!roomName) {
-      return;
-    }
     room = peer.joinRoom('sfu_video_' + roomName, {
       mode: 'sfu',
       stream: localStream
@@ -59,7 +56,7 @@ $(function() {
     $('#room-id').text(roomName);
     step3();
     step4();
-  });
+  },2000);
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {

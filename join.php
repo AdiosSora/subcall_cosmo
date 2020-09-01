@@ -50,13 +50,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <!--- favicon --->
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffc40d">
     <meta name="theme-color" content="#ffffff">
+
     <title>会議室 - Stable</title>
   </head>
   <body>
@@ -111,7 +112,7 @@
           <div id="step2">
             <h3>Make a call</h3>
             <form id="make-call" class="pure-form">
-              <input type="text" placeholder="Join room..." id="join-room">
+              <input type="text" value="<?php print $roomID ?>" id="join-room">
               <button id="btn" class="pure-button pure-button-success" type="submit">Join</button>
             </form>
           </div>
@@ -167,10 +168,6 @@
           const loading = document.getElementById('loading');
           loading.classList.add('loaded');
         },1000);
-      $(window).on('load', function(){
-        console.log("使える使える使える");
-        test();
-      })
     </script>
   </body>
 </html>
