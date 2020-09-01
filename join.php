@@ -34,10 +34,15 @@
   }
   else //ゲストのためpeerIDをどうするか用検討。
   {
+    $guestName=$_POST['guest_name'];
     print '<script>console.log("ログインされていない。");</script>';
     print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
-    print '<input type="hidden" id="memberName" value="ゲスト">';
+    print '<input type="hidden" id="guest" value="'.$guestName.'">';
     print '<input type="hidden" id="login_FLG" value="false">';
+    if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
+      header('Location: ./index.php');
+      exit;
+    }
   }
 ?>
 
@@ -76,8 +81,14 @@
       </div>
     </div>
     <div id="main">
-      <div class="local_video">
+      <div id="local_video">
         <video id="my-video" muted="true" autoplay playsinline></video>
+        <div id="button_group">
+          <div href="#" class="menu-button"></div>
+          <a href="#" class="menu-button"></a>
+          <a href="#" class="menu-button"></a>
+          <a href="#" class="menu-button"></a>
+        </div>
       </div>
       <div class="remote-streams" id="their-videos"></div>
     </div>
