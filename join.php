@@ -81,8 +81,14 @@
       </div>
     </div>
     <div id="main">
-      <div class="local_video">
+      <div id="local_video">
         <video id="my-video" muted="true" autoplay playsinline></video>
+        <div id="button_group">
+          <div href="#" class="menu-button"></div>
+          <a href="#" class="menu-button"></a>
+          <a href="#" class="menu-button"></a>
+          <a href="#" class="menu-button"></a>
+        </div>
       </div>
       <div class="remote-streams" id="their-videos"></div>
     </div>

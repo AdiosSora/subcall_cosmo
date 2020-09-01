@@ -98,8 +98,8 @@ if(isset($_SESSION['bool'])==false){
 
       $dbh = null;
   ?>
-    <a href="../register/register_update.php"><button type="button">編集</button></a>
-    <a href="../delete/delete.php"><button type="button">退会</button></a><br/><br/><br/>
+    <a "waves-effect waves-light btn-large grey darken-1" href="../register/register_update.php">編集</a>
+    <a class="btn waves-effect" href="../delete/delete.php"><button type="button">退会</button></a><br/><br/><br/>
     <a href="../../">トップページに戻る</a>
   </form>
   </body>

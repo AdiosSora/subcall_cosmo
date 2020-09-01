@@ -34,19 +34,6 @@ else
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-	// 悲観的排他制御の開始
-	$dbh->beginTransaction();
-
-	// すでに退会しているかチェック
-	$sql_account = 'SELECT name FROM account WHERE number=?
-									FOR UPDATE';
-
-	$stmt_account = $dbh->prepare($sql_account);
-	$data_account[] = $add_num;
-	$stmt_account->execute($data_account);
-
-	$rec_account = $stmt_account->fetch(PDO::FETCH_ASSOC);
-
 	// 許可する相手のフレンド登録数を取得
 	$sql = 'SELECT count(flag) FROM friendlist WHERE flag=true AND (user_number=? or friend_number=?)';
 
@@ -59,59 +46,45 @@ else
 
 	$count_friend = $rec['count(flag)'];
 
-	// 悲観的排他制御の終了
-	$dbh -> commit();
-
 	$dbh = null;
 
-	if($rec_account['name'] == false){
-		// すでに退会している場合
-		print $add_name.'様はすでに退会しています。'.'<br />';
-
-	}
-	else
+	print '<form method="post" action="friend_add_done.php">';
+	if(isset($_POST['add_yes']) == true)
 	{
-		// 退会していない場合
-		print '<form method="post" action="friend_add_done.php">';
-		if(isset($_POST['add_yes']) == true)
-	 	{
-			// 「許可」ボタンが押された
-			if($count_friend >= 10){
-				// 相手がフレンド上限に達した
-				print '相手の'.$add_name.'様はフレンド上限に達しています。'.'<br />';
-				print '申請の許可ができません。'.'<br />';
-				print '<button type="button" onclick="history.back()" value="friend_max">戻る</button>';
-			}else{
-				// 相手のフレンド登録に余裕あり
-			 	print $_SESSION['regist_name'];
-			 	print '様に届いた申請を許可します'.'</br>';
-				print '会員番号：'.$add_num;
-			  print '　　会員名：'.$add_name.'</br>';
-
-			  print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
-			  print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
-			  print '<br />';
-			  print '<input type="submit" name="add_done_yes" value="はい">';
-				print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
-			}
-		}
-		else if(isset($_POST['add_no']) == true)
-		{
-			// 「不可」ボタンが押された
-			print $_SESSION['regist_name'];
-			print '様に届いた申請を却下します'.'</br>';
+		// 「許可」ボタンが押された
+		if($count_friend >= 10){
+			// 相手がフレンド上限に達した
+			print '相手の'.$add_name.'様はフレンド上限に達しています。'.'<br />';
+			print '申請の許可ができません。'.'<br />';
+			print '<button type="button" onclick="history.back()" value="friend_max">戻る</button>';
+		}else{
+			// 相手のフレンド登録に余裕あり
+		 	print $_SESSION['regist_name'];
+		 	print '様に届いた申請を許可します'.'</br>';
 			print '会員番号：'.$add_num;
-			print '　　会員名：'.$add_name.'</br>';
-
+		  print '　　会員名：'.$add_name.'</br>';
 			print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
-			print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
-			print '<br />';
-			print '<input type="submit" name="add_done_no" value="はい">';
+		  print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
+		  print '<br />';
+		  print '<input type="submit" name="add_done_yes" value="はい">';
 			print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
 		}
-		print '</form>';
-		print '<br />';
 	}
+	else if(isset($_POST['add_no']) == true)
+	{
+		// 「不可」ボタンが押された
+		print $_SESSION['regist_name'];
+		print '様に届いた申請を却下します'.'</br>';
+		print '会員番号：'.$add_num;
+		print '　　会員名：'.$add_name.'</br>';
+		print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
+		print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
+		print '<br />';
+		print '<input type="submit" name="add_done_no" value="はい">';
+		print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
+	}
+	print '</form>';
+	print '<br />';
 
 }
 ?>

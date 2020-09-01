@@ -45,9 +45,8 @@ $(function() {
   });
 
   //ルーム入室ボタンが押された場合
-  //$('#make-call').on('submit', e => {
-  setTimeout(function(e){
-    console.log("onload");
+  $('#make-call').on('submit', e => {
+    e.preventDefault();
     const roomName = $('#join-room').val();
     room = peer.joinRoom('sfu_video_' + roomName, {
       mode: 'sfu',
@@ -57,7 +56,7 @@ $(function() {
     $('#room-id').text(roomName);
     step3();
     step4();
-  },2000);
+  });
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {

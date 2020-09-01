@@ -14,7 +14,6 @@
   <?php include '../../header.php'; ?>
   </head>
   <body>
-    <?php include '../../nav.php'; ?>
 
     <div id="index-banner" class="parallax-container">
       <div class="container">
