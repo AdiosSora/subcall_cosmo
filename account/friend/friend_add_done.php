@@ -49,10 +49,6 @@ else
 
 	$rec_account = $stmt_account->fetch(PDO::FETCH_ASSOC);
 
-
-	//テスト用、(x)秒待機
-	// sleep(3);
-
 	if($rec_account['name'] == false)
 	{
 		// すでに退会している場合
@@ -119,9 +115,14 @@ else
 				}
 			}else{
 				// 自身が先に更新した場合
+
+				//テスト用、(x)秒待機
+				// sleep(3);
+
 				if(isset($_POST['add_done_yes']) == true)
 			 	{
 			    // フレンド申請を許可する場合
+
 			    // friendlist から条件に合う行を更新
 			    $sql = 'UPDATE friendlist SET flag=true
 			            WHERE user_number=? and friend_number=? AND flag=false';
@@ -182,6 +183,10 @@ else
 			else
 			{
 				// 「不可」ボタンが押された
+
+				//テスト用、(x)秒待機
+				// sleep(3);
+
 				// friendlist から条件に合う行を削除
 				$sql = 'DELETE FROM friendlist
 								WHERE user_number=? and friend_number=? AND flag=false';
@@ -204,6 +209,7 @@ else
 	$dbh -> commit();
 
   $dbh = null;
+	
 }
 ?>
 <a href="friend.php">フレンド画面へ</a></br>
