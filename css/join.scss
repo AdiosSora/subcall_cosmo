@@ -136,15 +136,31 @@ body {
   background-color: rgba(255,255,255,0.3);
 }
 /* ローカルビデオの位置指定  */
-.local_video {
-  width: 20%;
-  height: auto;
+#local_video {
+  height: 135px;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 3;
+  background-color: #000000;
+}
+#my-video {
+  width: 240px;
+  height: 135px;
+  display: inline-block;
+}
+#button_group {
+  width:20px;
+  height:100%;
+  display: inline-block;
+  background-color: #ffffff;
+  overflow:hidden;
 }
 
+.menu-button {
+  width:40px;
+  height:40px;
+}
 #their-videos {
   width: 80vw;
   height: 100vh;
@@ -216,10 +232,14 @@ body {
   #chat-text{
     height:50%;
     max-height: 50%;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
   #sub-text{
     height:50%;
     max-height: 50%;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 .bg-0{
