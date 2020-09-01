@@ -8,7 +8,7 @@ session_regenerate_id(true);
 include('../db/dbConnecter.php');
 if(isset($_SESSION['bool'])==false){
   print'ログインされていません。<br/>';
-  print'<a href="../login/login.php">ログイン画面へ</a>';
+  print'<a href="login.php">ログイン画面へ</a>';
   exit();
 }
 
@@ -46,6 +46,9 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dbh = null;
 
+$_SESSION['regist_name'] = $name;
+$_SESSION['regist_address'] = $mail_address;
+
 $file_path = '';
 // ファイルがアップロードされているかの確認
 if(!empty($_FILES['image']['tmp_name']) ) {
@@ -56,7 +59,7 @@ if(!empty($_FILES['image']['tmp_name']) ) {
           $file_path = 'C:/xampp/htdocs/download/'.$image['name'];
     	} else {
       		print 'プロフィール情報の保存に失敗しました。';
-          print'<a href="../profile/profile.php">戻る</a>';
+          print'<a href="profile.php">戻る</a>';
           exit();
     	}
 }else{
@@ -92,7 +95,7 @@ $icon->writeImage($file_path);
 // 破棄
 $icon->destroy();
 
-print'<a href="../../index.php">トップページに戻る</a>';
+print'<a href="../profile/profile.php">プロフィール画面に戻る</a>';
 
 
 } catch (Exception $e) {
