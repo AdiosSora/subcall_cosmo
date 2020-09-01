@@ -5,7 +5,7 @@
   session_regenerate_id(true);
   // require_once('./common.php');
   // $post = sanitize($_POST);
-  if(isset($_POST['room_id']) && $_POST['room_id'] != ''&&isset($_POST['guest_name']) && $_POST['guest_name'] != ''){
+  if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
       $roomID=$_POST['room_id'];
     }else{
       header('Location: ./index.php');
@@ -37,8 +37,12 @@
     $guestName=$_POST['guest_name'];
     print '<script>console.log("ログインされていない。");</script>';
     print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
-    print '<input type="hidden" id="gusest" value="'.$guestName.'">';
+    print '<input type="hidden" id="guest" value="'.$guestName.'">';
     print '<input type="hidden" id="login_FLG" value="false">';
+    if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
+      header('Location: ./index.php');
+      exit;
+    }
   }
 ?>
 
