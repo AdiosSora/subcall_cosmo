@@ -96,7 +96,7 @@
     <div id="sub">
       <div id="text_content" class="msg-container">
         <div id="chat-text" class="msg-content"></div>
-        <div id="sub-text"></div>
+        <div id="sub-text" class="msg-content"></div>
       </div>
       <div id="text_input">
         <input type="text" id="chat-textarea"></textarea>

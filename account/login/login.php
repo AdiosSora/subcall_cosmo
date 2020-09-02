@@ -12,7 +12,7 @@
 <body>
 
   <?php include '../../nav.php'; ?>
-
+  <main>
   <div id="index-banner" class="parallax-container">
     <div class="container">
       <div class="section no-pad-bot">
@@ -43,6 +43,7 @@
       </div>
     </div>
   </div>
+  </main>
   <?php include '../../footer.php'; ?>
   <?php
   try{

@@ -7,13 +7,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../../js/jquery.validate.min.js"></script>
   <script src="/js/register.js"></script>
-
   <title>会員登録 - Stable </title>
   <?php include '../../header.php'; ?>
   </head>
   <body>
     <?php include '../../nav.php'; ?>
-    <div id="index-banner" class="parallax-container">
+    <main>
+      <div id="index-banner" class="parallax-container">
       <div class="container">
         <div class="section no-pad-bot">
           <br><br>
@@ -78,6 +78,7 @@
       </div>
       <div class="parallax" style="background:white;"></div>
     </div>
+    </main>
     <?php include '../../footer.php'; ?>
   </body>
   <?php
