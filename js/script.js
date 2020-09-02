@@ -107,7 +107,7 @@ $(function() {
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
-          '<div class="msg-name"><strong>' + userName.value + '</strong></div>'+
+          '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + userName.value + '</strong></div>'+
           '<div class="msg-content">' + subtext + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
@@ -245,7 +245,7 @@ $(function() {
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
-          '<div class="msg-name"><strong>' + `${result_name}` + '</strong></div>'+
+          '<div class="msg-name"><ion-icon name="volume-high-outline"><strong>' + `${result_name}` + '</strong></div>'+
           '<div class="msg-content">' + `${result_message}\n` + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
