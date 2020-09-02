@@ -68,8 +68,11 @@ try{
   $day = '';
   }
   ?>
-  <div class="form_title"><label for="name" class="form_name">生年月日</label></div>
+  <div class="table">
+  <div class="form_title">
+    <label for="name" class="form_name">生年月日</label></div>
   <div class="input-field col s12">
+    <div>
     <select class="browser-default" name="year" id="year">
       <option value="<?php print $year; ?>" checked><?php print $year; ?></option>
       <?php
@@ -77,9 +80,9 @@ try{
         print'<option value='.$i.'>'.$i.'</option>';
       }
       ?>
-    </select>年
+    </select>
+  </div><div>年</div>
   </div>
-
   <div class="input-field col s12">
     <select class="browser-default" name="month" id="month">
       <option value="<?php print $month; ?>" checked><?php print $month; ?></option>
@@ -107,6 +110,7 @@ try{
       ?>
     </select>日
   </div>
+</div>
   <?php
   if(!empty($_SESSION['regist_country'])){
   $country = $_SESSION['regist_country'];
@@ -138,7 +142,7 @@ try{
   </select>
 </div>
 
-  性別 :&nbsp;
+    <div class="form_title"><label for="name" class="form_name">性別</label></div>
   <div>
   <?php
   if(!empty($_SESSION['regist_gender'])){

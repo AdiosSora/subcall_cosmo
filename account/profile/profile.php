@@ -14,7 +14,7 @@ if(isset($_SESSION['bool'])==false){
 } catch (Exception $e) {
   print $e;
 }
-
+include '../../header.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,7 +23,12 @@ if(isset($_SESSION['bool'])==false){
     <meta charset="utf-8"/>
   </head>
   <body>
-  <h1>Profile</h1>
+    <div class="container">
+    <div class="section no-pad-bot">
+    <br><br>
+    <div class="row">
+    <div class="col col s10 offset-m1 m8 offset-m2 center">
+    <h2 style="color:black !important;">プロフィール</h2><br/>
 
   <?php
       $dbh = get_DBobj();
@@ -98,8 +103,8 @@ if(isset($_SESSION['bool'])==false){
 
       $dbh = null;
   ?>
-    <a "waves-effect waves-light btn-large grey darken-1" href="../register/register_update.php">編集</a>
-    <a class="btn waves-effect" href="../delete/delete.php"><button type="button">退会</button></a><br/><br/><br/>
+    <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php">編集</a><br><br>
+    <a href="../delete/delete.php">退会</button></a>
     <a href="../../">トップページに戻る</a>
   </form>
   </body>

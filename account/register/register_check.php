@@ -84,12 +84,14 @@
     print '<input type="hidden" name="pass" value="'.$regist_pass.'">';
     print '<input type="hidden" name="address" value="'.$regist_address.'">';  //hiddenにすることで画面に表示することなく次の画面に値を引き渡せる
     print '<br />';
-    print '<button type="button" onclick="history.back()" value="戻る">戻る</button>';
-    print '<button type="submit" value="登録">登録</button>';
+    print '<div id="button_box" style="margin: 20px;">';
+    print '<a class="waves-effect waves-light btn-large grey darken-1 btn-margin" href="register.php">戻る</a>';
+    print '<a class="waves-effect waves-light btn-large btn-margin" id="btn" href="register_check_done.php">登録</a>';
+    print '</div>';
     print '</form>';
   }
 else{
-  
+
 }
 ?>
 </div>

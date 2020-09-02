@@ -157,6 +157,10 @@ footer.page-footer {
   border-color: #05a;
 }
 
+.btn-margin{
+  margin:2px;
+}
+
 .field-icon {
   color: #555;
   float: right;
@@ -283,4 +287,9 @@ label.address-error {
   font-size: 10px;
   color:red;
   display:none;
+}
+
+/* プロフィール画面 */
+.table{
+  display:inline-flex;
 }
