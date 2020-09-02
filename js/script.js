@@ -45,8 +45,7 @@ $(function() {
   });
 
   //ルーム入室ボタンが押された場合
-  $('#make-call').on('submit', e => {
-    e.preventDefault();
+  setTimeout(function() {
     const roomName = $('#join-room').val();
     room = peer.joinRoom('sfu_video_' + roomName, {
       mode: 'sfu',
@@ -56,7 +55,7 @@ $(function() {
     $('#room-id').text(roomName);
     step3();
     step4();
-  });
+  },2000);
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {
@@ -84,7 +83,7 @@ $(function() {
       room.send(chatText);
 
 
-      $("#chat-text").append($(
+      $("#chat-text").prepend($(
         '<div class="msg_content bg-' + bg_chat_color + '">' +
         '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
         '<div class="msg-text">' +
@@ -100,9 +99,18 @@ $(function() {
   //字幕送信関数
   function onSubSend(subtext) {
     // Send message to all of the peers in the room via websocket
-    console.log('字幕送信');
-    room.send('2'+memPeerid+subtext);
-    localText.value = '';
+  console.log('字幕送信');
+        chatText='2'+userName.value+"<name>"+subtext;
+        room.send(chatText);
+
+        $("#sub-text").prepend($(
+          '<div class="msg_content bg-' + bg_chat_color + '"">' +
+          '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
+          '<div class="msg-text">' +
+          '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + userName.value + '</strong></div>'+
+          '<div class="msg-content">' + subtext + '</div>' +
+          '<div class="msg-date">' + getNow() + '</div>' +
+          '</div></div>'));
   }
 
   //使用するビデオとオーディオを選択するための定数
@@ -221,7 +229,7 @@ $(function() {
       //「１」チャットの場合
       if(result_num == '1'){
         console.log('データ受け取り1発火');
-        $("#chat-text").append($(
+        $("#chat-text").prepend($(
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
@@ -233,13 +241,14 @@ $(function() {
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
-        var peerID_length = src.length;
-        console.log(`${peerID_length}`);
-        var subtext_area = document.getElementById(`${src}`);
-        console.log(`${subtext_area}`);
-        sub_messages.innerHTML += result_message.substring(peerID_length);
-        console.log(result_message.substring(result_message));
-        console.log(result_message.substring(peerID_length));
+        $("#sub-text").prepend($(
+          '<div class="msg_content bg-' + bg_chat_color + '"">' +
+          '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
+          '<div class="msg-text">' +
+          '<div class="msg-name"><ion-icon name="volume-high-outline"><strong>' + `${result_name}` + '</strong></div>'+
+          '<div class="msg-content">' + `${result_message}\n` + '</div>' +
+          '<div class="msg-date">' + getNow() + '</div>' +
+          '</div></div>'));
       }
     });
 
@@ -256,7 +265,7 @@ $(function() {
   function step4(){
     const speech = new webkitSpeechRecognition();
     speech.lang = 'ja-JP';
-    //speech.start();
+    speech.start();
 
     console.log('認識スタート');
 

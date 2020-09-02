@@ -5,29 +5,21 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="../../js/jquery.validate.js"></script>
   <script src="../../js/jquery.validate.min.js"></script>
-  <script src="../../js/register.js"></script>
-
-
+  <script src="/js/register.js"></script>
   <title>会員登録 - Stable </title>
   <?php include '../../header.php'; ?>
   </head>
   <body>
-
-    <div id="index-banner" class="parallax-container">
+    <?php include '../../nav.php'; ?>
+    <main>
+      <div id="index-banner" class="parallax-container">
       <div class="container">
         <div class="section no-pad-bot">
           <br><br>
           <div class="row">
             <div class="col col s10 offset-m1 m8 offset-m2 center">
               <?php
-
-                function console_log( $data ){
-                echo '<script>';
-                echo 'console.log('. json_encode( $data ) .')';
-                echo '</script>';
-                }
 
                   include('../db/dbConnecter.php');
                   $dbh = get_DBobj();
@@ -86,6 +78,7 @@
       </div>
       <div class="parallax" style="background:white;"></div>
     </div>
+    </main>
     <?php include '../../footer.php'; ?>
   </body>
   <?php
@@ -130,10 +123,10 @@
     if(js_name_array.indexOf($("#name")[0].value) == -1){
       console.log(js_name_array);
       $('#validetion_alart_name').css('display','none');
-      console.log('ない');
+      $("#btn").attr("href", "javascript:regiser_form.submit()");
     }else{
       $('#validetion_alart_name').css('display','inline');
-      console.log('ある');
+      $("#btn").attr("href", "#");
     }
   });
 
@@ -143,11 +136,12 @@
     if(js_email_array.indexOf($("#address")[0].value) == -1){
       console.log(js_email_array);
       $('#validetion_alart_email').css('display','none');
-      console.log('ない');
+      $("#btn").attr("href", "javascript:regiser_form.submit()");
     }else{
       $('#validetion_alart_email').css('display','inline');
-      console.log('ある');
+      $("#btn").attr("href", "#");
     }
   });
+
   </script>
 </html>

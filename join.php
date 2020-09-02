@@ -54,6 +54,7 @@
     <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <!--- favicon --->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -96,7 +97,7 @@
     <div id="sub">
       <div id="text_content" class="msg-container">
         <div id="chat-text" class="msg-content"></div>
-        <div id="sub-text"></div>
+        <div id="sub-text" class="msg-content"></div>
       </div>
       <div id="text_input">
         <input type="text" id="chat-textarea"></textarea>
