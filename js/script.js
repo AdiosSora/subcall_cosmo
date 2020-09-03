@@ -231,7 +231,7 @@ $(function() {
       if(result_num == '1'){
         console.log('データ受け取り1発火');
         $("#chat-text").prepend($(
-          '<div class="msg_content bg-' + bg_chat_color + 'other-chat">' +
+          '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
           '<div class="msg-name"><strong>' + `${result_name}` + '</strong></div>'+
@@ -243,10 +243,10 @@ $(function() {
       if(result_num == '2'){
         console.log('データ受け取り2発火');
         $("#sub-text").prepend($(
-          '<div class="msg_content bg-' + bg_voicechat_color + 'other-chat">' +
+          '<div class="msg_content bg-' + bg_voicechat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
-          '<div class="msg-name"><ion-icon name="volume-high-outline"><strong>' + `${result_name}` + '</strong></div>'+
+          '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + `${result_name}` + '</strong></div>'+
           '<div class="msg-content">' + `${result_message}\n` + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));

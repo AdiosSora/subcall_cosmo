@@ -280,9 +280,10 @@ a.menu-button {
   box-sizing: border-box;
 }
 .self-chat{
-  animation: ChatSlideIn 1s;
+  animation: ChatSlideIn_Right 1s;
 }
 .other-chat {
+  animation: ChatSlideIn_Left 1s;
 
 }
 .msg-icon {
@@ -329,7 +330,7 @@ a.menu-button {
 @keyframes ChatSlideIn_Right {
   0% {
     opacity: 0;/*初期状態では透明に*/
-    transform: translateX(20%);
+    transform: translateX(-20%);
   }
   100% {
     opacity: 1;
