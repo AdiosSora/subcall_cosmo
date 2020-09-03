@@ -129,6 +129,7 @@ else
 		print '</tr>';
 		print '</form>';
 
+		$flag = 0;	// フラグの初期化
 		}
 	$dbh = null;
 
