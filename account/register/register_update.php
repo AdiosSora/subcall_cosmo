@@ -18,12 +18,12 @@ try{
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../js/register_update.js"></script>
     <script src="../../js/jquery.validate.js"></script>
     <script src="../../js/jquery.validate.min.js"></script>
     <script src="../../js/cropper.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" charset="UTF-8">
     <title>プロフィール更新画面 - Stable </title>
     <?php include '../../header.php'; ?>
     <style>
@@ -60,15 +60,18 @@ try{
   <div class="col col s10 offset-m1 m8 offset-m2 center">
   <h2 style="color:black !important;">プロフィール編集</h2><br/>
 
-  <form method='POST' action="register_update_done.php" id ="check" enctype="multipart/form-data">
+<form method='POST' action="register_update_done.php" enctype="multipart/form-data">
     <main>
-        <div class="cropper-container">
-            <input type="file" id="triming_image" name="triming_image" class="triming-image" required/>
-            <img src="" alt="トリミング画像" id="trimed_image" style="display: none;" />
-            <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
-        </div>
+      <div class="cropper-container">
 
-        <div id="result"></div>
+      <input type="file" id="triming_image" name="triming_image" class="triming-image" required/>
+      <img src="" alt="トリミング画像" id="trimed_image" style="display: none;" />
+      <label for="avatar">アップロードする画像を選択してください</label>
+      <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
+      <input type="hidden" id="upload-image-x" name="image_x" value="0">
+      <input type="hidden" id="upload-image-y" name="image_y" value="0">
+      <input type="hidden" id="upload-image-w" name="image_w" value="0">
+      <input type="hidden" id="upload-image-h" name="image_h" value="0">
     </main>
   <div class="form_title">
     <label for="name" class="form_name">ユーザ名</label>
@@ -125,8 +128,6 @@ try{
       ?>
     </select>月
   </div>
-
-  <option value="<?php print $day; ?>" checked><?php print $day; ?></option>
   <div class="input-field col s12">
     <select class="browser-default" name="day" id="day">
       <option value="<?php print $day; ?>" checked><?php print $day; ?></option>
@@ -272,11 +273,9 @@ try{
   </div>
   <div>
   <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
-  <a href="register_update_done.php">
-  <button class="btn waves-effect waves-light sub" type="submit" name="action" style="width:86px; height:54px">完了</button>
-  </a>
+  <a href="register_update_done.php"><button class="btn waves-effect waves-light" type="submit" name="action" style="width:86px; height:54px">完了</button></a>
   </div>
-  </form>
+</form>
   <div class="parallax" style="background:white;"></div>
 
   </div>
