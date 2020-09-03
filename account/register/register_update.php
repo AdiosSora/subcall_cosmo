@@ -18,13 +18,39 @@ try{
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../js/register_update.js"></script>
     <script src="../../js/jquery.validate.js"></script>
     <script src="../../js/jquery.validate.min.js"></script>
-    <script src="../../js/register.js"></script>
+    <script src="../../js/cropper.js"></script>
     <title>プロフィール更新画面 - Stable </title>
     <?php include '../../header.php'; ?>
+    <style>
+           /* 下記は円形にするなら必須です。 */
+           .cropper-view-box,
+           .cropper-face {
+               border-radius: 50%;
+           }
+           /* 下記はできれば必要なスタイルかと思います。（厳密にはスタイルなど必要ありませんが、最低現のスタイルとしてという意味です。） */
+           .cropper-container{
+               width: 100%;
+           }
+           /* 下記は必須ではありません。 Sampleを見やすくするために作成しました。 */
+           main{
+               width: 50%;
+               margin: 0 auto;
+           }
+           main .triming-image{
+               width: 100%;
+               height: 100px;
+               border: dashed #000 1px;
+               cursor: pointer;
+           }
+           /* main #trimed_image{
+               height: 500px;
+           } */
+       </style>
   </head>
 <body>
   <div class="container">
@@ -33,17 +59,17 @@ try{
   <div class="row">
   <div class="col col s10 offset-m1 m8 offset-m2 center">
   <h2 style="color:black !important;">プロフィール編集</h2><br/>
-  <p>
-  プレビュー:
-  <image id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
-  </p>
-
 
   <form method='POST' action="register_update_done.php" id ="check" enctype="multipart/form-data">
+    <main>
+        <div class="cropper-container">
+            <input type="file" id="triming_image" name="triming_image" class="triming-image" required/>
+            <img src="" alt="トリミング画像" id="trimed_image" style="display: none;" />
+            <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
+        </div>
 
-  <input type="hidden" name="MAX_FILE_SIZE" id="size_check" value="5242880">
-  <input type="file" name="image" id="image" accept='image/*' onchange="previewImage(this);"><br/><br/>
-
+        <div id="result"></div>
+    </main>
   <div class="form_title">
     <label for="name" class="form_name">ユーザ名</label>
     <a class="form_required_mark">必須</a>
@@ -90,6 +116,7 @@ try{
       for($i=1; $i<13; $i++){
         $length = strlen((string)$i);
         if(intval($length) == 1){
+          $i = '0'.$i;
           print'<option value='.$i.'>'.$i.'</option>';
         }else{
           print'<option value='.$i.'>'.$i.'</option>';
@@ -104,8 +131,14 @@ try{
     <select class="browser-default" name="day" id="day">
       <option value="<?php print $day; ?>" checked><?php print $day; ?></option>
       <?php
-      for($i= 1; $i < 32; $i++){
-        print'<option value='.$i.'>'.$i.'</option>';
+      for($i=1; $i<32; $i++){
+        $length = strlen((string)$i);
+        if(intval($length) == 1){
+          $i = '0'.$i;
+          print'<option value='.$i.'>'.$i.'</option>';
+        }else{
+          print'<option value='.$i.'>'.$i.'</option>';
+        }
       }
       ?>
     </select>日
@@ -240,9 +273,7 @@ try{
   <div>
   <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
   <a href="register_update_done.php">
-    <button class="btn waves-effect waves-light" type="submit" name="action">完了
-      <i class="material-icons right">send</i>
-    </button>
+  <button class="btn waves-effect waves-light sub" type="submit" name="action" style="width:86px; height:54px">完了</button>
   </a>
   </div>
   </form>
