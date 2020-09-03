@@ -132,6 +132,8 @@
           <div id="step3">
             <p>Currently in room <span id="room-id">...</span></p>
             <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+            <button id="dlSpeech" type="submit">会話文字列ログダウンロード準備
+            <!-- <a id="download" target="_blank">ダウンロード</a> -->
           </div>
         </open-modal>
       </div>

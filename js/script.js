@@ -30,6 +30,7 @@ $(function() {
 
   let localStream;
   let room;
+  let speechLog;
 
   //peerを確立
   peer.on('open', () => {
@@ -102,7 +103,8 @@ $(function() {
   console.log('字幕送信');
         chatText='2'+userName.value+"<name>"+subtext;
         room.send(chatText);
-
+        speechLog+=`${userName.value}「${subtext}」\n\n`;
+        console.log(speechLog);
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
@@ -111,6 +113,20 @@ $(function() {
           '<div class="msg-content">' + subtext + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
+  }
+
+// 会話文字おこしのログダウンロードボタンが押された
+  $('#dlSpeechLog').on('click', () => {
+    dlSpeechLog();
+  });
+
+  function dlSpeechLog(){//音声識別ログ　ダウンロード関数
+    console.loog("ダウンロード");
+    let blob = new Blob(speechLog,{type:"text/plan"});
+    let link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = '作ったファイル.txt';
+    link.click();
   }
 
   //使用するビデオとオーディオを選択するための定数
@@ -241,6 +257,7 @@ $(function() {
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
+        speechLog+=`${result_name}「${result_Message}」\n\n`;
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_chat_color + '"">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
