@@ -60,6 +60,8 @@ $(function() {
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {
+    chatText='3'+userName.value+"<name>が退室しました。";
+    room.send(chatText);
     room.close();
     step2();
   });
@@ -214,14 +216,18 @@ $(function() {
     });
 
     // UI stuff
-    room.on('close', step2);
+    room.on('close', () => {
+      chatText='3'+userName.value+"<name>が退室しました。";
+      room.send(chatText);
+      step2();
+    });
 
     room.once('open', () => {
       $("#chat-text").prepend($(
-        '<div class="msg_content bg-' + bg_chat_color + ' self-chat">' +
+        '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
         '<div class="msg-icon"><img src="../images/icon_system.png"></div>' +
         '<div class="msg-text">' +
-        '<div class="msg-name"><strong>' + userName.value + '</strong></div>'+
+        '<div class="msg-name"><strong>システム</strong></div>'+
         '<div class="msg-content">あなたが入室しました。</div>' +
         '<div class="msg-date">' + getNow() + '</div>' +
         '</div></div>'));

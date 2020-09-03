@@ -330,7 +330,7 @@ a.menu-button {
 @keyframes ChatSlideIn_Right {
   0% {
     opacity: 0;/*初期状態では透明に*/
-    transform: translateX(-20%);
+    transform: translateX(20%);
   }
   100% {
     opacity: 1;
