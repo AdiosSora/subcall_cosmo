@@ -148,7 +148,7 @@
         <div id="sub-text" class="msg-content"></div>
       </div>
       <div id="text_input">
-        <input type="text" id="chat-textarea"></textarea>
+        <input type="text" id="chat-textarea">
         <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</div>
       </div>
     </div>

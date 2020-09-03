@@ -217,7 +217,16 @@ $(function() {
     room.on('close', step2);
 
     room.once('open', () => {
-    $("#chat-text").append($('<div class="msg-system">あなたが入室しました。</div>'));
+      $("#chat-text").prepend($(
+        '<div class="msg_content bg-' + bg_chat_color + ' self-chat">' +
+        '<div class="msg-icon"><img src="../images/icon_system.png"></div>' +
+        '<div class="msg-text">' +
+        '<div class="msg-name"><strong>' + userName.value + '</strong></div>'+
+        '<div class="msg-content">あなたが入室しました。</div>' +
+        '<div class="msg-date">' + getNow() + '</div>' +
+        '</div></div>'));
+        chatText='3'+userName.value+"<name>が入室しました。";
+        room.send(chatText);
     });
 
     room.on('data', ({ data, src }) => {
@@ -251,6 +260,16 @@ $(function() {
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
           (bg_voicechat_color==0)?bg_voicechat_color=1:bg_voicechat_color=0;
+      }else
+      if(result_num == '3'){
+      $("#chat-text").prepend($(
+        '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
+        '<div class="msg-icon"><img src="../images/icon_system.png"></div>' +
+        '<div class="msg-text">' +
+        '<div class="msg-name"><strong>システム</strong></div>'+
+        '<div class="msg-content">' +  `${result_name}` + `${result_message}\n` + '</div>' +
+        '<div class="msg-date">' + getNow() + '</div>' +
+        '</div></div>'));
       }
     });
 
