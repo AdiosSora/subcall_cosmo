@@ -125,6 +125,7 @@ body {
   height: 100vh;
   position: absolute;
   left: 0;
+  z-index:2;
 }
 
 #sub {
@@ -134,6 +135,7 @@ body {
   right: 0;
   overflow: auto;
   background-color: rgba(255,255,255,0.3);
+  z-index:1;
 }
 /* ローカルビデオの位置指定  */
 #local_video {
@@ -150,17 +152,39 @@ body {
   display: inline-block;
 }
 #button_group {
-  width:20px;
+  width:30px;
   height:100%;
   display: inline-block;
   background-color: #ffffff;
   overflow:hidden;
 }
 
-.menu-button {
-  width:40px;
-  height:40px;
+a.menu-button {
+  text-align:center;
+  background: #fff;
+  :hover {
+    color: #fff;
+    background: #000;
+  }
+  p{
+    width:20px;
+    height:20px;
+    margin:0;
+    padding:5px;
+  }
 }
+
+@keyframes SlideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(135);
+  }
+}
+
 #their-videos {
   width: 80vw;
   height: 100vh;
@@ -243,10 +267,10 @@ body {
   }
 }
 .bg-0{
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.2);
 }
 .bg-1{
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.5);
 }
 .msg_content{
   width:100%;
@@ -254,6 +278,13 @@ body {
   table-layout:fixed; /* ブロックレベル要素を均等に配置 */
   padding:5px;
   box-sizing: border-box;
+}
+.self-chat{
+  animation: ChatSlideIn_Right 1s;
+}
+.other-chat {
+  animation: ChatSlideIn_Left 1s;
+
 }
 .msg-icon {
   width:15%;
@@ -294,6 +325,26 @@ body {
     font:{
       size:8px;
     }
+  }
+}
+@keyframes ChatSlideIn_Right {
+  0% {
+    opacity: 0;/*初期状態では透明に*/
+    transform: translateX(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+@keyframes ChatSlideIn_Left {
+  0% {
+    opacity: 0;/*初期状態では透明に*/
+    transform: translateX(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
   }
 }
 #text_input{

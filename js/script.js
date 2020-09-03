@@ -27,6 +27,7 @@ $(function() {
   const messages = document.getElementById('chat-text');
   const sub_messages = document.getElementById('sub-text');
   var bg_chat_color = 0;
+  var bg_voicechat_color = 0;
 
   let localStream;
   let room;
@@ -59,6 +60,8 @@ $(function() {
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {
+    chatText='3'+userName.value+"<name>が退室しました。";
+    room.send(chatText);
     room.close();
     step2();
   });
@@ -82,9 +85,8 @@ $(function() {
       chatText='1'+userName.value+"<name>"+localText.value;
       room.send(chatText);
 
-
       $("#chat-text").prepend($(
-        '<div class="msg_content bg-' + bg_chat_color + '">' +
+        '<div class="msg_content bg-' + bg_chat_color + ' self-chat">' +
         '<div class="msg-icon"><img src="../images/icon2.png"></div>' +
         '<div class="msg-text">' +
         '<div class="msg-name"><strong>' + userName.value + '</strong></div>'+
@@ -104,13 +106,14 @@ $(function() {
         room.send(chatText);
 
         $("#sub-text").prepend($(
-          '<div class="msg_content bg-' + bg_chat_color + '"">' +
+          '<div class="msg_content bg-' + bg_voicechat_color + 'self-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
           '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + userName.value + '</strong></div>'+
           '<div class="msg-content">' + subtext + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
+        (bg_voicechat_color==0)?bg_voicechat_color=1:bg_voicechat_color=0;
   }
 
   //使用するビデオとオーディオを選択するための定数
@@ -213,10 +216,23 @@ $(function() {
     });
 
     // UI stuff
-    room.on('close', step2);
+    room.on('close', () => {
+      chatText='3'+userName.value+"<name>が退室しました。";
+      room.send(chatText);
+      step2();
+    });
 
     room.once('open', () => {
-    $("#chat-text").append($('<div class="msg-system">あなたが入室しました。</div>'));
+      $("#chat-text").prepend($(
+        '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
+        '<div class="msg-icon"><img src="../images/icon_system.png"></div>' +
+        '<div class="msg-text">' +
+        '<div class="msg-name"><strong>システム</strong></div>'+
+        '<div class="msg-content">あなたが入室しました。</div>' +
+        '<div class="msg-date">' + getNow() + '</div>' +
+        '</div></div>'));
+        chatText='3'+userName.value+"<name>が入室しました。";
+        room.send(chatText);
     });
 
     room.on('data', ({ data, src }) => {
@@ -230,7 +246,7 @@ $(function() {
       if(result_num == '1'){
         console.log('データ受け取り1発火');
         $("#chat-text").prepend($(
-          '<div class="msg_content bg-' + bg_chat_color + '"">' +
+          '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
           '<div class="msg-name"><strong>' + `${result_name}` + '</strong></div>'+
@@ -242,13 +258,24 @@ $(function() {
       if(result_num == '2'){
         console.log('データ受け取り2発火');
         $("#sub-text").prepend($(
-          '<div class="msg_content bg-' + bg_chat_color + '"">' +
+          '<div class="msg_content bg-' + bg_voicechat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
-          '<div class="msg-name"><ion-icon name="volume-high-outline"><strong>' + `${result_name}` + '</strong></div>'+
+          '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + `${result_name}` + '</strong></div>'+
           '<div class="msg-content">' + `${result_message}\n` + '</div>' +
           '<div class="msg-date">' + getNow() + '</div>' +
           '</div></div>'));
+          (bg_voicechat_color==0)?bg_voicechat_color=1:bg_voicechat_color=0;
+      }else
+      if(result_num == '3'){
+      $("#chat-text").prepend($(
+        '<div class="msg_content bg-' + bg_chat_color + ' other-chat">' +
+        '<div class="msg-icon"><img src="../images/icon_system.png"></div>' +
+        '<div class="msg-text">' +
+        '<div class="msg-name"><strong>システム</strong></div>'+
+        '<div class="msg-content">' +  `${result_name}` + `${result_message}\n` + '</div>' +
+        '<div class="msg-date">' + getNow() + '</div>' +
+        '</div></div>'));
       }
     });
 
