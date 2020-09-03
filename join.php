@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php
-  session_start();
-  session_regenerate_id(true);
-  // require_once('./common.php');
-  // $post = sanitize($_POST);
-  if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
-      $roomID=$_POST['room_id'];
-    }else{
-      header('Location: ./index.php');
-      exit;
-    }
-  $rogin_flg=isset($_SESSION['bool']);
-
-  if($rogin_flg=='true'){//ログインチェック
-  //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
-    print '<script>console.log("ログイン済み");</script>';
-    $regist_name=$_SESSION['regist_name'];
-    include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・
-    $dbh=get_DBobj();
-    $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    $sql = 'select number from account where name=?';
-    $data[] = $regist_name;
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-    $dbh=null;
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    $memberPeer=$rec['number'];
-
-    print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
-    print '<input type="hidden" id="name" value="'.$regist_name.'">';
-    print '<input type="hidden" id="login_FLG" value="true">';
-  }
-  else //ゲストのためpeerIDをどうするか用検討。
-  {
-    $guestName=$_POST['guest_name'];
-    print '<script>console.log("ログインされていない。");</script>';
-    print '<input type="hidden" id="memberPeer" value="ランダム英数字">';
-    print '<input type="hidden" id="name" value="'.$guestName.'">';
-    print '<input type="hidden" id="login_FLG" value="false">';
-    if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
-      header('Location: ./index.php');
-      exit;
-    }
-  }
-?>
-
   <head>
+    <?php
+      session_start();
+      session_regenerate_id(true);
+      // require_once('./common.php');
+      // $post = sanitize($_POST);
+      if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
+          $roomID=$_POST['room_id'];
+        }else{
+          header('Location: ./index.php');
+          exit;
+        }
+      $rogin_flg=isset($_SESSION['bool']);
+
+      if($rogin_flg=='true'){//ログインチェック
+      //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
+        $regist_name=$_SESSION['regist_name'];
+        include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・
+        $dbh=get_DBobj();
+        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $sql = 'select number from account where name=?';
+        $data[] = $regist_name;
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+        $dbh=null;
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        $memberPeer=$rec['number'];
+
+        print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
+        print '<input type="hidden" id="name" value="'.$regist_name.'">';
+        print '<input type="hidden" id="login_FLG" value="true">';
+      }
+      else //ゲストのためpeerIDをどうするか用検討。
+      {
+        $guestName=$_POST['guest_name'];
+        print '<input type="hidden" id="memberPeer" value="">';
+        print '<input type="hidden" id="name" value="'.$guestName.'">';
+        print '<input type="hidden" id="login_FLG" value="false">';
+        if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
+          header('Location: ./index.php');
+          exit;
+        }
+      }
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/join.min.css">
@@ -54,7 +51,7 @@
     <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
     <!--- favicon --->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -85,25 +82,25 @@
       <div id="local_video">
         <video id="my-video" muted="true" autoplay playsinline></video>
         <div id="button_group">
+          <a class="menu-button" id="local_none_button">
+            <p>
+              <ion-icon name="caret-down-outline"/>
+            </p>
+          </a>
+          <a class="menu-button">
+            <p>
+              <ion-icon name="people-circle-outline"/>
+            </p>
+          </a>
+          <a class="menu-button">
+            <p>
+              <ion-icon name="code-slash-outline"/>
+            </p>
+          </a>
           <div id="setting">
-            <a class="menu-button">
-              <p>
-                <ion-icon name="caret-down-outline"/>
-              </p>
-            </a>
-            <a class="menu-button">
-              <p>
-                <ion-icon name="people-circle-outline"/>
-              </p>
-            </a>
-            <a class="menu-button">
-              <p>
-                <ion-icon name="code-slash-outline"/>
-              </p>
-            </a>
             <a class="menu-button" v-on:click="openModal">
               <p>
-                <ion-icon name="build-outline"/>
+                <ion-icon name="build-outline" v-pre/>
               </p>
             </a>
             <open-modal v-show="showContent" v-on:from-child="closeModal">
@@ -139,18 +136,23 @@
             </open-modal>
           </div>
         </div>
-      </div>
       <div class="remote-streams" id="their-videos"></div>
     </div>
 
     <div id="sub">
-      <div id="text_content" class="msg-container">
-        <div id="chat-text" class="msg-content"></div>
-        <div id="sub-text" class="msg-content"></div>
+      <div id="text-content">
+        <div id="chat-content">
+          <div id="chat-title">チャット</div>
+          <div id="chat-text" class="msg-content"></div>
+        </div>
+        <div id="voicechat-content">
+          <div id="voicechat-title">ボイスチャット</div>
+          <div id="sub-text" class="msg-content"></div>
+        </div>
       </div>
       <div id="text_input">
         <input type="text" id="chat-textarea">
-        <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</div>
+        <button id="btn-send" class="pure-button pure-button-success" type="submit">送信</button>
       </div>
     </div>
 
@@ -158,44 +160,39 @@
     window.setTimeout(() => {
         const loading = document.getElementById('loading');
         loading.classList.add('loaded');
-      },1000);
-      Vue.component('open-modal',{
-        template : `
-          <div id="overlay" v-on:click="clickEvent">
-              <div id="content" v-on:click="stopEvent">
-                <p><slot></slot></p>
-                <button v-on:click="clickEvent">close</button>
-              </div>
-          </div>
-          `,
-        methods :{
-          clickEvent: function(){
-            this.$emit('from-child')
-          },
-          stopEvent: function(){
-           event.stopPropagation()
-         }
-        }
-      })
-
-      new Vue({
-        el: '#setting',
-        data: {
-          showContent: false
+    },1000);
+    Vue.component('open-modal',{
+      template : `
+        <div id="overlay" v-on:click="clickEvent">
+            <div id="content" v-on:click="stopEvent">
+              <p><slot></slot></p>
+              <button v-on:click="clickEvent">close</button>
+            </div>
+        </div>
+        `,
+      methods :{
+        clickEvent: function(){
+          this.$emit('from-child')
         },
-        methods:{
-          openModal: function(){
-            this.showContent = true
-          },
-          closeModal: function(){
-            this.showContent = false
-          }
+        stopEvent: function(){
+         event.stopPropagation()
+       }
+      }
+    });
+    new Vue({
+      el: '#setting',
+      data: {
+        showContent: false
+      },
+      methods:{
+        openModal: function(){
+          this.showContent = true
+        },
+        closeModal: function(){
+          this.showContent = false
         }
-      })
-      window.setTimeout(() => {
-          const loading = document.getElementById('loading');
-          loading.classList.add('loaded');
-        },1000);
+      }
+    });
     </script>
   </body>
 </html>

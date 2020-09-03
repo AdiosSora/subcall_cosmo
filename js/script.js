@@ -124,7 +124,7 @@ $(function() {
   });
 
   function dlSpeechLog(){//音声識別ログ　ダウンロード関数
-    console.loog("ダウンロード");
+    console.log("ダウンロード");
     let blob = new Blob(speechLog,{type:"text/plan"});
     let link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -309,7 +309,7 @@ $(function() {
   function step4(){
     const speech = new webkitSpeechRecognition();
     speech.lang = 'ja-JP';
-    speech.start();
+    //speech.start();
 
     console.log('認識スタート');
 
