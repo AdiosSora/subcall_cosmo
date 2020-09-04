@@ -31,11 +31,7 @@ $(function() {
 
   let localStream;
   let room;
-<<<<<<< HEAD
   let speechLog = '';
-=======
-  let speechLog='';
->>>>>>> e9c12d74cce793e594560d0da792c8d8673fd685
 
   //peerを確立
   peer.on('open', () => {
@@ -134,12 +130,7 @@ $(function() {
     var sec =now.getSeconds();
   	var s =hour + "_" + min+"_"+sec;
     console.log("ダウンロード");
-<<<<<<< HEAD
-    console.log(speechLog);
-    let blob = new Blob(speechLog,{type:"text/plan"});
-=======
     let blob = new Blob([speechLog],{type:"text/plan"});
->>>>>>> e9c12d74cce793e594560d0da792c8d8673fd685
     let link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = `${s}.txt`;
