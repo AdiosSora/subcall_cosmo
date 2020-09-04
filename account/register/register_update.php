@@ -20,12 +20,10 @@ try{
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../js/register_update.js"></script>
-    <script src="../../js/jquery.validate.js"></script>
-    <script src="../../js/jquery.validate.min.js"></script>
     <script src="../../js/cropper.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" charset="UTF-8">
     <title>プロフィール更新画面 - Stable </title>
     <?php include '../../header.php'; ?>
     <style>
@@ -49,9 +47,9 @@ try{
                border: dashed #000 1px;
                cursor: pointer;
            }
-           /* main #trimed_image{
+           main #trimed_image{
                height: 500px;
-           } */
+           }
      </style>
   </head>
 
@@ -64,10 +62,10 @@ try{
 
     <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
       <main>
-        <div class="cropper-container">
+        <!-- <div class="cropper-container"> -->
         <!-- トリミング用 -->
-        <input type="file" id="triming_image" name="triming_image" class="triming-image" required/>
-        <img src="" alt="トリミング画像" id="trimed_image" style="display: none;" />
+        <input type="file" id="triming_image" name="triming_image">
+        <!-- <img src="" alt="トリミング画像" id="trimed_image" style="display: none;"> -->
         <label for="avatar">アップロードする画像を選択してください</label>
         <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
         <!-- トリミング時の高さ・幅を取得 -->
@@ -199,7 +197,7 @@ try{
         <?php
           if(!empty($_SESSION['regist_gender'])){
             switch($_SESSION['regist_gender']){
-              case '男性':
+                case '男性':
               print'<p>
                       <label>
                         <input class="with-gap" type="radio" id="gender1" name="gender" value="男性" checked>
@@ -221,7 +219,7 @@ try{
                       </label>
                     </p>';
                 break;
-              case '女性':
+                case '女性':
               print'<p>
                       <label>
                         <input class="with-gap" type="radio" id="gender1" name="gender" value="男性">
@@ -243,7 +241,7 @@ try{
                       </label>
                     </p>';
                 break;
-              case 'その他':
+                case 'その他':
               print'<p>
                       <label>
                         <input class="with-gap" type="radio" id="gender1" name="gender" value="男性">
@@ -293,10 +291,9 @@ try{
 
       <!--戻る・完了ボタン-->
       <div>
-        <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
-        <a href="register_update_done.php"><button class="btn waves-effect waves-light" type="submit" name="action" style="width:86px; height:54px">完了</button></a>
+      <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
+      <button class="btn waves-effect waves-light" type="submit" name="action" style="width:86px; height:54px">完了</button>
       </div>
-
     </form>
     <div class="parallax" style="background:white;"></div>
   </body>

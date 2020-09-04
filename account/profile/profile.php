@@ -41,20 +41,9 @@ include '../../header.php';
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+      $img = '../../download/'.$rec['image'];
 
-      if(empty($rec['image'])){
-           print'<image src="../../download/default.png"><br><br>';
-      }else{
-          $sql = 'SELECT image FROM account WHERE mail_address=?';
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
-          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-          $img = $rec['image'];
-
-          print'<image src="../../download/'; print $img.'"><br><br>';
-
-      }
-
+      print'<img src="'.$img.'"><br/><br/>';
       print '会員番号：'.$_SESSION['regist_number'].'<br/><br/>';
       print'ユーザ名：'.$_SESSION['regist_name'].'<br/><br/>';
       print'E-mail：'.$_SESSION['regist_address'].'<br/><br/>';
