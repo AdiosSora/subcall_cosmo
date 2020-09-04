@@ -89,15 +89,15 @@
           </a>
           <a class="menu-button">
             <p>
-              <ion-icon name="people-circle-outline"/>
-            </p>
-          </a>
-          <a class="menu-button">
-            <p>
               <ion-icon name="code-slash-outline"/>
             </p>
           </a>
           <div id="setting">
+            <a class="menu-button">
+              <p>
+                <ion-icon name="people-circle-outline"/>
+              </p>
+            </a>
             <a class="menu-button" v-on:click="openModal">
               <p>
                 <ion-icon name="build-outline" v-pre/>
@@ -132,8 +132,10 @@
                 <p>Currently in room <span id="room-id">...</span></p>
                 <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
                 <button id="dlSpeechLog" class="" type="submit">音声ログダウンロード</div>
+                  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>vaa
               </div>
             </open-modal>
+
           </div>
         </div>
       <div class="remote-streams" id="their-videos"></div>

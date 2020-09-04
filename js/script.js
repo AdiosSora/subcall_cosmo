@@ -31,7 +31,7 @@ $(function() {
 
   let localStream;
   let room;
-  let speechLog='';
+  let speechLog = '';
 
   //peerを確立
   peer.on('open', () => {
@@ -108,7 +108,7 @@ $(function() {
         speechLog+=`${getNow()}`+" "+` ${userName.value}「${subtext}」\n\n`;
         console.log(speechLog);
         $("#sub-text").prepend($(
-          '<div class="msg_content bg-' + bg_voicechat_color + 'self-chat">' +
+          '<div class="msg_content bg-' + bg_voicechat_color + ' self-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
           '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + userName.value + '</strong></div>'+
