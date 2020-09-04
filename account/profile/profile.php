@@ -10,79 +10,11 @@ include '../../header.php';
     <title>マイページ - Stable</title>
   </head>
   <body>
-<<<<<<< HEAD
-    <div class="container">
-    <div class="section no-pad-bot">
-    <br><br>
-    <div class="row">
-    <div class="col col s10 offset-m1 m8 offset-m2 center">
-    <h2 style="color:black !important;">プロフィール</h2><br/>
-
-  <?php
-      $dbh = get_DBobj();
-      $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-      $regist_address = $_SESSION['regist_address'];
-      $data[] = $regist_address;
-
-      $sql = 'SELECT image FROM account WHERE mail_address=?';
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute($data);
-      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-      $img = '../../download/'.$rec['image'];
-
-      print'<img src="'.$img.'"><br/><br/>';
-      print '会員番号：'.$_SESSION['regist_number'].'<br/><br/>';
-      print'ユーザ名：'.$_SESSION['regist_name'].'<br/><br/>';
-      print'E-mail：'.$_SESSION['regist_address'].'<br/><br/>';
-
-
-
-      print'生年月日 : ';
-      $sql = 'SELECT bone FROM account WHERE mail_address=?';
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute($data);
-      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-      if(empty($rec['bone']) || strcmp($rec['bone'], "―/―/―") == 0){
-         print'未設定<br><br>';
-          $_SESSION['regist_bone'] = "";
-      }else{
-         print $rec['bone'].'<br><br>';
-         $_SESSION['regist_bone'] = $rec['bone'];
-      }
-
-      print'居住国 : ';
-      $sql = 'SELECT country FROM account WHERE mail_address=?';
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute($data);
-
-      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-      if(empty($rec['country']) || strcmp($rec['country'] , "―") == 0){
-         print'未設定<br><br>';
-      }else{
-         print $rec['country'].'<br><br>';
-         $_SESSION['regist_country'] = $rec['country'];
-      }
-
-      print'性別 : ';
-      $sql = 'SELECT gender FROM account WHERE mail_address=?';
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute($data);
-
-      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-      if(empty($rec['gender']) || strcmp($rec['gender'], "―") == 0){
-         print'未設定<br><br>';
-      }else{
-         print $rec['gender'].'<br><br>';
-         $_SESSION['regist_gender'] = $rec['gender'];
-=======
     <?php
       include '../../nav.php';
       if(isset($_SESSION['bool'])==false){
         header('Location: /account/login/login.php');
       exit();
->>>>>>> 213f3d8ca4a7fd4d20bdb6a2e1c77b9a80c1abfc
       }
     ?>
     <div class="container">
