@@ -31,7 +31,7 @@ $(function() {
 
   let localStream;
   let room;
-  let speechLog;
+  let speechLog = '';
 
   //peerを確立
   peer.on('open', () => {
@@ -108,7 +108,7 @@ $(function() {
         speechLog+=`${userName.value}「${subtext}」\n\n`;
         console.log(speechLog);
         $("#sub-text").prepend($(
-          '<div class="msg_content bg-' + bg_voicechat_color + 'self-chat">' +
+          '<div class="msg_content bg-' + bg_voicechat_color + ' self-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
           '<div class="msg-text">' +
           '<div class="msg-name"><ion-icon name="volume-high-outline"></ion-icon><strong>' + userName.value + '</strong></div>'+
@@ -125,6 +125,7 @@ $(function() {
 
   function dlSpeechLog(){//音声識別ログ　ダウンロード関数
     console.log("ダウンロード");
+    console.log(speechLog);
     let blob = new Blob(speechLog,{type:"text/plan"});
     let link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -309,7 +310,7 @@ $(function() {
   function step4(){
     const speech = new webkitSpeechRecognition();
     speech.lang = 'ja-JP';
-    //speech.start();
+    speech.start();
 
     console.log('認識スタート');
 
