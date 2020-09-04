@@ -31,7 +31,11 @@ $(function() {
 
   let localStream;
   let room;
+<<<<<<< HEAD
   let speechLog = '';
+=======
+  let speechLog='';
+>>>>>>> e9c12d74cce793e594560d0da792c8d8673fd685
 
   //peerを確立
   peer.on('open', () => {
@@ -105,7 +109,7 @@ $(function() {
   console.log('字幕送信');
         chatText='2'+userName.value+"<name>"+subtext;
         room.send(chatText);
-        speechLog+=`${userName.value}「${subtext}」\n\n`;
+        speechLog+=`${getNow()}`+" "+` ${userName.value}「${subtext}」\n\n`;
         console.log(speechLog);
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_voicechat_color + ' self-chat">' +
@@ -124,12 +128,21 @@ $(function() {
   });
 
   function dlSpeechLog(){//音声識別ログ　ダウンロード関数
+    var now = new Date();
+  	var hour = now.getHours();
+  	var min = now.getMinutes();
+    var sec =now.getSeconds();
+  	var s =hour + "_" + min+"_"+sec;
     console.log("ダウンロード");
+<<<<<<< HEAD
     console.log(speechLog);
     let blob = new Blob(speechLog,{type:"text/plan"});
+=======
+    let blob = new Blob([speechLog],{type:"text/plan"});
+>>>>>>> e9c12d74cce793e594560d0da792c8d8673fd685
     let link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = '作ったファイル.txt';
+    link.download = `${s}.txt`;
     link.click();
   }
 
@@ -274,7 +287,7 @@ $(function() {
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
-        speechLog+=`${result_name}「${result_Message}」\n\n`;
+        speechLog+=`${getNow()}`+" "+`${result_name}「${result_Message}」\n\n`;
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_voicechat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
