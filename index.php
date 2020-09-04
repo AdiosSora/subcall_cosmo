@@ -20,12 +20,8 @@
 
               <form method="post" id="join_form" action="./join.php">
                 <div class="input-field col s12">
-                  <input name="room_id" id="room_id" type="text" class="validate">
+                  <input name="room_id" id="room_id" type="text" class="validate" maxlength="20">
                   <label for="room_id">Room ID</label>
-                </div>
-                <div id="room_create_form" class="input-field col s12" style="display: none;">
-                  <input id="room_password" type="password" class="validate">
-                  <label for="room_password">password</label>
                 </div>
                 <div id="room_nickname_form" class="input-field col s12"
                 <?php
