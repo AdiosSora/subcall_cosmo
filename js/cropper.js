@@ -8,6 +8,27 @@
  * Date: 2020-05-23T05:23:00.081Z
  */
 
+ $(function(){
+     var options = {
+         aspectRatio: 1 / 1,
+         viewMode: 1,
+         crop: function(e) {
+             cropData = $('#trimed_image').cropper("getData");
+             $("#upload-image-x").val(Math.floor(cropData.x));
+             $("#upload-image-y").val(Math.floor(cropData.y));
+             $("#upload-image-w").val(Math.floor(cropData.width));
+             $("#upload-image-h").val(Math.floor(cropData.height));
+         },
+         zoomable: true,
+         minCropBoxWidth: 100,
+         minCropBoxHeight: 100
+     }
+     $('#trimed_image').cropper(options);
+     $("#triming_image").change(function(){
+         $('trimed_imagew').cropper('replace', URL.createObjectURL(this.files[0]));
+     });
+ });
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :

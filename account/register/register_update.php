@@ -65,7 +65,7 @@ try{
         <!-- <div class="cropper-container"> -->
         <!-- トリミング用 -->
         <input type="file" id="triming_image" name="triming_image">
-        <!-- <img src="" alt="トリミング画像" id="trimed_image" style="display: none;"> -->
+        <img src="" alt="トリミング画像" id="trimed_image" style="display: none;"></br>
         <label for="avatar">アップロードする画像を選択してください</label>
         <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
         <!-- トリミング時の高さ・幅を取得 -->

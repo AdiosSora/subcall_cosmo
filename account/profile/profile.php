@@ -33,18 +33,9 @@ include '../../header.php';
                 $stmt->execute($data);
                 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if(empty($rec['image'])){
-                     print'<image src="../../download/default.png" style="width:100%;"><br><br>';
-                }else{
-                    $sql = 'SELECT image FROM account WHERE mail_address=?';
-                    $stmt = $dbh->prepare($sql);
-                    $stmt->execute($data);
-                    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $img = $rec['image'];
+                $img = $rec['image'];
+                print'<img src="'.$img.'" style="width:80%"><br><br>';
 
-                    print'<image src="../../download/'; print $img.' style="width:80%;"><br><br>';
-
-                }
               ?>
           </div>
           <div class="col offset-s1 s7 center">
