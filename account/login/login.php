@@ -4,7 +4,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <!--<script src="./js/login.js"></script>-->
 
   <title>Stable - ビデオ会議</title>
   <?php include '../../header.php'; ?>
