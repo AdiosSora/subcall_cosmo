@@ -10,9 +10,16 @@ nav .brand-logo {
   color: #444;
 }
 
-nav .logo-image {
+#logo-container{
+  height: 100%;
+  padding: 10px 0 10px 0;
+  img{
+    height: 100%;
+  }
+}
+.logo-image {
   margin: 0 auto;
-  padding: 0;
+  padding: 0 10px;
   height: 100%;
 }
 
@@ -302,4 +309,48 @@ label.address-error {
 /* プロフィール画面 */
 .table{
   display:inline-flex;
+}
+.profile_title{
+  position: relative;
+  height: 100%;
+}
+.profile_icon{
+  width:100%;
+  img{
+    width:100%;
+    height:100%;
+    margin:auto,0,0,0;
+  }
+}
+.profie_title_left{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  min-height: 100%;
+}
+.profile_title_right{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  font-size:40px;
+}
+.profile_number{
+  font-size: 2vw;
+}
+.profile_name{
+  font-size: 3.5vw;
+}
+.friend_list{
+  width: auto;
+}
+.friend_col{
+  width:50%;
+  display: inline-block;
+  font-size:20px;
+  img{
+    width: 80%;
+    height: 80%;
+  }
 }

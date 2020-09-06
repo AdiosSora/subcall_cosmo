@@ -2,63 +2,72 @@
 <html lang="ja">
   <head>
 <?php
-include('../db/dbConnecter.php');
+include '../db/dbConnecter.php';
 include '../../header.php';
 ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>マイページ - Stable</title>
   </head>
+  <main>
   <body>
     <?php
       include '../../nav.php';
-      if(isset($_SESSION['bool'])==false){
-        header('Location: /account/login/login.php');
-      exit();
+      if (isset($_SESSION['bool']) == false) {
+          header('Location: /account/login/login.php');
+          exit();
       }
     ?>
     <div class="container">
       <div class="section no-pad-bot">
         <div class="row">
-          <div class="col s3 center">
-            <?php
+          <div class="col s4 m2 offset-s1 offset-m1 center">
+            <div class="profile_icon">
+              <?php
                 $dbh = get_DBobj();
-                $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $regist_address = $_SESSION['regist_address'];
                 $data[] = $regist_address;
-
                 $sql = 'SELECT image FROM account WHERE mail_address=?';
                 $stmt = $dbh->prepare($sql);
                 $stmt->execute($data);
                 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
                 $img = $rec['image'];
-                print'<img src="'.$img.'" style="width:80%"><br><br>';
-
+                print'<img src="'.$img.'"><br><br>';
               ?>
+            </div>
           </div>
-          <div class="col offset-s1 s7 center">
+          <div class="col 7 m9 left profile_title">
+            <div class="profie_title_left">
+              <span class="profile_number"><?php print 'No.'.$_SESSION['regist_number']?></span>
+              <span class="profile_name"><?php print $_SESSION['regist_name']?></span>
+            </div>
+            <div class="profile_title_right">
+              <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php"><i class="material-icons left">create</i>編集</a>
+              <br/>
+              <a class="btn waves-effect waves-light btn-large" href="/account/friend/friend.php"><i class="material-icons left">group</i>フレンド一覧</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col offset-m1 m7 s12 center">
             <table class="centered">
               <?php
                   print '<thead><tr><td>会員番号</td><td>'.$_SESSION['regist_number'].'</td></tr></thead>';
                   print'<thead><tr><td>ユーザ名</td><td>'.$_SESSION['regist_name'].'</td></tr></thead>';
                   print'<thead><tr><td>E-mail</td><td>'.$_SESSION['regist_address'].'</td></tr></thead>';
-
-
-
                   print'<thead><tr><td>生年月日</td><td>';
                   $sql = 'SELECT bone FROM account WHERE mail_address=?';
                   $stmt = $dbh->prepare($sql);
                   $stmt->execute($data);
                   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                  if(empty($rec['bone']) || strcmp($rec['bone'], "―/―/―") == 0){
-                     print'未設定';
-                      $_SESSION['regist_bone'] = "";
-                  }else{
-                     print $rec['bone'];
-                     $_SESSION['regist_bone'] = $rec['bone'];
+                  if (empty($rec['bone']) || strcmp($rec['bone'], '―/―/―') == 0) {
+                      print'未設定';
+                      $_SESSION['regist_bone'] = '';
+                  } else {
+                      print $rec['bone'];
+                      $_SESSION['regist_bone'] = $rec['bone'];
                   }
                   print '</td></tr></thead>';
                   print'<thead><tr><td>居住国</td><td>';
@@ -67,11 +76,11 @@ include '../../header.php';
                   $stmt->execute($data);
 
                   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-                  if(empty($rec['country']) || strcmp($rec['country'] , "―") == 0){
-                     print'未設定';
-                  }else{
-                     print $rec['country'];
-                     $_SESSION['regist_country'] = $rec['country'];
+                  if (empty($rec['country']) || strcmp($rec['country'], '―') == 0) {
+                      print'未設定';
+                  } else {
+                      print $rec['country'];
+                      $_SESSION['regist_country'] = $rec['country'];
                   }
                   print '</td></tr></thead>';
                   print'<thead><tr><td>性別</td><td> ';
@@ -80,21 +89,71 @@ include '../../header.php';
                   $stmt->execute($data);
 
                   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-                  if(empty($rec['gender']) || strcmp($rec['gender'], "―") == 0){
-                     print'未設定';
-                  }else{
-                     print $rec['gender'];
-                     $_SESSION['regist_gender'] = $rec['gender'];
+                  if (empty($rec['gender']) || strcmp($rec['gender'], '―') == 0) {
+                      print'未設定';
+                  } else {
+                      print $rec['gender'];
+                      $_SESSION['regist_gender'] = $rec['gender'];
                   }
                   print '</td></tr></thead>';
                   $dbh = null;
               ?>
-          </table>
-          <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php">編集</a><br><br>
+            </table>
           <a href="../delete/delete.php">退会</button></a>
           <a href="../../">トップページに戻る</a>
+          </div>
+          <div class="col s12 m4 center">
+            <h5>フレンド一覧</h5>
+            <div class="friend_list">
+              <?php
+                // 変数の定義、初期化
+                $user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+                // DB接続(mysql, xampp)
+                // flag=true で自身以外の番号と名前を取得
+
+                $dbh = get_DBobj();
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute($data);
+                $sql = 'SELECT number, name, image FROM account
+                        WHERE (number IN(
+                        SELECT user_number FROM friendlist
+                        WHERE flag=true AND (user_number=? OR friend_number=?)
+                      ) OR number IN(
+                        SELECT friend_number FROM friendlist
+                        WHERE flag=true AND (user_number=? OR friend_number=?)
+                      )) AND number NOT LIKE ?
+                        ORDER BY number ';
+                $stmt = $dbh->prepare($sql);
+                $data2[] = $user_num;
+                $data2[] = $user_num;
+                $data2[] = $user_num;
+                $data2[] = $user_num;
+                $data2[] = $user_num;
+                $stmt->execute($data2);
+                $count = 0;
+                while(true){
+                  $count+=1;
+                  print '<div class="friend_col">';
+            	    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+            	    if($rec == false){
+            	      break;
+            	    }
+                  if (empty($rec['image'])){
+                    print '<img src="../../download/default.png" style="width:80%">';
+                  }else{
+                      $img = $rec['image'];
+                      print '<img src="'.$img.'">';
+                  }
+            	    print '<span class="friend_row">'.$rec['name'].'</span>';
+                  print '</div>';
+          	    }
+              ?>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   </body>
+  </main>
+  <?php include '../../footer.php'; ?>
 </html>

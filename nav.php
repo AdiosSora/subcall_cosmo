@@ -14,11 +14,7 @@ session_regenerate_id(true);
 <nav class="white" role="navigation">
   <div class="nav-wrapper container">
     <a id="logo-container" href="/index.php" class="brand-logo">
-      <div>
-        <object id="front-page-logo" class="responsive-img" width="170px" type="image/svg+xml" data="/images/STABLE_logo.svg">
-          Your browser does not support SVG.
-        </object>
-      </div>
+      <img src="/images/STABLE_logo.png">
     </a>
     <ul class="right hide-on-med-and-down">
      <li><a href="#">Stableとは？</a></li>
@@ -34,8 +30,7 @@ session_regenerate_id(true);
         else
         {
           print $_SESSION['regist_name'];
-          print '<li><a href="/account/profile/profile.php">プロフィール</a></li>';
-          print '<li><a href="/account/friend/friend.php">フレンド一覧</a></li>';
+          print '<li><a href="/account/profile/profile.php">マイページ</a></li>';
           print '<li><a href="/account/logout/logout.php">ログアウト</a></li>';
         }
        ?>
