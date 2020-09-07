@@ -37,14 +37,13 @@ include '../../header.php';
               ?>
             </div>
           </div>
-          <div class="col 7 m9 left profile_title">
+          <div class="col s7 m9 left profile_title">
             <div class="profie_title_left">
               <span class="profile_number"><?php print 'No.'.$_SESSION['regist_number']?></span>
               <span class="profile_name"><?php print $_SESSION['regist_name']?></span>
             </div>
             <div class="profile_title_right">
-              <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php"><i class="material-icons left">create</i>編集</a>
-              <br/>
+              <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php" style="margin:10px 0px;"><i class="material-icons left">create</i>編集</a>
               <a class="btn waves-effect waves-light btn-large" href="/account/friend/friend.php"><i class="material-icons left">group</i>フレンド一覧</a>
             </div>
           </div>
