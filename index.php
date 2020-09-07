@@ -38,38 +38,24 @@
     </div>
     <div class="container">
       <div class="section">
-
-        <!--   Icon Section   -->
-
         <div class="row">
-          <div class="col s12 m4">
+          <div class="col s12 m6">
             <div class="icon-block">
               <h2 class="center brown-text"><i class="material-icons">accessibility</i></h2>
               <h5 class="center">利便性</h5>
 
-              <p class="light">Stableは登録せずともWeb上でテレビ会議を行うことができます。それはパソコンやタブレット、スマートフォンでも同様に参加できます。</p>
+              <p class="light" style="text-align:center;">Stableは登録せずともWeb上でテレビ会議を行うことができます。</p>
             </div>
           </div>
-
-          <div class="col s12 m4">
+          <div class="col s12 m6">
             <div class="icon-block">
               <h2 class="center brown-text"><i class="material-icons">textsms</i></h2>
               <h5 class="center">字幕</h5>
 
-              <p class="light">どれだけ会議システムの質を上げても、回線が不安定な環境はあります。そこで字幕機能を使えば発言の聞き逃すことはなくなることでしょう。</p>
-            </div>
-          </div>
-
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center brown-text"><i class="material-icons">translate</i></h2>
-              <h5 class="center">翻訳</h5>
-
-              <p class="light">会話をテキストに起こすことが出来るので翻訳も可能です。通訳を通して会話する必要はもうありません。</p>
+              <p class="light" style="text-align:center;">どれだけ会議システムの質を上げても、ネットワーク回線が不安定な環境はあります。そこで字幕機能を使えば発言の聞き逃すことはなくなります。</p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="parallax-container valign-wrapper">
