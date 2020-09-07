@@ -11,39 +11,30 @@
   <?php include('./nav.php'); ?>
   <main>
     <div id="index-banner" class="parallax-container">
-      <div class="container">
-        <div class="section no-pad-bot">
-          <br><br>
-          <div class="row">
-            <div class="col s12 m6 offset-m6 center">
-              <h2 style="color:black !important;">会議へ参加する</h2>
-
-              <form method="post" id="join_form" action="./join.php">
-                <div class="input-field col s12">
-                  <input name="room_id" id="room_id" type="text" class="validate" maxlength="20">
-                  <label for="room_id">Room ID</label>
-                </div>
-                <div id="room_nickname_form" class="input-field col s12"
-                <?php
-                  if(isset($_SESSION['bool']) == true){
-                    print 'style="display: none;"';
-                  }else{
-                    print 'style="display: block;"';
-                  }
-                 ?>>
-                  <input name="guest_name" id="guest_name" type="text" class="validate" >
-                  <label for="guest_name">ニックネーム</label>
-                </div>
-                <a class="waves-effect waves-light2 btn-large" href="javascript:join_form.submit();">入室</a>
-              </form>
-
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="section no-pad-bot">
+            <div class="row">
+              <div class="col s12 m6 offset-m6 center">
+                <h2 style="color:black !important;">会議へ参加する</h2>
+                <form method="post" id="join_form" action="./join.php">
+                  <div class="input-field col s12">
+                    <input name="room_id" id="room_id" type="text" class="validate">
+                    <label for="room_id">Room ID</label>
+                  </div>
+                  <div class="input-field col s12" style="display: block;">
+                    <input name="guest_name" id="guest_name" type="text" class="validate" >
+                    <label for="guest_name">ニックネーム</label>
+                  </div>
+                  <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" ><i class="material-icons left">add</i>部屋作成</a>
+                  <a class="waves-effect waves-light2 btn-large" href="javascript:join_form.submit();">入室</a>
+                </form>
+              </div>
             </div>
           </div>
-          <br><br>
-
         </div>
+        <div class="parallax"><img src="images/background_top.png" alt="topimage"></div>
       </div>
-      <div class="parallax"><img src="images/background_top.png" alt="topimage"></div>
     </div>
     <div class="container">
       <div class="section">
@@ -93,6 +84,5 @@
     </div>
   </main>
   <?php include('./footer.php'); ?>
-  <script src="/js/index_script.js"></script>
   </body>
 </html>
