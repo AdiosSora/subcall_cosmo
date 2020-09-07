@@ -9,16 +9,17 @@
 </head>
 <body>
   <?php include('../../nav.php'); ?>
-
+  <main>
   <div id="index-banner" class="parallax-container">
     <br><br>
     <div class="row">
-      <div class="col s12 m12 center">
-        <p class="error_text" style="font-size: 4em !important;color: black !important;">ERROR - 404</p>
+      <div class="col s12 m12 center" style="padding:15vh 0vh;">
+        <p class="error_text" style="font-size: 3em !important;color: black !important;">お探しのページは見つかりませんでした。</p>
+        <a class="btn waves-effect waves-light btn-large" href="/index.php" >トップページへ戻る</a>
       </div>
     </div>
   </div>
+  </main>
   <?php include('../../footer.php'); ?>
-
   </body>
 </html>

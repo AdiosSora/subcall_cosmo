@@ -43,8 +43,8 @@ include '../../header.php';
               <span class="profile_name"><?php print $_SESSION['regist_name']?></span>
             </div>
             <div class="profile_title_right">
-              <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php" style="margin:10px 0px;"><i class="material-icons left">create</i>編集</a>
-              <a class="btn waves-effect waves-light btn-large" href="/account/friend/friend.php"><i class="material-icons left">group</i>フレンド一覧</a>
+              <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php" style="margin:5px 0px;"><i class="material-icons left">create</i>編集</a>
+              <a class="btn waves-effect waves-light btn-large" href="/account/friend/friend.php" style="margin:5px 0px;"><i class="material-icons left">group</i>フレンド一覧</a>
             </div>
           </div>
         </div>
@@ -98,8 +98,6 @@ include '../../header.php';
                   $dbh = null;
               ?>
             </table>
-          <a href="../delete/delete.php">退会</button></a>
-          <a href="../../">トップページに戻る</a>
           </div>
           <div class="col s12 m4 center">
             <h5>フレンド一覧</h5>
@@ -150,6 +148,8 @@ include '../../header.php';
               ?>
             </div>
           </div>
+          <a class="btn waves-effect waves-light btn-small" href="../delete/delete.php" style="margin:5px 0px;text-align:right;"><i class="material-icons left">directions_run</i>退会</a>
+
         </div>
       </div>
   </body>
