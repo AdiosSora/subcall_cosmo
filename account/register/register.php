@@ -117,28 +117,37 @@
    $('input#name, input#pass, input#pass2, input#address').characterCounter();
   });
   var js_name_array = JSON.parse('<?php echo $php_json_name ?>');
+  var js_email_array = JSON.parse('<?php echo $php_json_email ?>');
+  var flag_name = false;
+  var flag_email = false;
 
   $("#name").on("input change", function(){
     js_name_array.indexOf($("#name")[0].value);
     if(js_name_array.indexOf($("#name")[0].value) == -1){
-      console.log(js_name_array);
       $('#validetion_alart_name').css('display','none');
-      $("#btn").attr("href", "javascript:regiser_form.submit()");
+      flag_name = true;
     }else{
       $('#validetion_alart_name').css('display','inline');
+      flag_name = false;
+    }
+    if(flag_name==true && flag_email==true){
+      $("#btn").attr("href", "javascript:regiser_form.submit()");
+    }else{
       $("#btn").attr("href", "#");
     }
   });
-
-  var js_email_array = JSON.parse('<?php echo $php_json_email ?>');
   $("#address").on("input change", function(){
     js_email_array.indexOf($("#address")[0].value);
     if(js_email_array.indexOf($("#address")[0].value) == -1){
-      console.log(js_email_array);
       $('#validetion_alart_email').css('display','none');
-      $("#btn").attr("href", "javascript:regiser_form.submit()");
+      flag_email = true;
     }else{
       $('#validetion_alart_email').css('display','inline');
+      flag_name = false;
+    }
+    if(flag_name==true && flag_email==true){
+      $("#btn").attr("href", "javascript:regiser_form.submit()");
+    }else{
       $("#btn").attr("href", "#");
     }
   });
