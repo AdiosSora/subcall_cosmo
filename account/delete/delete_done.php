@@ -14,7 +14,7 @@ try
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>退会完了</title>
+<title>退会完了 - Stable</title>
 <?php include('../../header.php'); ?>
 </head>
 <body>
