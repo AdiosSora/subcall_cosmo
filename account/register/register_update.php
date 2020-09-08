@@ -133,7 +133,7 @@
               </select>
             </div>
             <div class="col s2">
-              <string>年</string>
+              <div style="padding:10px 0 0 0;">年</div>
             </div>
           </div>
 
@@ -156,7 +156,7 @@
             </select>
             </div>
             <div class="col s2">
-              <string>月</string>
+              <div style="padding:10px 0 0 0;">月</div>
             </div>
           </div>
 
@@ -179,7 +179,7 @@
             </select>
             </div>
             <div class="col s2">
-              <string>日</string>
+              <div style="padding:10px 0 0 0;">日</div>
             </div>
           </div>
 
