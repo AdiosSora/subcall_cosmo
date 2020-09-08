@@ -13,17 +13,19 @@
 		<main>
     <div class="container">
       <div class="section no-pad-bot">
-        <div class="row" style="margin: 10vh 0;">
+        <div class="row">
           <div class="col offset-s2 s8 center">
+						<!--フレンド申請、指定の名前を検索する-->
 						<?php
 						include('../db/dbConnecter.php');
 						if(isset($_SESSION['bool']) == false)
 						{
-							print 'ゲストユーザーではこの機能は使えません';
-							print '<a href="../../index.php">top画面へ</a><br />';
-							print '<br />';
+              header('Location: /account/login/login.php');
+              exit();
 						}
 						else
+            ?>
+            <?php
 						{
 							// ユーザー番号取得
 							$user_num = $_SESSION['regist_number'];
@@ -66,16 +68,16 @@
 
 							$count_send = $rec['count(friend_number)'];
 
-							print '<form method="post" action="friend_get.php">';
-							print '送ったフレンド申請：';
-							print $count_send.'件　　　';
 
 							if($count_send > 0){
+  							print '<div id="info_alert_sendfriend" class="alert info"><form method="post" action="friend_get.php">';
+  							print '送ったフレンド申請：';
+  							print $count_send.'件　　　';
 								print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
-								print '<input type="submit" name="get" value="申請の詳細へ">';
+								print '<input type="submit" name="get" class="alert button z-depth-1" value="詳細">';
+  							print '</form></div>';
 							}
 
-							print '</form>';
 
 							// 届いたフレンド申請
 							// 届いたフレンド申請の数を取得
@@ -91,40 +93,35 @@
 
 							$dbh = null;
 
-							print '<form method="post" action="friend_add.php">';
-							print '届いたフレンド申請：';
-							print $count_get.'件　　　';
-
 							if($count_get > 0){
+                print '<div id="info_alert_getfriend" class="alert success">';
+  							print '<form method="post" action="friend_add.php" style="text-align:center;">';
+  							print '届いたフレンド申請：';
+  							print $count_get.'件　　　';
 								print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
-								print '<input type="submit" name="add" value="登録の可否へ">';
+								print '<input type="submit" name="add" class="alert button z-depth-1" value="確認">';
+                print '</div>';
+  							print '</form>';
 							}
 
-							print '</form>';
-
 							// フレンド数
-
-							print '<form method="post" action="friend_list.php">';
+            ?>
+						<form class="col s12" name="friend_serch_form" method='POST' action="friend_search.php" enctype="multipart/form-data">
+							<div class="form_title col s12">
+								<label for="name" class="form_name">フレンドを探す</label>
+							</div>
+              <div class="col s10">
+		            <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
+              </div>
+              <div class="col s2">
+                <a class="waves-effect waves-light btn-large" id="btn" href="javascript:friend_serch_form.submit()">検索</a>
+              </div>
+						</form>
+            <?php
 							print 'フレンド数：　';
 							print $count_user;
 							print '　／　10　　';
-							if($count_user > 0){
-								print '<input type="submit" name="list" value="フレンドリストへ">';
-							}
-							print '</form>';
 						?>
-							<!--フレンド申請、指定の名前を検索する-->
-							<form method='POST' action="friend_search.php" enctype="multipart/form-data">
-								<div class="form_title col s12">
-									<label for="name" class="form_name">フレンドを探す</label>
-								</div>
-                <div class="col s10">
-			            <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
-                </div>
-                <div class="col s2">
-									<input type="submit" name="search" value="検索">
-				        </div>
-							</form>
 
               <?php
               // DB接続(mysql, xampp)
@@ -132,7 +129,7 @@
               $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
               // flag=true で自身以外の番号と名前を取得
-              $sql = 'SELECT number, name FROM account
+              $sql = 'SELECT number,name,image FROM account
                       WHERE (number IN(
                       SELECT user_number FROM friendlist
                       WHERE flag=true AND (user_number=? OR friend_number=?)
@@ -154,31 +151,32 @@
 
               ?>
               <table border="1">
-                <caption>フレンド一覧</caption>
-                <tr>
-                  <th>会員番号</th>
-                  <th>会員名</th>
-                  <th>削除の実行</th>
-                </tr>
                 <?php
+                $friend_from_count = 1;
                 while(true){
-
                   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
                   if($rec == false){
                     break;
                   }
                   print '<tr>';
-                  print '<td>'.$rec['number'].'</td>';
-                  print '<td>'.$rec['name'].'</td>';
-                  print '<form method="post" action="friend_list_check.php">';
+                  print '<td style="text-align:center;">No. '.$rec['number'].'</td>';
+                  $img = $rec['image'];
+                  if($img!=null){
+                    print'<td><img src="'.$img.'" style="width:64px;"></td>';
+                  }else{
+                    print'<td style="text-align:center;"><img src="../../images/default_icon.png" style="width:48px";></td>';
+                  }
+                  print '<td><strong>'.$rec['name'].'</strong></td>';
+                  print '<form method="post" name="friend_form'.$friend_from_count.'" action="friend_list_check.php">';
                   print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
                   print '<input type="hidden" name="list_name" value="'.$rec['name'].'">';
-                  print '<td align="center">';
-                  print '<input type="submit" name="list_check" value="フレンド削除" >';
+                  print '<td style="text-align:right;">';
+                  print '<a class="waves-effect waves-light2 btn-small" href="javascript:friend_form'.$friend_from_count.'.submit()" style="background-color:#dddddd;color:#111111;margin:5px;">解除</a>';
                   print '</form>';
                   print '</td>';
                   print '</tr>';
+                  $friend_from_count += 1;
                   }
               print '</table>';
 						}
