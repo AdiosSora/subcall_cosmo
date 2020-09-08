@@ -3,6 +3,7 @@
 // 安全対策関数
 function sanitize($before)
 {
+		$after = null;
 	foreach($before as $key=>$value)
 	{
 		$after[$key] = htmlspecialchars($value,ENT_QUOTES,'UTF-8');
