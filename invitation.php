@@ -11,14 +11,25 @@ if($rogin_flg=='true'){//ログイン時の処理
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-  if(isset($_POST['inv_name'])){
+  if(isset($_POST['inv_name'])){//招待ボタンが押された判定
     $InvName=$_POST['inv_name'];
+    $HostName=$_POST['host_name'];
+    $ROOMid=$_POST['ROOMID'];
+
+    $sql='Insert Into invitation(host_name,inv_name,room_name) values(?,?,?);';
+    $stmt = $dbh->prepare($sql);
+    $data[]=$HostName;
+    $data[]=$InvName;
+    $data[]=$ROOMid;
+    $stmt->execute($data);
+
     $sql='UPDATE account SET invFlag=1 WHERE name=?;';
     $stmt = $dbh->prepare($sql);
-    $data[]=$InvName;
-    $stmt->execute($data);
+    $data2[]=$InvName;
+    $stmt->execute($data2);
   }
-  else{
+  else{//最初の訪問
+    $ROOMid=$_GET['ROOMname'];
     $sql='UPDATE account SET invFlag=0;';
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
@@ -60,6 +71,8 @@ if($rogin_flg=='true'){//ログイン時の処理
       print '<input type="hidden" name="inv_num" value="'.$rec['number'].'">';
       print '<input type="hidden" name="inv_name" value="'.$rec['name'].'">';
       print '<input type="hidden" name="host_name" value="'.$hostName.'">';
+      print '<input type="hidden" name="ROOMID" value="'.$ROOMid.'">';
+
       print '<td align="center">';
 
       if($rec['invFlag']==0){
