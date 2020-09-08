@@ -154,12 +154,35 @@ include('../../header.php');
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col s12 m2 offset-m1">
-          <a class="btn waves-effect waves-light btn-small" href="../delete/delete.php" style="margin:5px 0px;text-align:right;"><i class="material-icons left">directions_run</i>退会</a>
-        </div>
-        <div class="col s12 m9"></div>
   </body>
   </main>
-  <?php include '../../footer.php'; ?>
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l3 s12">
+          <h5 class="white-text">概要</h5>
+          <ul>
+            <li><a class="white-text" href="#!">トップページ</a></li>
+            <li><a class="white-text" href="#!">Stableとは？</a></li>
+            <li><a class="white-text" href="#!">使い方</a></li>
+            <li><a class="white-text" href="/index.php">会議に参加する</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text"></h5>
+          <ul>
+            <li><a class="white-text" href="../delete/delete.php">退会</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Copyright ©2020 Stable Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
 </html>
