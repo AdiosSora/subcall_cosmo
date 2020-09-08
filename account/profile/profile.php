@@ -155,10 +155,10 @@ include('../../header.php');
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m2">
+        <div class="col s12 m2 offset-m1">
           <a class="btn waves-effect waves-light btn-small" href="../delete/delete.php" style="margin:5px 0px;text-align:right;"><i class="material-icons left">directions_run</i>退会</a>
         </div>
-        <div class="col s12 m10"></div>
+        <div class="col s12 m9"></div>
   </body>
   </main>
   <?php include '../../footer.php'; ?>
