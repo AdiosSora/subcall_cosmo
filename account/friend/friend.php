@@ -178,14 +178,31 @@
                     print'<td style="text-align:center;"><img src="../../images/default_icon.png" style="width:48px";></td>';
                   }
                   print '<td style="text-align:center;"><strong>'.$rec['name'].'</strong></td>';
-                  print '<form method="post" name="friend_form'.$friend_from_count.'" action="friend_list_check.php">';
                   print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
                   print '<input type="hidden" name="list_name" value="'.$rec['name'].'">';
                   print '<td style="text-align:right;">';
-                  print '<a class="waves-effect waves-light2 btn-small" href="javascript:friend_form'.$friend_from_count.'.submit()" style="background-color:#dddddd;color:#111111;margin:5px;">解除</a>';
-                  print '</form>';
+                  print '<a class="waves-effect waves-light btn modal-trigger" href="#modal'.$friend_from_count.'" style="background-color:#dddddd;color:#111111;margin:5px;">解除</a>';
                   print '</td>';
                   print '</tr>';
+                  print '<div id="modal'.$friend_from_count.'" class="modal" style="border: none;">';
+                  print '<div class="modal-content">';
+                  print '<h4>フレンドを解除しますか？</h4>';
+      					  // 変数の定義、初期化
+      						$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+      					  $list_num = $rec['number'];   // フレンド削除する会員番号取得
+      					  $list_name = $rec['name'];   // フレンド削除する会員名取得
+      					  print '<form method="post" name="friend_delete_form'.$friend_from_count.'" action="friend_list_done.php">';
+      					  print '会員番号：'.$list_num;
+      					  print '　　会員名：'.$list_name;
+      					  print '<input type="hidden" name="list_done_num" value="'.$list_num.'">';
+      					  print '<input type="hidden" name="list_done_name" value="'.$list_name.'">'.'</br>';
+                  print '<div class="modal-footer">';
+      					  print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:friend_delete_form'.$friend_from_count.'.submit()">解除';
+                  print '<a href="#!" class="waves-effect waves-light btn modal-trigger" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>';
+                  print '</div>';
+      					  print '</form>';
+
+                  print '</div>';
                   $friend_from_count += 1;
                   }
               print '</tbody></table>';
@@ -199,4 +216,9 @@
 </main>
 <?php include('../../footer.php'); ?>
 </body>
+<script>
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
 </html>
