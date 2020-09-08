@@ -22,7 +22,14 @@
                     <input name="room_id" id="room_id" type="text" class="validate">
                     <label for="room_id">Room ID</label>
                   </div>
-                  <div class="input-field col s12" style="display: block;">
+                  <div class="input-field col s12"
+                  <?php
+                  if(isset($_SESSION['bool']) == true){
+                    print 'style="display: none;"';
+                  }else{
+                    print 'style="display: block;"';
+                  }
+                 ?>>
                     <input name="guest_name" id="guest_name" type="text" class="validate" >
                     <label for="guest_name">ニックネーム</label>
                   </div>
