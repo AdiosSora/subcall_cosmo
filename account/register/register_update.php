@@ -61,8 +61,27 @@ try{
     <div class="row">
     <div class="col col s10 offset-m1 m8 offset-m2 center">
     <h2 style="color:black !important;">プロフィール編集</h2><br/>
+      <?php
+          $dbh = get_DBobj();
+          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
+          $sql = 'SELECT name FROM account;';
+          $stmt = $dbh->query($sql);
+          $name_list=array();
+          foreach ($stmt as $row) {
+            array_push($name_list,$row['name']);
+          }
+          $php_json_name = json_encode($name_list);
+
+          $sql = 'SELECT mail_address FROM account;';
+          $stmt = $dbh->query($sql);
+          $email_list=array();
+          foreach ($stmt as $row) {
+            array_push($email_list,$row['mail_address']);
+          }
+          $php_json_email = json_encode($email_list);
+      ?>
+    <form method='POST' name="register_update_form" action="register_update_done.php" enctype="multipart/form-data">
       <main>
         <!-- <div class="cropper-container"> -->
         <!-- トリミング用 -->
@@ -83,6 +102,7 @@ try{
       <label for="name" class="form_name">ユーザ名</label>
       <a class="form_required_mark">必須</a>
       <input type="text" id="name" name="name" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_name'];?>">
+      <p id="validetion_alart_name" style="display:none;">この名前は既に使用されています。</p>
       </div>
 
       <!--メールアドレスフォーム-->
@@ -90,6 +110,7 @@ try{
       <label for="name" class="form_name">E-mail</label>
       <a class="form_required_mark">必須</a>
       <input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>">
+      <p id="validetion_alart_email" style="display:none;">このメールアドレスは既に使用されています。</p>
       </div>
 
     <?php
@@ -295,9 +316,60 @@ try{
       <!--戻る・完了ボタン-->
       <div>
       <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
-      <button class="btn waves-effect waves-light" type="submit" name="action" style="width:86px; height:54px">完了</button>
+      <a class="waves-effect waves-light btn-large" id="btn" href="javascript:register_update_form.submit()">確認</a>
       </div>
     </form>
     <div class="parallax" style="background:white;"></div>
   </body>
+  <script>
+  $(document).ready(function() {
+   $('input#name, input#pass, input#pass2, input#address').characterCounter();
+  });
+  var js_name_array = JSON.parse('<?php echo $php_json_name ?>');
+  var js_email_array = JSON.parse('<?php echo $php_json_email ?>');
+  var old_name = $("#name")[0].value;
+  var old_email = $("#address")[0].value;
+  var flag_name = true;
+  var flag_email = true;
+
+  $("#name").on("input change", function(){
+    js_name_array.indexOf($("#name")[0].value);
+    if(js_name_array.indexOf($("#name")[0].value) == -1){
+      $('#validetion_alart_name').css('display','none');
+      flag_name = true;
+    }else{
+      if(old_name != $("#name")[0].value){
+        $('#validetion_alart_name').css('display','inline');
+        flag_name = false;
+      }else{
+        flag_name = true;
+      }
+    }
+    if(flag_name==true && flag_email==true){
+      $("#btn").attr("href", "javascript:register_update_form.submit()");
+    }else{
+      $("#btn").attr("href", "#");
+    }
+  });
+  $("#address").on("input change", function(){
+    js_email_array.indexOf($("#address")[0].value);
+    if(js_email_array.indexOf($("#address")[0].value) == -1 && old_email != $("#address")[0].value){
+      $('#validetion_alart_email').css('display','none');
+      flag_email = true;
+    }else{
+      if(old_email != $("#address")[0].value){
+        $('#validetion_alart_email').css('display','inline');
+        flag_email = false;
+      }else{
+        flag_email = true;
+      }
+    }
+    if(flag_name==true && flag_email==true){
+      $("#btn").attr("href", "javascript:register_update_form.submit()");
+    }else{
+      $("#btn").attr("href", "#");
+    }
+  });
+
+  </script>
 </html>
