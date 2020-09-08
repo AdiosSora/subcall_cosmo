@@ -1,4 +1,7 @@
 <!--現在のフレンドリストの削除完了-->
+<!DOCTYPE>
+<html>
+<body>
 <?php
 session_start();
 session_regenerate_id(true);
@@ -36,3 +39,5 @@ else
 	header('Location: ../friend/friend.php');
 }
 ?>
+</body>
+</html>

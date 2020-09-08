@@ -5,15 +5,8 @@ session_regenerate_id(true);
 include('../db/dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
-	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../../index.php">top画面へ</a><br />';
-	print '<br />';
-}
-// 不正に入ったかチェック
-else if(isset($_POST['add_done_num']) == false)
-{
-  header('Location: friend_ng.php');
-  exit();
+	header('Location: /account/login/login.php');
+	exit();
 }
 else
 {
@@ -23,15 +16,6 @@ else
 	$add_done_num = $_POST['add_done_num'];		// 選択した会員番号取得
   $add_done_name = $_POST['add_done_name'];   // 選択した名前取得
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>フレンド機能</title>
-</head>
-<body>
-  <?php
   // DB接続(mysql, xampp)
   $dbh = get_DBobj();
   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -211,8 +195,7 @@ else
   $dbh = null;
 
 }
+header('Location: ../friend/friend.php');
 ?>
-<a href="friend.php">フレンド画面へ</a></br>
-<a href="../../index.php">トップ画面へ</a>
 </body>
 </html>
