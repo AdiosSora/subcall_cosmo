@@ -18,6 +18,11 @@ if($rogin_flg=='true'){//ログイン時の処理
     $data[]=$InvName;
     $stmt->execute($data);
   }
+  else{
+    $sql='UPDATE account SET invFlag=0;';
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute();
+  }
 
   $sql = 'SELECT number, name ,invFlag FROM account
           WHERE (number IN(
