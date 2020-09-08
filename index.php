@@ -22,11 +22,17 @@
                     <input name="room_id" id="room_id" type="text" class="validate">
                     <label for="room_id">Room ID</label>
                   </div>
-                  <div class="input-field col s12" style="display: block;">
+                  <div class="input-field col s12"
+                  <?php
+                  if(isset($_SESSION['bool']) == true){
+                    print 'style="display: none;"';
+                  }else{
+                    print 'style="display: block;"';
+                  }
+                 ?>>
                     <input name="guest_name" id="guest_name" type="text" class="validate" >
                     <label for="guest_name">ニックネーム</label>
                   </div>
-                  <a class="waves-effect waves-light btn-large" href="javascript:clickBtn_create();" ><i class="material-icons left">add</i>部屋作成</a>
                   <a class="waves-effect waves-light2 btn-large" href="javascript:join_form.submit();">入室</a>
                 </form>
               </div>

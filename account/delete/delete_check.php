@@ -1,75 +1,82 @@
-<?php
-  session_start();
-  session_regenerate_id(true);
-  include('../db/dbConnecter.php');
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>退会画面</title>
+<title>退会確認 - Stable</title>
+<?php include('../../header.php'); ?>
 </head>
 <body>
+  <?php include('../../nav.php'); ?>
+  <main>
+    <div class="container">
+      <div class="section no-pad-bot">
+        <div class="row" style="margin: 20vh 0;">
+          <div class="col offset-s2 s8 center">
+            <?php
+            try
+            {
+            if(isset($_SESSION['bool']) == false)
+              {
+                print 'お客様はゲストユーザーか、ログインしていないため、退会はできません。'.'<br>';
+                print '<a class="waves-effect waves-light2 btn-large" href="javascript:history.back();" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>';
+                print '<br />';
+              }
+              else
+              {
 
-<?php
-try
-{
-if(isset($_SESSION['bool']) == false)
-  {
-    print 'お客様はゲストユーザーか、ログインしていないため、退会はできません。'.'<br>';
-    print '<a href="../../index.php">戻る</a>';
-    print '<br />';
-  }
-  else
-  {
+                require_once('../../common.php');
 
-    require_once('../../common.php');
+                $post = sanitize($_POST);
 
-    $post = sanitize($_POST);
+              	$name = $post['name'];
+                $pass = $post['pass'];
+                $address = $post['address'];
 
-  	$name = $post['name'];
-    $pass = $post['pass'];
-    $address = $post['address'];
+                $regist_pass = hash('sha256' , $pass);
 
-    $regist_pass = hash('sha256' , $pass);
+                include('../db/dbConnecter.php');
+              	$dbh = get_DBobj();
+              	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+              	$sql = 'SELECT name FROM account WHERE name=? AND pass=? AND mail_address=?';
+              	$stmt = $dbh->prepare($sql);
+              	$data[] = $name;
+                $data[] = $regist_pass;
+                $data[] = $address;
+              	$stmt->execute($data);
 
-  	$dbh = get_DBobj();
-  	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+              	$dbh = null;
 
-  	$sql = 'SELECT name FROM account WHERE name=? AND pass=? AND mail_address=?';
-  	$stmt = $dbh->prepare($sql);
-  	$data[] = $name;
-    $data[] = $regist_pass;
-    $data[] = $address;
-  	$stmt->execute($data);
+                $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  	$dbh = null;
+              	if($rec == true){
+                  print'本当に退会しますか？';
+                  print'<table class="centered">';
+                  print'<thead><tr><td style="text-align:center;">お名前</td><td style="text-align:center;">'.$name.'</td></tr></thead>';
+                  print'<thead><tr><td style="text-align:center;">メールアドレス</td><td style="text-align:center;">'.$address.'</td></tr></thead>';
+                  print'</table>';
+                  print'<form method="post" name="destroy_confirm_form" action="delete_done.php">';
+                  print'<input type="hidden" name="number" value="'.$_SESSION['regist_number'].'">';
 
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  	if($rec == true){
-      print '本当に削除しますか？'.'<br>';
-      print 'お名前：'.$name.'<br>';
-      print 'メールアドレス：'.$address;
-      print'<form method="post" action="delete_done.php">';
-        print'<input type="hidden" name="number" value="'.$_SESSION['regist_number'].'">';
-    	print'<input type="submit" value="はい">';
-        print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
-    	print'</form>';
-    }else{
-      print 'パスワードが間違っています。'.'<br>';
-      print '<button type="button" onclick="history.back()" value="no">戻る</button>';
-    }
-  }
-}
-catch (Exception $e)
-{
-	print'ただいま障害により大変ご迷惑をお掛けしております。';
-	exit();
-}
-
-?>
-
+                  print '<a class="waves-effect waves-light2 btn-large" href="javascript:destroy_confirm_form.submit();" style="margin:5px;">退会</a>';
+                  print '<a class="waves-effect waves-light2 btn-large" href="javascript:history.back();" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>';
+                	print'</form>';
+                }else{
+                  print 'パスワードが間違っています。'.'<br>';
+                  print '<a class="waves-effect waves-light2 btn-large" href="javascript:history.back();" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>';
+                }
+              }
+            }
+            catch (Exception $e)
+            {
+            	print'ただいま障害により大変ご迷惑をお掛けしております。';
+            	exit();
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <?php include('../../footer.php'); ?>
 </body>
 </html>

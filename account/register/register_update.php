@@ -24,7 +24,7 @@ try{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../js/register_update.js"></script>
     <script src="../../js/cropper.js"></script>
-    <title>プロフィール更新画面 - Stable </title>
+    <title>プロフィール更新 - Stable </title>
     <?php include '../../header.php'; ?>
     <style>
            /* 下記は円形にするなら必須です。 */

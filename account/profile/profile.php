@@ -2,8 +2,8 @@
 <html lang="ja">
   <head>
 <?php
-include '../db/dbConnecter.php';
-include '../../header.php';
+include('../db/dbConnecter.php');
+include('../../header.php');
 ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -33,7 +33,11 @@ include '../../header.php';
                 $stmt->execute($data);
                 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
                 $img = $rec['image'];
-                print'<img src="'.$img.'"><br><br>';
+                if($img!=null){
+                  print'<img src="'.$img.'">';
+                }else{
+                  print'<img src="../../images/default_icon.png">';
+                }
               ?>
             </div>
           </div>
@@ -48,7 +52,7 @@ include '../../header.php';
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 40px;">
           <div class="col offset-m1 m7 s12 center">
             <table class="centered">
               <?php
@@ -137,7 +141,7 @@ include '../../header.php';
             	      break;
             	    }
                   if (empty($rec['image'])){
-                    print '<img src="../../download/default.png" style="width:80%">';
+                    print '<img src="../../images/default_icon.png" style="width:80%">';
                   }else{
                       $img = $rec['image'];
                       print '<img src="'.$img.'">';
@@ -148,10 +152,13 @@ include '../../header.php';
               ?>
             </div>
           </div>
-          <a class="btn waves-effect waves-light btn-small" href="../delete/delete.php" style="margin:5px 0px;text-align:right;"><i class="material-icons left">directions_run</i>退会</a>
-
         </div>
       </div>
+      <div class="row">
+        <div class="col s12 m2 offset-m1">
+          <a class="btn waves-effect waves-light btn-small" href="../delete/delete.php" style="margin:5px 0px;text-align:right;"><i class="material-icons left">directions_run</i>退会</a>
+        </div>
+        <div class="col s12 m9"></div>
   </body>
   </main>
   <?php include '../../footer.php'; ?>
