@@ -31,6 +31,7 @@
         print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
         print '<input type="hidden" id="name" value="'.$regist_name.'">';
         print '<input type="hidden" id="login_FLG" value="true">';
+        print '<input type="hidden" id="room__name" value="'.$roomID.'">';
       }
       else //ゲストのためpeerIDをどうするか用検討。
       {
@@ -38,6 +39,7 @@
         print '<input type="hidden" id="memberPeer" value="">';
         print '<input type="hidden" id="name" value="'.$guestName.'">';
         print '<input type="hidden" id="login_FLG" value="false">';
+        print '<input type="hidden" id="room__name" value="'.$roomID.'">';
         if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
           header('Location: ./index.php');
           exit;
@@ -132,7 +134,12 @@
                 <p>Currently in room <span id="room-id">...</span></p>
                 <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
                 <button id="dlSpeechLog" class="" type="submit">音声ログダウンロード</div>
-                  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>vaa
+                  <iframe id="inlineFrameExample"
+                      width="300"
+                      height="200"
+                      src="invitation.php">
+                  </iframe>
+
               </div>
             </open-modal>
 
