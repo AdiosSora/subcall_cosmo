@@ -141,7 +141,7 @@ include('../../header.php');
             	      break;
             	    }
                   if (empty($rec['image'])){
-                    print '<img src="../../download/default.png" style="width:80%">';
+                    print '<img src="../../images/default_icon.png" style="width:80%">';
                   }else{
                       $img = $rec['image'];
                       print '<img src="'.$img.'">';
