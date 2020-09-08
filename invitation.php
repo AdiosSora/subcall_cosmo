@@ -23,16 +23,17 @@ if($rogin_flg=='true'){//ログイン時の処理
     $data[]=$ROOMid;
     $stmt->execute($data);
 
-    $sql='UPDATE account SET invFlag=1 WHERE name=?;';
-    $stmt = $dbh->prepare($sql);
-    $data2[]=$InvName;
-    $stmt->execute($data2);
+
   }
   else{//最初の訪問
     $ROOMid=$_GET['ROOMname'];
-    $sql='UPDATE account SET invFlag=0;';
+    $host_name=$_GET['hostname'];
+
+
+    $sql='DELETE FROM invitation WHERE host_name=?';
     $stmt = $dbh->prepare($sql);
-    $stmt->execute();
+    $data3[]=$host_name;
+    $stmt->execute($data3);
   }
 
   $sql = 'SELECT number, name ,invFlag FROM account
@@ -48,7 +49,7 @@ if($rogin_flg=='true'){//ログイン時の処理
   $stmt = $dbh->prepare($sql);
   $stmt->execute();
 
-  $dbh = null;
+
   ?>
   <table border="1">
     <tr>
@@ -64,6 +65,7 @@ if($rogin_flg=='true'){//ログイン時の処理
       if($rec == false){
         break;
       }
+      $resultName=$rec['name'];
       print '<tr>';
       print '<td>'.$rec['number'].'</td>';
       print '<td>'.$rec['name'].'</td>';
@@ -75,7 +77,13 @@ if($rogin_flg=='true'){//ログイン時の処理
 
       print '<td align="center">';
 
-      if($rec['invFlag']==0){
+      $sql='SELECT host_name from invitation where host_name=? AND inv_name=?;';
+      $data4[]=$hostName;
+      $data4[]=$resultName;
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute($data4);
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($result==false){
         print '<input type="submit" value="招待" >';
       }
       else{
@@ -93,5 +101,5 @@ else{
 }
 
 // flag=true で自身以外の番号と名前を取得
-
+$dbh = null;
 ?>
