@@ -25,10 +25,6 @@
 						}
 						else
 						{
-							print 'ようこそ';
-							print $_SESSION['regist_name'];
-							print '様　';
-							print '<br /><br />';
 							// ユーザー番号取得
 							$user_num = $_SESSION['regist_number'];
 
@@ -119,17 +115,17 @@
 						?>
 							<!--フレンド申請、指定の名前を検索する-->
 							<form method='POST' action="friend_search.php" enctype="multipart/form-data">
-								<div class="form_title">
+								<div class="form_title col s12">
 									<label for="name" class="form_name">フレンドを探す</label>
 								</div>
-						        <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
-										<br>
-						        <div>
+                <div class="col s10">
+			            <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
+                </div>
+                <div class="col s2">
 									<input type="submit" name="search" value="検索">
-						        </div>
+				        </div>
 							</form>
 
-							<a href="../../index.php">トップ画面へ</a>
               <?php
               // DB接続(mysql, xampp)
               $dbh = get_DBobj();
@@ -187,6 +183,7 @@
               print '</table>';
 						}
 						?>
+            <a class="waves-effect waves-light2 btn-large" href="../../index.php" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>
 				</div>
 			</div>
 		</div>
