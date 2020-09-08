@@ -134,11 +134,13 @@
                 <p>Currently in room <span id="room-id">...</span></p>
                 <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
                 <button id="dlSpeechLog" class="" type="submit">音声ログダウンロード</div>
-                  <iframe id="inlineFrameExample"
+                  <?php
+                  print '<iframe id="inlineFrameExample"
                       width="300"
                       height="200"
-                      src="invitation.php">
-                  </iframe>
+                      src="invitation.php?ROOMname='.$roomID.'">
+                  </iframe>'
+                  ?>
 
               </div>
             </open-modal>
