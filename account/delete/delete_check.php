@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>退会画面</title>
+<title>退会確認 - Stable</title>
 <?php include('../../header.php'); ?>
 </head>
 <body>
@@ -33,7 +33,7 @@
 
                 $regist_pass = hash('sha256' , $pass);
 
-                include('../db/dbConnecter.php'); 
+                include('../db/dbConnecter.php');
               	$dbh = get_DBobj();
               	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
