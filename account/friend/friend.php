@@ -74,8 +74,54 @@
   							print '送ったフレンド申請：';
   							print $count_send.'件　　　';
 								print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
-								print '<input type="submit" name="get" class="alert button z-depth-1" value="詳細">';
+                print '<a class="alert button z-depth-1 modal-trigger" href="#modal_friend_send">詳細</a>';
   							print '</form></div>';
+
+                // friendlist から条件に合う番号の名前を account から取得
+                $sql = 'SELECT number,name FROM account WHERE number IN (
+                  SELECT user_number FROM friendlist where friend_number=? and flag=false)';
+
+                $stmt = $dbh->prepare($sql);
+                $data_friendlist[] = $user_num;
+                $stmt->execute($data_friendlist);
+                ?>
+
+                <div id="modal_friend_send" class="modal">
+                  <div class="modal-content">
+                    <h4>フレンド申請済みリスト</h4>
+                <table border="1">
+                  <caption>申請した者一覧</caption>
+                  <tr>
+                    <th>会員番号</th>
+                    <th>会員名</th>
+                    <th></th>
+                  </tr>
+                <?php
+                while(true){
+                  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+                  if($rec == false){
+                    break;
+                  }
+                  print '<tr>';
+                  print '<td>'.$rec['number'].'</td>';
+                  print '<td>'.$rec['name'].'</td>';
+                  print '<form method="post" name="friend_send_form'.$rec['number'].'" action="friend_get_done.php">';
+                  print '<input type="hidden" name="get_done_num" value="'.$rec['number'].'">';
+                  print '<input type="hidden" name="get_done_name" value="'.$rec['name'].'">';
+                  print '<td style="text-align:right">';
+      					  print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:friend_send_form'.$rec['number'].'.submit()">申請取り下げ';
+                  print '</form>';
+                  print '</td>';
+                  print '</tr>';
+                  }
+                  print '</table>';
+                  ?>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">戻る</a>
+                  </div>
+                  </div>
+                <?php
 							}
 
 
@@ -197,7 +243,6 @@
       					  print '<input type="hidden" name="list_done_num" value="'.$list_num.'">';
       					  print '<input type="hidden" name="list_done_name" value="'.$list_name.'">'.'</br>';
                   print '<div class="modal-footer">';
-      					  print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:friend_delete_form'.$friend_from_count.'.submit()">解除';
                   print '<a href="#!" class="waves-effect waves-light btn modal-trigger" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>';
                   print '</div>';
       					  print '</form>';
