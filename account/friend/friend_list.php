@@ -26,12 +26,16 @@ else
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>フレンド機能</title>
+<title>フレンド - Stable</title>
+<?php
+  include('../../header.php');
+?>
 </head>
 <body>
+	<main>
+  <?php include('../../nav.php'); ?>
   <?php
   // DB接続(mysql, xampp)
 	$dbh = get_DBobj();
@@ -93,5 +97,7 @@ else
 
 }
 ?>
+</main>
+<?php include('../../footer.php'); ?>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>退会画面</title>
+<title>退会 - Stable</title>
 <?php
   include('../../header.php');
 ?>
