@@ -150,7 +150,17 @@
               $dbh = null;
 
               ?>
-              <table border="1">
+              <table border="1" style="margin:40px 0;">
+
+                <thead>
+                  <tr>
+                      <th style="text-align:center;">会員番号</th>
+                      <th style="text-align:center;">アイコン</th>
+                      <th style="text-align:center;">名前</th>
+                      <th style="text-align:center;"></th>
+                  </tr>
+                </thead>
+                <tbody>
                 <?php
                 $friend_from_count = 1;
                 while(true){
@@ -167,7 +177,7 @@
                   }else{
                     print'<td style="text-align:center;"><img src="../../images/default_icon.png" style="width:48px";></td>';
                   }
-                  print '<td><strong>'.$rec['name'].'</strong></td>';
+                  print '<td style="text-align:center;"><strong>'.$rec['name'].'</strong></td>';
                   print '<form method="post" name="friend_form'.$friend_from_count.'" action="friend_list_check.php">';
                   print '<input type="hidden" name="list_num" value="'.$rec['number'].'">';
                   print '<input type="hidden" name="list_name" value="'.$rec['name'].'">';
@@ -178,7 +188,7 @@
                   print '</tr>';
                   $friend_from_count += 1;
                   }
-              print '</table>';
+              print '</tbody></table>';
 						}
 						?>
             <a class="waves-effect waves-light2 btn-large" href="../../index.php" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>
