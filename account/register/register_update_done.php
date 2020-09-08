@@ -35,44 +35,46 @@ $file = $_FILES['triming_image'];
 //ファイルがアップロードされているかの確認
 if(!empty($file)) {
   //トリミング時の画像の高さ・幅を取得
-  // move_uploaded_file($file['tmp_name'],'../../download/'.$file['name']);
-  // $tmp_file_name = '../../download/'.$file['name'];
+
   // $size = getimagesize($tmp_file_name);
   // $src_w = 100;
   // $src_h = 100;
 
   //画像タイプを判定し、それに対応した読み込みを行う
-  // $base_img = null;
-  // if (exif_imagetype($tmp_file_name) == IMAGETYPE_PNG){
-  //     $base_img = imagecreatefrompng($tmp_file_name);// PNG
-  // }
-  // elseif (exif_imagetype($tmp_file_name) == IMAGETYPE_JPEG){
-  //     $base_img = imagecreatefromjpeg($tmp_file_name);// JPEG
-  // }
-  // elseif (exif_imagetype($tmp_file_name) == IMAGETYPE_GIF){
-  //     $base_img = imagecreatefromgif($tmp_file_name); // GIF
-  // }else{
-  //   print'この画像形式には対応していません';
-  //   exit();
-  // }
+  // $baseImage = null;
   // unlink($tmp_file_name);
 
 
   // 読み込んだ画像を加工・保存
-  // if ($base_img != null){
+  // if ($baseImage != null){
       list($width, $hight) = getimagesize($file['tmp_name']); // 元の画像名を指定してサイズを取得
-      $baseImage = imagecreatefromjpeg($file['tmp_name']); // 元の画像から新しい画像を作る準備
-      $image = imagecreatetruecolor(, ); // サイズを指定して新しい画像のキャンバスを作成
+      // 元の画像から新しい画像を作る準備
+      move_uploaded_file($file['tmp_name'],'../../download/'.$file['name']);
+      $tmp_file_name = '../../download/'.$file['name'];
+
+      if (exif_imagetype($tmp_file_name) == IMAGETYPE_PNG){
+          $baseImage = imagecreatefrompng($tmp_file_name);// PNG
+      }
+      elseif (exif_imagetype($tmp_file_name) == IMAGETYPE_JPEG){
+          $baseImage = imagecreatefromjpeg($tmp_file_name);// JPEG
+      }
+      elseif (exif_imagetype($tmp_file_name) == IMAGETYPE_GIF){
+          $baseImage = imagecreatefromgif($tmp_file_name); // GIF
+      }else{
+        print'この画像形式には対応していません';
+        exit();
+      }
+      $image = imagecreatetruecolor($width,$hight); // サイズを指定して新しい画像のキャンバスを作成
 
       // 画像のコピーと伸縮
-      imagecopyresampled($image, $baseImage, 0, 0, 0, 0, , , $width, $hight);
+      imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $width, $hight, $width, $hight);
       // 保存先パスを作る
       $img_path = '../../download/'.$_SESSION['regist_number'].'.jpg';
 
       // コピーした画像を出力する
       imagejpeg($image , $img_path);
     // // アルファブレンディングを無効にします
-    // imagealphablending($base_img, false);
+    // imagealphablending($baseImage, false);
     //
     // // 真ん中が透過色のマスク画像を用意
     // $mask = imagecreatetruecolor($src_w, $src_h);
@@ -87,22 +89,22 @@ if(!empty($file)) {
     // imagefilledellipse($mask, $src_w/2, $src_h/2, $src_w-20, $src_h-20, $mask_transparent);
     // // imagearc($mask, $src_w/2, $src_h/2, $src_w, $src_h, 0, 360, $mask_transparent);
     // // 元画像とマスク画像を重ね合わせ
-    // imagecopymerge($base_img, $mask, 0, 0, 0, 0, $src_w, $src_h, 100);
+    // imagecopymerge($baseImage, $mask, 0, 0, 0, 0, $src_w, $src_h, 100);
     //
     // // 余分な背景色の緑(0, 255, 0)を透過色に指定
-    // $src_transparent = imagecolorallocate($base_img, 0, 255, 0);
-    // imagecolortransparent($base_img, $src_transparent);
-    // imagefill($base_img, 0, 0, $src_transparent);
+    // $src_transparent = imagecolorallocate($baseImage, 0, 255, 0);
+    // imagecolortransparent($baseImage, $src_transparent);
+    // imagefill($baseImage, 0, 0, $src_transparent);
 
-    // imagecolorallocatealpha($base_img, 0, 255, 0, 100);
+    // imagecolorallocatealpha($baseImage, 0, 255, 0, 100);
 
 
       // // アルファフラグを設定します
-      // // imagesavealpha($base_img, true);
+      // // imagesavealpha($baseImage, true);
       // // 生成した画像を保存する
       //
-      // imagepng($base_img, $img_path);
-      // imagedestroy($base_img);
+      // imagepng($baseImage, $img_path);
+      // imagedestroy($baseImage);
 
       $dbh = get_DBobj();
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
