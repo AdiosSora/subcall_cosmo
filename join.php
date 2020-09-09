@@ -6,44 +6,45 @@
       session_regenerate_id(true);
       // require_once('./common.php');
       // $post = sanitize($_POST);
-      if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
-          $roomID=$_POST['room_id'];
-      }else{
-        header('Location: ./index.php');
-        exit;
-      }
-      $login_flg=isset($_SESSION['bool']);
-
-      if($login_flg=='true'){//ログインチェック
-      //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
-        $regist_name=$_SESSION['regist_name'];
-        include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・
-        $dbh=get_DBobj();
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $sql = 'select number from account where name=?';
-        $data[] = $regist_name;
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute($data);
-        $dbh=null;
-        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        $memberPeer=$rec['number'];
-
-        print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
-        print '<input type="hidden" id="name" value="'.$regist_name.'">';
-        print '<input type="hidden" id="login_FLG" value="true">';
-        print '<input type="hidden" id="room__name" value="'.$roomID.'">';
-      }
-      else //ゲストのためpeerIDをどうするか用検討。
-      {
-        $guestName=$_POST['guest_name'];
-        print '<input type="hidden" id="memberPeer" value="">';
-        print '<input type="hidden" id="name" value="'.$guestName.'">';
-        print '<input type="hidden" id="login_FLG" value="false">';
-        print '<input type="hidden" id="room__name" value="'.$roomID.'">';
-        if(isset($_POST['guest_name']) == false || $_POST['guest_name'] == ''){
+      if (isset($_POST['room_id']) && $_POST['room_id'] != '') {
+          $roomID = $_POST['room_id'];
+      } else {
           header('Location: ./index.php');
           exit;
-        }
+      }
+      $login_flg = isset($_SESSION['bool']);
+
+      if ($login_flg == 'true') {
+          //ログインチェック
+      //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
+        $regist_name = $_SESSION['regist_name'];
+          include './account/db/dbConnecter.php';//peerIDをaccountの主キーと紐づける用のSQL発行・
+        $dbh = get_DBobj();
+          $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = 'select number from account where name=?';
+          $data[] = $regist_name;
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+          $dbh = null;
+          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+          $memberPeer = $rec['number'];
+
+          print '<input type="hidden" id="memberPeer" value="'.$memberPeer.'">';
+          print '<input type="hidden" id="name" value="'.$regist_name.'">';
+          print '<input type="hidden" id="login_FLG" value="true">';
+          print '<input type="hidden" id="room__name" value="'.$roomID.'">';
+      } else {
+          //ゲストのためpeerIDをどうするか用検討。
+
+        $guestName = $_POST['guest_name'];
+          print '<input type="hidden" id="memberPeer" value="">';
+          print '<input type="hidden" id="name" value="'.$guestName.'">';
+          print '<input type="hidden" id="login_FLG" value="false">';
+          print '<input type="hidden" id="room__name" value="'.$roomID.'">';
+          if (isset($_POST['guest_name']) == false || $_POST['guest_name'] == '') {
+              header('Location: ./index.php');
+              exit;
+          }
       }
     ?>
     <meta charset="UTF-8">
@@ -89,23 +90,43 @@
               <ion-icon name="caret-down-outline"/>
             </p>
           </a> -->
-          <a class="menu-button">
-            <p>
-              <ion-icon name="code-slash-outline"/>
-            </p>
-          </a>
           <div id="setting">
-            <a class="menu-button">
+            <a class="menu-button" v-on:click="openModal">
               <p>
-                <ion-icon name="people-circle-outline"/>
+                <ion-icon name="code-slash-outline" v-pre/>
               </p>
             </a>
+            <open-modal v-show="showContent" v-on:from-child="closeModal">
+            </open-modal>
+          </div>
+          <div id="setting2">
+            <a class="menu-button" v-on:click="openModal">
+              <p>
+                <ion-icon name="people-circle-outline" v-pre/>
+              </p>
+            </a>
+            <open-modal v-show="showContent" v-on:from-child="closeModal">
+                <?php
+                if (isset($regist_name)) {
+                    print '<iframe id="inlineFrameExample"
+                      width="300"
+                      height="200"
+                      src="invitation.php?ROOMname='.$roomID.'&hostname='.$regist_name.'&usernum='.$memberPeer.'">
+                  </iframe>';
+                } else {
+                    print 'ログインすることでフレンド招待機能が解放されます';
+                }
+                  ?>
+            </open-modal>
+          </div>
+          <div id="setting3">
             <a class="menu-button" v-on:click="openModal">
               <p>
                 <ion-icon name="build-outline" v-pre/>
               </p>
             </a>
             <open-modal v-show="showContent" v-on:from-child="closeModal">
+              <h2>設定</h2>
               <p>Your id: <span id="my-id">...</span></p>
               <div class="select">
                 <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
@@ -133,28 +154,18 @@
               <div id="step3">
                 <p>Currently in room <span id="room-id">...</span></p>
                 <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
-                <button id="dlSpeechLog" class="" type="submit">音声ログダウンロード</div>
-                  <?php
-                  if(isset($regist_name)){
-                    print '<iframe id="inlineFrameExample"
-                        width="300"
-                        height="200"
-                        src="invitation.php?ROOMname='.$roomID.'&hostname='.$regist_name.'&usernum='.$memberPeer.'">
-                    </iframe>';
-                  }
-                  else{
-                    print 'ログインすることでフレンド招待機能が解放されます';
-                  }
-                    ?>
-
-
+                <button id="dlSpeechLog" class="" type="submit">音声ログダウンロード</button>
               </div>
             </open-modal>
-
+            </div>
           </div>
         </div>
       <div class="remote-streams" id="their-videos"></div>
-      <div id="main_button"></div>
+      <div id="main_button">
+        <a href="javascript:Video_MuteToggle();"><ion-icon name="mic-outline" v-pre></ion-icon></a>
+        <a href="javascript:Mic_MuteToggle();"><ion-icon name="videocam-outline" v-pre></ion-icon></a>
+        <a href="/index.php"><ion-icon name="log-out-outline" v-pre></ion-icon></a>
+      </div>
     </div>
 
     <div id="sub">
@@ -211,6 +222,45 @@
         }
       }
     });
+    new Vue({
+      el: '#setting2',
+      data: {
+        showContent: false
+      },
+      methods:{
+        openModal: function(){
+          this.showContent = true
+        },
+        closeModal: function(){
+          this.showContent = false
+        }
+      }
+    });
+    new Vue({
+      el: '#setting3',
+      data: {
+        showContent: false
+      },
+      methods:{
+        openModal: function(){
+          this.showContent = true
+        },
+        closeModal: function(){
+          this.showContent = false
+        }
+      }
+    });
+    private MediaStream stream;
+    var video_mute_flag = true;
+    // muteする
+    function Video_MuteToggle() {
+      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
+      stream.setEnableVideoTrack(0, video_mute_flag);
+    }
+    function Mic_MuteToggle() {
+      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
+          stream.setEnableAudioTrack(0, video_mute_flag);
+    }
     </script>
   </body>
 </html>

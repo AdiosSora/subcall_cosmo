@@ -159,14 +159,39 @@ body {
   overflow:hidden;
 }
 #main_button{
-  width:600px;
-  height:180px;
-  background-color: #ffffff;
-  z-index: 1;
+  width:311px;
+  height:80px;
+  background-color: rgba(255,255,255,0.5);
+  z-index: 2;
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 40%;
+  bottom: 0%;
   transform: translateY(-50%);
+  border-radius: 30px;
+  a{
+    width:100px;
+    height:60px;
+    padding:20px 0 0 0;
+    display: inline-block;
+    text-align: center;
+    &:first-child{
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+    &:last-child{
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+    &:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+    ion-icon {
+      font-size: 40px;
+    }
+    &:link, &:visited, &:hover, &:active {
+      color:black;
+    }
+  }
 }
 a.menu-button {
   text-align:center;
