@@ -9,7 +9,7 @@
   include('./account/db/dbConnecter.php');
 
   if(isset($_POST['inv_name'])){//招待ボタンが押された判定
-    
+
     $InvName=$_POST['inv_name'];
     $host_name=$_POST['host_name'];
     $ROOMid=$_POST['ROOMID'];
@@ -80,7 +80,18 @@
       print '<input type="hidden" name="ROOMID" value="'.$ROOMid.'">';
       print '<td align="center">';
 
-      print '<input type="submit" value="招待" >';
+      $sql='SELECT host_name from invitation where host_name=:HOSTname AND inv_name=:INVname;';
+      $stat = $dbh->prepare($sql);
+      $stat->execute(array("HOSTname"=>$host_name,
+                          "INVname"=>$resultName));
+      $result = $stat->fetch(PDO::FETCH_ASSOC);
+      if($result==false){
+        print '<input type="submit" value="招待" >';
+      }
+      else{
+        print '招待済み';
+      }
+
 
 
       print '</form>';
