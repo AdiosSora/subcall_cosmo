@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -108,7 +106,7 @@
                   print '<input type="hidden" name="get_done_num" value="'.$rec['number'].'">';
                   print '<input type="hidden" name="get_done_name" value="'.$rec['name'].'">';
                   print '<td style="text-align:right">';
-      					  print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:friend_send_form'.$rec['number'].'.submit()">申請取り下げ';
+      					  print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:friend_send_form'.$rec['number'].'.submit()">申請取り下げ</a>';
                   print '</form>';
                   print '</td>';
                   print '</tr>';
@@ -200,8 +198,7 @@
                   			// 自身のフレンドが上限に達していない場合
                   			if($rec_count['count(user_number)'] < 10){
                   				// 相手のフレンドが上限に達していない場合
-                  				print '<input type="hidden" name="add_yes" value="申請の許可">';
-                          print '<a class="waves-effect waves-light btn modal-trigger" style="margin:5px;" href="javascript:friend_confirm_form'.$rec['number'].'.submit()">許可</a>';
+                          print '<input type="submit" name="add_yes" value="許可" style="margin:5px;"></input>';
                   			}else{
                   				// 相手のフレンドが上限に達している場合
                   				print '許可できません。';
@@ -212,8 +209,8 @@
                   			print '許可できません。';
                   			$flag = 2;
                   		}
-                      print '<input type="hidden" name="add_no" value="申請の拒否">';
-                      print '<a class="waves-effect waves-light btn modal-trigger" style="background-color:#dddddd;color:#111111;margin:5px;" href="javascript:friend_confirm_form'.$rec['number'].'.submit()">拒否</a>';
+
+                      print '<input type="submit" name="add_no" value="拒否" style="margin:5px;"></input>';
                   		print '</td>';
                   		// print '<td>';
                   		// if($flag == 0){
