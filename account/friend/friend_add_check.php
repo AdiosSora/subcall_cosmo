@@ -65,14 +65,14 @@ else
 	else if(isset($_POST['add_no']) == true)
 	{
 		// 「不可」ボタンが押された
-		print $_SESSION['regist_name'];
+		// print $_SESSION['regist_name'];
 		// print '様に届いた申請を却下します'.'</br>';
 		// print '会員番号：'.$add_num;
 		// print '　　会員名：'.$add_name.'</br>';
 		print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
 		print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
 		// print '<br />';
-		// print '<input type="hidden" name="add_done_no" value="はい">';
+		print '<input type="hidden" name="add_done_no" value="いいえ">';
 	}
 	print '</form>';
 	print '<br />';

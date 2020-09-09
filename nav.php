@@ -38,8 +38,25 @@ session_regenerate_id(true);
        ?>
     </ul>
     <ul id="nav-mobile" class="sidenav">
-      <li><a href="#">Stableとは？</a></li>
-      <li><a href="#">使い方</a></li>
+      <?php
+        // セッション名は統一
+        if(isset($_SESSION['bool']) == false)
+        {
+          print '<li><a href="#">Stableとは？</a></li>';
+          print '<li><a href="#">使い方</a></li>';
+          print '<li><a href="/account/login/login.php">ログイン</a></li>';
+          print '<li><a href="/account/register/register.php">会員登録</a></li>';
+          print '<br />';
+        }
+        else
+        {
+          print '<li style="color:#111111 !important;margin:0 10px;">'.$_SESSION['regist_name'].'さん</li>';
+          print '<li><a href="#">Stableとは？</a></li>';
+          print '<li><a href="#">使い方</a></li>';
+          print '<li><a href="/account/profile/profile.php">マイページ</a></li>';
+          print '<li><a href="/account/logout/logout.php">ログアウト</a></li>';
+        }
+       ?>
     </ul>
     <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>

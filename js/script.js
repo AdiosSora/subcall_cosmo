@@ -7,13 +7,15 @@ $(function() {
 
   if(login_FLG=='true'){ //ログイン確認 TODO(PEERIDがundefindになる事象の修正)
     console.log("loginが完了しています.");
-    memPeerid = document.getElementById('memberPeer').value;
+    memPeerid = 'stable-';
+    memPeerid += document.getElementById('memberPeer').value;
     console.log(memPeerid)
   }
   else{
     console.log("loginが完了していません");
     var N=16
-    memPeerid = Math.random().toString(36).slice(-8);
+    memPeerid = 'stable-';
+    memPeerid += Math.random().toString(36).slice(-8);
   }
 
   const peer = new Peer(memPeerid,{
@@ -222,6 +224,7 @@ $(function() {
 
       $('#their-videos').append($(
         '<div class="remoteVideo_div video_' + peerId +'" id="' + id + '">' +
+          '<div class="remoteVideo_name_tag"></div>' +
           '<label>' + stream.peerId + ':' + stream.id + '</label>' +
           '<video class="remoteVideos" autoplay playsinline>' +
           '<p class="subtext_field"></p>' +

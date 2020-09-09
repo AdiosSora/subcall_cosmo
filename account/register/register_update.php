@@ -7,35 +7,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../js/register_update.js"></script>
     <script src="../../js/cropper.js"></script>
-    <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        var image = document.querySelector('#triming_image');
-        var cropper = new Cropper(image, {
-          dragMode: 'move',
-          aspectRatio: 1 / 1,
-          autoCropArea: 0.65,
-          restore: false,
-          guides: false,
-          center: false,
-          highlight: false,
-          cropBoxMovable: false,
-          cropBoxResizable: false,
-          toggleDragModeOnDblclick: false,
-        });
-      });
-    </script>
     <title>プロフィール更新 - Stable </title>
     <?php include '../../header.php'; ?>
     <style>
-      .container {
-        margin: 20px auto;
-        max-width: 640px;
-      }
-
-      img {
-        max-width: 100%;
-      }
-    </style>
+           /* 下記は円形にするなら必須です。 */
+           .cropper-view-box,
+           .cropper-face {
+               border-radius: 50%;
+           }
+           /* 下記はできれば必要なスタイルかと思います。（厳密にはスタイルなど必要ありませんが、最低現のスタイルとしてという意味です。） */
+           .cropper-container{
+               width: 100%;
+           }
+           /* 下記は必須ではありません。 Sampleを見やすくするために作成しました。 */
+           main{
+               width: 50%;
+               margin: 0 auto;
+           }
+           main .triming-image{
+               width: 100%;
+               height: 100px;
+               border: dashed #000 1px;
+               cursor: pointer;
+           }
+           main #trimed_image{
+               height: 500px;
+           }
+     </style>
   </head>
   <body>
   <main>

@@ -158,7 +158,16 @@ body {
   background-color: #ffffff;
   overflow:hidden;
 }
-
+#main_button{
+  width:600px;
+  height:180px;
+  background-color: #ffffff;
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
 a.menu-button {
   text-align:center;
   background: #fff;
