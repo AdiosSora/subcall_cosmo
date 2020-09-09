@@ -12,12 +12,7 @@
           header('Location: ./index.php');
           exit;
         }
-<<<<<<< HEAD
-
-      $rogin_flg=isset($_SESSION['bool']);
-=======
       $login_flg=isset($_SESSION['bool']);
->>>>>>> 1ef8c746c18cd099a4c250e0d62113d2beb1a774
 
       if($login_flg=='true'){//ログインチェック
       //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
