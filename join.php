@@ -8,10 +8,10 @@
       // $post = sanitize($_POST);
       if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
           $roomID=$_POST['room_id'];
-        }else{
-          header('Location: ./index.php');
-          exit;
-        }
+      }else{
+        header('Location: ./index.php');
+        exit;
+      }
       $login_flg=isset($_SESSION['bool']);
 
       if($login_flg=='true'){//ログインチェック
@@ -84,11 +84,11 @@
       <div id="local_video">
         <video id="my-video" muted="true" autoplay playsinline></video>
         <div id="button_group">
-          <a class="menu-button" id="local_none_button">
+          <!-- <a class="menu-button" id="local_none_button">
             <p>
               <ion-icon name="caret-down-outline"/>
             </p>
-          </a>
+          </a> -->
           <a class="menu-button">
             <p>
               <ion-icon name="code-slash-outline"/>
@@ -154,6 +154,7 @@
           </div>
         </div>
       <div class="remote-streams" id="their-videos"></div>
+      <div id="main_button"></div>
     </div>
 
     <div id="sub">
