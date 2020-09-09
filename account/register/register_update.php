@@ -57,26 +57,9 @@
       <h2 style="color:black !important;">プロフィール編集</h2><br/>
         <?php
 
-<<<<<<< HEAD
-    <form method='POST' action="register_update_done.php" enctype="multipart/form-data">
-      <main>
-        <!-- <div class="cropper-container"> -->
-        <!-- トリミング用 -->
-        <input type="file" id="triming_image" name="triming_image">
-        <img src="" alt="トリミング画像" id="trimed_image" style="display: none;"></br>
-        <label for="avatar">アップロードする画像を選択してください</label>
-        <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
-        <!-- トリミング時の高さ・幅を取得 -->
-        <input type="hidden" id="upload-image-x" name="image_x" value="0">
-        <input type="hidden" id="upload-image-y" name="image_y" value="0">
-        <input type="hidden" id="upload-image-w" name="image_w" value="0">
-        <input type="hidden" id="upload-image-h" name="image_h" value="0">
-      </main>
-=======
           include('../db/dbConnecter.php');
           $dbh = get_DBobj();
           $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
->>>>>>> d1d5f8e0ce6d3048e201025fdecebf0c5e7ca724
 
           $sql = 'SELECT name FROM account;';
           $stmt = $dbh->query($sql);
