@@ -5,15 +5,8 @@ session_regenerate_id(true);
 include('../db/dbConnecter.php');
 if(isset($_SESSION['bool']) == false)
 {
-	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../../index.php">top画面へ</a><br />';
-	print '<br />';
-}
-// 選択されているか、不正に入ったかチェック
-else if(isset($_POST['add_num']) == false)
-{
-  header('Location: friend_ng.php');
-  exit();
+	header('Location: /account/login/login.php');
+	exit();
 }
 else
 {
@@ -28,7 +21,7 @@ else
 <meta charset="UTF-8">
 <title>フレンド機能</title>
 </head>
-<body>
+<body onLoad="document.friend_add_checkform.submit()">
   <?php
 	// DB接続
   $dbh = get_DBobj();
@@ -48,47 +41,45 @@ else
 
 	$dbh = null;
 
-	print '<form method="post" action="friend_add_done.php">';
+	print '<form method="post" name="friend_add_checkform" action="friend_add_done.php">';
 	if(isset($_POST['add_yes']) == true)
 	{
 		// 「許可」ボタンが押された
 		if($count_friend >= 10){
 			// 相手がフレンド上限に達した
-			print '相手の'.$add_name.'様はフレンド上限に達しています。'.'<br />';
-			print '申請の許可ができません。'.'<br />';
-			print '<button type="button" onclick="history.back()" value="friend_max">戻る</button>';
+			// print '相手の'.$add_name.'様はフレンド上限に達しています。'.'<br />';
+			// print '申請の許可ができません。'.'<br />';
+			header('Location: ../friend/friend.php');
 		}else{
 			// 相手のフレンド登録に余裕あり
-		 	print $_SESSION['regist_name'];
-		 	print '様に届いた申請を許可します'.'</br>';
-			print '会員番号：'.$add_num;
-		  print '　　会員名：'.$add_name.'</br>';
+		 	// print $_SESSION['regist_name'];
+		 	// print '様に届いた申請を許可します'.'</br>';
+			// print '会員番号：'.$add_num;
+		  // print '　　会員名：'.$add_name.'</br>';
 			print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
 		  print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
 		  print '<br />';
-		  print '<input type="submit" name="add_done_yes" value="はい">';
-			print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
+		  print '<input type="hidden" name="add_done_yes" value="はい">';
 		}
 	}
 	else if(isset($_POST['add_no']) == true)
 	{
 		// 「不可」ボタンが押された
 		print $_SESSION['regist_name'];
-		print '様に届いた申請を却下します'.'</br>';
-		print '会員番号：'.$add_num;
-		print '　　会員名：'.$add_name.'</br>';
+		// print '様に届いた申請を却下します'.'</br>';
+		// print '会員番号：'.$add_num;
+		// print '　　会員名：'.$add_name.'</br>';
 		print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
 		print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
-		print '<br />';
-		print '<input type="submit" name="add_done_no" value="はい">';
-		print '<button type="button" onclick="history.back()" value="no">いいえ</button>';
+		// print '<br />';
+		// print '<input type="hidden" name="add_done_no" value="はい">';
 	}
 	print '</form>';
 	print '<br />';
 
 }
 ?>
-<a href="friend.php">フレンド画面へ</a></br>
-<a href="../../index.php">トップ画面へ</a>
+<!-- <a href="friend.php">フレンド画面へ</a></br>
+<a href="../../index.php">トップ画面へ</a> -->
 </body>
 </html>
