@@ -52,8 +52,8 @@ else
 			header('Location: ../friend/friend.php');
 		}else{
 			// 相手のフレンド登録に余裕あり
-		 	print $_SESSION['regist_name'];
-		 	print '様に届いた申請を許可します'.'</br>';
+		 	// print $_SESSION['regist_name'];
+		 	// print '様に届いた申請を許可します'.'</br>';
 			// print '会員番号：'.$add_num;
 		  // print '　　会員名：'.$add_name.'</br>';
 			print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
@@ -66,20 +66,20 @@ else
 	{
 		// 「不可」ボタンが押された
 		print $_SESSION['regist_name'];
-		print '様に届いた申請を却下します'.'</br>';
-		print '会員番号：'.$add_num;
-		print '　　会員名：'.$add_name.'</br>';
+		// print '様に届いた申請を却下します'.'</br>';
+		// print '会員番号：'.$add_num;
+		// print '　　会員名：'.$add_name.'</br>';
 		print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
 		print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
-		print '<br />';
-		print '<input type="hidden" name="add_done_no" value="はい">';
+		// print '<br />';
+		// print '<input type="hidden" name="add_done_no" value="はい">';
 	}
 	print '</form>';
 	print '<br />';
 
 }
 ?>
-<a href="friend.php">フレンド画面へ</a></br>
-<a href="../../index.php">トップ画面へ</a>
+<!-- <a href="friend.php">フレンド画面へ</a></br>
+<a href="../../index.php">トップ画面へ</a> -->
 </body>
 </html>
