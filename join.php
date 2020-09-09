@@ -8,10 +8,10 @@
       // $post = sanitize($_POST);
       if(isset($_POST['room_id']) && $_POST['room_id'] != ''){
           $roomID=$_POST['room_id'];
-        }else{
-          header('Location: ./index.php');
-          exit;
-        }
+      }else{
+        header('Location: ./index.php');
+        exit;
+      }
       $login_flg=isset($_SESSION['bool']);
 
       if($login_flg=='true'){//ログインチェック
