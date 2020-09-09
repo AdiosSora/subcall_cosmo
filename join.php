@@ -12,6 +12,7 @@
           header('Location: ./index.php');
           exit;
         }
+
       $rogin_flg=isset($_SESSION['bool']);
 
       if($rogin_flg=='true'){//ログインチェック
