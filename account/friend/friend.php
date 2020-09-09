@@ -212,6 +212,7 @@
                   			print '許可できません。';
                   			$flag = 2;
                   		}
+                      print '<input type="hidden" name="add_no" value="申請の拒否">';
                       print '<a class="waves-effect waves-light btn modal-trigger" style="background-color:#dddddd;color:#111111;margin:5px;" href="javascript:friend_confirm_form'.$rec['number'].'.submit()">拒否</a>';
                   		print '</td>';
                   		// print '<td>';
