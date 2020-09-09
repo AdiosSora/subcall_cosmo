@@ -72,7 +72,7 @@ else
 		print '<input type="hidden" name="add_done_num" value="'.$add_num.'">';
 		print '<input type="hidden" name="add_done_name" value="'.$add_name.'">';
 		// print '<br />';
-		 print '<input type="hidden" name="add_done_no" value="いいえ">';
+		print '<input type="hidden" name="add_done_no" value="いいえ">';
 	}
 	print '</form>';
 	print '<br />';
