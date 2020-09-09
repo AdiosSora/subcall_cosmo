@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>フレンド一覧</title>
+<title>フレンド - Stable </title>
 <?php
   include('../../header.php');
 ?>
@@ -88,9 +88,8 @@
 
                 <div id="modal_friend_send" class="modal">
                   <div class="modal-content">
-                    <h4>フレンド申請済みリスト</h4>
+                    <h4>申請済みリスト</h4>
                 <table border="1">
-                  <caption>申請した者一覧</caption>
                   <tr>
                     <th>会員番号</th>
                     <th>会員名</th>
@@ -160,15 +159,14 @@
                   	$stmt->execute($data_friendget);
 
                   	?>
+                    <h4>受取申請一覧</h4>
                   	<table border="1">
-                  		<caption>届いた申請一覧</caption>
                       <tr>
                         <th>会員番号</th>
                         <th>会員名</th>
                   			<th>フレンド数</th>
-                  			<th>許可の実行</th>
-                  			<th>不可の実行</th>
-                  			<th>備考</th>
+                  			<th></th>
+                  			<th></th>
                       </tr>
                   	<?php
 
@@ -194,40 +192,39 @@
                       print '<td>'.$rec['number'].'</td>';
                       print '<td>'.$rec['name'].'</td>';
                   		print '<td align="center">'.$rec_count['count(user_number)'].'　／　10</td>';
-                  		print '<form method="post" action="friend_add_check.php">';
+                  		print '<form method="post" name="friend_confirm_form'.$rec['number'].'" action="friend_add_check.php">';
                   		print '<input type="hidden" name="add_num" value="'.$rec['number'].'">';
                   		print '<input type="hidden" name="add_name" value="'.$rec['name'].'">';
-                  		print '<td align="center">';
+                  		print '<td style="text-align:right;">';
                   		if($count_user < 10){
                   			// 自身のフレンドが上限に達していない場合
                   			if($rec_count['count(user_number)'] < 10){
                   				// 相手のフレンドが上限に達していない場合
-                  				print '<input type="submit" name="add_yes" value="申請の許可">';
+                  				print '<input type="hidden" name="add_yes" value="申請の許可">';
+                          print '<a class="waves-effect waves-light btn modal-trigger" style="margin:5px;" href="javascript:friend_confirm_form'.$rec['number'].'.submit()">許可</a>';
                   			}else{
                   				// 相手のフレンドが上限に達している場合
                   				print '許可できません。';
                   				$flag = 1;
                   			}
-                  			print '</td>';
                   		}else{
                   			// 自身のフレンドが上限に達している場合
                   			print '許可できません。';
                   			$flag = 2;
                   		}
-                  		print '<td align="center">';
-                  	  print '<input type="submit" name="add_no" value="申請の不可">';
+                      print '<a class="waves-effect waves-light btn modal-trigger" style="background-color:#dddddd;color:#111111;margin:5px;" href="javascript:friend_confirm_form'.$rec['number'].'.submit()">拒否</a>';
                   		print '</td>';
-                  		print '<td>';
-                  		if($flag == 0){
-                  			print '許可・不可できます。';
-                  		}else{
-                  			if($flag == 1){
-                  				print '相手のフレンドが上限に達しているため、許可できません。';
-                  			}else{
-                  				print '自身のフレンドが上限に達しているため、許可できません。';
-                  			}
-                  		}
-                  		print '</td>';
+                  		// print '<td>';
+                  		// if($flag == 0){
+                  		// 	print '許可・不可できます。';
+                  		// }else{
+                  		// 	if($flag == 1){
+                  		// 		print '相手のフレンドが上限に達しているため、許可できません。';
+                  		// 	}else{
+                  		// 		print '自身のフレンドが上限に達しているため、許可できません。';
+                  		// 	}
+                  		// }
+                  		// print '</td>';
                   		print '</tr>';
                   		print '</form>';
 
@@ -239,7 +236,7 @@
                     ?>
                   </div>
                   <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">戻る</a>
                   </div>
                 </div>
               <?php
@@ -251,10 +248,10 @@
 							<div class="form_title col s12">
 								<label for="name" class="form_name">フレンドを探す</label>
 							</div>
-              <div class="col s10">
+              <div class="col s9">
 		            <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
               </div>
-              <div class="col s2">
+              <div class="col s3">
                 <a class="waves-effect waves-light btn-large" id="btn" href="javascript:friend_serch_form.submit()">検索</a>
               </div>
 						</form>
@@ -349,7 +346,7 @@
               print '</tbody></table>';
 						}
 						?>
-            <a class="waves-effect waves-light2 btn-large" href="../../index.php" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>
+            <a class="waves-effect waves-light2 btn-large" href="../profile/profile.php" style="background-color:#dddddd;color:#111111;margin:5px;">戻る</a>
 				</div>
 			</div>
 		</div>

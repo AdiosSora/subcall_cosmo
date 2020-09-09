@@ -12,9 +12,9 @@
           header('Location: ./index.php');
           exit;
         }
-      $rogin_flg=isset($_SESSION['bool']);
+      $login_flg=isset($_SESSION['bool']);
 
-      if($rogin_flg=='true'){//ログインチェック
+      if($login_flg=='true'){//ログインチェック
       //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
         $regist_name=$_SESSION['regist_name'];
         include('./account/db/dbConnecter.php');//peerIDをaccountの主キーと紐づける用のSQL発行・

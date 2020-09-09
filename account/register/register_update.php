@@ -102,7 +102,7 @@
 
           <!--メールアドレスフォーム-->
           <div class="input-field">
-          <label for="name">E-mail
+          <label for="mail_address">E-mail
           <a class="form_required_mark">必須</a></label>
           <input type="text" id="address" name="mail_address" contentEditable="true" autocomplete="off" value="<?php print $_SESSION['regist_address'];?>">
           <p id="validetion_alart_email" style="display:none;">このメールアドレスは既に使用されています。</p>
@@ -121,8 +121,9 @@
           ?>
 
           <!--生年月日（年）-->
+          <div style="text-align:left;"><label>生年月日</label></div>
           <div class="input-field col s12 m4">
-            <div class="col s10">
+            <div class="col s10" name="birthday">
               <select class="browser-default" name="year" id="year">
                 <option value="<?php print $year; ?>" checked><?php print $year; ?></option>
                 <?php
