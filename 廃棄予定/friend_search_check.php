@@ -1,36 +1,35 @@
 <!--フレンド検索の結果-->
-<?php
-session_start();
-session_regenerate_id(true);
-include('../db/dbConnecter.php');
-if(isset($_SESSION['bool']) == false)
-{
-	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../../index.php">top画面へ</a><br />';
-	print '<br />';
-}
-else if(isset($_POST['search_check']) == false)
-{
-  // 不正な動作でたどり着いた
-  header('Location: friend_ng.php');
-  exit();
-}
-else
-{
-  // 変数の定義、初期化
-	$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
-  $search_num = $_POST['search_num'];   // 申請する相手番号取得
-  $search_name = $_POST['search_name'];   // 申請する相手名取得
-
-?>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>フレンド機能</title>
+<?php
+  include('../../header.php');
+?>
 </head>
 <body>
+  <?php include('../../nav.php'); ?>
+	<?php
+	include('../db/dbConnecter.php');
+	if(isset($_SESSION['bool']) == false)
+	{
+		header('Location: /account/login/login.php');
+		exit();
+	}else
+	{
+	  // 変数の定義、初期化
+		$user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+	  $search_num = $_POST['search_num'];   // 申請する相手番号取得
+	  $search_name = $_POST['search_name'];   // 申請する相手名取得
+
+	?>
+		<main>
+    <div class="container">
+      <div class="section no-pad-bot">
+        <div class="row" style="margin:10vh 0;">
+          <div class="col offset-s2 s8 center">
   <?php
   // DB接続(mysql, xampp)
 	$dbh = get_DBobj();
@@ -49,10 +48,6 @@ else
 
   $dbh = null;
 
-	print $_SESSION['regist_name'];
-	print '様の出す申請を管理します。';
-	print '<br /><br />';
-
 	if($rec_add['count(user_number)'] >0){
 	   // すでに相手から申請されている、friend_add_check.php に飛ばせるようにする
    	print 'すでに　'.$search_name.'　様から申請されています。'.'<br />';
@@ -60,8 +55,8 @@ else
 	  print '<form method="post" action="friend_add_check.php">';
    	print '<input type="hidden" name="add_num" value="'.$search_num.'">';
 		print '<input type="hidden" name="add_name" value="'.$search_name.'">'.'</br>';
-	  print '<input type="submit" name="add_yes" value="許可">';
-    print '<input type="submit" name="add_no" value="不可">';
+	  print '<input type="submit" class="waves-effect waves-light" name="add_yes" value="許可">';
+    print '<input type="submit" class="waves-effect waves-light" name="add_no" value="不可">';
 	 	print '<button type="button" onclick="history.back()" value="no">戻る</button>';
 	  print '</form>';
 
@@ -70,13 +65,12 @@ else
 	{
 	   // それ以外
 	   print '以下の方に申請します。'.'<br />';
-	   print '<form method="post" action="friend_search_done.php">';
+	   print '<form method="post" name="friend_search_checkform" action="friend_search_done.php">';
 	   print '会員番号：'.$search_num;
 	   print '　　会員名：'.$search_name;
 	   print '<input type="hidden" name="search_done_num" value="'.$search_num.'">';
 	   print '<input type="hidden" name="search_done_name" value="'.$search_name.'">'.'</br>';
-	   print '<input type="submit" name="search_done" value="申請する" >';
-	   print '<button type="button" onclick="history.back()" value="no">申請しない</button>';
+		 print '<a name="search_done" class="waves-effect waves-light btn" href="javascript:friend_search_checkform.submit()">申請する</a>';
 	   print '</form>';
 
 	 }
@@ -84,7 +78,12 @@ else
 
 }
 ?>
-<a href="friend.php">フレンド画面へ</a></br>
-<a href="../../index.php">トップ画面へ</a>
+<a href="friend.php" class="waves-effect waves-light btn-large grey darken-1">戻る</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<?php include('../../footer.php'); ?>
 </body>
 </html>

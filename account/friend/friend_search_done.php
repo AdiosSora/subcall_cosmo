@@ -1,36 +1,36 @@
 <!--届いたフレンド申請に対して行動の完了-->
-<?php
-session_start();
-session_regenerate_id(true);
-include('../db/dbConnecter.php');
-if(isset($_SESSION['bool']) == false)
-{
-	print 'ゲストユーザーではこの機能は使えません';
-	print '<a href="../../index.php">top画面へ</a><br />';
-	print '<br />';
-}
-// 不正に入ったかチェック
-else if(isset($_POST['search_done']) == false)
-{
-  header('Location: friend_ng.php');
-  exit();
-}
-else
-{
-  // 変数の定義
-  $user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
-	$user_name = $_SESSION['regist_name'];    	// ユーザー名取得
-	$search_done_num = $_POST['search_done_num'];		// 選択した会員番号取得
-  $search_done_name = $_POST['search_done_name'];   // 選択した名前取得
 
-?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>フレンド機能</title>
+<?php
+  include('../../header.php');
+?>
 </head>
 <body>
+  <?php include('../../nav.php'); ?>
+	<?php
+	include('../db/dbConnecter.php');
+	if(isset($_SESSION['bool']) == false)
+	{
+		header('Location: /account/login/login.php');
+		exit();
+	}else
+	{
+	  // 変数の定義
+	  $user_num = $_SESSION['regist_number'];    	// ユーザー番号取得
+		$user_name = $_SESSION['regist_name'];    	// ユーザー名取得
+		$search_done_num = $_POST['search_num'];		// 選択した会員番号取得
+	  $search_done_name = $_POST['search_name'];   // 選択した名前取得
+
+	?>
+		<main>
+    <div class="container">
+      <div class="section no-pad-bot">
+        <div class="row" style="margin:10vh 0;">
+          <div class="col offset-s2 s8 center">
   <?php
   // DB接続(mysql, xampp)
   $dbh = get_DBobj();
@@ -113,22 +113,13 @@ else
 				$data_comit[] = $user_num;   // 申請した（自身の）番号
 				$stmt_comit->execute($data_comit);
 
-				print $_SESSION['regist_name'];
-				print '様の以下の方への申請が完了しました。';
+				print '<h4>申請が完了しました。</h4>';
 				print '<br />';
 				print '会員番号：'.$search_done_num.'　　会員名：'.$search_done_name.'</br>';
 				print '</br>';
 			}else{
 				// 申請が重複した場合
-				print '申請処理中に、'.$search_done_name.'様からの申請が完了したため、処理を中断しました。';
-				print '<br />';
-				print '申請を許可しますか？'.'<br />';
-				print '<form method="post" action="friend_add_check.php">';
-				print '<input type="hidden" name="add_num" value="'.$search_done_num.'">';
-				print '<input type="hidden" name="add_name" value="'.$search_done_name.'">'.'</br>';
-				print '<input type="submit" name="add_yes" value="許可">';
-				print '<input type="submit" name="add_no" value="不可">';
-				print '</form>';
+				print '申請処理中に、'.$search_done_name.'様から申請されています。';
 			}
 		}
 		else
@@ -158,7 +149,8 @@ else
 	$dbh = null;
 }
 ?>
-<a href="friend.php">フレンド画面へ</a></br>
-<a href="../../index.php">トップ画面へ</a>
+<a href="friend.php" class="waves-effect waves-light btn-large grey darken-1">戻る</a>
+</main>
+<?php include('../../footer.php'); ?>
 </body>
 </html>
