@@ -2,9 +2,8 @@
 session_start();
 session_regenerate_id(true);
 
-$rogin_flg=isset($_SESSION['bool']);
-
-if($rogin_flg=='true'){//ログイン時の処理
+$login_flg=isset($_SESSION['bool']);
+if($login_flg=='true'){//ログイン時の処理
   $user_num = $_SESSION['regist_number'];
   $hostName =$_SESSION['regist_name'];
   include('./account/db/dbConnecter.php');
