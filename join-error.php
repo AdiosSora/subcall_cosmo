@@ -15,8 +15,10 @@
         <div class="section no-pad-bot">
           <div class="row" style="margin:5vh 0;">
             <div class="col s12 m8 offset-m2 center">
-              <?php if($_GET["error"]=="id"){
-                ?><h5 style="color:black !important;">同じ部屋に入室できません。</h5><?php
+              <?php if(isset($_GET["error"])==true){
+                if($_GET["error"]=="id"){
+                  ?><h5 style="color:black !important;">同じ部屋に入室できません。</h5><?php
+                }
               }else{
                 ?><h5 style="color:black !important;">ビデオカメラまたは、マイクが接続されていません。</h5><?php
               }
@@ -24,7 +26,7 @@
               <h6 style="color:black !important;">接続されているか確認して再度入室を行ってください。</h6>
               <form method="post" id="join_form" action="./join.php">
                 <div class="input-field col s12">
-                  <input name="room_id" id="room_id" type="text" class="validate" value="<?php print $_GET["room"]?>">
+                  <input name="room_id" id="room_id" type="text" class="validate" value="<?php print $_GET['room']?>">
                   <label for="room_id">Room ID</label>
                 </div>
                 <div class="input-field col s12"

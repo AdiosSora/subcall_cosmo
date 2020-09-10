@@ -43,7 +43,7 @@ $(function() {
 
   //接続に問題があった場合
   peer.on('error', err => {
-    document.location.href = "/join-error.php?error=id?room=" + encodeURI($('#join-room').val());
+    // document.location.href = "/join-error.php?error=id&room=" + encodeURI($('#join-room').val());
     // alert(err.message);
     // // Return to step 2 if error occurs
     // step2();
