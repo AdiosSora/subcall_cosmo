@@ -9,31 +9,6 @@
     <script src="../../js/cropper.js"></script>
     <title>プロフィール更新 - Stable </title>
     <?php include '../../header.php'; ?>
-    <style>
-           /* 下記は円形にするなら必須です。 */
-           .cropper-view-box,
-           .cropper-face {
-               border-radius: 50%;
-           }
-           /* 下記はできれば必要なスタイルかと思います。（厳密にはスタイルなど必要ありませんが、最低現のスタイルとしてという意味です。） */
-           .cropper-container{
-               width: 100%;
-           }
-           /* 下記は必須ではありません。 Sampleを見やすくするために作成しました。 */
-           main{
-               width: 50%;
-               margin: 0 auto;
-           }
-           main .triming-image{
-               width: 100%;
-               height: 100px;
-               border: dashed #000 1px;
-               cursor: pointer;
-           }
-           main #trimed_image{
-               height: 500px;
-           }
-     </style>
   </head>
   <body>
   <main>
@@ -78,19 +53,6 @@
           $php_json_email = json_encode($email_list);
         ?>
         <form method='POST' name="register_update_form" action="register_update_done.php" enctype="multipart/form-data">
-          <!-- <div class="cropper-container"> -->
-          <!-- トリミング用 -->
-          <input type="file" id="triming_image" name="triming_image">
-          <img src="" alt="トリミング画像" id="trimed_image" style="display: none;"></br>
-          <label for="avatar">アップロードする画像を選択してください</label>
-          <div id="result"></div>
-          <!-- <p><input type="button" id="crop_btn" value="画像をトリミングして送信" /></p> -->
-          <!-- トリミング時の高さ・幅を取得 -->
-          <input type="hidden" id="upload-image-x" name="image_x" value="0">
-          <input type="hidden" id="upload-image-y" name="image_y" value="0">
-          <input type="hidden" id="upload-image-w" name="image_w" value="0">
-          <input type="hidden" id="upload-image-h" name="image_h" value="0">
-
           <!-- ユーザフォーム -->
           <div class="input-field">
           <label for="name">ユーザ名<a class="form_required_mark">必須</a></label>
