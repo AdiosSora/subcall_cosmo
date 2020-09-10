@@ -61,21 +61,6 @@ $(function() {
     step3();
     step4();
   },2000);
-    var videoTrack = stream.getVideoTracks()[0];
-    var audioTrack = stream.getAudioTracks()[0];
-
-    var video_mute_flag = true;
-    var mic_mute_flag = true;
-    function Video_MuteToggle() {
-      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
-      videoTrack.enabled = video_mute_flag;
-      console.log(video_mute_flag);
-    }
-    function Mic_MuteToggle() {
-      if(mic_mute_flag==true){mic_mute_flag=false;}else{mic_mute_flag=true;}
-        audioTrack.enabled = mic_mute_flag;
-        console.log(mic_mute_flag);
-    }
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {
@@ -90,29 +75,6 @@ $(function() {
     $('#step1-error').hide();
     step1();
   });
-
-  var videoTrack = stream.getVideoTracks()[0];
-  var audioTrack = stream.getAudioTracks()[0];
-
-  var video_mute_flag = true;
-  var mic_mute_flag = true;
-  $('#video_mute_button').on('click', () => {
-    if(video_mute_flag){
-      video_mute_flag=false;
-    }else{
-      video_mute_flag=true;
-    }
-    videoTrack.enabled = video_mute_flag;
-  });
-  $('#mic_mute_button').on('click', () => {
-    if(mic_mute_flag){
-      mic_mute_flag=false;
-    }else{
-      mic_mute_flag=true;
-    }
-      audioTrack.enabled = mic_mute_flag;
-  });
-
   //チャット送信ボタンが押された場合
   $('#btn-send').on('click', () => {
     onClickSend();
@@ -319,7 +281,7 @@ $(function() {
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
-        speechLog+=`${getNow()}`+" "+`${result_name}「${result_Message}」\n\n`;
+        speechLog+=`${getNow()}`+" "+`${result_name}「${result_message}」\n\n`;
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_voicechat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +
