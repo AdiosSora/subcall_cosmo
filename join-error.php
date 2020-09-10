@@ -15,7 +15,12 @@
         <div class="section no-pad-bot">
           <div class="row" style="margin:5vh 0;">
             <div class="col s12 m8 offset-m2 center">
-              <h5 style="color:black !important;">ビデオカメラまたは、マイクが接続されていません。</h5>
+              <?php if($_GET["error"]=="id"){
+                ?><h5 style="color:black !important;">同じ部屋に入室できません。</h5><?php
+              }else{
+                ?><h5 style="color:black !important;">ビデオカメラまたは、マイクが接続されていません。</h5><?php
+              }
+              ?>
               <h6 style="color:black !important;">接続されているか確認して再度入室を行ってください。</h6>
               <form method="post" id="join_form" action="./join.php">
                 <div class="input-field col s12">
