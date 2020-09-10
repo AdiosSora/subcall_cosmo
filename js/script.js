@@ -48,7 +48,7 @@ $(function() {
     step2();
   });
 
-  //ルーム入室ボタンが押された場合
+  //自動入室
   setTimeout(function() {
     const roomName = $('#join-room').val();
     room = peer.joinRoom('sfu_video_' + roomName, {
@@ -202,8 +202,7 @@ $(function() {
 
       step2();
     }).catch(err => {
-      $('#step1-error').show();
-      console.error(err);
+      document.location.href = "/join-error.php?room=" + encodeURI($('#join-room').val());
     });
   }
 
