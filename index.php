@@ -18,9 +18,19 @@
               <div class="col s12 m6 offset-m6 center">
                 <h2 style="color:black !important;">会議へ参加する</h2>
                 <form method="post" id="join_form" action="./join.php">
-                  <div class="input-field col s12">
-                    <input name="room_id" id="room_id" type="text" class="validate">
-                    <label for="room_id">Room ID</label>
+                  <div class="input-field col s12"
+                  <?php
+                  if(isset($_GET['room_NAME'])==true){
+                    print 'style="display: none;">';
+                    print '<input name="room_id" id="room_id" type="text" value="'.$_GET['room_NAME'].'" class="validate">';
+                    print '<label for="room_id">Room ID</label>';
+                  }else{
+                    print 'style="display: block;">';
+                    print '<input name="room_id" id="room_id" type="text" class="validate">';
+                    print '<label for="room_id">Room ID</label>';
+                  }
+                  ?>
+
                   </div>
                   <div class="input-field col s12"
                   <?php

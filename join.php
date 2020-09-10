@@ -20,6 +20,7 @@
       $login_flg = isset($_SESSION['bool']);
 
       if ($login_flg == 'true') {
+
           //ログインチェック
       //ログイン中にて、peerIDは accountテーブルのnumberから取得した値を使用する。
         $regist_name = $_SESSION['regist_name'];
@@ -40,6 +41,12 @@
           print '<input type="hidden" id="room__name" value="'.$roomID.'">';
       } else {
           //ゲストのためpeerIDをどうするか用検討。
+          if(isset($_GET['room_ID'])){
+            $room=$roomID;
+            $URL="http://localhost/index.php?room_NAME=".$room;
+            header('Location:'.$URL);
+            exit();
+          }
 
         $guestName = $_POST['guest_name'];
           print '<input type="hidden" id="memberPeer" value="">';
@@ -48,7 +55,7 @@
           print '<input type="hidden" id="room__name" value="'.$roomID.'">';
           if (isset($_POST['guest_name']) == false || $_POST['guest_name'] == '') {
               header('Location: ./index.php');
-              exit;
+              exit();
           }
       }
     ?>
