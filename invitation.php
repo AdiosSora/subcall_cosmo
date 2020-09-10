@@ -6,6 +6,7 @@
 // if($login_flg=='true'){//ログイン時の処理
   // $user_num = $_SESSION['regist_number'];
   // $hostName =$_SESSION['regist_name'];
+  include('./header.php');
   include('./account/db/dbConnecter.php');
 
   if(isset($_POST['inv_name'])){//招待ボタンが押された判定
@@ -71,7 +72,7 @@
 
       $resultName=$rec['name'];
       print '<tr>';
-      print '<form method="post" action="invitation.php">';
+      print '<form method="post" name="invitation_form'.$rec['name'].'" action="invitation.php">';
       print '<input type="hidden" name="inv_num" value="'.$user_num.'">';
       print '<input type="hidden" name="inv_name" value="'.$rec['name'].'">';
       print '<input type="hidden" name="host_name" value="'.$host_name.'">';
@@ -86,7 +87,7 @@
                           "INVname"=>$resultName));
       $result = $stat->fetch(PDO::FETCH_ASSOC);
       if($result==false){
-        print '<input type="submit" value="招待" >';
+        print '<a class="waves-effect waves-light btn modal-trigger" href="javascript:invitation_form'.$rec['name'].'.submit()">招待</a>';
       }
       else{
         print '招待済み';
