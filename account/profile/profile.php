@@ -49,6 +49,7 @@ include('../../header.php');
             <div class="profile_title_right">
               <a class="btn waves-effect waves-light btn-large" href="../register/register_update.php" style="margin:5px 0px;"><i class="material-icons left">create</i>編集</a>
               <a class="btn waves-effect waves-light btn-large" href="/account/friend/friend.php" style="margin:5px 0px;"><i class="material-icons left">group</i>フレンド一覧</a>
+              <a class="btn waves-effect waves-light btn-large" href="../crop/crop.php" style="margin:5px 0px;"><i class="material-icons left">image</i>画像変更</a>
             </div>
           </div>
         </div>
