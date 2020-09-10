@@ -15,7 +15,7 @@
         <div class="section no-pad-bot">
           <div class="row" style="margin:5vh 0;">
             <div class="col s12 m8 offset-m2 center">
-              <?php if(isset($_GET["error"])==true){
+              <?php if(isset($_GET["error"])==true){  // $_GET["error"]が取得できなかったため、if文（取得しているかどうか）を追加
                 if($_GET["error"]=="id"){
                   ?><h5 style="color:black !important;">同じ部屋に入室できません。</h5><?php
                 }
