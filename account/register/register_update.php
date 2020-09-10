@@ -316,7 +316,7 @@
           <!--戻る・完了ボタン-->
           <div>
           <a class="waves-effect waves-light btn-large grey darken-1" href="../profile/profile.php">戻る</a>
-          <a class="waves-effect waves-light btn-large" id="btn" href="javascript:register_update_form.submit()">確認</a>
+          <a class="waves-effect waves-light btn-large" id="btn" href="javascript:register_update_form.submit()">完了</a>
           </div>
         </form>
       </div>
