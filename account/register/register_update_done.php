@@ -33,7 +33,8 @@ $bone = $year.'/'.$month.'/'.$day;
 $file = $_FILES['triming_image'];
 
 //ファイルがアップロードされているかの確認
-if(!empty($file)) {
+if(!empty($file['tmp_name'])) {
+//if(!empty($file)) {
   //トリミング時の画像の高さ・幅を取得
 
   // $size = getimagesize($tmp_file_name);
@@ -133,6 +134,7 @@ if(!empty($file)) {
   $data[] = $bone;
   $data[] = $country;
   $data[] = $gender;
+  //$data[] = null;
   $data[] = '../../download/default.png';
   $data[] = $_SESSION['regist_address'];
 
