@@ -43,9 +43,10 @@ $(function() {
 
   //接続に問題があった場合
   peer.on('error', err => {
-    alert(err.message);
-    // Return to step 2 if error occurs
-    step2();
+    document.location.href = "/join-error.php?error=id?room=" + encodeURI($('#join-room').val());
+    // alert(err.message);
+    // // Return to step 2 if error occurs
+    // step2();
   });
 
   //自動入室
@@ -60,6 +61,21 @@ $(function() {
     step3();
     step4();
   },2000);
+    var videoTrack = stream.getVideoTracks()[0];
+    var audioTrack = stream.getAudioTracks()[0];
+
+    var video_mute_flag = true;
+    var mic_mute_flag = true;
+    function Video_MuteToggle() {
+      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
+      videoTrack.enabled = video_mute_flag;
+      console.log(video_mute_flag);
+    }
+    function Mic_MuteToggle() {
+      if(mic_mute_flag==true){mic_mute_flag=false;}else{mic_mute_flag=true;}
+        audioTrack.enabled = mic_mute_flag;
+        console.log(mic_mute_flag);
+    }
 
   //ルーム退出ボタンが押された場合
   $('#end-call').on('click', () => {
@@ -73,6 +89,28 @@ $(function() {
   $('#step1-retry').on('click', () => {
     $('#step1-error').hide();
     step1();
+  });
+
+  var videoTrack = stream.getVideoTracks()[0];
+  var audioTrack = stream.getAudioTracks()[0];
+
+  var video_mute_flag = true;
+  var mic_mute_flag = true;
+  $('#video_mute_button').on('click', () => {
+    if(video_mute_flag){
+      video_mute_flag=false;
+    }else{
+      video_mute_flag=true;
+    }
+    videoTrack.enabled = video_mute_flag;
+  });
+  $('#mic_mute_button').on('click', () => {
+    if(mic_mute_flag){
+      mic_mute_flag=false;
+    }else{
+      mic_mute_flag=true;
+    }
+      audioTrack.enabled = mic_mute_flag;
   });
 
   //チャット送信ボタンが押された場合
@@ -217,6 +255,7 @@ $(function() {
   //ルーム内のリスナーを設定している関数
   function step3() {
     // Wait for stream on the call, then set peer video display
+
     room.on('stream', stream => {
       const peerId = stream.peerId;
       const id = 'video_' + peerId + '_' + stream.id.replace('{', '').replace('}', '');

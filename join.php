@@ -93,7 +93,7 @@
           <div id="setting">
             <a class="menu-button" v-on:click="openModal">
               <p>
-                <ion-icon name="code-slash-outline" v-pre/>
+                <ion-icon name="code-slash-outline" v-pre></icon-icon>
               </p>
             </a>
             <open-modal v-show="showContent" v-on:from-child="closeModal">
@@ -102,7 +102,7 @@
           <div id="setting2">
             <a class="menu-button" v-on:click="openModal">
               <p>
-                <ion-icon name="people-circle-outline" v-pre/>
+                <ion-icon name="people-circle-outline" v-pre></ion-icon>
               </p>
             </a>
             <open-modal v-show="showContent" v-on:from-child="closeModal">
@@ -122,7 +122,7 @@
           <div id="setting3">
             <a class="menu-button" v-on:click="openModal">
               <p>
-                <ion-icon name="build-outline" v-pre/>
+                <ion-icon name="build-outline" v-pre></ion-icon>
               </p>
             </a>
             <open-modal v-show="showContent" v-on:from-child="closeModal">
@@ -162,8 +162,8 @@
         </div>
       <div class="remote-streams" id="their-videos"></div>
       <div id="main_button">
-        <a href="javascript:Video_MuteToggle();"><ion-icon name="mic-outline" v-pre></ion-icon></a>
-        <a href="javascript:Mic_MuteToggle();"><ion-icon name="videocam-outline" v-pre></ion-icon></a>
+        <a href="#" id="mic_mute_button"><ion-icon name="mic-outline" v-pre><ion-icon name="close-outline"></ion-icon></ion-icon></a>
+        <a href="#" id="video_mute_button"><ion-icon name="videocam-outline" v-pre></ion-icon></a>
         <a href="/index.php"><ion-icon name="log-out-outline" v-pre></ion-icon></a>
       </div>
     </div>
@@ -250,17 +250,6 @@
         }
       }
     });
-    private MediaStream stream;
-    var video_mute_flag = true;
-    // muteする
-    function Video_MuteToggle() {
-      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
-      stream.setEnableVideoTrack(0, video_mute_flag);
-    }
-    function Mic_MuteToggle() {
-      if(video_mute_flag==true){video_mute_flag=false;}else{video_mute_flag=true;}
-          stream.setEnableAudioTrack(0, video_mute_flag);
-    }
     </script>
   </body>
 </html>
