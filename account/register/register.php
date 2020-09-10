@@ -21,7 +21,6 @@
             <div class="col col s10 offset-m1 m8 offset-m2 center">
               <?php
 
-                  include('../db/dbConnecter.php');
                   $dbh = get_DBobj();
                   $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 

@@ -12,7 +12,6 @@
 <body>
   <?php include('../../nav.php'); ?>
 	<?php
-	include('../db/dbConnecter.php');
 	if(isset($_SESSION['bool']) == false)
 	{
 		header('Location: /account/login/login.php');

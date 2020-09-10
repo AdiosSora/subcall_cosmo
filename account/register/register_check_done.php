@@ -21,7 +21,6 @@
 
 							try {
 							    require_once('../../common.php');
-                  include('../db/dbConnecter.php');
 							    $post = sanitize($_POST);
 							    $regist_address = $post['address'];
 							    $regist_name = $post['name'];

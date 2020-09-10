@@ -33,7 +33,6 @@
 
                 $regist_pass = hash('sha256' , $pass);
 
-                include('../db/dbConnecter.php');
               	$dbh = get_DBobj();
               	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 

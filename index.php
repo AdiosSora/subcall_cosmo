@@ -77,4 +77,9 @@
   </main>
   <?php include('./footer.php'); ?>
   </body>
+  <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
+  </script>
 </html>
