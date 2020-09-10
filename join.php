@@ -8,7 +8,12 @@
       // $post = sanitize($_POST);
       if (isset($_POST['room_id']) && $_POST['room_id'] != '') {
           $roomID = $_POST['room_id'];
-      } else {
+      }
+      else if(isset($_GET['room_ID'])){
+          $roomID=$_GET['room_ID'];
+      }
+
+      else{
           header('Location: ./index.php');
           exit;
       }
