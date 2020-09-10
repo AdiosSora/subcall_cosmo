@@ -15,7 +15,6 @@
           <div class="col offset-s2 s8 center">
 						<!--フレンド申請、指定の名前を検索する-->
 						<?php
-						include('../db/dbConnecter.php');
 						if(isset($_SESSION['bool']) == false)
 						{
               header('Location: /account/login/login.php');
@@ -352,9 +351,4 @@
 </main>
 <?php include('../../footer.php'); ?>
 </body>
-<script>
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
-</script>
 </html>

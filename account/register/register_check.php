@@ -12,7 +12,6 @@
 	<script src="/js/register.js">
 	</script>
 	<title>会員登録確認 - Stable</title><?php include '../../header.php';
-	        include('../db/dbConnecter.php'); ?>
 </head>
 <body>
 	<?php include '../../nav.php'; ?>

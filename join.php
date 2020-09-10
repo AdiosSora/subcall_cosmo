@@ -121,8 +121,8 @@
                 <?php
                 if (isset($regist_name)) {
                     print '<iframe id="inlineFrameExample"
-                      width="300"
-                      height="200"
+                      width="100%"
+                      height="100%"
                       src="invitation.php?ROOMname='.$roomID.'&hostname='.$regist_name.'&usernum='.$memberPeer.'">
                   </iframe>';
                 } else {

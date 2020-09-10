@@ -87,4 +87,12 @@
   </main>
   <?php include('./footer.php'); ?>
   </body>
+  <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
+    $(document).ready(function(){
+      $('.parallax').parallax();
+  });
+  </script>
 </html>

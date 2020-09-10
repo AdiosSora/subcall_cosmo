@@ -1,16 +1,3 @@
-<?php
-try
-{
-  session_start();
-  $_SESSION=array();
-  include('../db/dbConnecter.php');
-  if(isset($_COOKIE[session_name()]) == true)
-    {
-    	setcookie(session_name(),'',time()-42000,'/');
-    }
-    session_destroy();
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,6 +6,17 @@ try
 </head>
 <body>
   <?php include('../../nav.php'); ?>
+  <?php
+  try
+  {
+    session_start();
+    $_SESSION=array();
+    if(isset($_COOKIE[session_name()]) == true)
+      {
+      	setcookie(session_name(),'',time()-42000,'/');
+      }
+      session_destroy();
+  ?>
   <main>
     <div class="container">
       <div class="section no-pad-bot">

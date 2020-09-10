@@ -26,7 +26,6 @@
 						$flag_friend = 1;		// フレンド上限フラグ
 
 					  // DB接続
-						include('../db/dbConnecter.php');
 						$dbh = get_DBobj();
 						$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 

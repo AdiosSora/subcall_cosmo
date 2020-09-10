@@ -29,6 +29,38 @@ session_regenerate_id(true);
         }
         else
         {
+          include('account/db/dbConnecter.php');
+          $dbh = get_DBobj();
+          $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $regist_name = $_SESSION['regist_name'];
+          $data_invite[] = $regist_name;
+          $sql = 'SELECT host_name,room_name,count(inv_name) FROM invitation WHERE inv_name=?';
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data_invite);
+          $flaginvite = false;
+          while(true){
+            $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+            $count_invite = $rec['count(inv_name)'];
+            if($flaginvite == false){
+              print '<div id="modal_friend_invite" class="modal col s10 offset-s1" style="color:black !important;overflow:hidden;">';
+              print '<div class="modal-content">';
+              print '<h4>申請済みリスト</h4>';
+              print '<table border="1" >';
+              print '<tr><th style="text-align:center">招待した人</th><th style="text-align:center">入室ボタン</th><th></th></tr>';
+              $flaginvite = true;
+            }
+            if($rec == false){
+              print '</table></div><div class="modal-footer">';
+              print '<a href="#!" class="modal-close waves-effect waves-green btn-flat">閉じる</a>';
+              print '</div></div>';
+              if($count_invite == 0){
+                print '<li><a class="waves-effect waves-light btn modal-trigger" href="#modal_friend_invite">新着</a></li>';
+              }
+              break;
+            }
+            print '<tr><td style="text-align:center;font-size:40px;">'.$rec['host_name'].'</td><td style="text-align:center"><a class="waves-effect waves-light btn" href="/join.php?room_ID='.$rec['room_name'].'">入室</a></td></tr>';
+          }
+
           print '<li style="color:#111111 !important;margin:0 10px;">'.$_SESSION['regist_name'].'さん</li>';
           print '<li><a href="#">Stableとは？</a></li>';
           print '<li><a href="#">使い方</a></li>';
@@ -61,3 +93,8 @@ session_regenerate_id(true);
     <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>
 </nav>
+<script>
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
