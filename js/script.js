@@ -281,7 +281,7 @@ $(function() {
       }else
       if(result_num == '2'){
         console.log('データ受け取り2発火');
-        speechLog+=`${getNow()}`+" "+`${result_name}「${result_message}」\n\n`;
+        speechLog+=`${getNow()}`+" "+`${result_name}「${result_Message}」\n\n`;
         $("#sub-text").prepend($(
           '<div class="msg_content bg-' + bg_voicechat_color + ' other-chat">' +
           '<div class="msg-icon"><img src="../images/icon1.png"></div>' +

@@ -134,8 +134,8 @@ body {
   position: absolute;
   right: 0;
   overflow: auto;
-  background-color: rgba(255,255,255,0.3);
   z-index:1;
+  background-color: rgba(255,255,255,0.1);
 }
 /* ローカルビデオの位置指定  */
 #local_video {
@@ -293,12 +293,14 @@ a.menu-button {
     max-height: 50%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    background-color: rgba(255,255,255,0.2);
     #chat-title {
       height: 20px;
       background-color: rgba(255,255,255,0.4);
       text-align: center;
       z-index:2;
       padding:5px;
+      box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
     }
     #chat-text{
       height:calc( 100% - 30px );
@@ -316,10 +318,10 @@ a.menu-button {
     z-index:2;
     #voicechat-title {
       height: 20px;
-
-        background-color: rgba(255,255,255,0.4);
+      background-color: rgba(255,255,255,0.4);
       text-align: center;
       padding:5px;
+      box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
     }
     #sub-text{
       height:calc( 100% - 30px );
