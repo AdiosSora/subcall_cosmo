@@ -46,9 +46,9 @@ include('../../header.php');
               <span class="profile_name"><?php print $_SESSION['regist_name']?></span>
             </div>
             <div class="profile_title_right">
-              <a class="btn waves-effect waves-light btn" href="../register/register_update.php" style="margin:5px 0px;"><i class="material-icons left">create</i>編集</a>
-              <a class="btn waves-effect waves-light btn" href="/account/friend/friend.php" style="margin:5px 0px;"><i class="material-icons left">group</i>フレンド一覧</a>
-              <a class="btn waves-effect waves-light btn" href="../crop/crop.php" style="margin:5px 0px;"><i class="material-icons left">image</i>画像変更</a>
+              <a class="btn waves-effect waves-light" href="../register/register_update.php" style="margin:5px 0px;"><i class="material-icons left">create</i>編集</a>
+              <a class="btn waves-effect waves-light" href="/account/friend/friend.php" style="margin:5px 0px;"><i class="material-icons left">group</i>フレンド一覧</a>
+              <a class="btn waves-effect waves-light modal-trigger" href="#modal_icon" style="margin:5px 0px;"><i class="material-icons left">image</i>画像変更</a></a>
             </div>
           </div>
         </div>
@@ -152,6 +152,17 @@ include('../../header.php');
               ?>
             </div>
           </div>
+        </div>
+      </div>
+      <div id="modal_icon" class="modal">
+        <div class="modal-content" style="width:60vw;height:50vh;">
+          <iframe id="inlineFrameExample"
+            width="100%"
+            height="100%"
+            src="../crop/crop.php">
+          </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
         </div>
       </div>
   </body>
